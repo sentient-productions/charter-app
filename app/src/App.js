@@ -85,7 +85,6 @@ function App() {
       let formData = new FormData()
       formData.append("rawData", rawData);
       formData.append("query", query);
-      console.log("query=", query)
       fetch('http://127.0.0.1:5000/', {
           method: 'POST',
           body: formData
@@ -94,28 +93,26 @@ function App() {
         return response.text()
       })
       .then(jsonText => {
-        console.log('Success:', jsonText);
         var figure = JSON.parse(jsonText);
         setIsPlotted(true)
         Plotly.newPlot('graph-div', figure.data, figure.layout)
-        setResponseCode(figure.response_code)
+        setResponseCode("Query: \"" + query + "\", " + "generated code shown below;" + figure.response_code)
         setIsLoading(false)
       });
     } catch (error) {
+      console.log("caught error=", error)
       setResponseCode(error)
       setIsLoading(false)
     }
   }
 
   useEffect(() => {
-    console.log("useEffect")
     fetch('./salaries.csv')
     .then((r) => r.text())
     .then((defaultData) => {
       processData(defaultData)
     })
   }, []);
-
 
   return (
     <Grid container>
@@ -169,7 +166,7 @@ function App() {
                           theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
                         border: '1px solid',
                         borderColor: (theme) =>
-                          theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
+                        snippet.includes("Query") ? 'grey.800' : 'grey.300',
                         borderRadius: 2,
                         fontSize: '0.875rem',
                         fontWeight: '700',
@@ -189,7 +186,7 @@ function App() {
       </Grid>
       <Grid item xs={12} sx={{pt: 5}}>
         <Button variant="contained" component="label" sx={{pb: - 3}}>
-          Upload Different Data
+          Upload Custom Data
           <input
             hidden
             type="file"

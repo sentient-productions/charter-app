@@ -38,6 +38,9 @@ class Processor:
 
     def construct_prompt(self):
         prompt = self.load_template_prompt() + self.construct_data_header(self.dataset)
+        print(
+            "Prompt:\n%s" % (prompt)
+        )
         return prompt
 
     def generate_response(self):
@@ -52,13 +55,15 @@ class Processor:
             presence_penalty=0
         )
         response_text = response["choices"][0]["text"]
+        print(
+            "response_text:\n%s" % (response_text)
+        )
         return ';'.join(response_text.strip(' ').split(';')[:-1])
 
     def produce_payload(self, temp_file = "temp.json"):
         response = self.generate_response()
         raw_response = response
-        print("Raw response=", raw_response)
-        response += """; f = open(temp_file, "w"); f.write(fig.to_json()); print(fig.to_json()); f.close(); fig.show();"""
+        response += """; f = open(temp_file, "w"); f.write(fig.to_json()); f.close();"""
         dataset = self.dataset
 
         # execute the response, which should result in a json file being written
@@ -70,28 +75,6 @@ class Processor:
         return payload
 
 if __name__ == "__main__":
-
     dataset = pd.read_csv("temp.txt")
     processor = Processor("plotter", dataset, "Histogram of Data Scientist salaries")
     payload = processor.produce_payload()
-    print('output payload = ', payload)
-
-    ## CRUFT TO CLEANUP
-    # print('prompt = ', processor.construct_prompt())
-    # print('response = ', response)
-    # exec(response)
-
-    # # Set the API key for your OpenAI account
-
-    # # Use the Codex model to generate text
-    # response = openai.Completion.create(
-    #     engine="text-davinci-003",
-    #     # engine="code-davinci-002",
-    #     prompt=processor.construct_prompt(),
-    #     max_tokens=1024,
-    #     temperature=0.5,
-    #     top_p=1,
-    #     frequency_penalty=0,
-    #     presence_penalty=0
-    # )
-    # response_text = response["choices"][0]["text"]
