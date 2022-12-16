@@ -43,7 +43,6 @@ def table():
     dataset = pd.read_csv('temp.txt')
     print('dataset=', dataset)
     query = data['query']
-    dataset = pd.read_csv('temp.txt')
 
     processor = TableProcessor(dataset, query)
     return processor.produce_payload()
