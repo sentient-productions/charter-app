@@ -9,7 +9,7 @@ from server.binder.nsql.qa_module.openai_qa import OpenAIQAModel
 
 
 class Executor(object):
-    def __init__(self, args=DEFAULT_BINDER_PARAMS, keys=None):
+    def __init__(self, args, keys=None):
         self.new_col_name_id = 0
         self.qa_model = OpenAIQAModel(args, keys)
 
