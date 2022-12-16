@@ -74,7 +74,6 @@ def ask():
     text_logit_pairs = response_dict[0]
     nsql = max(text_logit_pairs, key=lambda x: x[1])[0]
     db = NeuralDB([{'table': dataset, 'title': title}])
-    print(nsql)
 
     # nsql = post_process_sql(
     #     sql_str=nsql,
