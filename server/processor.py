@@ -1,14 +1,13 @@
+import json
 import os
 import sys
 
-import numpy as np
-import json
 import openai
 import pandas as pd
-import plotly.express as px
 
 ROOT_PATH = os.path.join(os.path.dirname(__file__), "../")
 sys.path.insert(0, ROOT_PATH)
+sys.path.insert(0, os.path.join(ROOT_PATH, "../"))
 
 from server.binder.binder_params import DEFAULT_BINDER_PARAMS
 from server.binder.generation.generator import Generator
