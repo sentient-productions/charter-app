@@ -5,6 +5,9 @@ import sys
 import openai
 import pandas as pd
 
+import numpy as np
+import plotly.express as px
+
 ROOT_PATH = os.path.join(os.path.dirname(__file__), "../")
 sys.path.insert(0, ROOT_PATH)
 
@@ -78,6 +81,7 @@ class PlotterProcessor(Processor):
         response += """; f = open(temp_file, "w"); f.write(fig.to_json()); f.close();"""
 
         # execute the response, which should result in a json file being written
+        dataset = self.dataset # need this for successful exec
         exec(response)
         with open(temp_file, "r") as f:
             payload = json.load(f)
@@ -132,5 +136,5 @@ class TableProcessor(Processor):
 
 if __name__ == "__main__":
     dataset = pd.read_csv("temp.txt")
-    processor = PlotterProcessor("plotter", dataset, "Histogram of Data Scientist salaries")
+    processor = PlotterProcessor(dataset, "Histogram of Data Scientist salaries")
     payload = processor.produce_payload()

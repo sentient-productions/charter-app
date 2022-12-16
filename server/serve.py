@@ -26,7 +26,7 @@ def plot():
     query = data['query']
 
     # Construct the prompt and query the result
-    processor = PlotterProcessor("plotter", dataset, query)
+    processor = PlotterProcessor(dataset, query)
 
     return processor.produce_payload()
 
