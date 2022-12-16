@@ -9,7 +9,7 @@ const datasetQueries = {
   "cars.csv": "Scatter plot of horsepower vs city mpg, colored by weight",
   "major_ports.csv": "Scatter plot of latitude vs. longitude for Brazilian ports",
   "2022_congress_fundraise.csv": "Box plot of cash on hand by party",
-  "airbnb_listings.csv": "Scatter plot of lattitude vs longitude, weighted by average rating",
+  "airbnb_listings.csv": "2d scatter plot of latitude vs longitude, weighted by average rating",
   "scooby.csv": "Time series of imdb score vs. date aired",
   "series.csv": "Scatter plot of Ratings vs cleaned Votes, clipped at 100k",
 }
@@ -23,7 +23,7 @@ function App() {
   const [dataset, setDataset] = useState("salaries.csv");
 
   // query helpers
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("Histogram of average data scientist salary, stacked by experience level");
   const [defaultQuery, setDefaultQuery] = useState("Histogram of average data scientist salary, stacked by experience level");
   const [isPlotted, setIsPlotted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -138,12 +138,10 @@ function App() {
 
   return (
     <Grid container>
-      <Grid item xs={12}>
+      <Grid item xs={4}>
         <h3>NeuralPlot</h3>
-      </Grid>
-      <Grid item xs={12}>
         <Grid container>
-          <Grid item>
+          <Grid item sx={{mb:2.5}}>
             <TextField 
               id="outlined-basic" 
               sx={{width: 500}}
@@ -168,47 +166,8 @@ function App() {
               }
             />
           </Grid>
-          <Grid item sx={{mt:-2}} >
-            {isPlotted &&
-            
-              responseCode.split(";").map((snippet) => {
-                if (snippet == "" ) {
-                  return null
-                }
-                
-                return (
-                  <Grid item sx={{mt:3}}>
-                    <Box
-                      component="div"
-                      sx={{
-                        display: 'inline',
-                        p: 1,
-                        m: 1,
-                        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
-                        color: (theme) =>
-                          theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
-                        border: '1px solid',
-                        borderColor: (theme) =>
-                        snippet.includes("Query") ? 'grey.800' : 'grey.300',
-                        borderRadius: 2,
-                        fontSize: '0.875rem',
-                        fontWeight: '700',
-                      }}
-                    >
-                      {snippet}
-                    </Box> 
-                  </Grid>
-                )
-              })
-            }
-          </Grid>
-          <Grid item>
-            {isPlotted && <div style={{width: 750, height: 750}} id="graph-div"/>}
-          </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={12} sx={{pt: 5}}>
-        <FormControl sx={{height:75, minHeight: 75}}>
+        <FormControl sx={{height:75, minHeight: 75, minWidth: 300}}>
           <InputLabel id="demo-simple-select-label">Dataset</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -229,7 +188,7 @@ function App() {
           </Select>
         </FormControl>
         <Button variant="contained" component="label" sx={{mt: 1, ml: 1 }}>
-          Upload Custom Data
+          Upload Custom
           <input
             hidden
             type="file"
@@ -237,12 +196,50 @@ function App() {
             onChange={handleFileUpload}
           />
         </Button>
-        <DataTable
-          pagination
-          highlightOnHover
-          columns={columns}
-          data={data}
-        />
+        <Grid sx={{mt:1}}>
+          <DataTable
+            pagination
+            noHeader={true}
+            highlightOnHover
+            columns={columns}
+            data={data}
+          />
+        </Grid>
+      </Grid>
+      <Grid item xs={8} sx={{mt:5, pl: 2}}>
+        {
+          responseCode.split(";").map((snippet) => {
+            if (snippet == "" ) {
+              return null
+            }
+            return (
+              <Grid item sx={{mt:3}}>
+                <Box
+                  component="div"
+                  sx={{
+                    display: 'inline',
+                    p: 1,
+                    m: 1,
+                    bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
+                    color: (theme) =>
+                      theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
+                    border: '1px solid',
+                    borderColor: (theme) =>
+                    snippet.includes("Query") ? 'grey.800' : 'grey.300',
+                    borderRadius: 2,
+                    fontSize: '0.875rem',
+                    fontWeight: '700',
+                  }}
+                >
+                  {snippet}
+                </Box> 
+              </Grid>
+            )
+          })
+        }
+        <Grid item sx={{mt:3}}>
+          <div style={{width: 750, height: 750}} id="graph-div"/>
+        </Grid>
       </Grid>
     </Grid>
   );
