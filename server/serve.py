@@ -25,7 +25,8 @@ def plot():
     with open("temp.txt", "w") as f:
         f.write(rawData)
     dataset = pd.read_csv('temp.txt')
-    print('dataset=', dataset)
+    # Rename columns to remove trailing and leading spaces
+    dataset.rename(columns=lambda x: x.strip(), inplace=True)
     query = data['query']
 
     # Construct the prompt and query the result
