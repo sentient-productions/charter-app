@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
 import DataTable from 'react-data-table-component';
-import {Button, Grid, TextField} from '@mui/material';
+import {Box, Button, Grid, TextField} from '@mui/material';
 import * as Plotly from 'plotly.js';
 
 function App() {
-
-  const [columns, setColumns] = useState([]);
+  // persistent data states
   const [rawData, setRawData] = useState([]);
+  const [columns, setColumns] = useState([]);
   const [data, setData] = useState([]);
-  const [query, setQuery] = useState("Histogram of average data scientist salary");
+  // query helpers
+  const [query, setQuery] = useState("");
   const [isPlotted, setIsPlotted] = useState(false);
-  const [response, setResponse] = useState("");
+  const [responseCode, setResponseCode] = useState("fig = px.histogram(dataset[dataset.job_title == 'Data Scientist'], x=\"salary_in_usd\", title='Average Data Scientist Salary');");
 
   // process CSV data
   const processData = dataString => {
@@ -94,7 +95,7 @@ function App() {
       var figure = JSON.parse(jsonText);
       setIsPlotted(true)
       Plotly.newPlot('graph-div', figure.data, figure.layout)
-      setResponse(figure.response_code)
+      setResponseCode(figure.response_code)
     });
   }
 
@@ -111,7 +112,7 @@ function App() {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <h3>Read and Plot CSV file in React</h3>
+        <h3>NeuralPlot</h3>
       </Grid>
       <Grid item xs={12}>
         <Grid container>
@@ -121,7 +122,7 @@ function App() {
               label="Plot Query"
               variant="outlined" 
               onChange={handleQueryInput}
-              placeholder={query}
+              placeholder={"Histogram of average data scientist salary"}
               InputProps={
                 {
                   endAdornment: 
@@ -129,7 +130,7 @@ function App() {
                       <Button 
                         onClick={handleQuerySubmit}
                         variant="contained" 
-                        // disabled={data.length==0 || query == ""} 
+                        disabled={data.length==0 || query == ""} 
                         sx={{ml: 1}}
                       >
                         Plot
@@ -139,17 +140,46 @@ function App() {
               }
             />
           </Grid>
-          <Grid item>
-            {isPlotted && <div>{response}</div>}
+          <Grid item sx={{mt:2}}>
+            {isPlotted &&
+            
+              responseCode.split(";").map((snippet) => {
+                if (snippet == "" ) {
+                  return null
+                }
+                
+                return (
+                  <Box
+                    component="div"
+                    sx={{
+                      display: 'inline',
+                      p: 1,
+                      m: 1,
+                      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
+                      color: (theme) =>
+                        theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
+                      border: '1px solid',
+                      borderColor: (theme) =>
+                        theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
+                      borderRadius: 2,
+                      fontSize: '0.875rem',
+                      fontWeight: '700',
+                    }}
+                  >
+                    {snippet}
+                  </Box> 
+                )
+              })
+            }
           </Grid>
           <Grid item>
             {isPlotted && <div style={{width: 750, height: 750}} id="graph-div"/>}
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} sx={{pt: 1}}>
-        <Button variant="contained" component="label">
-          Upload Data
+      <Grid item xs={12} sx={{pt: 5}}>
+        <Button variant="contained" component="label" sx={{pb: - 3}}>
+          Upload Different Data
           <input
             hidden
             type="file"
