@@ -88,3 +88,24 @@ Out[6]:
 Q: Pie chart of salary in usd by experience level
 NeuralPlot: fig = px.pie(dataset.groupby("experience_level").mean().reset_index(), values="salary_in_usd", names="experience_level", title='Salary by Experience Level');
 
+In [6]: dataset.tail(5)
+Out[6]: 
+     index           Member       Party           State Chamber      Raised       Spent Cash on Hand     Debts
+532    532  William Timmons  Republican  South Carolina   House    $892,064    $823,955      $76,799  $391,742
+533    533        Young Kim  Republican      California   House  $7,900,497  $7,380,035     $928,803   $94,940
+534    534    Yvette Clarke  Democratic        New York   House    $684,268    $662,375      $93,513   $49,480
+535    535   Yvette Herrell  Republican      New Mexico   House  $3,777,731  $2,746,661   $1,085,613        $0
+536    536      Zoe Lofgren  Democratic      California   House  $1,679,466  $2,103,190     $736,813        $0
+Q: Box plot of cash on hand by party
+NeuralPlot: dataset["Cash on Hand"] = pd.to_numeric(dataset["Cash on Hand"].str.replace(",", "").str.replace("$",""), errors="coerce"); fig = px.box(dataset.dropna(), x="Cash on Hand", color="Party", title='Cash on Hand by Party');
+
+In [6]: dataset.tail(5)
+Out[6]: 
+     OBJECTID                          Postal      Lat        Lng     Type ISO3               REGION
+172       134             Surigao,Philippines  9.78900  125.49500     Bulk  PHL  East Asia & Pacific
+173       130               Davao,Philippines  7.07306  125.61278  General  PHL  East Asia & Pacific
+174       121  Port Moresby ,Papua New Guinea -9.47723  147.15089  General  PNG  East Asia & Pacific
+175       176                   Lamu Mainland      NaN        NaN  General  KEN   Sub-Saharan Africa
+176       177               Port Sudan, Sudan      NaN        NaN  General  SDN   Sub-Saharan Africa
+Q: Scatter plot of latitude vs. longitude for Brazilian ports
+NeuralPlot: dataset = dataset[dataset.ISO3 == "BRA"]; fig = px.scatter_geo(dataset, lat="Lat", lon="Lng", title='Brazilian Ports');

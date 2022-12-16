@@ -1,19 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
 import DataTable from 'react-data-table-component';
-import {Box, Button, Grid, TextField} from '@mui/material';
+import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField} from '@mui/material';
 import * as Plotly from 'plotly.js';
+const datasetQueries = {
+  "salaries.csv": "Histogram of salary, stacked by experience level",
+  "AAPL.csv": "5d moving average of stock price for last 30 entries",
+  "cars.csv": "Scatter plot of horsepower vs city mpg, colored by weight",
+  "major_ports.csv": "Scatter plot of latitude vs. longitude for Brazilian ports",
+  "2022_congress_fundraise.csv": "Box plot of cash on hand by party",
+  "airbnb_listings.csv": "Scatter plot of lattitude vs longitude, weighted by average rating",
+  "scooby.csv": "Time series of imdb score vs. date aired",
+  "series.csv": "Scatter plot of Ratings vs cleaned Votes, clipped at 100k",
+}
+
 
 function App() {
   // persistent data states
   const [rawData, setRawData] = useState([]);
   const [columns, setColumns] = useState([]);
   const [data, setData] = useState([]);
+  const [dataset, setDataset] = useState("salaries.csv");
+
   // query helpers
   const [query, setQuery] = useState("");
+  const [defaultQuery, setDefaultQuery] = useState("Histogram of average data scientist salary, stacked by experience level");
   const [isPlotted, setIsPlotted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [responseCode, setResponseCode] = useState("fig = px.histogram(dataset[dataset.job_title == 'Data Scientist'], x=\"salary_in_usd\", title='Average Data Scientist Salary'); xxxx; yyyy;");
+  const [responseCode, setResponseCode] = useState("");
 
   // process CSV data
   const processData = dataString => {
@@ -54,6 +68,14 @@ function App() {
 
     setData(list);
     setColumns(columns);
+  }
+
+  // handle dataset selection 
+  const handleDatasetSelect = (event) => {
+    console.log(event.target.value);
+    setDataset(event.target.value);
+    setDefaultQuery(datasetQueries[event.target.value])
+    setQuery(datasetQueries[event.target.value])
   }
 
   // handle file upload
@@ -107,12 +129,12 @@ function App() {
   }
 
   useEffect(() => {
-    fetch('./salaries.csv')
+    fetch('./'+dataset)
     .then((r) => r.text())
     .then((defaultData) => {
       processData(defaultData)
     })
-  }, []);
+  }, [dataset]);
 
   return (
     <Grid container>
@@ -124,10 +146,11 @@ function App() {
           <Grid item>
             <TextField 
               id="outlined-basic" 
+              sx={{width: 500}}
               label="Plot Query"
               variant="outlined" 
               onChange={handleQueryInput}
-              placeholder={"Histogram of average data scientist salary"}
+              placeholder={defaultQuery}
               InputProps={
                 {
                   endAdornment: 
@@ -185,7 +208,27 @@ function App() {
         </Grid>
       </Grid>
       <Grid item xs={12} sx={{pt: 5}}>
-        <Button variant="contained" component="label" sx={{pb: - 3}}>
+        <FormControl sx={{height:75, minHeight: 75}}>
+          <InputLabel id="demo-simple-select-label">Dataset</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={dataset}
+            label="Demo Dataset"
+            onChange={handleDatasetSelect}
+          >
+            <MenuItem value={"salaries.csv"}>Salaries</MenuItem>
+            <MenuItem value={"AAPL.csv"}>Apple Stock Price</MenuItem>
+            <MenuItem value={"cars.csv"}>Cars</MenuItem>
+            <MenuItem value={"major_ports.csv"}>Major International Ports</MenuItem>
+            <MenuItem value={"2022_congress_fundraise.csv"}>2022 Congress Fundraising</MenuItem>
+            <MenuItem value={"crypto_tweets.csv"}>Crypto Tweets</MenuItem>
+            <MenuItem value={"airbnb_listings.csv"}>Airbnb Listings in Boston</MenuItem>
+            <MenuItem value={"scooby.csv"}>Scooby Doo Episodes</MenuItem>
+            <MenuItem value={"series.csv"}>Thriller, Crime, and Action Series</MenuItem>
+          </Select>
+        </FormControl>
+        <Button variant="contained" component="label" sx={{mt: 1, ml: 1 }}>
           Upload Custom Data
           <input
             hidden

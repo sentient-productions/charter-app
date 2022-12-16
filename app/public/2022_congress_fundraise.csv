@@ -1,0 +1,538 @@
+index,Member,Party,State,Chamber,Raised,Spent,Cash on Hand,Debts
+0,Abigail Spanberger,Democratic,Virginia,House,"$7,719,396","$7,449,678","$851,851",$0
+1,Adam Kinzinger,Republican,Illinois,House,"$2,192,741","$1,243,502","$2,472,888",$0
+2,Adam Schiff,Democratic,California,House,"$20,993,041","$13,957,854","$20,942,888",$0
+3,Adam Smith,Democratic,Washington,House,"$1,211,111","$1,173,466","$623,472",$0
+4,Adrian Smith,Republican,Nebraska,House,"$1,617,611","$1,664,674","$1,098,579",$0
+5,Adriano Espaillat,Democratic,New York,House,"$1,178,693","$888,437","$392,705",$0
+6,Al Green,Democratic,Texas,House,"$346,571","$289,586","$296,791","$50,000"
+7,Al Lawson,Democratic,Florida,House,"$593,604","$522,650","$238,345",$0
+8,Alan Lowenthal,Democratic,California,House,"$181,286","$288,295","$285,025",$0
+9,Albio Sires,Democratic,New Jersey,House,"$204,340","$284,473","$128,200",$0
+10,Alex Mooney,Republican,West Virginia,House,"$4,262,971","$5,856,816","$724,272",$0
+11,Alex Padilla,Democratic,California,Senate,"$11,253,771","$3,870,947","$7,617,654","$5,703"
+12,Alexandria Ocasio-Cortez,Democratic,New York,House,"$11,326,505","$9,411,406","$5,940,454",$0
+13,Alma Adams,Democratic,North Carolina,House,"$838,536","$608,400","$576,809",$0
+14,Aumua Amata Radewagen,Republican,American Samoa,Senate,"$54,700","$52,064","$3,153",$0
+15,Ami Bera,Democratic,California,House,"$1,355,357","$1,143,120","$2,241,254","$172,800"
+16,Amy Klobuchar,Democratic,Minnesota,Senate,"$3,234,766","$3,363,479","$1,122,953",$0
+17,Andre Carson,Democratic,Indiana,House,"$725,565","$737,136","$976,598",$0
+18,Andrew Clyde,Republican,Georgia,House,"$726,917","$666,629","$68,396","$1,262,363"
+19,Andrew Garbarino,Republican,New York,House,"$3,184,656","$2,567,027","$749,483",$0
+20,Andy Barr,Republican,Kentucky,House,"$3,447,266","$1,797,666","$2,004,303",$0
+21,Andy Biggs,Republican,Arizona,House,"$1,761,000","$1,659,510","$752,537",$0
+22,Andy Harris,Republican,Maryland,House,"$1,757,044","$1,253,968","$1,546,254",$0
+23,Andy Kim,Democratic,New Jersey,House,"$6,069,123","$3,538,016","$3,082,941",$0
+24,Andy Levin,Democratic,Michigan,House,"$2,586,972","$2,972,880","$42,569",$0
+25,Angie Craig,Democratic,Minnesota,House,"$6,817,301","$4,821,652","$3,027,648",$0
+26,Angus King,Independent,Maine,Senate,"$81,913","$180,532","$290,026",$0
+27,Ann Kirkpatrick,Democratic,Arizona,House,$0,$0,$0,$0
+28,Ann Kuster,Democratic,New Hampshire,House,"$3,873,628","$2,283,004","$2,663,709",$0
+29,Ann Wagner,Republican,Missouri,House,"$4,331,508","$2,224,183","$2,220,767",$0
+30,Anna Eshoo,Democratic,California,House,"$1,857,034","$1,735,758","$674,075",$0
+31,Anthony Brown,Democratic,Maryland,House,"$448,866","$493,986","$1,072,214",$0
+32,Anthony Gonzalez,Republican,Ohio,House,"$778,998","$608,730","$735,203",$0
+33,Ashley Hinson,Republican,Iowa,House,"$6,446,790","$4,880,484","$1,682,977",$0
+34,August Pfluger,Republican,Texas,House,"$2,639,948","$1,537,278","$1,697,076",$0
+35,Austin Scott,Republican,Georgia,House,"$761,878","$646,701","$781,706",$0
+36,Ayanna Pressley,Democratic,Massachusetts,House,"$1,242,476","$1,323,871","$419,642",$0
+37,Barbara Lee,Democratic,California,House,"$1,881,840","$1,932,642","$159,572",$0
+38,Barry Loudermilk,Republican,Georgia,House,"$717,298","$695,877","$394,252",$0
+39,Barry Moore,Republican,Alabama,House,"$790,735","$319,509","$472,664",$0
+40,Ben Cardin,Democratic,Maryland,Senate,"$152,052","$275,498","$1,028,821",$0
+41,Ben Cline,Republican,Virginia,House,"$858,890","$806,171","$291,492",$0
+42,Ben Ray Luján,Democratic,New Mexico,Senate,"$1,097,555","$559,006","$617,871",$0
+43,Ben Sasse,Republican,Nebraska,Senate,"$951,050","$366,607","$2,717,701",$0
+44,Bennie Thompson,Democratic,Mississippi,House,"$1,247,753","$871,154","$1,900,146",$0
+45,Bernie Sanders,Independent,Vermont,Senate,"$14,074,831","$11,331,428","$9,751,125",$0
+46,Beth Van Duyne,Republican,Texas,House,"$3,465,317","$1,883,001","$1,650,726",$0
+47,Betty McCollum,Democratic,Minnesota,House,"$1,991,061","$1,825,706","$449,330",$0
+48,Bill Cassidy,Republican,Louisiana,Senate,"$1,978,660","$756,703","$2,859,633",$0
+49,Bill Foster,Democratic,Illinois,House,"$3,289,974","$2,861,784","$4,164,390","$1,046,178"
+50,Bill Hagerty,Republican,Tennessee,Senate,"$2,369,794","$1,505,501","$919,351","$2,125,000"
+51,Bill Huizenga,Republican,Michigan,House,"$2,480,390","$2,035,658","$914,429",$0
+52,Bill Johnson,Republican,Ohio,House,"$1,534,981","$1,421,054","$972,756",$0
+53,Bill Pascrell,Democratic,New Jersey,House,"$1,389,395","$1,048,295","$1,745,484",$0
+54,Bill Keating,Democratic,Massachusetts,House,"$620,848","$619,647","$1,505,978",$0
+55,Bill Posey,Republican,Florida,House,"$893,757","$466,071","$597,650",$0
+56,Billy Long,Republican,Missouri,House,"$1,289,389","$1,697,311","$67,188","$170,000"
+57,Blaine Luetkemeyer,Republican,Missouri,House,"$2,370,318","$1,985,221","$2,590,501","$550,000"
+58,Blake Moore,Republican,Utah,House,"$1,580,076","$1,037,966","$570,471","$205,951"
+59,Bob Casey Jr.,Democratic,Pennsylvania,Senate,"$4,120,442","$2,174,116","$3,197,571",$0
+60,Bob Gibbs,Republican,Ohio,House,"$321,762","$529,478","$283,857",$0
+61,Bob Good,Republican,Virginia,House,"$1,038,921","$772,587","$316,670",$0
+62,Bob Latta,Republican,Ohio,House,"$1,411,641","$973,991","$1,157,114",$0
+63,Bobby Rush,Democratic,Illinois,House,"$193,192","$286,417","$18,395","$23,489"
+64,Bobby Scott,Democratic,Virginia,House,"$758,691","$555,196","$398,701","$3,191"
+65,Bonnie Watson Coleman,Democratic,New Jersey,House,"$781,122","$600,927","$287,355",$0
+66,Brad Finstad,Republican,Minnesota,House,"$1,242,835","$906,093","$336,741",$0
+67,Brad Schneider,Democratic,Illinois,House,"$3,360,517","$3,689,920","$1,544,359",$0
+68,Brad Sherman,Democratic,California,House,"$1,593,208","$1,395,216","$2,822,613",$117
+69,Brad Wenstrup,Republican,Ohio,House,"$1,904,466","$1,143,230","$1,222,482",$0
+70,Brenda Lawrence,Democratic,Michigan,House,"$344,191","$318,197","$917,179",$0
+71,Brendan Boyle,Democratic,Pennsylvania,House,"$1,406,396","$617,930","$2,257,207",$0
+72,Brett Guthrie,Republican,Kentucky,House,"$2,094,504","$1,667,628","$2,283,550",$0
+73,Brian Babin,Republican,Texas,House,"$875,803","$828,729","$832,155",$0
+74,Brian Fitzpatrick,Republican,Pennsylvania,House,"$3,991,112","$2,820,247","$1,219,189","$24,750"
+75,Brian Higgins,Democratic,New York,House,"$1,447,143","$1,495,264","$1,062,931",$0
+76,Brian Mast,Republican,Florida,House,"$6,007,472","$4,690,006","$2,311,828",$0
+77,Brian Schatz,Democratic,Hawaii,Senate,"$2,328,949","$2,184,358","$3,207,427",$0
+78,Bruce Westerman,Republican,Arkansas,House,"$1,656,992","$931,947","$1,701,850",$0
+79,Bryan Steil,Republican,Wisconsin,House,"$3,232,315","$1,764,088","$1,843,730",$0
+80,Buddy Carter,Republican,Georgia,House,"$1,854,187","$1,655,991","$1,904,121",$0
+81,Burgess Owens,Republican,Utah,House,"$3,149,814","$2,842,400","$387,742",$0
+82,Byron Donalds,Republican,Florida,House,"$5,225,390","$4,960,375","$745,908",$0
+83,Carlos Gimenez,Republican,Florida,House,"$2,016,114","$705,336","$1,349,948","$35,000"
+84,Carol Miller,Republican,West Virginia,House,"$1,084,888","$983,753","$268,141","$442,992"
+85,Carolyn Bourdeaux,Democratic,Georgia,House,"$2,746,695","$2,842,137","$18,505",$0
+86,Carolyn Maloney,Democratic,New York,House,"$4,353,630","$4,076,246","$393,800","$1,463,000"
+87,Catherine Cortez Masto,Democratic,Nevada,Senate,"$37,993,811","$35,928,936","$5,089,745",$0
+88,Cathy McMorris Rodgers,Republican,Washington,House,"$5,808,554","$4,589,556","$2,294,548",$0
+89,Chuck Schumer,Democratic,New York,Senate,"$35,899,966","$25,944,350","$20,231,213",$0
+90,Charlie Crist,Democratic,Florida,House,"$381,761","$800,480",$289,$0
+91,Chellie Pingree,Democratic,Maine,House,"$509,569","$361,902","$594,325","$20,000"
+92,Cheri Bustos,Democratic,Illinois,House,"$167,506","$302,234","$783,896",$0
+93,Chip Roy,Republican,Texas,House,"$2,071,661","$1,281,527","$1,253,716",$0
+94,Chris Coons,Democratic,Delaware,Senate,"$858,263","$815,704","$1,883,072",$0
+95,Chris Jacobs,Republican,New York,House,"$474,819","$537,648",$0,"$346,561"
+96,Chris Pappas,Democratic,New Hampshire,House,"$4,220,118","$2,218,578","$2,215,452",$0
+97,Chris Smith,Republican,New Jersey,House,"$1,332,282","$1,123,490","$350,366",$0
+98,Chris Stewart,Republican,Utah,House,"$996,345","$879,282","$281,756",$0
+99,Chris Van Hollen,Democratic,Maryland,Senate,"$6,167,303","$5,211,295","$2,286,105","$2,209"
+100,Chrissy Houlahan,Democratic,Pennsylvania,House,"$4,418,709","$1,764,928","$5,763,037",$0
+101,Christopher S. Murphy,Democratic,Connecticut,Senate,"$569,007","$1,158,935","$4,177,754",$0
+102,Chuck Fleischmann,Republican,Tennessee,House,"$510,936","$388,755","$2,002,521",$0
+103,Chuck Grassley,Republican,Iowa,Senate,"$7,828,900","$5,762,066","$3,905,425",$0
+104,Cindy Axne,Democratic,Iowa,House,"$6,131,905","$4,403,176","$1,748,249",$0
+105,Cindy Hyde-Smith,Republican,Mississippi,Senate,"$806,946","$652,320","$323,168","$60,000"
+106,Claudia Tenney,Republican,New York,House,"$2,989,524","$3,080,490","$311,901",$0
+107,Clay Higgins,Republican,Louisiana,House,"$856,339","$613,999","$314,102",$0
+108,Cliff Bentz,Republican,Oregon,House,"$1,010,336","$464,018","$635,371","$48,100"
+109,Colin Allred,Democratic,Texas,House,"$3,119,825","$1,359,247","$1,920,000",$0
+110,Conor Lamb,Democratic,Pennsylvania,House,"$5,272,240","$6,054,169","$51,890",$0
+111,Cori Bush,Democratic,Missouri,House,"$2,212,505","$2,264,075","$32,932","$14,477"
+112,Cory Booker,Democratic,New Jersey,Senate,"$5,794,554","$4,010,634","$7,671,026",$0
+113,Cynthia Lummis,Republican,Wyoming,Senate,"$220,970","$205,300","$130,119",$0
+114,Dan Bishop,Republican,North Carolina,House,"$1,793,984","$605,473","$1,248,907","$9,336"
+115,Dan Crenshaw,Republican,Texas,House,"$14,535,870","$14,512,435","$1,876,149",$0
+116,Dan Kildee,Democratic,Michigan,House,"$4,798,334","$3,909,159","$1,670,896",$0
+117,Dan Meuser,Republican,Pennsylvania,House,"$853,475","$907,109","$86,975",$0
+118,Dan Newhouse,Republican,Washington,House,"$1,979,358","$1,796,234","$482,842","$38,400"
+119,Dan Sullivan,Republican,Alaska,Senate,"$629,343","$429,962","$931,124",$0
+120,Daniel Webster,Republican,Florida,House,"$704,798","$594,814","$320,685",$0
+121,Danny K. Davis,Democratic,Illinois,House,"$570,467","$876,190","-$64,781","$58,954"
+122,Darin LaHood,Republican,Illinois,House,"$3,632,692","$2,416,383","$4,306,879",$0
+123,Darrell Issa,Republican,California,House,"$1,115,797","$960,887","$447,473","$5,081,387"
+124,Darren Soto,Democratic,Florida,House,"$1,191,099","$888,596","$474,902",$0
+125,David Cicilline,Democratic,Rhode Island,House,"$1,838,461","$1,209,603","$1,157,906",$0
+126,David Kustoff,Republican,Tennessee,House,"$1,800,445","$1,127,286","$1,386,991","$248,000"
+127,David McKinley,Republican,West Virginia,House,"$2,111,035","$2,497,268","$6,978","$935,000"
+128,David Joyce,Republican,Ohio,House,"$2,367,635","$798,352","$2,235,774",$0
+129,David Price,Democratic,North Carolina,House,"$199,991","$390,173","$123,133",$0
+130,David Rouzer,Republican,North Carolina,House,"$1,204,897","$1,073,920","$1,559,476",$0
+131,David Schweikert,Republican,Arizona,House,"$1,646,710","$1,461,715","$244,577","$242,755"
+132,David Scott,Democratic,Georgia,House,"$1,911,503","$1,590,932","$782,219","$27,100"
+133,David Trone,Democratic,Maryland,House,"$12,990,741","$6,878,050","$6,206,371","$13,302,000"
+134,David Valadao,Republican,California,House,"$3,215,917","$1,934,922","$1,436,824",$0
+135,Dean Phillips,Democratic,Minnesota,House,"$2,049,518","$1,546,193","$721,391","$250,000"
+136,Deb Fischer,Republican,Nebraska,Senate,"$983,002","$575,589","$1,235,905",$0
+137,Debbie Dingell,Democratic,Michigan,House,"$1,427,992","$1,075,784","$789,922",$0
+138,Debbie Lesko,Republican,Arizona,House,"$1,076,710","$806,104","$959,238",$0
+139,Debbie Stabenow,Democratic,Michigan,Senate,"$3,437,752","$1,675,633","$4,280,511",$0
+140,Debbie Wasserman Schultz,Democratic,Florida,House,"$1,881,484","$1,447,640","$1,050,075",$0
+141,Deborah Ross,Democratic,North Carolina,House,"$1,936,676","$1,350,959","$1,037,175",$0
+142,Derek Kilmer,Democratic,Washington,House,"$2,461,642","$2,393,151","$3,056,589",$0
+143,Diana DeGette,Democratic,Colorado,House,"$1,029,410","$935,113","$371,669",$0
+144,Diana Harshbarger,Republican,Tennessee,House,"$1,720,763","$1,133,074","$845,534","$250,000"
+145,Dianne Feinstein,Democratic,California,Senate,"$9,778","$47,909","$9,888","$500,000"
+146,Dick Durbin,Democratic,Illinois,Senate,"$1,028,474","$650,774","$1,454,186",$0
+147,Dina Titus,Democratic,Nevada,House,"$2,588,432","$1,948,461","$968,861",$0
+148,Don Bacon,Republican,Nebraska,House,"$3,367,598","$2,665,450","$787,186",$0
+149,Don Beyer,Democratic,Virginia,House,"$1,993,756","$2,034,811","$598,966",$0
+150,Don Norcross,Democratic,New Jersey,House,"$1,836,753","$2,164,438","$1,596,978",$0
+151,Donald Payne Jr.,Democratic,New Jersey,House,"$1,260,631","$1,338,120","$103,782",$0
+152,Donald McEachin,Democratic,Virginia,House,"$821,439","$722,678","$307,893",$0
+153,Doris Matsui,Democratic,California,House,"$1,284,829","$1,151,252","$402,988",$0
+154,Doug LaMalfa,Republican,California,House,"$783,541","$367,065","$507,617",$430
+155,Doug Lamborn,Republican,Colorado,House,"$465,226","$661,939","$232,064",$0
+156,Drew Ferguson,Republican,Georgia,House,"$3,163,351","$2,731,173","$770,264",$0
+157,Dusty Johnson,Republican,South Dakota,House,"$2,447,306","$1,232,550","$2,264,896",$0
+158,Dutch Ruppersberger,Democratic,Maryland,House,"$970,454","$830,599","$1,344,068",$0
+159,Dwight Evans,Democratic,Pennsylvania,House,"$1,083,660","$1,069,356","$196,906",$0
+160,Earl Blumenauer,Democratic,Oregon,House,"$1,218,880","$1,185,765","$790,459",$0
+161,Ed Case,Democratic,Hawaii,House,"$991,211","$606,459","$501,453",$0
+162,Ed Markey,Democratic,Massachusetts,Senate,"$904,754","$998,253","$1,558,477",$0
+163,Ed Perlmutter,Democratic,Colorado,House,"$627,622","$959,386","$721,931",$0
+164,Eddie Bernice Johnson,Democratic,Texas,House,"$15,000","$111,535","$319,149",$0
+165,Elaine Luria,Democratic,Virginia,House,"$8,724,776","$5,845,980","$3,020,970",$0
+166,Eleanor Holmes Norton,Democratic,District of Columbia,Senate,"$217,953","$273,075","$42,506",$0
+167,Elise Stefanik,Republican,New York,House,"$8,417,574","$7,381,711","$3,019,403",$0
+168,Elissa Slotkin,Democratic,Michigan,House,"$8,700,992","$6,471,192","$3,796,480",$0
+169,Elizabeth Warren,Democratic,Massachusetts,Senate,"$4,754,168","$3,828,062","$2,251,694",$0
+170,Emanuel Cleaver,Democratic,Missouri,House,"$1,042,771","$914,101","$1,056,533",$0
+171,Eric Swalwell,Democratic,California,House,"$3,390,174","$2,979,716","$913,386",$0
+172,Frank Lucas,Republican,Oklahoma,House,"$1,388,678","$1,424,753","$246,103",$0
+173,Frank Mrvan,Democratic,Indiana,House,"$1,871,503","$1,594,630","$391,100",$0
+174,Frank Pallone Jr.,Democratic,New Jersey,House,"$2,803,934","$2,339,583","$3,801,946",$0
+175,Fred Keller,Republican,Pennsylvania,House,"$634,266","$677,872","$432,173",$0
+176,Fred Upton,Republican,Michigan,House,"$1,396,865","$1,035,867","$548,873",$0
+177,Frederica Wilson,Democratic,Florida,House,"$563,173","$372,925","$610,833","$15,250"
+178,French Hill,Republican,Arkansas,House,"$2,895,371","$2,141,876","$1,164,573",$0
+179,G.K. Butterfield,Democratic,North Carolina,House,"$217,083","$549,535","$331,504",$0
+180,Garret Graves,Republican,Louisiana,House,"$1,733,173","$1,156,648","$2,603,433",$0
+181,Gary Palmer,Republican,Alabama,House,"$1,113,250","$1,011,061","$472,876",$0
+182,Gary Peters,Democratic,Michigan,Senate,"$3,667,685","$811,365","$4,626,592",$0
+183,Gerry Connolly,Democratic,Virginia,House,"$1,941,614","$1,056,208","$3,777,325","$40,631"
+184,Glenn Grothman,Republican,Wisconsin,House,"$1,210,017","$905,520","$573,927","$139,110"
+185,Glenn Thompson,Republican,Pennsylvania,House,"$2,412,193","$2,084,240","$421,129",$0
+186,Grace Meng,Democratic,New York,House,"$1,423,370","$900,247","$918,643",$0
+187,Grace Napolitano,Democratic,California,House,"$295,443","$176,910","$651,863","$5,000"
+188,Greg Murphy,Republican,North Carolina,House,"$1,724,862","$1,227,846","$759,247",$0
+189,Greg Pence,Republican,Indiana,House,"$2,097,733","$2,112,033","$496,526","$20,574"
+190,Greg Stanton,Democratic,Arizona,House,"$3,879,556","$2,971,064","$1,952,894",$0
+191,Greg Steube,Republican,Florida,House,"$1,472,022","$831,312","$964,486",$0
+192,Gregory Meeks,Democratic,New York,House,"$2,498,238","$1,474,002","$1,805,708",$0
+193,Gus Bilirakis,Republican,Florida,House,"$1,746,079","$1,488,258","$332,931",$0
+194,Guy Reschenthaler,Republican,Pennsylvania,House,"$1,701,888","$1,831,816","$557,651",$0
+195,Gwen Moore,Democratic,Wisconsin,House,"$1,042,952","$966,329","$110,623",$0
+196,Hakeem Jeffries,Democratic,New York,House,"$5,529,626","$4,878,372","$2,796,536",$0
+197,Hal Rogers,Republican,Kentucky,House,"$696,558","$859,416","$674,044",$0
+198,Haley Stevens,Democratic,Michigan,House,"$5,300,715","$4,643,235","$742,473",$0
+199,Hank Johnson,Democratic,Georgia,House,"$481,307","$570,238","$93,468","$6,211"
+200,Henry Cuellar,Democratic,Texas,House,"$4,269,860","$4,984,190","$836,142",$0
+201,Ilhan Omar,Democratic,Minnesota,House,"$2,828,252","$2,786,198","$209,823",$0
+202,Jack Reed,Democratic,Rhode Island,Senate,"$472,779","$557,790","$1,924,376",$0
+203,Jackie Speier,Democratic,California,House,"$273,672","$335,736","$1,717,707",$477
+204,Jacky Rosen,Democratic,Nevada,Senate,"$4,215,388","$2,470,764","$3,406,319","$15,000"
+205,Jahana Hayes,Democratic,Connecticut,House,"$2,253,420","$1,724,204","$1,558,823",$0
+206,Jaime Herrera Beutler,Republican,Washington,House,"$3,078,342","$3,127,968","$36,537","$47,000"
+207,Jake Auchincloss,Democratic,Massachusetts,House,"$2,824,798","$937,214","$2,345,366",$0
+208,Jake Ellzey,Republican,Texas,House,"$6,278,712","$5,713,656","$565,055",$0
+209,Jake LaTurner,Republican,Kansas,House,"$1,393,362","$588,372","$819,937",$0
+210,Jamaal Bowman,Democratic,New York,House,"$1,754,371","$1,720,690","$111,155","$26,410"
+211,James Comer,Republican,Kentucky,House,"$1,506,882","$779,716","$1,129,628",$0
+212,James Clyburn,Democratic,South Carolina,House,"$3,208,608","$2,644,422","$2,544,681",$0
+213,Jim Risch,Republican,Idaho,Senate,"$403,990","$302,624","$2,288,912",$0
+214,James Lankford,Republican,Oklahoma,Senate,"$5,429,416","$3,860,244","$2,482,347",$0
+215,Jim McGovern,Democratic,Massachusetts,House,"$975,577","$783,053","$457,469",$0
+216,Jamie Raskin,Democratic,Maryland,House,"$4,160,925","$2,465,547","$3,033,907",$0
+217,Jan Schakowsky,Democratic,Illinois,House,"$1,445,030","$1,283,092","$910,992",$0
+218,Jared Golden,Democratic,Maine,House,"$5,051,130","$3,902,805","$1,279,185",$0
+219,Jared Huffman,Democratic,California,House,"$827,098","$670,493","$1,079,047",$0
+220,Jason Crow,Democratic,Colorado,House,"$2,417,062","$1,789,315","$1,916,752",$0
+221,Jason Smith,Republican,Missouri,House,"$2,714,726","$3,419,235","$827,170",$0
+222,Jay Obernolte,Republican,California,House,"$854,849","$559,391","$365,041","$1,331,970"
+223,Jeanne Shaheen,Democratic,New Hampshire,Senate,"$1,020,109","$825,784","$1,312,786",$0
+224,Jeff Duncan,Republican,South Carolina,House,"$1,536,235","$1,333,874","$684,771",$0
+225,Jeff Merkley,Democratic,Oregon,Senate,"$1,558,322","$1,259,364","$4,104,519",$0
+226,Jeff Van Drew,Republican,New Jersey,House,"$2,816,286","$2,083,474","$924,689",$0
+227,Jennifer Wexton,Democratic,Virginia,House,"$3,369,890","$2,379,436","$3,131,151",$0
+228,Jenniffer Gonzalez,Republican,Puerto Rico,Senate,"$560,343","$407,384","$265,291",$0
+229,Jerrold Nadler,Democratic,New York,House,"$2,124,293","$2,523,595","$124,113",$0
+230,Jerry Carl,Republican,Alabama,House,"$923,401","$524,947","$510,426","$474,738"
+231,Jerry McNerney,Democratic,California,House,"$538,284","$636,872","$135,584",$0
+232,Jerry Moran,Republican,Kansas,Senate,"$4,880,505","$1,296,606","$6,134,163","$333,216"
+233,Jesus Garcia,Democratic,Illinois,House,"$844,278","$737,068","$233,967",$0
+234,Jim Baird,Republican,Indiana,House,"$335,990","$253,537","$345,255","$170,000"
+235,Jim Banks,Republican,Indiana,House,"$2,302,093","$1,286,076","$1,460,443","$27,052"
+236,Jim Cooper,Democratic,Tennessee,House,"$561,230","$565,141","$269,023",$0
+237,Jim Costa,Democratic,California,House,"$1,727,906","$1,181,490","$956,586","$3,435"
+238,Jim Himes,Democratic,Connecticut,House,"$1,520,006","$1,252,777","$2,090,429",$0
+239,Jim Jordan,Republican,Ohio,House,"$12,417,107","$9,675,701","$8,855,217",$0
+240,Jim Langevin,Democratic,Rhode Island,House,"$402,848","$520,692","$593,630",$0
+241,Jimmy Gomez,Democratic,California,House,"$1,566,445","$1,093,316","$962,647","$13,201"
+242,Jimmy Panetta,Democratic,California,House,"$2,287,480","$1,346,762","$2,116,074",$0
+243,Joaquin Castro,Democratic,Texas,House,"$638,820","$482,993","$271,573",$0
+244,Jodey Arrington,Republican,Texas,House,"$1,888,539","$1,568,139","$1,419,753",$0
+245,Jody Hice,Republican,Georgia,House,"-$42,855","$181,189","$25,871",$0
+246,Joe Courtney,Democratic,Connecticut,House,"$1,729,051","$1,272,645","$1,172,217",$0
+247,Joe Manchin,Democratic,West Virginia,Senate,"$7,790,164","$835,794","$9,414,431",$0
+248,Joe Sempolinski,Republican,New York,House,"$241,369","$240,382",$986,"$18,000"
+249,Joe Wilson,Republican,South Carolina,House,"$910,221","$683,561","$301,026",$0
+250,John Barrasso,Republican,Wyoming,Senate,"$1,480,419","$1,320,611","$4,281,697",$0
+251,John Bergman,Republican,Michigan,House,"$1,622,189","$1,012,886","$749,702","$72,680"
+252,John Boozman,Republican,Arkansas,Senate,"$6,252,176","$5,947,581","$1,211,436",$0
+253,John Carter,Republican,Texas,House,"$1,192,842","$1,006,781","$386,467",$0
+254,John Cornyn,Republican,Texas,Senate,"$1,974,574","$1,155,981","$1,452,053",$0
+255,John Curtis,Republican,Utah,House,"$1,898,707","$1,670,631","$579,381",$0
+256,John Garamendi,Democratic,California,House,"$1,012,953","$996,030","$1,128,045",$0
+257,John Hickenlooper,Democratic,Colorado,Senate,"$864,182","$1,205,871","$1,300,393",$0
+258,John Hoeven,Republican,North Dakota,Senate,"$2,941,980","$2,775,658","$2,263,638","$100,000"
+259,John Joyce,Republican,Pennsylvania,House,"$1,373,506","$395,221","$1,697,167","$906,423"
+260,John Katko,Republican,New York,House,"$1,517,310","$827,000","$962,371",$0
+261,John Kennedy,Republican,Louisiana,Senate,"$28,119,082","$18,276,565","$15,530,074",$0
+262,John Larson,Democratic,Connecticut,House,"$1,614,911","$1,506,215","$526,071","$11,992"
+263,John Moolenaar,Republican,Michigan,House,"$1,992,376","$2,034,990","$568,532","$33,345"
+264,John Rose,Republican,Tennessee,House,"$1,442,822","$573,729","$1,323,467","$1,997,460"
+265,John Rutherford,Republican,Florida,House,"$710,380","$548,875","$268,442",$0
+266,John Sarbanes,Democratic,Maryland,House,"$177,476","$582,519","$631,740",$0
+267,John Thune,Republican,South Dakota,Senate,"$6,770,674","$2,763,217","$17,419,927",$0
+268,John Yarmuth,Democratic,Kentucky,House,"$190,197","$236,256","$123,787","$132,262"
+269,Jon Ossoff,Democratic,Georgia,Senate,"$10,260,242","$12,275,027","$2,316,948",$0
+270,Jon Tester,Democratic,Montana,Senate,"$2,335,296","$900,741","$2,480,084",$0
+271,Joni Ernst,Republican,Iowa,Senate,"$1,642,695","$1,169,059","$1,002,050",$0
+272,Joseph Morelle,Democratic,New York,House,"$1,775,246","$1,262,551","$672,870",$0
+273,Joe Neguse,Democratic,Colorado,House,"$2,099,507","$1,148,462","$1,844,549",$0
+274,Josh Gottheimer,Democratic,New Jersey,House,"$7,720,264","$2,045,198","$14,024,163",$0
+275,Josh Harder,Democratic,California,House,"$6,193,616","$5,122,224","$4,541,154",$0
+276,Josh Hawley,Republican,Missouri,Senate,"$11,028,757","$8,426,682","$4,040,790",$0
+277,Joyce Beatty,Democratic,Ohio,House,"$2,027,765","$845,770","$2,138,584","$2,500"
+278,Juan Vargas,Democratic,California,House,"$905,730","$582,443","$393,026",$0
+279,Judy Chu,Democratic,California,House,"$1,275,434","$854,516","$3,202,686","$2,705"
+280,Julia Brownley,Democratic,California,House,"$1,998,752","$2,309,786","$2,802,396",$0
+281,Julia Letlow,Republican,Louisiana,House,"$2,620,536","$1,458,271","$1,162,265",$0
+282,Kai Kahele,Democratic,Hawaii,House,"$463,256","$622,946","$33,696",$0
+283,Kamala Harris,Democratic,California,Senate,$0,$0,$0,$0
+284,Karen Bass,Democratic,California,House,"$507,962","$791,486","$1,042,340",$0
+285,Kat Cammack,Republican,Florida,House,"$2,091,623","$1,708,461","$415,015",$0
+286,Katherine Clark,Democratic,Massachusetts,House,"$2,002,236","$2,104,697","$1,190,314",$0
+287,Kathleen Rice,Democratic,New York,House,"$466,705","$584,768","$71,781",$0
+288,Kathy Castor,Democratic,Florida,House,"$1,432,885","$880,523","$975,764",$0
+289,Kathy Manning,Democratic,North Carolina,House,"$2,692,609","$1,874,537","$1,130,411","$250,000"
+290,Katie Porter,Democratic,California,House,"$21,441,693","$15,946,876","$15,762,568",$0
+291,Kay Granger,Republican,Texas,House,"$1,846,695","$1,623,165","$534,195",$0
+292,Kelly Armstrong,Republican,North Dakota,House,"$1,794,452","$1,370,986","$729,173","$200,000"
+293,Ken Buck,Republican,Colorado,House,"$1,375,514","$1,142,475","$523,705",$0
+294,Ken Calvert,Republican,California,House,"$3,077,072","$2,371,953","$1,115,717","$11,787"
+295,Kevin Brady,Republican,Texas,House,"$273,024","$730,606","$645,085",$0
+296,Kevin Cramer,Republican,North Dakota,Senate,"$458,054","$324,173","$352,272",$0
+297,Kevin Hern,Republican,Oklahoma,House,"$1,167,360","$771,398","$725,359","$775,000"
+298,Kevin McCarthy,Republican,California,House,"$24,791,538","$22,086,344","$7,507,326",$0
+299,Kim Schrier,Democratic,Washington,House,"$8,163,575","$7,548,005","$2,333,322",$0
+300,Kirsten Gillibrand,Democratic,New York,Senate,"$3,301,708","$651,381","$4,392,753",$0
+301,Kurt Schrader,Democratic,Oregon,House,"$2,244,429","$4,680,564","$80,364",$0
+302,Kweisi Mfume,Democratic,Maryland,House,"$452,659","$244,657","$509,104",$0
+303,Kyrsten Sinema,Democratic,Arizona,Senate,"$7,112,616","$1,691,482","$7,876,875",$0
+304,Lance Gooden,Republican,Texas,House,"$814,098","$882,850","$383,782",$0
+305,Larry Bucshon,Republican,Indiana,House,"$1,296,300","$888,047","$615,172","$2,362"
+306,Lauren Underwood,Democratic,Illinois,House,"$6,175,563","$3,787,920","$2,925,541",$0
+307,Lauren Boebert,Republican,Colorado,House,"$6,227,355","$4,659,808","$1,924,341",$0
+308,Lee Zeldin,Republican,New York,House,"$766,924","$922,007","$16,354",$0
+309,Linda Sánchez,Democratic,California,House,"$1,403,194","$1,298,816","$945,360",$0
+310,Lindsey Graham,Republican,South Carolina,Senate,"$6,695,582","$5,371,524","$13,815,515",$0
+311,Lisa Blunt Rochester,Democratic,Delaware,House,"$2,543,199","$1,746,273","$1,760,692","$346,040"
+312,Lisa McClain,Republican,Michigan,House,"$1,189,244","$337,384","$900,015",$0
+313,Lisa Murkowski,Republican,Alaska,Senate,"$8,559,805","$6,057,395","$3,526,355",$0
+314,Liz Cheney,Republican,Wyoming,House,$0,$0,$0,$0
+315,Lizzie Fletcher,Democratic,Texas,House,"$3,412,257","$1,217,624","$2,255,729",$0
+316,Lloyd Doggett,Democratic,Texas,House,"$1,131,363","$1,239,741","$5,097,097",$0
+317,Lloyd Smucker,Republican,Pennsylvania,House,"$1,407,018","$825,428","$1,278,365","$49,208"
+318,Lois Frankel,Democratic,Florida,House,"$1,117,075","$827,680","$1,481,566",$0
+319,Lori Trahan,Democratic,Massachusetts,House,"$1,812,003","$766,481","$1,331,485",$0
+320,Lou Correa,Democratic,California,House,"$1,174,363","$632,506","$1,687,557","$25,467"
+321,Louis B. Gohmert Jr.,Republican,Texas,House,"$206,591","$280,040","$20,251",$0
+322,Lucille Roybal-Allard,Democratic,California,House,"$168,660","$159,810","$47,393",$0
+323,Lucy McBath,Democratic,Georgia,House,"$5,042,351","$4,374,448","$807,831",$0
+324,Madeleine Dean,Democratic,Pennsylvania,House,"$1,727,651","$1,120,169","$1,182,075",$0
+325,Madison Cawthorn,Republican,North Carolina,House,"$3,965,149","$4,058,668","$12,211",$0
+326,Maggie Hassan,Democratic,New Hampshire,Senate,"$30,914,830","$28,380,992","$4,813,508",$0
+327,Marc Veasey,Democratic,Texas,House,"$1,652,257","$1,283,856","$836,744",$0
+328,Marco Rubio,Republican,Florida,Senate,"$36,709,285","$30,153,111","$9,631,856",$0
+329,Marcy Kaptur,Democratic,Ohio,House,"$2,855,041","$2,478,802","$1,148,634",$0
+330,Maria Cantwell,Democratic,Washington,Senate,"$686,777","$902,774","$179,611","$2,171,350"
+331,Maria Salazar,Republican,Florida,House,"$4,516,392","$2,613,085","$1,924,564","$78,856"
+332,Mariannette Miller-Meeks,Republican,Iowa,House,"$4,225,010","$2,617,278","$2,060,145","$186,500"
+333,Marie Newman,Democratic,Illinois,House,"$1,449,001","$1,530,297","$21,544","$10,642"
+334,Marilyn Strickland,Democratic,Washington,House,"$1,718,171","$827,196","$923,000","$50,000"
+335,Mario Diaz-Balart,Republican,Florida,House,"$1,584,197","$959,585","$1,557,856",$0
+336,Marjorie Taylor Greene,Republican,Georgia,House,"$11,571,029","$9,713,658","$2,228,902","$950,000"
+337,Mark Amodei,Republican,Nevada,House,"$924,763","$1,081,270","$167,808","$9,000"
+338,Mark Desaulnier,Democratic,California,House,"$566,400","$442,749","$605,038",$0
+339,Mark Green,Republican,Tennessee,House,"$1,447,075","$1,544,369","$176,911",$0
+340,Mark Kelly,Democratic,Arizona,Senate,"$73,140,886","$61,357,281","$13,186,127",$0
+341,Mark Pocan,Democratic,Wisconsin,House,"$1,000,923","$850,344","$1,001,591",$0
+342,Mark Takano,Democratic,California,House,"$1,123,015","$731,370","$555,609",$0
+343,Mark Warner,Democratic,Virginia,Senate,"$2,563,285","$729,334","$2,222,361",$0
+344,Markwayne Mullin,Republican,Oklahoma,House,"$4,466,785","$4,642,810","$434,285","$1,230,810"
+345,Marsha Blackburn,Republican,Tennessee,Senate,"$2,561,756","$1,070,457","$3,172,197",$0
+346,Martin Heinrich,Democratic,New Mexico,Senate,"$1,403,676","$984,961","$890,650",$0
+347,Mary Gay Scanlon,Democratic,Pennsylvania,House,"$1,434,559","$1,037,461","$615,776","$250,000"
+348,Mary Miller,Republican,Illinois,House,"$1,869,196","$1,679,404","$308,492",$0
+349,Mary Peltola,Democratic,Alaska,House,"$4,163,482","$1,897,681","$2,265,800",$0
+350,Matt Cartwright,Democratic,Pennsylvania,House,"$4,604,399","$3,511,552","$1,263,713","$242,800"
+351,Matt Gaetz,Republican,Florida,House,"$5,929,700","$6,878,447","$657,078",$0
+352,Matt Rosendale,Republican,Montana,House,"$1,977,326","$1,103,300","$1,136,865",$0
+353,Maxine Waters,Democratic,California,House,"$1,117,733","$1,169,917","$268,683","$45,293"
+354,Mayra Flores,Republican,Texas,House,"$3,305,211","$2,505,998","$799,212",$0
+355,Mazie K. Hirono,Democratic,Hawaii,Senate,"$640,039","$647,254","$836,625",$0
+356,Melanie Stansbury,Democratic,New Mexico,House,"$3,211,215","$2,881,729","$380,609",$0
+357,Michael Bennet,Democratic,Colorado,Senate,"$18,086,343","$13,713,611","$4,898,614","$374,819"
+358,Michael Burgess,Republican,Texas,House,"$1,159,191","$1,066,159","$235,528",$0
+359,Michael Cloud,Republican,Texas,House,"$975,508","$914,954","$302,925",$0
+360,Michael Guest,Republican,Mississippi,House,"$1,240,555","$1,378,472","$144,151",$0
+361,Michael McCaul,Republican,Texas,House,"$2,265,809","$1,896,999","$376,543",$0
+362,Michael Turner,Republican,Ohio,House,"$1,349,285","$703,942","$722,683",$0
+363,Michael San Nicolas,Democratic,Guam,Senate,"$13,025","$17,683","$16,205","$14,303"
+364,Michael Waltz,Republican,Florida,House,"$2,728,460","$2,447,258","$1,165,661",$0
+365,Michelle Fischbach,Republican,Minnesota,House,"$1,515,656","$1,140,241","$413,364",$0
+366,Michelle Steel,Republican,California,House,"$6,258,368","$4,493,801","$1,921,641","$470,573"
+367,Mike Bost,Republican,Illinois,House,"$1,500,937","$995,497","$919,230",$0
+368,Mike Braun,Republican,Indiana,Senate,"$1,269,505","$559,052","$1,261,125","$341,069"
+369,Mike Carey,Republican,Ohio,House,"$2,181,022","$2,025,581","$155,440",$0
+370,Mike Crapo,Republican,Idaho,Senate,"$4,182,600","$3,899,937","$4,365,054",$0
+371,Mike Rogers,Republican,Alabama,House,"$1,788,743","$1,368,622","$922,354",$0
+372,Mike Doyle,Democratic,Pennsylvania,House,"$166,850","$354,781","$77,965",$0
+373,Mike Gallagher,Republican,Wisconsin,House,"$2,940,815","$1,130,175","$2,980,001",$0
+374,Mike Garcia,Republican,California,House,"$6,128,156","$4,621,964","$1,884,050","$169,894"
+375,Mike Johnson,Republican,Louisiana,House,"$1,276,358","$1,039,697","$906,346",$0
+376,Mike Kelly,Republican,Pennsylvania,House,"$1,180,269","$865,325","$1,273,468","$95,000"
+377,Mike Lee,Republican,Utah,Senate,"$7,703,753","$6,837,453","$1,415,684",$0
+378,Mike Levin,Democratic,California,House,"$4,448,589","$3,933,903","$2,016,947","$5,000"
+379,Mike Quigley,Democratic,Illinois,House,"$963,237","$683,359","$1,302,225",$0
+380,Mike Rounds,Republican,South Dakota,Senate,"$138,756","$476,486","$1,344,792",$0
+381,Mike Simpson,Republican,Idaho,House,"$1,547,000","$1,534,292","$189,022",$0
+382,Mike Thompson,Democratic,California,House,"$2,000,373","$1,899,090","$1,847,454","$20,794"
+383,Mikie Sherrill,Democratic,New Jersey,House,"$5,622,081","$5,381,147","$3,372,654",$0
+384,Mitch McConnell,Republican,Kentucky,Senate,"$5,503,392","$4,543,999","$7,771,094",$0
+385,Mitt Romney,Republican,Utah,Senate,"$474,786","$608,948","$467,216",$0
+386,Mo Brooks,Republican,Alabama,House,"$3,148,542","$4,270,401","$15,641",$0
+387,Mondaire Jones,Democratic,New York,House,"$3,013,074","$3,724,475","$86,188",$0
+388,Morgan Griffith,Republican,Virginia,House,"$720,632","$561,948","$580,125",$0
+389,Nancy Mace,Republican,South Carolina,House,"$5,119,356","$4,381,625","$797,217",$100
+390,Nancy Pelosi,Democratic,California,House,"$22,216,583","$21,814,643","$6,701,313",$0
+391,Nanette Barragán,Democratic,California,House,"$1,107,829","$561,441","$1,597,139",$0
+392,Neal Dunn,Republican,Florida,House,"$1,531,504","$1,130,495","$803,071","$303,284"
+393,Nicole Malliotakis,Republican,New York,House,"$4,260,780","$2,760,113","$1,523,610",$0
+394,Nikema Williams,Democratic,Georgia,House,"$1,066,976","$1,162,211","$95,928",$0
+395,Norma Torres,Democratic,California,House,"$677,046","$486,938","$397,761","$2,243"
+396,Nydia Velazquez,Democratic,New York,House,"$543,105","$526,529","$326,957","$7,736"
+397,Pat Ryan,Democratic,New York,House,"$3,352,245","$2,799,498","$553,243",$0
+398,Pat Toomey,Republican,Pennsylvania,Senate,"$13,254","$394,707","$1,103,643",$0
+399,Pat Fallon,Republican,Texas,House,"$730,885","$704,310","$188,683","$25,000"
+400,Patrick Leahy,Democratic,Vermont,Senate,"$812,657","$825,290","$1,486,031",$0
+401,Patrick McHenry,Republican,North Carolina,House,"$3,471,514","$3,052,628","$2,125,855",$0
+402,Patty Murray,Democratic,Washington,Senate,"$13,377,243","$13,073,248","$3,786,960",$0
+403,Paul Gosar,Republican,Arizona,House,"$737,101","$711,469","$39,380",$0
+404,Paul Tonko,Democratic,New York,House,"$1,661,023","$1,476,649","$996,034",$0
+405,Pete Aguilar,Democratic,California,House,"$2,916,586","$2,421,160","$2,335,020",$0
+406,Pete Sessions,Republican,Texas,House,"$876,121","$732,508","$309,602","$120,000"
+407,Pete Stauber,Republican,Minnesota,House,"$2,279,020","$1,181,123","$1,100,665",$0
+408,Peter DeFazio,Democratic,Oregon,House,$0,$0,$0,$0
+409,Peter Meijer,Republican,Michigan,House,"$2,399,884","$2,381,236","$106,846","$480,000"
+410,Peter Welch,Democratic,Vermont,House,"$5,143,410","$2,456,802","$2,686,607",$0
+411,Pramila Jayapal,Democratic,Washington,House,"$2,533,189","$1,700,676","$2,616,125",$0
+412,Raja Krishnamoorthi,Democratic,Illinois,House,"$7,843,935","$4,638,387","$11,633,394",$0
+413,Ralph Norman,Republican,South Carolina,House,"$306,434","$508,078","$526,295",$0
+414,Rand Paul,Republican,Kentucky,Senate,"$22,490,627","$15,865,010","$8,308,644",$0
+415,Randy Feenstra,Republican,Iowa,House,"$2,664,811","$1,505,476","$1,171,281",$0
+416,Randy Weber,Republican,Texas,House,"$921,792","$873,717","$519,482","$124,000"
+417,Raphael Warnock,Democratic,Georgia,Senate,"$86,581,469","$75,959,810","$22,762,985",$0
+418,Rashida Tlaib,Democratic,Michigan,House,"$3,105,241","$3,070,877","$426,096",$0
+419,Raul Grijalva,Democratic,Arizona,House,"$549,117","$412,910","$362,415","$4,015"
+420,Raul Ruiz,Democratic,California,House,"$2,099,148","$1,785,769","$2,629,550",$0
+421,Richard Blumenthal,Democratic,Connecticut,Senate,"$6,871,179","$6,230,804","$4,544,418",$0
+422,Richard Burr,Republican,North Carolina,Senate,"$145,474","$208,721","$3,322",$0
+423,Richard Shelby,Republican,Alabama,Senate,"$20,520","$226,622","$9,558,166",$0
+424,Richard Neal,Democratic,Massachusetts,House,"$3,163,938","$2,089,988","$3,458,513",$0
+425,Richard Hudson,Republican,North Carolina,House,"$2,846,323","$1,559,526","$1,517,715",$0
+426,Rick Allen,Republican,Georgia,House,"$856,257","$607,298","$895,868","$1,125,000"
+427,Rick Crawford,Republican,Arkansas,House,"$979,267","$543,708","$618,266",$0
+428,Rick Larsen,Democratic,Washington,House,"$1,516,417","$1,142,747","$702,871",$0
+429,Rick Scott,Republican,Florida,Senate,"$4,731,925","$5,672,380","$1,212,013","$1,000,000"
+430,Ritchie Torres,Democratic,New York,House,"$4,080,074","$806,930","$3,662,833",$0
+431,Ro Khanna,Democratic,California,House,"$5,550,174","$2,408,297","$5,403,004","$89,348"
+432,Rob Portman,Republican,Ohio,Senate,"-$1,386,356","$386,217","$3,237,052",$0
+433,Rob Wittman,Republican,Virginia,House,"$1,859,691","$1,134,994","$912,028",$0
+434,Robert Aderholt,Republican,Alabama,House,"$1,385,034","$647,570","$1,384,467",$0
+435,Bob Menendez,Democratic,New Jersey,Senate,"$4,598,365","$679,677","$5,219,723",$0
+436,Robin Kelly,Democratic,Illinois,House,"$1,562,228","$1,094,311","$1,482,329",$0
+437,Rodney Davis,Republican,Illinois,House,"$3,304,702","$3,406,429","$38,708",$0
+438,Roger Marshall,Republican,Kansas,Senate,"$605,073","$392,087","$422,944","$97,000"
+439,Roger Wicker,Republican,Mississippi,Senate,"$1,386,724","$756,088","$2,318,412",$0
+440,Roger Williams,Republican,Texas,House,"$1,589,224","$1,231,307","$369,458","$47,900"
+441,Ron Estes,Republican,Kansas,House,"$1,674,579","$1,075,157","$1,443,586",$0
+442,Ron Johnson,Republican,Wisconsin,Senate,"$27,680,901","$23,731,653","$4,508,581","$11,759,857"
+443,Ron Kind,Democratic,Wisconsin,House,"$587,143","$695,941","$768,373",$0
+444,Ron Wyden,Democratic,Oregon,Senate,"$10,024,604","$6,264,627","$5,986,323",$0
+445,Ronny Jackson,Republican,Texas,House,"$4,442,159","$3,782,300","$1,046,998",$0
+446,Rosa DeLauro,Democratic,Connecticut,House,"$1,895,941","$1,211,915","$843,754",$0
+447,Roy Blunt,Republican,Missouri,Senate,"-$367,162","$513,399","$861,989",$0
+448,Ruben Gallego,Democratic,Arizona,House,"$2,153,850","$1,416,479","$1,354,341",$0
+449,Russ Fulcher,Republican,Idaho,House,"$479,167","$383,652","$198,346",$0
+450,Salud Carbajal,Democratic,California,House,"$2,031,545","$906,948","$2,525,300",$0
+451,Sam Graves,Republican,Missouri,House,"$2,005,290","$1,507,525","$1,354,737","$43,683"
+452,Sanford Bishop Jr.,Democratic,Georgia,House,"$2,680,786","$1,832,607","$1,040,707",$0
+453,Sara Jacobs,Democratic,California,House,"$1,584,377","$1,432,530","$254,013",$0
+454,Scott Desjarlais,Republican,Tennessee,House,"$141,458","$140,755","$303,352",$0
+455,Scott Fitzgerald,Republican,Wisconsin,House,"$919,350","$684,771","$421,894",$0
+456,Scott Franklin,Republican,Florida,House,"$972,575","$601,487","$396,568","$422,762"
+457,Scott Perry,Republican,Pennsylvania,House,"$2,529,397","$1,546,285","$1,150,812","$119,566"
+458,Scott Peters,Democratic,California,House,"$2,227,355","$1,978,300","$1,830,173","$170,760"
+459,Sean Casten,Democratic,Illinois,House,"$4,650,448","$4,206,412","$790,173","$75,694"
+460,Sean Maloney,Democratic,New York,House,"$4,717,097","$4,620,358","$956,740",$903
+461,Seth Moulton,Democratic,Massachusetts,House,"$1,867,651","$1,379,427","$733,892",$0
+462,Sharice Davids,Democratic,Kansas,House,"$6,717,662","$5,671,654","$1,525,158",$0
+463,Sheila Cherfilus-McCormick,Democratic,Florida,House,"$4,250,064","$4,276,527","$13,498","$3,848,131"
+464,Sheila Jackson Lee,Democratic,Texas,House,"$761,516","$488,238","$537,223",$0
+465,Sheldon Whitehouse,Democratic,Rhode Island,Senate,"$1,373,474","$645,659","$1,247,257",$0
+466,Shelley Moore Capito,Republican,West Virginia,Senate,"$707,321","$428,963","$2,748,888",$0
+467,Sherrod Brown,Democratic,Ohio,Senate,"$3,672,268","$2,884,655","$2,951,256",$0
+468,Shontel Brown,Democratic,Ohio,House,"$4,522,424","$4,147,205","$414,847",$0
+469,Stacey Plaskett,Democratic,Virgin Islands,Senate,"$920,408","$830,112","$152,483","$24,733"
+470,Steny Hoyer,Democratic,Maryland,House,"$3,583,458","$3,534,293","$928,232",$764
+471,Stephanie Bice,Republican,Oklahoma,House,"$2,185,504","$1,597,240","$799,854",$0
+472,Stephanie Murphy,Democratic,Florida,House,"$1,111,888","$1,106,700","$1,417,204",$0
+473,Stephen Lynch,Democratic,Massachusetts,House,"$714,987","$694,030","$1,234,341",$0
+474,Steve Chabot,Republican,Ohio,House,"$1,731,244","$1,103,591","$678,565",$0
+475,Steve Cohen,Democratic,Tennessee,House,"$509,828","$264,993","$1,460,953",$0
+476,Steve Scalise,Republican,Louisiana,House,"$17,940,130","$19,428,130","$4,729,718",$0
+477,Steve Womack,Republican,Arkansas,House,"$1,404,019","$808,587","$1,958,688",$0
+478,Steve Daines,Republican,Montana,Senate,"$1,179,969","$529,216","$758,536","$44,813"
+479,Steven Horsford,Democratic,Nevada,House,"$4,254,563","$3,481,983","$1,268,497","$2,375"
+480,Steven Palazzo,Republican,Mississippi,House,"$1,048,457","$1,315,531","$33,954","$30,000"
+481,Susan Collins,Republican,Maine,Senate,"$966,641","$687,093","$1,574,740",$0
+482,Susan Wild,Democratic,Pennsylvania,House,"$5,771,483","$4,270,837","$1,579,342",$0
+483,Susie Lee,Democratic,Nevada,House,"$5,420,136","$4,228,959","$1,219,881",$0
+484,Suzan DelBene,Democratic,Washington,House,"$2,252,066","$2,045,946","$1,545,237","$495,000"
+485,Suzanne Bonamici,Democratic,Oregon,House,"$918,476","$843,310","$628,512",$0
+486,Sylvia Garcia,Democratic,Texas,House,"$836,909","$468,144","$616,363",$0
+487,Tammy Baldwin,Democratic,Wisconsin,Senate,"$3,943,221","$3,155,369","$2,741,555",$0
+488,Tammy Duckworth,Democratic,Illinois,Senate,"$13,588,871","$8,631,795","$7,631,025",$0
+489,Ted Budd,Republican,North Carolina,House,"$11,030,158","$9,170,583","$2,930,574","$275,000"
+490,Ted Cruz,Republican,Texas,Senate,"$17,471,712","$18,818,227","$3,248,487",$0
+491,Ted Deutch,Democratic,Florida,House,"$309,658","$552,315","$217,159",$0
+492,Ted Lieu,Democratic,California,House,"$1,323,092","$2,074,087","$1,193,368",$0
+493,Teresa Leger Fernandez,Democratic,New Mexico,House,"$2,684,930","$1,812,604","$1,033,795",$0
+494,Terri Sewell,Democratic,Alabama,House,"$2,093,425","$1,179,817","$3,157,088",$0
+495,Thom Tillis,Republican,North Carolina,Senate,"$783,940","$882,010","$736,838",$0
+496,Thomas Massie,Republican,Kentucky,House,"$973,980","$884,305","$209,059",$0
+497,Tim Burchett,Republican,Tennessee,House,"$1,314,552","$970,838","$937,391","$13,803"
+498,Tim Kaine,Democratic,Virginia,Senate,"$2,239,085","$832,884","$3,922,102",$0
+499,Tim Ryan,Democratic,Ohio,House,"$38,334,636","$36,909,832","$1,424,804","$68,075"
+500,Tim Scott,Republican,South Carolina,Senate,"$37,743,256","$23,876,921","$21,539,824",$0
+501,Tim Walberg,Republican,Michigan,House,"$1,375,262","$1,018,729","$1,125,901",$0
+502,Tina Smith,Democratic,Minnesota,Senate,"$1,418,349","$1,505,859","$714,245",$0
+503,Todd Young,Republican,Indiana,Senate,"$10,055,406","$6,932,873","$5,501,025",$0
+504,Tom Carper,Democratic,Delaware,Senate,"$697,627","$531,955","$470,019",$0
+505,Tom Cole,Republican,Oklahoma,House,"$2,095,503","$2,000,560","$1,372,131",$0
+506,Tom Cotton,Republican,Arkansas,Senate,"$4,637,570","$3,054,045","$7,980,477","$77,959"
+507,Tom Emmer,Republican,Minnesota,House,"$3,893,173","$3,249,177","$1,092,835",$0
+508,Tom Malinowski,Democratic,New Jersey,House,"$7,599,512","$4,867,489","$2,783,118",$0
+509,Tom McClintock,Republican,California,House,"$1,509,014","$1,490,054","$189,780",$0
+510,Tom O'Halleran,Democratic,Arizona,House,"$3,688,187","$1,911,807","$1,839,527",$0
+511,Tom Rice,Republican,South Carolina,House,"$1,587,079","$2,296,616","$411,817",$0
+512,Tom Suozzi,Democratic,New York,House,"$1,548,007","$3,393,860","$109,143","$30,379"
+513,Tom Tiffany,Republican,Wisconsin,House,"$1,037,497","$801,275","$358,941",$0
+514,Tommy Tuberville,Republican,Alabama,Senate,"$881,479","$900,339","$154,620","$162,914"
+515,Tony Cárdenas,Democratic,California,House,"$1,393,256","$1,313,142","$609,903",$0
+516,Tony Gonzales,Republican,Texas,House,"$3,851,900","$2,657,423","$1,225,835",$0
+517,Tracey Mann,Republican,Kansas,House,"$1,144,309","$313,482","$1,107,024","$197,611"
+518,Trent Kelly,Republican,Mississippi,House,"$959,008","$848,201","$339,101",$0
+519,Trey Hollingsworth,Republican,Indiana,House,"$354,993","$192,082","$835,855","$576,083"
+520,Troy Balderson,Republican,Ohio,House,"$1,752,943","$801,443","$994,549",$0
+521,Troy Carter,Democratic,Louisiana,House,"$2,904,436","$2,667,808","$615,058","$94,686"
+522,Troy Nehls,Republican,Texas,House,"$1,247,447","$798,676","$467,977","$5,726"
+523,Val Demings,Democratic,Florida,House,"$64,682,883","$58,806,664","$6,647,641",$0
+524,Van Taylor,Republican,Texas,House,"$2,353,035","$2,368,614","$6,919","$1,088,192"
+525,Vernon Buchanan,Republican,Florida,House,"$3,664,655","$1,728,747","$2,008,993",$0
+526,Veronica Escobar,Democratic,Texas,House,"$1,166,742","$940,660","$510,937",$0
+527,Vicente Gonzalez,Democratic,Texas,House,"$2,492,127","$3,042,545","$820,074",$0
+528,Vicky Hartzler,Republican,Missouri,House,"$2,992,372","$3,572,065","$65,738","$57,607"
+529,Victoria Spartz,Republican,Indiana,House,"$3,612,075","$2,138,185","$1,583,013","$1,137,000"
+530,Virginia Foxx,Republican,North Carolina,House,"$1,929,971","$1,651,369","$2,619,486",$0
+531,Warren Davidson,Republican,Ohio,House,"$871,656","$906,552","$369,819",$0
+532,William Timmons,Republican,South Carolina,House,"$892,064","$823,955","$76,799","$391,742"
+533,Young Kim,Republican,California,House,"$7,900,497","$7,380,035","$928,803","$94,940"
+534,Yvette Clarke,Democratic,New York,House,"$684,268","$662,375","$93,513","$49,480"
+535,Yvette Herrell,Republican,New Mexico,House,"$3,777,731","$2,746,661","$1,085,613",$0
+536,Zoe Lofgren,Democratic,California,House,"$1,679,466","$2,103,190","$736,813",$0
