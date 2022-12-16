@@ -1,0 +1,42 @@
+{
+  "name": "read-csv-file-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.0",
+    "html-loader": "^4.2.0",
+    "plotly.js": "^2.16.5",
+    "react": "^16.13.1",
+    "react-data-table-component": "^6.11.2",
+    "react-scripts": "3.4.3",
+    "styled-components": "^5.1.1",
+    "webpack": "4.42.0",
+    "xlsx": "^0.16.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0"
+  }
+}
