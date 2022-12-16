@@ -6,7 +6,8 @@ import plotly.express as px
 
 class Processor:
     def __init__(self, mode, dataset, query, key = "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"):
-        assert(mode in ["plotter", "tabler"])
+        self.valid_modes = ["plotter", "table", "binder"]
+        assert(mode in self.valid_modes)
         self.mode = mode
         self.dataset = dataset
         self.query = query
@@ -69,10 +70,15 @@ class Processor:
         payload['response_code'] = raw_response
         return payload
 
+class NsqlProcessor(Processor):
+    valid_modes = ['nsql']
+    def __init__(self, mode, dataset, query, key = "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"):
+        super().__init__(mode, dataset, query, key)
+
 if __name__ == "__main__":
 
     dataset = pd.read_csv("temp.txt")
-    processor = Processor("plotter", dataset, "Histogram of Data Scientist salaries")
+    processor = NsqlProcessor("plotter", dataset, "Histogram of Data Scientist salaries")
     payload = processor.produce_payload()
     print('output payload = ', payload)
 
