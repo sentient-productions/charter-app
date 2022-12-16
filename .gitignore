@@ -1,0 +1,12 @@
+app/node_modules/*
+app/package-lock.json
+dump/*
+__pycache__/*
+server/temp.txt
+data/*
+.DS_Store
+.test.html.swp
+server/__pycache__/*
+server/*.json
+server/*.txt
+notebooks/*
