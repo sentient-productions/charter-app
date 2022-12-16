@@ -43,22 +43,22 @@ class Processor:
     def generate_response(self):
         # Use the GPT-3 model to generate text
         response = openai.Completion.create(
-            engine="text-davinci-003",
+            engine="code-davinci-002",
             prompt=self.construct_prompt(),
-            max_tokens=1024,
+            max_tokens=128,
             temperature=0.5,
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0
         )
         response_text = response["choices"][0]["text"]
-        return response_text.strip(' ')
+        return ';'.join(response_text.strip(' ').split(';')[:-1])
 
     def produce_payload(self, temp_file = "temp.json"):
         response = self.generate_response()
         raw_response = response
         print("Raw response=", raw_response)
-        response += """ f = open(temp_file, "w"); f.write(fig.to_json()); print(fig.to_json()); f.close(); fig.show();"""
+        response += """; f = open(temp_file, "w"); f.write(fig.to_json()); print(fig.to_json()); f.close(); fig.show();"""
         dataset = self.dataset
 
         # execute the response, which should result in a json file being written

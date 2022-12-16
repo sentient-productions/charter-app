@@ -12,7 +12,8 @@ function App() {
   // query helpers
   const [query, setQuery] = useState("");
   const [isPlotted, setIsPlotted] = useState(false);
-  const [responseCode, setResponseCode] = useState("fig = px.histogram(dataset[dataset.job_title == 'Data Scientist'], x=\"salary_in_usd\", title='Average Data Scientist Salary');");
+  const [isLoading, setIsLoading] = useState(false);
+  const [responseCode, setResponseCode] = useState("fig = px.histogram(dataset[dataset.job_title == 'Data Scientist'], x=\"salary_in_usd\", title='Average Data Scientist Salary'); xxxx; yyyy;");
 
   // process CSV data
   const processData = dataString => {
@@ -79,24 +80,31 @@ function App() {
 
   const handleQuerySubmit = () => {
     setIsPlotted(false);
-    let formData = new FormData()
-    formData.append("rawData", rawData);
-    formData.append("query", query);
-    console.log("query=", query)
-    fetch('http://127.0.0.1:5000/', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-      return response.text()
-    })
-    .then(jsonText => {
-      console.log('Success:', jsonText);
-      var figure = JSON.parse(jsonText);
-      setIsPlotted(true)
-      Plotly.newPlot('graph-div', figure.data, figure.layout)
-      setResponseCode(figure.response_code)
-    });
+    setIsLoading(true)
+    try {
+      let formData = new FormData()
+      formData.append("rawData", rawData);
+      formData.append("query", query);
+      console.log("query=", query)
+      fetch('http://127.0.0.1:5000/', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => {
+        return response.text()
+      })
+      .then(jsonText => {
+        console.log('Success:', jsonText);
+        var figure = JSON.parse(jsonText);
+        setIsPlotted(true)
+        Plotly.newPlot('graph-div', figure.data, figure.layout)
+        setResponseCode(figure.response_code)
+        setIsLoading(false)
+      });
+    } catch (error) {
+      setResponseCode(error)
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -130,7 +138,7 @@ function App() {
                       <Button 
                         onClick={handleQuerySubmit}
                         variant="contained" 
-                        disabled={data.length==0 || query == ""} 
+                        disabled={data.length==0 || query == "" || isLoading} 
                         sx={{ml: 1}}
                       >
                         Plot
@@ -140,7 +148,7 @@ function App() {
               }
             />
           </Grid>
-          <Grid item sx={{mt:2}}>
+          <Grid item sx={{mt:-2}} >
             {isPlotted &&
             
               responseCode.split(";").map((snippet) => {
@@ -149,25 +157,27 @@ function App() {
                 }
                 
                 return (
-                  <Box
-                    component="div"
-                    sx={{
-                      display: 'inline',
-                      p: 1,
-                      m: 1,
-                      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
-                      color: (theme) =>
-                        theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
-                      border: '1px solid',
-                      borderColor: (theme) =>
-                        theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
-                      borderRadius: 2,
-                      fontSize: '0.875rem',
-                      fontWeight: '700',
-                    }}
-                  >
-                    {snippet}
-                  </Box> 
+                  <Grid item sx={{mt:3}}>
+                    <Box
+                      component="div"
+                      sx={{
+                        display: 'inline',
+                        p: 1,
+                        m: 1,
+                        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
+                        color: (theme) =>
+                          theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
+                        border: '1px solid',
+                        borderColor: (theme) =>
+                          theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
+                        borderRadius: 2,
+                        fontSize: '0.875rem',
+                        fontWeight: '700',
+                      }}
+                    >
+                      {snippet}
+                    </Box> 
+                  </Grid>
                 )
               })
             }

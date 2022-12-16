@@ -19,6 +19,9 @@ def plot():
     with open("temp.txt", "w") as f:
         f.write(rawData)
     dataset = pd.read_csv('temp.txt')
+    # Rename columns to remove trailing and leading spaces
+    dataset.rename(columns=lambda x: x.strip(), inplace=True)
+    
     print('dataset=', dataset)
     query = data['query']
 
