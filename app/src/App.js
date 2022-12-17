@@ -176,8 +176,8 @@ function App() {
     <Grid container>
       <Grid item xs={5}>
         <Tabs sx={{mb: 1}} value={queryMode} onChange={(event) => {setQueryMode(queryMode == 0? 1 : 0)}}>
-          <Tab label="NeuralPlot" />
-          <Tab label="NeuralTable" />
+          <Tab label="Neural Plot" />
+          <Tab label="Neural Table" />
         </Tabs>
         <Grid container>
           <Grid item sx={{mb:2.5}}>
