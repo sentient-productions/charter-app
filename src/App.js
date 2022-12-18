@@ -3,6 +3,8 @@ import * as XLSX from 'xlsx';
 import DataTable from 'react-data-table-component';
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, Tab, Tabs, TextField} from '@mui/material';
 import * as Plotly from 'plotly.js';
+// const URL = "http://127.0.0.1:5000/"
+const URL = "http://flask-env-5.eba-stwbput5.us-east-1.elasticbeanstalk.com/"
 
 const datasetQueries = { 
   "PLOT" : {
@@ -126,10 +128,11 @@ function App() {
       let formData = new FormData()
       formData.append("rawData", rawData);
       formData.append("query", query);
-      const endpoint = queryMode == 0 ? "http://127.0.0.1:5000/" : "http://127.0.0.1:5000/table"
+      const endpoint = queryMode == 0 ? URL :URL + "/table"
       fetch(endpoint, {
           method: 'POST',
           body: formData
+
       })
       .then(response => {
         return response.text()
