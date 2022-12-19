@@ -17,7 +17,7 @@ S3_SECRET = os.environ.get("S3_SECRET")
 
 application = Flask(__name__)
 CORS(application,
-     origins=['http://localhost:3000', 'http://localhost:3000/', 'https://feature-amplify.doyldq2ymzq2e.amplifyapp.com',
+     origins=['http://localhost', 'http://localhost:3000/', 'https://feature-amplify.doyldq2ymzq2e.amplifyapp.com',
               'https://rango.run', 'https://www.app.rango.run'])
 
 
@@ -38,29 +38,29 @@ def table():
 @application.route('/upload', methods=['POST'])
 def upload():
     # fetch the form from the data
-    token = request.args.get('token')
+    token = None # request.args.get('token')
     if not token:
         token = str(uuid.uuid4())
 
     # Each key in :attr:`files` is the name from the ``<input type="file" name="">``
     for name, file_storage in request.files.items():
         dataset = pd.read_csv(file_storage)
-        dataset.to_csv(f's3://rango-data/user/{token}/{name}.csv',
-                       storage_options={'key': S3_KEY, 'secret': S3_SECRET})
+        dataset.to_csv(f's3://rango-data/user/{token}/{name}',
+                       storage_options={'key': S3_KEY, 'secret': S3_SECRET}, index=False)
     return token
 
 
 def load_from_s3(name, token):
-    s3 = boto3.resource('s3')
+    s3 = boto3.resource('s3', aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
     bucket = s3.Bucket('rango-data')
-    default_files = list(bucket.objects.filter(Prefix='default'))
-    if name in default_files:
-        return pd.read_csv(f's3://rango-data/default/{name}.csv',
+    default_files = list([obj.key for obj in bucket.objects.filter(Prefix='default')])
+    if 'default/' + name in default_files:
+        return pd.read_csv(f's3://rango-data/default/{name}',
                            storage_options={'key': S3_KEY, 'secret': S3_SECRET})
     if token:
-        user_files = list(bucket.objects.filter(Prefix=f'user/{token}'))
-        if name in user_files:
-            return pd.read_csv(f's3://rango-data/user/{token}/{name}.csv',
+        user_files = list([obj.key for obj in bucket.objects.filter(Prefix=f'user/{token}')])
+        if f'user/{token}/' + name in user_files:
+            return pd.read_csv(f's3://rango-data/user/{token}/{name}',
                                storage_options={'key': S3_KEY, 'secret': S3_SECRET})
     raise ValueError(f'File {name} not found')
 
