@@ -3,8 +3,8 @@ import * as XLSX from 'xlsx';
 import DataTable from 'react-data-table-component';
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, Tab, Tabs, TextField} from '@mui/material';
 import * as Plotly from 'plotly.js';
-// const URL = "http://127.0.0.1:5000/"
-const URL = "https://www.rango.run/"//#http://flask-env-5.eba-stwbput5.us-east-1.elasticbeanstalk.com/"
+const URL = "http://127.0.0.1:5000/"
+// const URL = "https://www.rango.run/"//#http://flask-env-5.eba-stwbput5.us-east-1.elasticbeanstalk.com/"
 
 const datasetQueries = { 
   "PLOT" : {
@@ -145,8 +145,13 @@ function App() {
           setResponseCode("Query: \"" + query + "\", " + "generated code shown below;" + figure.response_code)
           setIsLoading(false)
         } else {
-          const table = JSON.parse(jsonText);
+          console.log(jsonText)
+          const response = JSON.parse(jsonText);
+          const table = response.data;
+          const nsql = response.nsql;
+          console.log("nsql=", nsql)
           console.log("table data=", table)
+          setResponseCode("Query: \"" + query + "\", " + "generated code shown below;" + nsql)
           setTableColumns(table["header"].map(header => ({name:header, selector:header})));
           // enumeratd map over rows 
           setTableRows(table["rows"].map(row => {
@@ -198,7 +203,7 @@ function App() {
                       <Button 
                         onClick={handleQuerySubmit}
                         variant="contained" 
-                        disabled={data.length==0 || query == "" || isLoading} 
+                        disabled={data.length==0 || query == "" || isLoading}
                         sx={{ml: 1}}
                       >
                         {queryMode == 0? 'Plot' : 'Tabulate'}

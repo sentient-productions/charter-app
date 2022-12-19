@@ -45,7 +45,8 @@ def table():
     query = data['query']
 
     processor = TableProcessor(dataset, query)
-    return processor.produce_payload()
+    payload = processor.produce_payload()
+    return payload
 
 
 if __name__ == '__main__':

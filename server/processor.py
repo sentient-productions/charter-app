@@ -7,6 +7,7 @@ import pandas as pd
 
 import numpy as np
 import plotly.express as px
+import sqlfluff
 
 ROOT_PATH = os.path.join(os.path.dirname(__file__), "../")
 sys.path.insert(0, ROOT_PATH)
@@ -130,9 +131,13 @@ class TableProcessor(Processor):
 
         executor = Executor(self.params, keys=[self.key])
         exec_answer = executor.nsql_exec(nsql, db)
-        print(nsql, exec_answer)
-        return exec_answer
+        formatted = sqlfluff.fix(nsql.replace('`', ''))
+        payload = {
+            'nsql': formatted,
+            'data': exec_answer
+        }
 
+        return payload
 
 if __name__ == "__main__":
     dataset = pd.read_csv("temp.txt")
