@@ -145,8 +145,12 @@ function App() {
           setResponseCode("Query: \"" + query + "\", " + "generated code shown below;" + figure.response_code)
           setIsLoading(false)
         } else {
-          const table = JSON.parse(jsonText);
+          const response = JSON.parse(jsonText);
+          const table = response.data;
+          const nsql = response.nsql;
+          console.log("nsql=", nsql)
           console.log("table data=", table)
+          setResponseCode("Query: \"" + query + "\", " + "generated code shown below;" + nsql)
           setTableColumns(table["header"].map(header => ({name:header, selector:header})));
           // enumeratd map over rows 
           setTableRows(table["rows"].map(row => {
