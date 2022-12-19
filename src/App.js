@@ -4,7 +4,7 @@ import DataTable from 'react-data-table-component';
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, Tab, Tabs, TextField} from '@mui/material';
 import * as Plotly from 'plotly.js';
 // const URL = "http://127.0.0.1:5000/"
-const URL = "http://flask-env-5.eba-stwbput5.us-east-1.elasticbeanstalk.com/"
+const URL = "https://www.rango.run/"//#http://flask-env-5.eba-stwbput5.us-east-1.elasticbeanstalk.com/"
 
 const datasetQueries = { 
   "PLOT" : {
