@@ -4,6 +4,7 @@ import sys
 
 import openai
 import pandas as pd
+import sqlfluff
 
 import numpy as np
 import plotly.express as px
@@ -130,8 +131,13 @@ class TableProcessor(Processor):
 
         executor = Executor(self.params, keys=[self.key])
         exec_answer = executor.nsql_exec(nsql, db)
-        print(nsql, exec_answer)
-        return exec_answer
+        formatted = sqlfluff.fix(nsql.replace('`', ''))
+        payload = {
+            'nsql': formatted,
+            'data': exec_answer
+        }
+
+        return payload
 
 
 if __name__ == "__main__":

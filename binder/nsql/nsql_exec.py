@@ -24,7 +24,7 @@ class Executor(object):
         result = db.execute_query(sql)
         return result
 
-    def nsql_exec(self, nsql: str, db: NeuralDB, verbose=True, extract=False):
+    def nsql_exec(self, nsql: str, db: NeuralDB, verbose=False, extract=False):
         steps = []
         root_node = get_cfg_tree(nsql)  # Parse execution tree from server.binder.nsql.
         get_steps(root_node, steps)  # Flatten the execution tree and get the steps.

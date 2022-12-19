@@ -54,6 +54,7 @@ responses==0.18.0
 six==1.16.0
 SQLAlchemy==1.4.45
 sqlparse==0.4.3
+sqlfluff==1.4.5
 tablib==3.3.0
 tenacity==8.1.0
 tqdm==4.64.1
