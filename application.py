@@ -14,6 +14,9 @@ from processor import TableProcessor, PlotterProcessor
 # load S3 credentials from environment variables
 S3_KEY = os.environ.get("S3_KEY")
 S3_SECRET = os.environ.get("S3_SECRET")
+BUCKET_NAME = 'rango-data'
+DEFAULT_DATA_DIR = 'default'
+USER_DATA_DIR = 'user'
 
 application = Flask(__name__)
 CORS(application,
@@ -45,22 +48,22 @@ def upload():
     # Each key in :attr:`files` is the name from the ``<input type="file" name="">``
     for name, file_storage in request.files.items():
         dataset = pd.read_csv(file_storage)
-        dataset.to_csv(f's3://rango-data/user/{token}/{name}',
+        dataset.to_csv(f's3://{BUCKET_NAME}/{USER_DATA_DIR}/{token}/{name}',
                        storage_options={'key': S3_KEY, 'secret': S3_SECRET}, index=False)
     return token
 
 
 def load_from_s3(name, token):
     s3 = boto3.resource('s3', aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
-    bucket = s3.Bucket('rango-data')
+    bucket = s3.Bucket('{BUCKET_NAME}')
     default_files = list([obj.key for obj in bucket.objects.filter(Prefix='default')])
     if 'default/' + name in default_files:
-        return pd.read_csv(f's3://rango-data/default/{name}',
+        return pd.read_csv(f's3://{BUCKET_NAME}/{DEFAULT_DATA_DIR}/{name}',
                            storage_options={'key': S3_KEY, 'secret': S3_SECRET})
     if token:
         user_files = list([obj.key for obj in bucket.objects.filter(Prefix=f'user/{token}')])
         if f'user/{token}/' + name in user_files:
-            return pd.read_csv(f's3://rango-data/user/{token}/{name}',
+            return pd.read_csv(f's3://{BUCKET_NAME}/{USER_DATA_DIR}/{token}/{name}',
                                storage_options={'key': S3_KEY, 'secret': S3_SECRET})
     raise ValueError(f'File {name} not found')
 
