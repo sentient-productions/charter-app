@@ -18,15 +18,17 @@ export default function Output({ state, setState }) {
         <Typography variant="overline" > Output </Typography>
       </Grid>
     </Grid>
-      <Box sx={{ height: 400, width: '100%' }}>
-        <DataGrid
-            rows={state.outputRows}
-            columns={state.outputColumns}
-            pageSize={5}
-            rowsPerPageOptions={[5,10,25,50]}
-            disableSelectionOnClick
-            experimentalFeatures={{ newEditingApi: true }}
-        />
-     </Box>
+    {state.queryMode == QUERY_MODES.TABLE && state.isExecuted &&
+        <Box sx={{ height: 400, width: '100%' }}>
+          <DataGrid
+              rows={state.outputRows}
+              columns={state.outputColumns}
+              pageSize={5}
+              rowsPerPageOptions={[5,10,25,50]}
+              disableSelectionOnClick
+              experimentalFeatures={{ newEditingApi: true }}
+          />
+      </Box>
+     }
     </Grid>
 }

@@ -18,6 +18,7 @@ function App() {
       showCode: true, 
       isExecuted: false, 
       responseCode: "",
+      errorText: "",
       outputRows: [],
       outputColumns: [],
     }

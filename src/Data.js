@@ -46,6 +46,7 @@ export default function Data({ state, setState }){
         }));
         setState({...state, columns: columns, rows: rows, raw: dataString})
     }
+
     // handle file upload
     const handleFileUpload = e => {
         const file = e.target.files[0];
@@ -80,8 +81,7 @@ export default function Data({ state, setState }){
     return (
         <Grid> 
             <FormControl sx={{height:75, minHeight: 75, minWidth: 300}}>
-                <InputLabel 
-                >
+                <InputLabel>
                     Selected Data
                 </InputLabel>
                 <Select
