@@ -24,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build --max-old-space-size=8192",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.js' --write"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "html-webpack-plugin": "^5.5.0"
+    "html-webpack-plugin": "^5.5.0",
+    "prettier": "^2.8.1"
   }
 }
