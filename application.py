@@ -38,7 +38,7 @@ def table():
 @application.route('/upload', methods=['POST'])
 def upload():
     # fetch the form from the data
-    token = None # request.args.get('token')
+    token = request.args.get('token')
     if not token:
         token = str(uuid.uuid4())
 
