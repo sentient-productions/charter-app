@@ -35,14 +35,14 @@ CORS(
 
 @application.route("/", methods=["POST"])
 def plot():
-    dataset, query = preprocess_data_request(request)
+    dataset, query = load_requested_data(request)
     processor = PlotterProcessor(dataset, query)
     return processor.produce_payload()
 
 
 @application.route("/table", methods=["POST"])
 def table():
-    dataset, query = preprocess_data_request(request)
+    dataset, query = load_requested_data(request)
     processor = TableProcessor(dataset, query)
     return processor.produce_payload()
 
@@ -88,7 +88,7 @@ def load_from_s3(name, token):
     raise ValueError(f"File {name} not found")
 
 
-def preprocess_data_request(request):
+def load_requested_data(request):
     data = request.form
     dataset_name = data.get("name", "default")
     user_token = request.args.get("token", None)
