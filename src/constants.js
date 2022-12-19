@@ -23,20 +23,10 @@ export const DATASET_QUERIES = {
     }
 }
 
-export const URL = "https://www.rango.run/"
+// export const URL = "https://www.rango.run/"
+export const URL = "http://127.0.0.1:5000/"
 
 export const QUERY_MODES = {
     PLOT: 0,
     TABLE: 1,
 }
-  
-export const SQL_DUMMY = 
-`SELECT tweet_url, text, like_count
-FROM tweets
-WHERE user_id = (SELECT user_id
-                 FROM users
-                 WHERE (lower(user_name) = lower('ilyasut'))
-                 ORDER BY followers_count DESC
-                 LIMIT 1)
-ORDER BY like_count DESC
-LIMIT 10`

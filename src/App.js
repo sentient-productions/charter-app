@@ -15,9 +15,11 @@ function App() {
       rows: [], 
       raw: [], 
       queryMode: QUERY_MODES.PLOT, 
-      showCode: false, 
+      showCode: true, 
       isExecuted: false, 
-      responseCode: ""
+      responseCode: "",
+      outputRows: [],
+      outputColumns: [],
     }
   );
 

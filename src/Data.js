@@ -40,7 +40,7 @@ export default function Data({ state, setState }){
             headerName: c,
             description: c,
             sortable: true,
-            resizable: true,
+            // resizable: true, -> Only works in pro mode
             // width: 160,
             // editable: true,
         }));

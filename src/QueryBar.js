@@ -26,7 +26,7 @@ export default function QueryBar({state, setState}) {
           let formData = new FormData()
           formData.append("rawData", state.raw);
           formData.append("query", query);
-          const endpoint = state.queryMode == QUERY_MODES.PLOT ? URL :URL + "/table"
+          const endpoint = state.queryMode == QUERY_MODES.PLOT ? URL : URL + "/table"
           fetch(endpoint, {
               method: 'POST',
               body: formData
@@ -46,18 +46,25 @@ export default function QueryBar({state, setState}) {
               setState({...state, responseCode: figure.response_code.replace('; ','\n'), isExecuted: true})
               setIsLoading(false)
             } else {
-              const table = JSON.parse(jsonText);
-            //   setTableColumns(table["header"].map(header => ({name:header, selector:header})));
-              // enumeratd map over rows 
-            //   setTableRows(table["rows"].map(row => {
-            //       let result = {}
-            //       for (let i = 0; i < table["header"].length; i++) {
-            //         result[table["header"][i]] = row[i]
-            //       }
-            //       return result
-            //     })
-            //   );
-              setIsLoading(false)
+                const table = JSON.parse(jsonText);
+                const outputColumns = table["data"]["header"].map(header => {
+                    let cleanHeader = header.replace("`","").replace("`","")
+                    return {field:cleanHeader, headerName:cleanHeader, description:cleanHeader, minWidth: 200, sortable: true}
+                });
+                let counter = 0;
+                const outputRows = table["data"]["rows"].map(row => {
+                    let result = {}
+                    for (let i = 0; i < table["data"]["header"].length; i++) {
+                        let cleanHeader = table["data"]["header"][i].replace("`","").replace("`","")
+                        result[cleanHeader] = row[i]
+                    }
+                    result["id"] = counter
+                    counter += 1
+                    return result
+                }
+                );
+                setState({...state, outputColumns, outputRows, responseCode: table.nsql, isExecuted: true})
+                setIsLoading(false)
             }
           });
         } catch (error) {

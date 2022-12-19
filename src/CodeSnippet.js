@@ -3,6 +3,7 @@ import { Button, Card, Grid, Typography} from '@mui/material';
 import {Code as CodeIcon} from '@mui/icons-material';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { obsidian } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { QUERY_MODES } from './constants';
 
 export default function CodeSnippet({ state, setState }) {
     return  state.isExecuted && 
@@ -16,11 +17,11 @@ export default function CodeSnippet({ state, setState }) {
             </Grid>
             <Grid item sx={{flexGrow: 1}}/>
             <Grid item>
-              <Button onClick={()=>{setState({...state, showCode: !state.showCode})}}> Show </Button>
+              <Button onClick={()=>{setState({...state, showCode: !state.showCode})}}> {state.showCode == false ? "Show" : "Hide"} </Button>
             </Grid>
           </Grid>
           {state.showCode &&
-            <SyntaxHighlighter language="python" style={obsidian} >
+            <SyntaxHighlighter language={state.queryMode == QUERY_MODES.PLOT ? "python" : "sql"} style={obsidian} >
               {state.responseCode} 
             </SyntaxHighlighter>
           }
