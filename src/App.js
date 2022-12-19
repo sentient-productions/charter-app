@@ -14,8 +14,7 @@ function App() {
       columns: [], 
       rows: [], 
       raw: [], 
-      queryMode: 
-      QUERY_MODES.PLOT, 
+      queryMode: QUERY_MODES.PLOT, 
       showCode: false, 
       isExecuted: false, 
       responseCode: ""

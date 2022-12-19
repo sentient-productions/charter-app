@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Plotly from 'plotly.js';
 import {ShowChart as ShowChartIcon, TableRows as TableRowsIcon} from '@mui/icons-material';
 import {Button, InputAdornment, Menu, MenuItem, TextField} from '@mui/material';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-import {URL, QUERY_MODES, dummyResponse} from './constants';
+import {URL, QUERY_MODES, DATASET_QUERIES} from './constants';
 
 export default function QueryBar({state, setState}) {
 
-    const [query, setQuery] = useState("20 bin Histogram of salary, stacked by experience level");
-    const [defaultQuery, setDefaultQuery] = useState("20 bin Histogram of salary, stacked by experience level");
+    const [query, setQuery] = useState(DATASET_QUERIES[state.queryMode][state.dataset]);
+    const [defaultQuery, setDefaultQuery] = useState(DATASET_QUERIES[state.queryMode][state.dataset]);
     const [isLoading, setIsLoading] = useState(false);
+    
+    useEffect(() => {
+        setDefaultQuery(DATASET_QUERIES[state.queryMode][state.dataset]);
+        setQuery(DATASET_QUERIES[state.queryMode][state.dataset]);
+    }, [state.dataset, state.queryMode]);
 
     const handleQueryInput = (event) => {
         setQuery(event.target.value);
