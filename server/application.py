@@ -7,11 +7,11 @@ from flask_cors import CORS
 # local
 from processor import TableProcessor, PlotterProcessor
 
-app = Flask(__name__)
-CORS(app, origins=['http://localhost:3000', 'http://localhost:3000/'])
+application = Flask(__name__)
+CORS(application, origins=['http://localhost:3000', 'http://localhost:3000/', 'https://feature-amplify.doyldq2ymzq2e.amplifyapp.com', 'https://rango.run', 'https://www.app.rango.run'])
 
 
-@app.route('/', methods=['POST'])
+@application.route('/', methods=['POST'])
 def plot():
     # fetch the form from the data
     data = request.form
@@ -31,7 +31,7 @@ def plot():
     return processor.produce_payload()
 
 
-@app.route('/table', methods=['POST'])
+@application.route('/table', methods=['POST'])
 def table():
     # fetch the form from the data
     data = request.form
@@ -49,4 +49,5 @@ def table():
 
 
 if __name__ == '__main__':
-    app.run()
+    application.debug = True
+    application.run()

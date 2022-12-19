@@ -1,3 +1,7 @@
+**/__pycache__
+app/build
+app/yarn-error.log
+server/tmp/*
 app/node_modules/*
 app/package-lock.json
 dump/*

@@ -7,7 +7,7 @@ from subprocess import PIPE, Popen
 
 import pandas as pd
 
-from server.binder.nsql.qa_module.openai_qa import OpenAIQAModel
+from binder.nsql.qa_module.openai_qa import OpenAIQAModel
 
 
 # For Python execution.
@@ -24,8 +24,8 @@ import pandas as pd
 import pickle
 import numpy as np
 from collections.abc import Iterable
-from server.binder.nsql.qa_module.openai_qa import OpenAIQAModel
-from server.binder.nsql.database import NeuralDB
+from binder.nsql.qa_module.openai_qa import OpenAIQAModel
+from binder.nsql.database import NeuralDB
 import copy
 import os
 import time

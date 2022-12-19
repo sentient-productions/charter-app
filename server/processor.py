@@ -4,6 +4,7 @@ import sys
 
 import openai
 import pandas as pd
+import sqlfluff
 
 import numpy as np
 import plotly.express as px
@@ -11,10 +12,10 @@ import plotly.express as px
 ROOT_PATH = os.path.join(os.path.dirname(__file__), "../")
 sys.path.insert(0, ROOT_PATH)
 
-from server.binder.binder_params import DEFAULT_BINDER_PARAMS
-from server.binder.generation.generator import Generator
-from server.binder.nsql.database import NeuralDB
-from server.binder.nsql.nsql_exec import Executor
+from binder.binder_params import DEFAULT_BINDER_PARAMS
+from binder.generation.generator import Generator
+from binder.nsql.database import NeuralDB
+from binder.nsql.nsql_exec import Executor
 
 
 class Processor:
@@ -30,13 +31,13 @@ class PlotterProcessor(Processor):
 
     def load_template_prompt(self):
         # Load the template prompt
-        with open("../templates/%s_template_prompt.txt" % (self.mode), "r") as f:
+        with open("templates/%s_template_prompt.txt" % (self.mode), "r") as f:
             plotter_template = f.read()
         return plotter_template
 
     def load_client_prompt_prefix(self):
         # Load the template prompt
-        with open("../templates/%s_client_prompt_prefix.txt" % (self.mode), "r") as f:
+        with open("templates/%s_client_prompt_prefix.txt" % (self.mode), "r") as f:
             plotter_template = f.read()
         return plotter_template
 
@@ -130,8 +131,13 @@ class TableProcessor(Processor):
 
         executor = Executor(self.params, keys=[self.key])
         exec_answer = executor.nsql_exec(nsql, db)
-        print(nsql, exec_answer)
-        return exec_answer
+        formatted = sqlfluff.fix(nsql.replace('`', ''))
+        payload = {
+            'nsql': formatted,
+            'data': exec_answer
+        }
+
+        return payload
 
 
 if __name__ == "__main__":

@@ -9,8 +9,8 @@ import nltk
 from nltk.stem import SnowballStemmer
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
-from server.binder.retrieval.retrieve_pool import OpenAIQARetrievePool, QAItem
-from server.binder.utils.normalizer import normalize
+from binder.retrieval.retrieve_pool import OpenAIQARetrievePool, QAItem
+from binder.utils.normalizer import normalize
 
 
 class OpenAIQARetriever(object):
