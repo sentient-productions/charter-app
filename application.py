@@ -9,6 +9,8 @@ from flask import request
 from flask_cors import CORS
 
 # local
+from werkzeug.utils import secure_filename
+
 from processor import TableProcessor, PlotterProcessor
 
 # load S3 credentials from environment variables
@@ -48,12 +50,14 @@ def upload():
     # Each key in :attr:`files` is the name from the ``<input type="file" name="">``
     for name, file_storage in request.files.items():
         dataset = pd.read_csv(file_storage)
+        name = secure_filename(name)
         dataset.to_csv(f's3://{BUCKET_NAME}/{USER_DATA_DIR}/{token}/{name}',
                        storage_options={'key': S3_KEY, 'secret': S3_SECRET}, index=False)
     return token
 
 
 def load_from_s3(name, token):
+    name = secure_filename(name)
     s3 = boto3.resource('s3', aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
     bucket = s3.Bucket('{BUCKET_NAME}')
     default_files = list([obj.key for obj in bucket.objects.filter(Prefix='default')])
