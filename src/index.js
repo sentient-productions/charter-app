@@ -13,17 +13,9 @@ const theme = createTheme({
     },
     primary: {
       main: '#ff4400', // Use a bright, bold color for the primary theme
-      // light: '#757ce8',
-      // main: '#3f50b5',
-      // dark: '#002884',
-      // contrastText: '#fff',
     },
     secondary: {
       main: '#0044ff', // Use a cool, muted color for the secondary theme
-      // light: '#ff7961',
-      // main: '#f44336',
-      // dark: '#ba000d',
-      // contrastText: '#000',
     },
     text: {
       primary: '#ffffff',
