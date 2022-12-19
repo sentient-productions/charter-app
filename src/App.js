@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
-import DataTable from 'react-data-table-component';
-import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, Tab, Tabs, TextField} from '@mui/material';
+import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField} from '@mui/material';
 import * as Plotly from 'plotly.js';
-// const URL = "http://127.0.0.1:5000/"
-const URL = "https://www.rango.run/"//#http://flask-env-5.eba-stwbput5.us-east-1.elasticbeanstalk.com/"
+import { DataGrid } from '@mui/x-data-grid';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
+import TableRowsIcon from '@mui/icons-material/TableRows';
+import { InputAdornment } from '@mui/material';
+import Menu from '@mui/material/Menu';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { obsidian } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+const URL = "https://www.rango.run/"
 
 const datasetQueries = { 
   "PLOT" : {
@@ -30,10 +37,6 @@ const datasetQueries = {
     "financial_sample.xlsx": "Histogram of gross sales, cleaned and clipped at 95th percentile",
   }
 }
-
-// const dataJson = {"header":["job_title","AVG(`salary`)"],"rows":[["3D Computer Vision Researcher",201162.0],["AI Scientist",229500.0],["Analytics Engineer",139192.7027027027],["Applied Data Scientist",152000.0],["Applied Machine Learning Scientist",377200.0],["Applied Scientist",172150.0],["BI Analyst",200000.0],["BI Data Analyst",1027056.0],["Big Data Architect",125000.0],["Big Data Engineer",427777.77777777775],["Business Data Analyst",259375.0],["Cloud Data Architect",250000.0],["Cloud Data Engineer",140000.0],["Computer Vision Engineer",83500.0],["Computer Vision Software Engineer",105250.0],["Data Analyst",102182.50617283951],["Data Analytics Consultant",113000.0],["Data Analytics Engineer",76400.0],["Data Analytics Lead",405000.0],["Data Analytics Manager",127134.28571428571],["Data Architect",162071.30303030304],["Data Engineer",163391.35144927536],["Data Engineering Manager",131999.83333333334],["Data Manager",125600.0],["Data Operations Analyst",73500.0],["Data Operations Engineer",80000.0],["Data Science Consultant",124444.44444444444],["Data Science Engineer",84500.0],["Data Science Lead",165000.0],["Data Science Manager",556722.1724137932],["Data Scientist",329170.94838709675],["Data Scientist Lead",183000.0],["Data Specialist",134166.66666666666],["Director of Data Engineering",141250.0],["Director of Data Science",176000.0],["ETL Developer",130947.0],["Finance Data Analyst",45000.0],["Financial Data Analyst",208333.33333333334],["Head of Data",156400.0],["Head of Data Science",146718.75],["Head of Machine Learning",6000000.0],["Lead Data Analyst",569000.0],["Lead Data Engineer",140333.33333333334],["Lead Data Scientist",590061.3333333334],["Lead Machine Learning Engineer",2548666.6666666665],["ML Engineer",1231957.142857143],["Machine Learning Developer",99000.0],["Machine Learning Engineer",213951.0128205128],["Machine Learning Infrastructure Engineer",125360.0],["Machine Learning Manager",169000.0],["Machine Learning Research Engineer",460000.0],["Machine Learning Scientist",156886.66666666666],["Marketing Data Analyst",137500.0],["NLP Engineer",140000.0],["Power BI Developer",400000.0],["Principal Data Analyst",122500.0],["Principal Data Architect",3000000.0],["Principal Data Engineer",328333.3333333333],["Principal Data Scientist",206714.2857142857],["Product Data Analyst",203333.33333333334],["Product Data Scientist",8000.0],["Research Scientist",109644.95],["Staff Data Scientist",105000.0]]}
-// const dataColumns = [{name:"job_title", selector:"job_title"}, {name:"AVG(`salary`)", selector:"AVG(`salary`)"}]
-// const dataRows = dataJson["rows"].map(row => ({job_title: row[0], "AVG(`salary`)": row[1]}))
 
 function App() {
   // persistent data states
@@ -64,6 +67,7 @@ function App() {
       const row = dataStringLines[i].split(/,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/);
       if (headers && row.length == headers.length) {
         const obj = {};
+        obj['id'] = i;
         for (let j = 0; j < headers.length; j++) {
           let d = row[j];
           if (d.length > 0) {
@@ -85,8 +89,11 @@ function App() {
     }
     // prepare columns list from headers
     const columns = headers.map(c => ({
-      name: c,
-      selector: c,
+      field: c,
+      headerName: c,
+      description: c,
+      sortable: true,
+      width: 160,
     }));
     setData(list);
     setColumns(columns);
@@ -141,6 +148,11 @@ function App() {
         if (queryMode == 0) {
           var figure = JSON.parse(jsonText);
           console.log("figure data=", figure)
+          figure.layout.template = "plotly_dark"
+          figure.layout.plot_bgcolor = "#1f1f1f"
+          figure.layout.paper_bgcolor = "#1f1f1f"
+          figure.layout.font = {color: "#ffffff"}
+          console.log("laout=", figure.layout)
           Plotly.newPlot('graph-div', figure.data, figure.layout)
           setResponseCode("Query: \"" + query + "\", " + "generated code shown below;" + figure.response_code)
           setIsLoading(false)
@@ -176,126 +188,113 @@ function App() {
   }, [dataset]);
 
   return (
-    <Grid container>
-      <Grid item xs={5}>
-        <Tabs sx={{mb: 1}} value={queryMode} onChange={(event) => {setQueryMode(queryMode == 0? 1 : 0)}}>
-          <Tab label="Neural Plot" />
-          <Tab label="Neural Table" />
-        </Tabs>
-        <Grid container>
-          <Grid item sx={{mb:2.5}}>
+      <Grid container alignItems="center" justifyContent="center">
+        <Grid item xs={8} sx={{mt:10}}>
+          <Grid item sx={{mb:2.5}} >
             <TextField 
-              id="outlined-basic" 
-              sx={{width: 500}}
-              label={queryMode == 0? "Plot Query" : "Table Query"}
+              fullWidth
+              label={"Query"}
               variant="outlined" 
               onChange={handleQueryInput}
               placeholder={defaultQuery}
               InputProps={
                 {
+                  sx: {borderRadius: '16px'},
+                  startAdornment: 
+                    <InputAdornment sx={{mr: 2}}> 
+                      <PopupState variant="popover" popupId="demo-popup-menu">
+                        {(popupState) => (
+                          <React.Fragment>
+                            <Button variant="outlined" {...bindTrigger(popupState)}>
+                              {queryMode == 0 ? <ShowChartIcon /> : <TableRowsIcon />}
+                            </Button>
+                            <Menu {...bindMenu(popupState)}>
+                              <MenuItem onClick={() => {
+                                setQueryMode(0)
+                                popupState.close()
+                              }}>
+                                <ShowChartIcon /> 
+                              </MenuItem>
+                              <MenuItem onClick={() => {
+                                setQueryMode(1)
+                                popupState.close()
+                              }}>
+                                <TableRowsIcon /> 
+                              </MenuItem>
+                            </Menu>
+                          </React.Fragment>
+                        )}
+                      </PopupState>
+                    </InputAdornment>,
                   endAdornment: 
-                    (
-                      <Button 
-                        onClick={handleQuerySubmit}
-                        variant="contained" 
-                        disabled={data.length==0 || query == "" || isLoading} 
-                        sx={{ml: 1}}
-                      >
-                        {queryMode == 0? 'Plot' : 'Tabulate'}
-                      </Button>
-                    )
+                    <Button 
+                      onClick={handleQuerySubmit}
+                      variant="contained" 
+                      disabled={data.length==0 || query == "" || isLoading} 
+                      sx={{ml: 1}}
+                    >
+                      Generate
+                    </Button>
                 }
               }
             />
           </Grid>
-        </Grid>
-        <FormControl sx={{height:75, minHeight: 75, minWidth: 300}}>
-          <InputLabel id="demo-simple-select-label">Dataset</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={dataset}
-            label="Demo Dataset"
-            onChange={handleDatasetSelect}
-          >
-            <MenuItem value={"salaries.csv"}>Salaries</MenuItem>
-            <MenuItem value={"AAPL.csv"}>Apple Stock Price</MenuItem>
-            <MenuItem value={"cars.csv"}>Cars</MenuItem>
-            <MenuItem value={"major_ports.csv"}>Major International Ports</MenuItem>
-            <MenuItem value={"2022_congress_fundraise.csv"}>2022 Congress Fundraising</MenuItem>
-            {/* <MenuItem value={"crypto_tweets.csv"}>Crypto Tweets</MenuItem> */}
-            <MenuItem value={"airbnb_listings.csv"}>Airbnb Listings in Boston</MenuItem>
-            <MenuItem value={"scooby.csv"}>Scooby Doo Episodes</MenuItem>
-            <MenuItem value={"series.csv"}>Thriller, Crime, and Action Series</MenuItem>
-            {/* <MenuItem value={"financial_sample.xlsx"}>Sample Financials</MenuItem> */}
-          </Select>
-        </FormControl>
-        <Button variant="contained" component="label" sx={{mt: 1, ml: 1 }}>
-          Upload Custom
-          <input
-            hidden
-            type="file"
-            accept=".csv,.xlsx,.xls"
-            onChange={handleFileUpload}
-          />
-        </Button>
-        <Grid sx={{mt:1}}>
-          <DataTable
-            pagination
-            noHeader={true}
-            highlightOnHover
-            columns={columns}
-            data={data}
-          />
-        </Grid>
-      </Grid>
-      <Grid item xs={7} sx={{mt:5, pl: 2}}>
-        {
-          responseCode.split(";").map((snippet) => {
-            if (snippet == "" ) {
-              return null
-            }
-            return (
-              <Grid item sx={{mt:3}}>
-                <Box
-                  component="div"
-                  sx={{
-                    display: 'inline',
-                    p: 1,
-                    m: 1,
-                    bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
-                    color: (theme) =>
-                      theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
-                    border: '1px solid',
-                    borderColor: (theme) =>
-                    snippet.includes("Query") ? 'grey.800' : 'grey.300',
-                    borderRadius: 2,
-                    fontSize: '0.875rem',
-                    fontWeight: '700',
-                  }}
-                >
-                  {snippet}
-                </Box> 
-              </Grid>
-            )
-          })
-        }
-        <Grid item sx={{mt:3}}>
-          {queryMode == 0 && <div style={{width: 750, height: 750}} id="graph-div"/>}
-          {queryMode == 1 && 
-             <Grid sx={{mt:21.85, ml: 1}}>
-              <DataTable
-                pagination
-                noHeader={true}
-                highlightOnHover
-                columns={tableColumns}
-                data={tableRows}
-              />
-            </Grid>
+          <SyntaxHighlighter language="sql" style={obsidian} >
+          {`SELECT tweet_url, text, like_count
+            FROM tweets
+            WHERE user_id = (SELECT user_id
+                             FROM users
+                             WHERE (lower(user_name) = lower('ilyasut'))
+                             ORDER BY followers_count DESC
+                             LIMIT 1)
+            ORDER BY like_count DESC
+            LIMIT 10`} 
+          </SyntaxHighlighter>
+          {queryMode == 0 && 
+             <Grid sx={{mb: 2}} container alignItems="center" justifyContent="center">
+                <div id="graph-div"/>
+              </Grid>  
           }
+
+          <FormControl sx={{height:75, minHeight: 75, minWidth: 300}}>
+            <InputLabel>Selected Dataset</InputLabel>
+            <Select
+              value={dataset}
+              onChange={handleDatasetSelect}
+            >
+              <MenuItem value={"salaries.csv"}>Salaries</MenuItem>
+              <MenuItem value={"AAPL.csv"}>Apple Stock Price</MenuItem>
+              <MenuItem value={"cars.csv"}>Cars</MenuItem>
+              <MenuItem value={"major_ports.csv"}>Major International Ports</MenuItem>
+              <MenuItem value={"2022_congress_fundraise.csv"}>2022 Congress Fundraising</MenuItem>
+              <MenuItem value={"airbnb_listings.csv"}>Airbnb Listings in Boston</MenuItem>
+              <MenuItem value={"scooby.csv"}>Scooby Doo Episodes</MenuItem>
+              <MenuItem value={"series.csv"}>Thriller, Crime, and Action Series</MenuItem>
+            </Select>
+          </FormControl>
+          <Button variant="contained" component="label" sx={{mt: 1, ml: 1 }}>
+            Upload Custom
+            <input
+              hidden
+              type="file"
+              accept=".csv,.xlsx,.xls"
+              onChange={handleFileUpload}
+            />
+          </Button>
+          <Grid sx={{mt:1}}>
+            <Box sx={{ height: 400, width: '100%' }}>
+              <DataGrid
+                rows={data}
+                columns={columns}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+                disableSelectionOnClick
+                experimentalFeatures={{ newEditingApi: true }}
+              />
+            </Box>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
   );
 }
 

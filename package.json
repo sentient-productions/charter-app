@@ -5,13 +5,16 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.0",
+    "@mui/x-data-grid": "^5.17.16",
     "html-loader": "^4.2.0",
+    "material-ui-popup-state": "^5.0.4",
     "plotly.js": "^2.16.5",
     "react": "~18.0.0",
-    "react-data-table-component": "^6.11.2",
     "react-dom": "^18.0.0",
     "react-scripts": "3.4.3",
+    "react-syntax-highlighter": "^15.5.0",
     "styled-components": "^5.1.1",
     "webpack": "4.42.0",
     "xlsx": "^0.16.6"
