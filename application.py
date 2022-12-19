@@ -69,7 +69,7 @@ def upload():
 def load_from_s3(name, token):
     name = secure_filename(name)
     s3 = boto3.resource("s3", aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
-    bucket = s3.Bucket("{BUCKET_NAME}")
+    bucket = s3.Bucket(BUCKET_NAME)
     default_files = list([obj.key for obj in bucket.objects.filter(Prefix="default")])
     if "default/" + name in default_files:
         return pd.read_csv(
