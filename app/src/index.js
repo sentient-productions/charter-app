@@ -3,18 +3,22 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Helmet } from "react-helmet";
+import { NAME } from './constants';
 
 const theme = createTheme({
   palette: {
     mode: 'dark',
     background: {
-      default: '#212121' // Set the default background color to a light gray
+      // default: '#232023' // Set the default background color to a light gray
+      // default: '#18151A', // Set the default background color to a light gray
+      paper: '#000000'
     },
     primary: {
-      main: '#ff4400' // Use a bright, bold color for the primary theme
+      main: '#C70039' // Use a bright, bold color for the primary theme
     },
     secondary: {
-      main: '#0044ff' // Use a cool, muted color for the secondary theme
+      main: '#FF5733' // Use a cool, muted color for the secondary theme
     },
     text: {
       primary: '#ffffff',
@@ -22,7 +26,7 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: "Roboto",
     fontSize: 14,
     fontWeightLight: 300,
     fontWeightRegular: 400,
@@ -36,17 +40,17 @@ const theme = createTheme({
         backgroundColor: '#0044ff' // Use the secondary theme color as the background
       }
     },
-    MuiCard: {
-      root: {
-        borderRadius: 12, // Round the edges of the card
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' // Add a subtle shadow
-      }
-    }
   }
 });
 
 ReactDOM.render(
   <React.StrictMode>
+    <Helmet>
+      <title>{NAME} | AI Powered Data Wrangling. </title>
+      <link rel="preconnect" href="https://fonts.googleapis.com"/>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+    </Helmet>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <App />
