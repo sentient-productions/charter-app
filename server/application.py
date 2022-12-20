@@ -78,15 +78,14 @@ def list_user_files():
     # fetch the form from the data
     token = request.args.get("token")
     if not token:
-        return []
-
+        return ''
     s3 = boto3.resource("s3", aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
     bucket = s3.Bucket(BUCKET_NAME)
     user_files = list(
         [obj.key for obj in bucket.objects.filter(Prefix=f"user/{token}")]
     )
 
-    return [file.split("/")[-1] for file in user_files]
+    return ','.join([file.split("/")[-1] for file in user_files])
 
 @application.route("/list-default-files", methods=["GET"])
 def list_default_files():
@@ -98,7 +97,7 @@ def list_default_files():
         [obj.key for obj in bucket.objects.filter(Prefix=f"default/")]
     )
 
-    return [file.split("/")[-1] for file in user_files]
+    return ','.join([file.split("/")[-1] for file in user_files])
 
 @application.route("/generate-token", methods=["GET"])
 def generate_auth_token():
@@ -112,7 +111,8 @@ def generate_auth_token():
 def get_dataset_as_csv():
     name = request.form.get("name", "salaries.csv")
     name = secure_filename(name)
-    dataset = load_from_s3(name, None)
+    token = request.form.get("token")
+    dataset = load_from_s3(name, token)
     return dataset.to_csv(index=False)
 
 def load_from_s3(name, token):
@@ -140,7 +140,7 @@ def load_from_s3(name, token):
 def load_dataset_and_query(request):
     data = request.form
     dataset_name = data.get("name", "default")
-    user_token = request.args.get("token", None)
+    user_token = data.get("token", None)
     dataset = load_from_s3(dataset_name, user_token)
     query = data["query"]
     return dataset, query

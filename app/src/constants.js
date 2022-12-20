@@ -17,7 +17,7 @@ export const DATASET_QUERIES = {
   },
   1: {
     'salaries.csv': 'aggregate average salary by experience level',
-    'AAPL.csv': '5d moving average of stock price for last 30 entries',
+    'AAPL.csv': 'aggregate average close price by month',
     'cars.csv': 'Scatter plot of horsepower vs city mpg, colored by weight',
     'major_ports.csv':
       'Scatter plot of latitude vs. longitude for Brazilian ports',

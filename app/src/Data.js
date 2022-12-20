@@ -1,18 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
 import {
   Box,
   Button,
   FormControl,
+  Divider,
   Grid,
   InputLabel,
   MenuItem,
   Select
 } from '@mui/material';
+import {
+  Save as SaveIcon,
+} from '@mui/icons-material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { DataGrid } from '@mui/x-data-grid';
-import { URL } from './constants';
+import { DATASET_QUERIES, URL } from './constants';
 
 export default function Data({ state, setState }) {
+  const [list, setList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   // process CSV data
   const processData = (dataString) => {
     const dataStringLines = dataString.split(/\r\n|\n/);
@@ -61,12 +69,14 @@ export default function Data({ state, setState }) {
 
   // handle file upload
   const handleFileUpload = (e) => {
+    setIsLoading(true);
     const endpoint = URL + '/upload';
     const storedToken = localStorage.getItem('storage-token');
     console.log('storedToken=', storedToken);
     var data = new FormData();
     data.append('file', e.target.files[0]);
-    if (storedToken != null) {
+    // TODO - update to use the proper UUID check
+    if (storedToken != null  && storedToken.split('-').length == 5) {
       data.append('token', storedToken);
     }
 
@@ -78,14 +88,17 @@ export default function Data({ state, setState }) {
         return response.text();
       })
       .then((token) => {
-        if (storedToken == null) {
+        if (storedToken == null || storedToken.split('-').length != 5) {
           localStorage.setItem('storage-token', token);
         }
+        updateUserList();
+        setIsLoading(false);
       });
   };
 
   // handle dataset selection
   const handleDatasetSelect = (event) => {
+    console.log('handlign a select for dataset=', event.target.value)
     setState({ ...state, dataset: event.target.value });
   };
 
@@ -93,6 +106,10 @@ export default function Data({ state, setState }) {
     const endpoint = URL + 'get-dataset';
     let formData = new FormData();
     formData.append('name', state.dataset);
+    if (DATASET_QUERIES[0][state.dataset] === undefined) {
+      console.log("appending token  = ", localStorage.getItem('storage-token'))
+      formData.append('token', localStorage.getItem('storage-token'));
+    }
     fetch(endpoint, {
       method: 'POST',
       body: formData
@@ -102,6 +119,28 @@ export default function Data({ state, setState }) {
         processData(defaultData);
       });
   }, [state.dataset]);
+
+  const updateUserList = () => {
+    const endpoint = URL + 'list-user-files?';
+    const storedToken = localStorage.getItem('storage-token');
+    var formData = new FormData();
+    // TODO - update to use the proper UUID check
+    if (storedToken != null  && storedToken.split('-').length == 5) {
+      formData.append('token', storedToken);
+      // add storedToken as an input argument to fetch
+      fetch(endpoint + new URLSearchParams({
+        token: storedToken,
+      }))
+        .then((r) => r.text())
+        .then((userListString) => {
+          setList(userListString.split(','))
+        });
+    }
+  }
+
+  useEffect(() => {
+    updateUserList();
+  }, []);
 
   return (
     <Grid container sx={{ mt: 2.5 }}>
@@ -130,20 +169,40 @@ export default function Data({ state, setState }) {
             <MenuItem value={'series.csv'}>
               Thriller, Crime, and Action Series
             </MenuItem>
+            {list.length > 0 &&   <Divider > Your Data </Divider> }
+            {list.length > 0 &&              
+              list.map((item) => (
+                <MenuItem value={item}>
+                  {item}
+                </MenuItem>
+              ))
+            }
           </Select>
         </FormControl>
       </Grid>
       <Grid item md={4} xs={5}>
-        {/* Upload custom user data */}
-        <Button variant="contained" component="label" sx={{ mt: 1, ml: 1 }}>
-          Upload Custom
-          <input
-            hidden
-            type="file"
-            accept=".csv,.xlsx,.xls"
-            onChange={handleFileUpload}
-          />
-        </Button>
+        {
+          isLoading ?
+          <LoadingButton
+          loading
+          startIcon={<SaveIcon />}
+          variant="contained"
+          color="primary"
+          sx={{ mt: 1, ml: 1 }}
+        >
+          Loading
+        </LoadingButton>
+        :
+          <Button variant="contained" component="label" sx={{ mt: 1, ml: 1 }}>
+            Upload Custom
+            <input
+              hidden
+              type="file"
+              accept=".csv,.xlsx,.xls"
+              onChange={handleFileUpload}
+            />
+          </Button>
+        }
       </Grid>
       {/* Selected data */}
       <Box sx={{ height: 400, width: '100%' }}>
