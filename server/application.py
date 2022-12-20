@@ -55,7 +55,8 @@ def table():
 @application.route("/upload", methods=["POST"])
 def upload():
     # fetch the form from the data
-    token = request.args.get("token")
+    token = request.form.get("token")
+
     if not token:
         token = str(uuid.uuid4())
     # Each key in :attr:`files` is the name from the ``<input type="file" name="">``

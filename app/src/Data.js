@@ -60,16 +60,25 @@ export default function Data({ state, setState }) {
   // handle file upload
   const handleFileUpload = (e) => {
     const endpoint = URL + '/upload';
+    const storedToken = localStorage.getItem('storage-token');
+    console.log('storedToken=', storedToken);
     var data = new FormData();
     data.append('file', e.target.files[0]);
+    if (storedToken != null) {
+        data.append('token', storedToken);
+    }
+
     fetch(endpoint, {
         method: 'POST',
         body: data
     })
     .then((response) => {
-        const token = response.text()
-        console.log(token);
-        return token;
+        return response.text();
+    })
+    .then((token) => {
+        if (storedToken == null) {
+            localStorage.setItem('storage-token', token);
+        }
     })
   };
 
@@ -84,8 +93,7 @@ export default function Data({ state, setState }) {
     formData.append('name', state.dataset);
     fetch(endpoint, {
             method: 'POST',
-            body: formData
-      })
+            body: formData      })
       .then((r) => r.text())
       .then((defaultData) => {
         processData(defaultData);
