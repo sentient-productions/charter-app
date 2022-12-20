@@ -47,6 +47,12 @@ export default function QueryBar({ state, setState }) {
       );
       const endpoint =
         state.queryMode == QUERY_MODES.PLOT ? URL : URL + '/table';
+
+      if (DATASET_QUERIES[0][state.dataset] === undefined) {
+        console.log("appending token  = ", localStorage.getItem('storage-token'))
+        formData.append('token', localStorage.getItem('storage-token'));
+      }
+    
       fetch(endpoint, {
         method: 'POST',
         body: formData
@@ -214,7 +220,7 @@ export default function QueryBar({ state, setState }) {
                 type="submit"
                 onClick={handleQuerySubmit}
                 variant="contained"
-                disabled={defaultQuery == undefined || isLoading}
+                disabled={defaultQuery == undefined && query === "" || isLoading}
                 sx={{ ml: 1 }}
               >
                 {/* Generate */}
