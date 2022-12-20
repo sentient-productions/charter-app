@@ -46,7 +46,7 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <Helmet>
-      <title>{NAME} | AI Powered Data Wrangling. </title>
+      <title>{NAME} | AI Powered Data Wrangling </title>
       <link rel="preconnect" href="https://fonts.googleapis.com"/>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
       <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>

@@ -4,7 +4,7 @@ export const DATASET_QUERIES = {
     'salaries.csv':
       'plot 20 bin histogram of salary, stacked by experience level',
     'AAPL.csv': 'plot 5d moving average of stock price for last 30 entries',
-    'cars.csv': 'scatter plot of horsepower vs city mpg, colored by weight with model name available on mouseover',
+    'cars.csv': 'scatter plot of horsepower vs city mpg, colored by weight',
     'major_ports.csv':
       'scatter plot of latitude vs. longitude for Brazilian ports',
     '2022_congress_fundraise.csv': 'box plot of cash on hand by party',
@@ -32,7 +32,9 @@ export const DATASET_QUERIES = {
 };
 
 export const URL = 'https://www.rango.run/';
+// export const URL = "http://127.0.0.1:5000/"
 export const NAME = "Grappler";
+
 export const QUERY_MODES = {
   PLOT: 0,
   TABLE: 1

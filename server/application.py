@@ -34,6 +34,8 @@ CORS(
         "https://feature-amplify.doyldq2ymzq2e.amplifyapp.com",
         "https://rango.run",
         "https://www.app.rango.run",
+        "https://grappler.link",
+        "https://www.grappler.link",
     ],
 )
 
@@ -139,7 +141,7 @@ def load_dataset_and_query(request):
     data = request.form
     dataset_name = data.get("name", "default")
     user_token = request.args.get("token", None)
-    dataset = load_from_s3(dataset_name, user_token).convert_dtypes()
+    dataset = load_from_s3(dataset_name, user_token)
     query = data["query"]
     return dataset, query
 
