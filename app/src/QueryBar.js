@@ -3,10 +3,12 @@ import * as Plotly from 'plotly.js';
 import {
   Save as SaveIcon,
   ShowChart as ShowChartIcon,
-  TableRows as TableRowsIcon
+  TableRows as TableRowsIcon,
+  ScatterPlot as ScatterPlotIcon
 } from '@mui/icons-material';
 import {
   Button,
+  Grid,
   InputAdornment,
   Menu,
   MenuItem,
@@ -62,7 +64,7 @@ export default function QueryBar({ state, setState }) {
               Plotly.newPlot('graph-div', figure.data, figure.layout);
               setState({
                 ...state,
-                responseCode: figure.response_code.replace('; ', '\n'),
+                responseCode: figure.response_code.replaceAll('; ', '\n'),
                 isExecuted: true
               });
               setIsLoading(false);
@@ -127,89 +129,95 @@ export default function QueryBar({ state, setState }) {
   };
 
   return (
-    <TextField
-      fullWidth
-      label={'Query'}
-      variant="outlined"
-      onChange={handleQueryInput}
-      placeholder={defaultQuery}
-      error={state.errorText != ''}
-      helperText={state.errorText}
-      InputProps={{
-        sx: { borderRadius: '16px' },
-        startAdornment: (
-          <InputAdornment sx={{ mr: 2 }}>
-            <PopupState variant="popover" popupId="demo-popup-menu">
-              {(popupState) => (
-                <React.Fragment>
-                  <Button variant="outlined" {...bindTrigger(popupState)}>
-                    {state.queryMode == QUERY_MODES.PLOT ? (
-                      <ShowChartIcon />
-                    ) : (
-                      <TableRowsIcon />
+    <Grid container direction="column">
+        <Grid item>
+            <TextField
+            fullWidth
+            label={'Query'}
+            variant="outlined"
+            onChange={handleQueryInput}
+            placeholder={defaultQuery}
+            error={state.errorText != ''}
+            helperText={state.errorText}
+            InputProps={{
+                sx: { borderRadius: '16px' },
+                startAdornment: (
+                <InputAdornment sx={{ mr: 2 }}>
+                    <PopupState variant="popover" popupId="demo-popup-menu">
+                    {(popupState) => (
+                        <React.Fragment>
+                        <Button variant="outlined" {...bindTrigger(popupState)}>
+                            {state.queryMode == QUERY_MODES.PLOT ? (
+                            <ShowChartIcon />
+                            ) : (
+                            <TableRowsIcon />
+                            )}
+                        </Button>
+                        <Menu {...bindMenu(popupState)}>
+                            <MenuItem
+                            onClick={() => {
+                                setState({
+                                ...state,
+                                responseCode: '',
+                                isExecuted: false,
+                                queryMode: QUERY_MODES.PLOT,
+                                defaultQuery:
+                                    DATASET_QUERIES[state.queryMode][state.dataset],
+                                errorText: ''
+                                });
+                                Plotly.purge('graph-div');
+                                popupState.close();
+                            }}
+                            >
+                            <ShowChartIcon />
+                            </MenuItem>
+                            <MenuItem
+                            onClick={() => {
+                                setState({
+                                ...state,
+                                responseCode: '',
+                                isExecuted: false,
+                                queryMode: QUERY_MODES.TABLE,
+                                defaultQuery:
+                                    DATASET_QUERIES[state.queryMode][state.dataset],
+                                errorText: ''
+                                });
+                                Plotly.purge('graph-div');
+                                popupState.close();
+                            }}
+                            >
+                            <TableRowsIcon />
+                            </MenuItem>
+                        </Menu>
+                        </React.Fragment>
                     )}
-                  </Button>
-                  <Menu {...bindMenu(popupState)}>
-                    <MenuItem
-                      onClick={() => {
-                        setState({
-                          ...state,
-                          responseCode: '',
-                          isExecuted: false,
-                          queryMode: QUERY_MODES.PLOT,
-                          defaultQuery:
-                            DATASET_QUERIES[state.queryMode][state.dataset],
-                          errorText: ''
-                        });
-                        Plotly.purge('graph-div');
-                        popupState.close();
-                      }}
-                    >
-                      <ShowChartIcon />
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => {
-                        setState({
-                          ...state,
-                          responseCode: '',
-                          isExecuted: false,
-                          queryMode: QUERY_MODES.TABLE,
-                          defaultQuery:
-                            DATASET_QUERIES[state.queryMode][state.dataset],
-                          errorText: ''
-                        });
-                        Plotly.purge('graph-div');
-                        popupState.close();
-                      }}
-                    >
-                      <TableRowsIcon />
-                    </MenuItem>
-                  </Menu>
-                </React.Fragment>
-              )}
-            </PopupState>
-          </InputAdornment>
-        ),
-        endAdornment: isLoading ? (
-          <LoadingButton
-            loading
-            startIcon={<SaveIcon />}
-            variant="contained"
-            color="primary"
-          >
-            {/* Loading */}
-          </LoadingButton>
-        ) : (
-          <Button
-            onClick={handleQuerySubmit}
-            variant="contained"
-            disabled={defaultQuery == undefined || isLoading}
-            sx={{ ml: 1 }}
-          >
-            Generate
-          </Button>
-        )
-      }}
-    />
+                    </PopupState>
+                </InputAdornment>
+                ),
+                endAdornment: isLoading ? (
+                <LoadingButton
+                    loading
+                    startIcon={<SaveIcon />}
+                    variant="contained"
+                    color="primary"
+                >
+                    {/* Loading */}
+                </LoadingButton>
+                ) : (
+                <Button
+                    onClick={handleQuerySubmit}
+                    variant="contained"
+                    disabled={defaultQuery == undefined || isLoading}
+                    sx={{ ml: 1 }}
+                >
+                    {/* Generate */}
+                    <ScatterPlotIcon />
+                </Button>
+                )
+            }}
+            />
+        </Grid>
+    </Grid>
+
   );
 }
