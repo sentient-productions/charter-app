@@ -75,7 +75,6 @@ def upload():
 
 @application.route("/list-user-files", methods=["GET"])
 def list_user_files():
-    # fetch the form from the data
     token = request.args.get("token")
     if not token:
         return []
@@ -90,8 +89,6 @@ def list_user_files():
 
 @application.route("/list-default-files", methods=["GET"])
 def list_default_files():
-    # fetch the form from the data
-
     s3 = boto3.resource("s3", aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
     bucket = s3.Bucket(BUCKET_NAME)
     user_files = list(
@@ -120,7 +117,7 @@ def load_from_s3(name, token):
     s3 = boto3.resource("s3", aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
     bucket = s3.Bucket(BUCKET_NAME)
     default_files = list([obj.key for obj in bucket.objects.filter(Prefix="default")])
-    if "default/" + name in default_files:
+    if f"{DEFAULT_DATA_DIR}/" + name in default_files:
         return pd.read_csv(
             f"s3://{BUCKET_NAME}/{DEFAULT_DATA_DIR}/{name}",
             storage_options=STORAGE_OPTIONS,
@@ -129,7 +126,7 @@ def load_from_s3(name, token):
         user_files = list(
             [obj.key for obj in bucket.objects.filter(Prefix=f"user/{token}")]
         )
-        if f"user/{token}/" + name in user_files:
+        if f"{USER_DATA_DIR}/{token}/" + name in user_files:
             return pd.read_csv(
                 f"s3://{BUCKET_NAME}/{USER_DATA_DIR}/{token}/{name}",
                 storage_options=STORAGE_OPTIONS,
