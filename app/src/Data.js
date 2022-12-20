@@ -16,9 +16,10 @@ export default function Data({ state, setState }) {
   // process CSV data
   const processData = (dataString) => {
     const dataStringLines = dataString.split(/\r\n|\n/);
-    const headers = dataStringLines[0].split(
+    let headers = dataStringLines[0].split(
       /,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/
-    );
+    )
+    headers = headers.map((header) => header.replace(/"/g, ''));
     const rows = [];
     for (let i = 1; i < dataStringLines.length; i++) {
       const row = dataStringLines[i].split(
@@ -49,7 +50,8 @@ export default function Data({ state, setState }) {
       field: c,
       headerName: c,
       description: c,
-      sortable: true
+      sortable: true,
+      minWidth: 150,
       // resizable: true, -> Only works for DataGridPro, we need to purchase this module.
       // width: 160,
       // editable: true,
@@ -101,43 +103,47 @@ export default function Data({ state, setState }) {
   }, [state.dataset]);
 
   return (
-    <Grid>
-      <FormControl sx={{ height: 75, minHeight: 75, minWidth: 300 }}>
-        <InputLabel>Selected Data</InputLabel>
-        <Select
-          value={state.dataset}
-          onChange={handleDatasetSelect}
-          displayEmpty
-          label="Package Type"
-        >
-          <MenuItem value={'salaries.csv'}>AI Salaries</MenuItem>
-          <MenuItem value={'AAPL.csv'}>Apple Stock Price</MenuItem>
-          <MenuItem value={'cars.csv'}>Cars</MenuItem>
-          <MenuItem value={'major_ports.csv'}>
-            Major International Ports
-          </MenuItem>
-          <MenuItem value={'2022_congress_fundraise.csv'}>
-            2022 Congress Fundraising
-          </MenuItem>
-          <MenuItem value={'airbnb_listings.csv'}>
-            Airbnb Listings in Boston
-          </MenuItem>
-          <MenuItem value={'scooby.csv'}>Scooby Doo Episodes</MenuItem>
-          <MenuItem value={'series.csv'}>
-            Thriller, Crime, and Action Series
-          </MenuItem>
-        </Select>
-      </FormControl>
-      {/* Upload custom user data */}
-      <Button variant="contained" component="label" sx={{ mt: 1, ml: 1 }}>
-        Upload Custom
-        <input
-          hidden
-          type="file"
-          accept=".csv,.xlsx,.xls"
-          onChange={handleFileUpload}
-        />
-      </Button>
+    <Grid container sx={{mt:2.5}}>
+      <Grid item md={5} xs={7}>
+        <FormControl sx={{ height: 75, minHeight: 75 }} fullWidth>
+          <InputLabel>Selected Data</InputLabel>
+          <Select
+            value={state.dataset}
+            onChange={handleDatasetSelect}
+            displayEmpty
+            label="Package Type"
+          >
+            <MenuItem value={'salaries.csv'}>AI Salaries</MenuItem>
+            <MenuItem value={'AAPL.csv'}>Apple Stock Price</MenuItem>
+            <MenuItem value={'cars.csv'}>Cars</MenuItem>
+            <MenuItem value={'major_ports.csv'}>
+              Major International Ports
+            </MenuItem>
+            <MenuItem value={'2022_congress_fundraise.csv'}>
+              2022 Congress Fundraising
+            </MenuItem>
+            <MenuItem value={'airbnb_listings.csv'}>
+              Airbnb Listings in Boston
+            </MenuItem>
+            <MenuItem value={'scooby.csv'}>Scooby Doo Episodes</MenuItem>
+            <MenuItem value={'series.csv'}>
+              Thriller, Crime, and Action Series
+            </MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item md={4} xs={5}>
+        {/* Upload custom user data */}
+        <Button variant="contained" component="label" sx={{ mt: 1, ml: 1 }}>
+          Upload Custom
+          <input
+            hidden
+            type="file"
+            accept=".csv,.xlsx,.xls"
+            onChange={handleFileUpload}
+          />
+        </Button>
+      </Grid>
       {/* Selected data */}
       <Box sx={{ height: 400, width: '100%' }}>
         <DataGrid
@@ -149,6 +155,8 @@ export default function Data({ state, setState }) {
           experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
+      {/* // Padding to avoid footer issues */}
+      <Box sx={{height:100, width: '100%'}}/>
     </Grid>
   );
 }

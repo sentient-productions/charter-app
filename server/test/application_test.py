@@ -4,7 +4,7 @@ import boto3
 import pandas as pd
 
 sys.path.insert(0, '../..')
-from server.application import load_from_s3, S3_KEY, S3_SECRET
+from application import load_from_s3, S3_KEY, S3_SECRET
 import requests
 # make sure the server is running
 # and the data is in the s3 bucket

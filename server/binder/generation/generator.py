@@ -11,8 +11,8 @@ ROOT_DIR = os.path.join(os.path.dirname(__file__), "../../..")
 sys.path.insert(0, ROOT_DIR)
 sys.path.insert(0, os.path.join(ROOT_DIR, "../"))
 
-from server.binder.binder_params import BinderParameters
-from server.binder.generation.prompt import PromptBuilder
+from binder.binder_params import BinderParameters
+from binder.generation.prompt import PromptBuilder
 
 
 class Generator(object):
