@@ -19,6 +19,7 @@ S3_SECRET = os.environ.get("S3_SECRET")
 BUCKET_NAME = "rango-data"
 DEFAULT_DATA_DIR = "default"
 USER_DATA_DIR = "user"
+STORAGE_OPTIONS = {"key": S3_KEY, "secret": S3_SECRET} if S3_KEY and S3_SECRET else None
 
 application = Flask(__name__)
 CORS(
@@ -60,10 +61,25 @@ def upload():
         name = secure_filename(name)
         dataset.to_csv(
             f"s3://{BUCKET_NAME}/{USER_DATA_DIR}/{token}/{name}",
-            storage_options={"key": S3_KEY, "secret": S3_SECRET},
+            storage_options=STORAGE_OPTIONS,
             index=False,
         )
     return token
+
+@application.route("/list", methods=["GET"])
+def list_user_files():
+    # fetch the form from the data
+    token = request.args.get("token")
+    if not token:
+        return []
+
+    s3 = boto3.resource("s3", aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
+    bucket = s3.Bucket(BUCKET_NAME)
+    user_files = list(
+        [obj.key for obj in bucket.objects.filter(Prefix=f"user/{token}")]
+    )
+
+    return [file.split("/")[-1] for file in user_files]
 
 
 def load_from_s3(name, token):
@@ -74,7 +90,7 @@ def load_from_s3(name, token):
     if "default/" + name in default_files:
         return pd.read_csv(
             f"s3://{BUCKET_NAME}/{DEFAULT_DATA_DIR}/{name}",
-            storage_options={"key": S3_KEY, "secret": S3_SECRET},
+            storage_options=STORAGE_OPTIONS,
         )
     if token:
         user_files = list(
@@ -83,7 +99,7 @@ def load_from_s3(name, token):
         if f"user/{token}/" + name in user_files:
             return pd.read_csv(
                 f"s3://{BUCKET_NAME}/{USER_DATA_DIR}/{token}/{name}",
-                storage_options={"key": S3_KEY, "secret": S3_SECRET},
+                storage_options=STORAGE_OPTIONS,
             )
     raise ValueError(f"File {name} not found")
 
