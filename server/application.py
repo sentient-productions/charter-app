@@ -28,6 +28,8 @@ CORS(
     application,
     origins=[
         "http://localhost",
+        "http://127.0.0.1",
+        "http://localhost:3000",
         "http://localhost:3000/",
         "https://feature-amplify.doyldq2ymzq2e.amplifyapp.com",
         "https://rango.run",
@@ -38,14 +40,14 @@ CORS(
 
 @application.route("/", methods=["POST"])
 def plot():
-    dataset, query = load_requested_data(request)
+    dataset, query = load_dataset_and_query(request)
     processor = PlotterProcessor(dataset, query)
     return processor.produce_payload()
 
 
 @application.route("/table", methods=["POST"])
 def table():
-    dataset, query = load_requested_data(request)
+    dataset, query = load_dataset_and_query(request)
     processor = TableProcessor(dataset, query)
     return processor.produce_payload()
 
@@ -95,6 +97,20 @@ def list_default_files():
 
     return [file.split("/")[-1] for file in user_files]
 
+@application.route("/generate-token", methods=["GET"])
+def generate_auth_token():
+    data = request.args
+    if "token" in data:
+        return data["token"]  # do not create a new token
+    token = str(uuid.uuid4())
+    return token
+
+@application.route("/get-dataset", methods=["POST"])
+def get_dataset_as_csv():
+    name = request.form.get("name", "salaries.csv")
+    name = secure_filename(name)
+    dataset = load_from_s3(name, None)
+    return dataset.to_csv(index=False)
 
 def load_from_s3(name, token):
     name = secure_filename(name)
@@ -118,23 +134,13 @@ def load_from_s3(name, token):
     raise ValueError(f"File {name} not found")
 
 
-def load_requested_data(request):
+def load_dataset_and_query(request):
     data = request.form
     dataset_name = data.get("name", "default")
     user_token = request.args.get("token", None)
-    dataset = load_from_s3(dataset_name, user_token)
+    dataset = load_from_s3(dataset_name, user_token).convert_dtypes()
     query = data["query"]
     return dataset, query
-
-
-@application.route("/generate_token", methods=["GET"])
-def generate_auth_token():
-    data = request.args
-    if "token" in data:
-        return data["token"]  # do not create a new token
-    token = str(uuid.uuid4())
-    return token
-
 
 if __name__ == "__main__":
     application.debug = True

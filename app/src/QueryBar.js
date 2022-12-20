@@ -38,7 +38,7 @@ export default function QueryBar({ state, setState }) {
     setIsLoading(true);
     try {
       let formData = new FormData();
-      formData.append('rawData', state.raw);
+      formData.append('name', state.dataset);
       formData.append(
         'query',
         query == '' ? DATASET_QUERIES[state.queryMode][state.dataset] : query

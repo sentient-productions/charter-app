@@ -10,6 +10,7 @@ import {
   Select
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+import { URL } from './constants';
 
 export default function Data({ state, setState }) {
   // process CSV data
@@ -80,7 +81,13 @@ export default function Data({ state, setState }) {
   };
 
   useEffect(() => {
-    fetch('./' + state.dataset)
+    const endpoint = URL + 'get-dataset';
+    let formData = new FormData();
+    formData.append('name', state.dataset);
+    fetch(endpoint, {
+            method: 'POST',
+            body: formData
+      })
       .then((r) => r.text())
       .then((defaultData) => {
         processData(defaultData);
