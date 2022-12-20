@@ -38,8 +38,7 @@ export default function Footer() {
   };
 
   return (
-    // <AppBar position='static' style={{  bottom: 0, width: '100%', height:"70px", background: '#080808' }}>
-    <AppBar color="primary" sx={{ top: 'auto', bottom: 0, background: '#080808' }}>
+    <AppBar color="primary" sx={{ top: 'auto', bottom: 0 }}>
         <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}/>

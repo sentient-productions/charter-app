@@ -58,8 +58,8 @@ export default function QueryBar({ state, setState }) {
           if (state.queryMode == QUERY_MODES.PLOT) {
             try {
               var figure = JSON.parse(jsonText);
-              figure.layout.plot_bgcolor = '#1f1f1f';
-              figure.layout.paper_bgcolor = '#1f1f1f';
+              figure.layout.plot_bgcolor = '#000000';
+              figure.layout.paper_bgcolor = '#000000';
               figure.layout.font = { color: '#ffffff' };
               Plotly.newPlot('graph-div', figure.data, figure.layout);
               setState({
@@ -139,6 +139,13 @@ export default function QueryBar({ state, setState }) {
             placeholder={defaultQuery}
             error={state.errorText != ''}
             helperText={state.errorText}
+            onKeyPress={(ev) => {
+              if (ev.key === 'Enter') {
+                // Do code here
+                handleQuerySubmit();
+                }
+              }
+            }
             InputProps={{
                 sx: { borderRadius: '16px' },
                 startAdornment: (
@@ -205,6 +212,7 @@ export default function QueryBar({ state, setState }) {
                 </LoadingButton>
                 ) : (
                 <Button
+                    type="submit" 
                     onClick={handleQuerySubmit}
                     variant="contained"
                     disabled={defaultQuery == undefined || isLoading}

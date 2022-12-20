@@ -10,7 +10,8 @@ const theme = createTheme({
     mode: 'dark',
     background: {
       // default: '#232023' // Set the default background color to a light gray
-      default: '#18151A' // Set the default background color to a light gray
+      // default: '#18151A', // Set the default background color to a light gray
+      paper: '#000000'
     },
     primary: {
       main: '#C70039' // Use a bright, bold color for the primary theme
@@ -38,12 +39,13 @@ const theme = createTheme({
         backgroundColor: '#0044ff' // Use the secondary theme color as the background
       }
     },
-    MuiCard: {
-      root: {
-        borderRadius: 12, // Round the edges of the card
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' // Add a subtle shadow
-      }
-    }
+    // MuiCard: {
+    //   root: {
+    //     // backgroundColor: '#080808',
+    //     borderRadius: 12, // Round the edges of the card
+    //     // boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' // Add a subtle shadow
+    //   }
+    // }
   }
 });
 

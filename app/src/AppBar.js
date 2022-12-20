@@ -38,7 +38,7 @@ export default function LocalAppBar() {
   };
 
   return (
-    <AppBar position="static" style={{ background: '#18151A' }}>
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AllInclusiveIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
