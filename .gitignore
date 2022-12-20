@@ -1,7 +1,16 @@
-__pycache__
-temp*
-tmp
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+**/__pycache__
+app/build
+app/yarn-error.log
+server/tmp/*
+app/node_modules/*
+app/package-lock.json
+dump/*
+__pycache__/*
+server/temp.txt
+data/*
+.DS_Store
+.test.html.swp
+server/__pycache__/*
+server/*.json
+server/*.txt
+notebooks/*
