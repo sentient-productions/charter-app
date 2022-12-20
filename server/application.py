@@ -58,9 +58,9 @@ def upload():
     token = request.args.get("token")
     if not token:
         token = str(uuid.uuid4())
-
     # Each key in :attr:`files` is the name from the ``<input type="file" name="">``
-    for name, file_storage in request.files.items():
+    for file_storage in request.files.values():
+        name = file_storage.filename
         dataset = pd.read_csv(file_storage)
         name = secure_filename(name)
         dataset.to_csv(
