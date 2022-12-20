@@ -68,7 +68,7 @@ def upload():
         )
     return token
 
-@application.route("/list", methods=["GET"])
+@application.route("/list-user-files", methods=["GET"])
 def list_user_files():
     # fetch the form from the data
     token = request.args.get("token")
@@ -79,6 +79,18 @@ def list_user_files():
     bucket = s3.Bucket(BUCKET_NAME)
     user_files = list(
         [obj.key for obj in bucket.objects.filter(Prefix=f"user/{token}")]
+    )
+
+    return [file.split("/")[-1] for file in user_files]
+
+@application.route("/list-default-files", methods=["GET"])
+def list_default_files():
+    # fetch the form from the data
+
+    s3 = boto3.resource("s3", aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
+    bucket = s3.Bucket(BUCKET_NAME)
+    user_files = list(
+        [obj.key for obj in bucket.objects.filter(Prefix=f"default/")]
     )
 
     return [file.split("/")[-1] for file in user_files]
