@@ -38,8 +38,9 @@ export default function Footer() {
   };
 
   return (
-    <AppBar position="static" style={{  position: 'fixed', bottom: 0, width: '100%', background: '#080808' }}>
-      <Container maxWidth="xl">
+    // <AppBar position='static' style={{  bottom: 0, width: '100%', height:"70px", background: '#080808' }}>
+    <AppBar color="primary" sx={{ top: 'auto', bottom: 0, background: '#080808' }}>
+        <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}/>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}/>
@@ -47,7 +48,7 @@ export default function Footer() {
           <Typography
             variant="caption"
           >
-            {`This is a demo powered by OpenAI Codex and is not yet a production ready tool. Please do not upload any sensitive data.`}
+            {`Mobius is a demo powered by OpenAI Codex and is not yet a production ready tool. Please do not upload any sensitive data.`}
             {/* //  Mobius is not liable for content displayed or generated. Contact us on Twitter, Discord, or at support@mobius.ninja.`}     */}
           </Typography>
 

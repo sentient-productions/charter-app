@@ -142,6 +142,8 @@ export default function Data({ state, setState }) {
           experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
+      {/* // Padding to avoid footer issues */}
+      <Box sx={{height:100, width: '100%'}}/>
     </Grid>
   );
 }
