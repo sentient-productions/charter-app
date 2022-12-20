@@ -7,12 +7,12 @@ from typing import Dict, List, Union, Tuple
 import openai
 import time
 
-ROOT_DIR = os.path.join(os.path.dirname(__file__), "../..")
+ROOT_DIR = os.path.join(os.path.dirname(__file__), "../../..")
 sys.path.insert(0, ROOT_DIR)
 sys.path.insert(0, os.path.join(ROOT_DIR, "../"))
 
-from binder.binder_params import BinderParameters, DEFAULT_BINDER_PARAMS
-from binder.generation.prompt import PromptBuilder
+from server.binder.binder_params import BinderParameters
+from server.binder.generation.prompt import PromptBuilder
 
 
 class Generator(object):

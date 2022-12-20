@@ -1,6 +1,6 @@
 import argparse
 import json
-from binder.utils.sql.process_sql import (
+from server.binder.utils.sql.process_sql import (
     tokenize,
     CLAUSE_KEYWORDS,
     WHERE_OPS,

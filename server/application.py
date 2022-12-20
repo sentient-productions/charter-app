@@ -1,5 +1,6 @@
 # external
 import os
+import sys
 import uuid
 
 import boto3
@@ -10,8 +11,9 @@ from flask_cors import CORS
 
 # local
 from werkzeug.utils import secure_filename
-
-from processor import TableProcessor, PlotterProcessor
+ROOT_DIR = os.path.join(os.path.dirname(__file__), "..")
+sys.path.insert(0, ROOT_DIR)
+from server.processor import TableProcessor, PlotterProcessor
 
 # load S3 credentials from environment variables
 S3_KEY = os.environ.get("S3_KEY")

@@ -1,11 +1,10 @@
 from typing import List, Dict
 
-from binder.binder_params import DEFAULT_BINDER_PARAMS
-from binder.nsql.database import NeuralDB
-from binder.nsql.parser import get_cfg_tree, get_steps, remove_duplicate, TreeNode, parse_question_paras, \
+from server.binder.nsql.database import NeuralDB
+from server.binder.nsql.parser import get_cfg_tree, get_steps, remove_duplicate, TreeNode, parse_question_paras, \
     nsql_role_recognize, \
     extract_answers
-from binder.nsql.qa_module.openai_qa import OpenAIQAModel
+from server.binder.nsql.qa_module.openai_qa import OpenAIQAModel
 
 
 class Executor(object):

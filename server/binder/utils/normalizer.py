@@ -9,8 +9,7 @@ import recognizers_suite
 from fuzzywuzzy import fuzz
 from recognizers_suite import Culture
 
-from binder.utils.sql.all_keywords import ALL_KEY_WORDS
-from binder.utils.sql.extraction_from_sql import *
+from server.binder.utils.sql.all_keywords import ALL_KEY_WORDS
 
 culture = Culture.English
 

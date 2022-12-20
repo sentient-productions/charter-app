@@ -9,13 +9,13 @@ import sqlfluff
 import numpy as np
 import plotly.express as px
 
-ROOT_PATH = os.path.join(os.path.dirname(__file__), "../")
+ROOT_PATH = os.path.join(os.path.dirname(__file__), "../../")
 sys.path.insert(0, ROOT_PATH)
 
-from binder.binder_params import DEFAULT_BINDER_PARAMS
-from binder.generation.generator import Generator
-from binder.nsql.database import NeuralDB
-from binder.nsql.nsql_exec import Executor
+from server.binder.binder_params import DEFAULT_BINDER_PARAMS
+from server.binder.generation.generator import Generator
+from server.binder.nsql.database import NeuralDB
+from server.binder.nsql.nsql_exec import Executor
 
 
 class Processor:

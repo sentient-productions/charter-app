@@ -10,7 +10,7 @@ import uuid
 import records
 import sqlalchemy
 
-from binder.utils.normalizer import convert_df_type, prepare_df_for_neuraldb_from_table
+from server.binder.utils.normalizer import convert_df_type, prepare_df_for_neuraldb_from_table
 
 
 def check_in_and_return(key: str, source: dict):

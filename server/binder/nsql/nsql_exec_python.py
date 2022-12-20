@@ -7,7 +7,7 @@ from subprocess import PIPE, Popen
 
 import pandas as pd
 
-from binder.nsql.qa_module.openai_qa import OpenAIQAModel
+from server.binder.nsql.qa_module.openai_qa import OpenAIQAModel
 
 
 # For Python execution.

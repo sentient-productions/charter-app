@@ -1,11 +1,11 @@
 import os
 import random
 
-from binder.binder_params import BinderParameters
-from binder.generation.prompt import OpenAIQAPromptBuilder
-from binder.generation.generator import Generator
-from binder.retrieval.retriever import OpenAIQARetriever
-from binder.retrieval.retrieve_pool import OpenAIQARetrievePool, QAItem
+from server.binder.binder_params import BinderParameters
+from server.binder.generation.prompt import OpenAIQAPromptBuilder
+from server.binder.generation.generator import Generator
+from server.binder.retrieval.retriever import OpenAIQARetriever
+from server.binder.retrieval.retrieve_pool import OpenAIQARetrievePool, QAItem
 
 num_parallel_prompts = 10
 num_qa_shots = 8

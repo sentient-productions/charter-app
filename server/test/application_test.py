@@ -3,10 +3,12 @@ import sys
 import boto3
 import pandas as pd
 
-sys.path.insert(0, '..')
-from application import load_from_s3, S3_KEY, S3_SECRET
+sys.path.insert(0, '../..')
+from server.application import load_from_s3, S3_KEY, S3_SECRET
 import requests
-
+# make sure the server is running
+# and the data is in the s3 bucket
+# and the credentials are in the environment
 def upload_test():
     url = 'http://127.0.0.1:5000/upload'
     name = 'data.csv'
@@ -14,6 +16,7 @@ def upload_test():
 
     # send the POST request with the CSV file as the body
     response = requests.post(url, files={name: csv_file})
+    breakpoint()
     assert response.status_code == 200, 'Upload failed'
 
     token = response.text
@@ -30,6 +33,7 @@ def plot_test():
     query = 'Rolling average of volume'
     form_data = {'name': name, 'query': query}
     response = requests.post(url, data=form_data)
+    breakpoint()
     assert response.status_code == 200, 'Plot failed'
 
 def table_test():
@@ -41,7 +45,7 @@ def table_test():
     assert response.status_code == 200, 'Aggregation failed'
 
 
-# upload_test()
-# plot_test()
-# table_test()
+upload_test()
+plot_test()
+table_test()
 
