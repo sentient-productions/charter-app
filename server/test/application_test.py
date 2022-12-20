@@ -16,7 +16,6 @@ def upload_test():
 
     # send the POST request with the CSV file as the body
     response = requests.post(url, files={name: csv_file})
-    breakpoint()
     assert response.status_code == 200, 'Upload failed'
 
     token = response.text
@@ -41,11 +40,10 @@ def table_test():
     query = 'Close minus open on days when volume is over 100 million'
     form_data = {'name': name, 'query': query}
     response = requests.post(url, data=form_data)
-    breakpoint()
     assert response.status_code == 200, 'Aggregation failed'
 
 
 #upload_test()
 #plot_test()
-table_test()
+#table_test()
 
