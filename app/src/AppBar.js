@@ -15,7 +15,7 @@ import DataObjectIcon from '@mui/icons-material/Dataset';
 import { NAME } from './constants';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-const pages = []
+const pages = [];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function LocalAppBar() {
@@ -54,14 +54,14 @@ export default function LocalAppBar() {
               fontWeight: 700,
               // letterSpacing: '.3rem',
               color: 'inherit',
-              textDecoration: 'none',
+              textDecoration: 'none'
             }}
           >
             {NAME}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -70,23 +70,23 @@ export default function LocalAppBar() {
               color="inherit"
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: 'left'
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'center',
+                horizontal: 'center'
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: 'block', md: 'none' }
               }}
             >
               {pages.map((page) => (
@@ -110,7 +110,7 @@ export default function LocalAppBar() {
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
-              textDecoration: 'none',
+              textDecoration: 'none'
             }}
           >
             {NAME}

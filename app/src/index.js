@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet';
 import { NAME } from './constants';
 
 const theme = createTheme({
@@ -26,7 +26,7 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: "Roboto",
+    fontFamily: 'Roboto',
     fontSize: 14,
     fontWeightLight: 300,
     fontWeightRegular: 400,
@@ -39,7 +39,7 @@ const theme = createTheme({
         fontWeight: 'bold', // Use a bold font weight
         backgroundColor: '#0044ff' // Use the secondary theme color as the background
       }
-    },
+    }
   }
 });
 
@@ -47,9 +47,12 @@ ReactDOM.render(
   <React.StrictMode>
     <Helmet>
       <title>{NAME} | AI Powered Data Wrangling </title>
-      <link rel="preconnect" href="https://fonts.googleapis.com"/>
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-      <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+        rel="stylesheet"
+      />
     </Helmet>
     <ThemeProvider theme={theme}>
       <CssBaseline />

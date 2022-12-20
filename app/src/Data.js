@@ -18,7 +18,7 @@ export default function Data({ state, setState }) {
     const dataStringLines = dataString.split(/\r\n|\n/);
     let headers = dataStringLines[0].split(
       /,(?![^"]*"(?:(?:[^"]*"){2})*[^"]*$)/
-    )
+    );
     headers = headers.map((header) => header.replace(/"/g, ''));
     const rows = [];
     for (let i = 1; i < dataStringLines.length; i++) {
@@ -51,7 +51,7 @@ export default function Data({ state, setState }) {
       headerName: c,
       description: c,
       sortable: true,
-      minWidth: 150,
+      minWidth: 150
       // resizable: true, -> Only works for DataGridPro, we need to purchase this module.
       // width: 160,
       // editable: true,
@@ -67,21 +67,21 @@ export default function Data({ state, setState }) {
     var data = new FormData();
     data.append('file', e.target.files[0]);
     if (storedToken != null) {
-        data.append('token', storedToken);
+      data.append('token', storedToken);
     }
 
     fetch(endpoint, {
-        method: 'POST',
-        body: data
+      method: 'POST',
+      body: data
     })
-    .then((response) => {
+      .then((response) => {
         return response.text();
-    })
-    .then((token) => {
+      })
+      .then((token) => {
         if (storedToken == null) {
-            localStorage.setItem('storage-token', token);
+          localStorage.setItem('storage-token', token);
         }
-    })
+      });
   };
 
   // handle dataset selection
@@ -94,8 +94,9 @@ export default function Data({ state, setState }) {
     let formData = new FormData();
     formData.append('name', state.dataset);
     fetch(endpoint, {
-            method: 'POST',
-            body: formData      })
+      method: 'POST',
+      body: formData
+    })
       .then((r) => r.text())
       .then((defaultData) => {
         processData(defaultData);
@@ -103,7 +104,7 @@ export default function Data({ state, setState }) {
   }, [state.dataset]);
 
   return (
-    <Grid container sx={{mt:2.5}}>
+    <Grid container sx={{ mt: 2.5 }}>
       <Grid item md={5} xs={7}>
         <FormControl sx={{ height: 75, minHeight: 75 }} fullWidth>
           <InputLabel>Selected Data</InputLabel>
@@ -156,7 +157,7 @@ export default function Data({ state, setState }) {
         />
       </Box>
       {/* // Padding to avoid footer issues */}
-      <Box sx={{height:100, width: '100%'}}/>
+      <Box sx={{ height: 100, width: '100%' }} />
     </Grid>
   );
 }

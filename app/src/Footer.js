@@ -15,7 +15,7 @@ import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import { NAME } from './constants';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-const pages = []
+const pages = [];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function Footer() {
@@ -39,17 +39,15 @@ export default function Footer() {
 
   return (
     <AppBar color="primary" sx={{ top: 'auto', bottom: 0 }}>
-        <Container maxWidth="xl">
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}/>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}/>
-          <Box sx={{ flexGrow: 0 }} style={{maxWidth:400}}>
-          <Typography
-            variant="caption"
-          >
-            {`${NAME} is a demo powered by OpenAI Codex and is not yet a production ready tool. Please do not upload any large or sensitive data.`}
-            {/* //  Mobius is not liable for content displayed or generated. Contact us on Twitter, Discord, or at support@mobius.ninja.`}     */}
-          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }} />
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} />
+          <Box sx={{ flexGrow: 0 }} style={{ maxWidth: 400 }}>
+            <Typography variant="caption">
+              {`${NAME} is a demo powered by OpenAI Codex and is not yet a production ready tool. Please do not upload any large or sensitive data.`}
+              {/* //  Mobius is not liable for content displayed or generated. Contact us on Twitter, Discord, or at support@mobius.ninja.`}     */}
+            </Typography>
 
             {/* <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -78,8 +76,7 @@ export default function Footer() {
                 </MenuItem>
               ))}
             </Menu> */}
-          </Box> 
-         
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

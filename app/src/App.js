@@ -9,7 +9,6 @@ import QueryBar from './QueryBar';
 import { QUERY_MODES } from './constants';
 
 function App() {
-
   // Global application state
   const [state, setState] = useState({
     dataset: 'cars.csv',
@@ -36,15 +35,15 @@ function App() {
             </Typography>
           </Grid>
           {/* Query Panel */}
-          <Grid item sx={{ mb: 2. }}>
+          <Grid item sx={{ mb: 2 }}>
             <QueryBar state={state} setState={setState} />
           </Grid>
           {/* Code Snippet Panel */}
-          <Grid item sx={{ mb: state.isExecuted ? 2. : 0 }}>
+          <Grid item sx={{ mb: state.isExecuted ? 2 : 0 }}>
             <CodeSnippet state={state} setState={setState} />
           </Grid>
           {/* Output Panel */}
-          <Grid item sx={{ mb: state.isExecuted ? 2. : 0 }}>
+          <Grid item sx={{ mb: state.isExecuted ? 2 : 0 }}>
             {/* 
                   TODO - move this to it's own component
                   This was challenging b/c we need the id="graph-div" 
@@ -68,7 +67,7 @@ function App() {
           </Grid>
         </Grid>
       </Grid>
-      <Grid >
+      <Grid>
         <Footer />
       </Grid>
     </>
