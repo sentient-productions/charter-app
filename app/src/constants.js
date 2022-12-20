@@ -31,8 +31,7 @@ export const DATASET_QUERIES = {
   }
 };
 
-// export const URL = 'https://www.rango.run/';
-export const URL = "http://127.0.0.1:5000/"
+export const URL = 'https://www.rango.run/';
 export const NAME = "Grappler";
 export const QUERY_MODES = {
   PLOT: 0,

@@ -2,7 +2,7 @@ from fuzzywuzzy import fuzz
 import pandas as pd
 import string
 
-from server.binder.utils.normalizer import str_normalize
+from binder.utils.normalizer import str_normalize
 
 
 class Matcher(object):

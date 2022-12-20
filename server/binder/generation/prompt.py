@@ -10,11 +10,11 @@ from typing import Dict, Tuple
 import pandas as pd
 import copy
 
-from server.binder.binder_params import BinderParameters
-from server.binder.utils.errors import DuplicateColumnsError
-from server.binder.retrieval.retrieve_pool import QAItem
+from binder.binder_params import BinderParameters
+from binder.utils.errors import DuplicateColumnsError
+from binder.retrieval.retrieve_pool import QAItem
 
-from server.binder.utils.normalizer import prepare_df_for_neuraldb_from_table
+from binder.utils.normalizer import prepare_df_for_neuraldb_from_table
 
 
 def _create_table_prompt(df: pd.DataFrame, title: str):
