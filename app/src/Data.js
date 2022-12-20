@@ -10,6 +10,7 @@ import {
   Select
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+import { URL } from './constants';
 
 export default function Data({ state, setState }) {
   // process CSV data
@@ -60,20 +61,27 @@ export default function Data({ state, setState }) {
 
   // handle file upload
   const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (evt) => {
-      /* Parse data */
-      const bstr = evt.target.result;
-      const wb = XLSX.read(bstr, { type: 'binary' });
-      /* Get first worksheet */
-      const wsname = wb.SheetNames[0];
-      const ws = wb.Sheets[wsname];
-      /* Convert array of arrays */
-      const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
-      processData(data);
-    };
-    reader.readAsBinaryString(file);
+    const endpoint = URL + '/upload';
+    const storedToken = localStorage.getItem('storage-token');
+    console.log('storedToken=', storedToken);
+    var data = new FormData();
+    data.append('file', e.target.files[0]);
+    if (storedToken != null) {
+        data.append('token', storedToken);
+    }
+
+    fetch(endpoint, {
+        method: 'POST',
+        body: data
+    })
+    .then((response) => {
+        return response.text();
+    })
+    .then((token) => {
+        if (storedToken == null) {
+            localStorage.setItem('storage-token', token);
+        }
+    })
   };
 
   // handle dataset selection
@@ -82,7 +90,12 @@ export default function Data({ state, setState }) {
   };
 
   useEffect(() => {
-    fetch('./' + state.dataset)
+    const endpoint = URL + 'get-dataset';
+    let formData = new FormData();
+    formData.append('name', state.dataset);
+    fetch(endpoint, {
+            method: 'POST',
+            body: formData      })
       .then((r) => r.text())
       .then((defaultData) => {
         processData(defaultData);

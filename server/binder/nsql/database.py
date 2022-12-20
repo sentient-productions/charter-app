@@ -103,24 +103,25 @@ class NeuralDB(object):
         # Due to change in versioning we do not need to make a connection any longer
         # with self.db.get_connection() as conn:
         # When the sql query is a column name (@deprecated: or a certain value with '' and "" surrounded).
-        if len(sql_query.split(' ')) == 1 or (sql_query.startswith('`') and sql_query.endswith('`')):
-            col_name = sql_query
-            new_sql_query = r"SELECT row_id, {} FROM {}".format(col_name, self.table_name)
-            # Here we use a hack that when a value is surrounded by '' or "", the sql will return a column of the value,
-            # while for variable, no ''/"" surrounded, this sql will query for the column.
-            out = self.db.query(new_sql_query)
-        # When the sql query wants all cols or col_id, which is no need for us to add 'row_id'.
-        elif sql_query.lower().startswith("select *") or sql_query.startswith("select col_id"):
-            out = self.db.query(sql_query)
-        else:
-            try:
-                # SELECT row_id in addition, needed for result and old table alignment.
-                new_sql_query = "SELECT row_id, " + sql_query[7:]
-                out = self.db.query(new_sql_query)
-            except sqlalchemy.exc.OperationalError as e:
-                print(e)
-                # Execute normal SQL, and in this case the row_id is actually in no need.
-                out = self.db.query(sql_query)
+        with self.db.get_connection() as conn:
+            if len(sql_query.split(' ')) == 1 or (sql_query.startswith('`') and sql_query.endswith('`')):
+                col_name = sql_query
+                new_sql_query = r"SELECT row_id, {} FROM {}".format(col_name, self.table_name)
+                # Here we use a hack that when a value is surrounded by '' or "", the sql will return a column of the value,
+                # while for variable, no ''/"" surrounded, this sql will query for the column.
+                out = conn.query(new_sql_query)
+            # When the sql query wants all cols or col_id, which is no need for us to add 'row_id'.
+            elif sql_query.lower().startswith("select *") or sql_query.startswith("select col_id"):
+                out = conn.query(sql_query)
+            else:
+                try:
+                    # SELECT row_id in addition, needed for result and old table alignment.
+                    new_sql_query = "SELECT row_id, " + sql_query[7:]
+                    out = self.db.query(new_sql_query)
+                except sqlalchemy.exc.OperationalError as e:
+                    print(e)
+                    # Execute normal SQL, and in this case the row_id is actually in no need.
+                    out = conn.query(sql_query)
 
             results = out.all()
             unmerged_results = []
@@ -132,7 +133,7 @@ class NeuralDB(object):
                 merged_results.extend(results[i].values())
             return {"header": headers, "rows": unmerged_results}
 
-    def add_sub_table(self, sub_table, table_name=None, verbose=True):
+def add_sub_table(self, sub_table, table_name=None, verbose=True):
         """
         Add sub_table into the table.
         @return:

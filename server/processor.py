@@ -9,7 +9,7 @@ import sqlfluff
 import numpy as np
 import plotly.express as px
 
-ROOT_PATH = os.path.join(os.path.dirname(__file__), "../")
+ROOT_PATH = os.path.join(os.path.dirname(__file__), "../../")
 sys.path.insert(0, ROOT_PATH)
 
 from binder.binder_params import DEFAULT_BINDER_PARAMS

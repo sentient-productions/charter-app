@@ -1,6 +1,5 @@
 from typing import List, Dict
 
-from binder.binder_params import DEFAULT_BINDER_PARAMS
 from binder.nsql.database import NeuralDB
 from binder.nsql.parser import get_cfg_tree, get_steps, remove_duplicate, TreeNode, parse_question_paras, \
     nsql_role_recognize, \
@@ -26,7 +25,7 @@ class Executor(object):
 
     def nsql_exec(self, nsql: str, db: NeuralDB, verbose=False, extract=False):
         steps = []
-        root_node = get_cfg_tree(nsql)  # Parse execution tree from server.binder.nsql.
+        root_node = get_cfg_tree(nsql)  # Parse execution tree from binder.nsql.
         get_steps(root_node, steps)  # Flatten the execution tree and get the steps.
         steps = remove_duplicate(steps)  # Remove the duplicate steps.
         if verbose:
