@@ -33,7 +33,6 @@ def plot_test():
     query = 'Rolling average of volume'
     form_data = {'name': name, 'query': query}
     response = requests.post(url, data=form_data)
-    breakpoint()
     assert response.status_code == 200, 'Plot failed'
 
 def table_test():
@@ -42,10 +41,11 @@ def table_test():
     query = 'Close minus open on days when volume is over 100 million'
     form_data = {'name': name, 'query': query}
     response = requests.post(url, data=form_data)
+    breakpoint()
     assert response.status_code == 200, 'Aggregation failed'
 
 
-upload_test()
-plot_test()
+#upload_test()
+#plot_test()
 table_test()
 
