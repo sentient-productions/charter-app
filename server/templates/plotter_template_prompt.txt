@@ -1,0 +1,111 @@
+Generate python code which when given a question produces the anticipated plot.
+The expected format of the result is: 
+Q: Question "X"
+NeuralPlot: Code which produces a plot which satisfies Question "X"
+
+In [6]: dataset.tail(3)
+Out[6]: 
+            date     open    high       low   close    volume  Name
+1256  2018-02-05  159.100  163.88  156.0000  156.49  72738522  AAPL
+1257  2018-02-06  154.830  163.72  154.0000  163.03  68243838  AAPL
+1258  2018-02-07  163.085  163.40  159.0685  159.54  51608580  AAPL
+
+Q: Plot the stock close price
+NeuralPlot: fig = px.line(dataset, x="date", y="close", title='Stock Close');
+
+In [6]: dataset.tail(3)
+Out[6]: 
+            date     open    high       low   close    volume  Name
+1256  2018-02-05  159.100  163.88  156.0000  156.49  72738522  AAPL
+1257  2018-02-06  154.830  163.72  154.0000  163.03  68243838  AAPL
+1258  2018-02-07  163.085  163.40  159.0685  159.54  51608580  AAPL
+
+Q: Plot the stock close price for all of 2014
+NeuralPlot: dataset = dataset[np.logical_and(dataset.date >= "2014-01-01", dataset.date < "2015-01-01")]; fig = px.line(dataset, x="date", y="close", title='Stock Close in 2014');
+
+
+In [6]: dataset.tail(3)
+Out[6]: 
+            date     open    high       low   close    volume  Name
+1256  2018-02-05  159.100  163.88  156.0000  156.49  72738522  AAPL
+1257  2018-02-06  154.830  163.72  154.0000  163.03  68243838  AAPL
+1258  2018-02-07  163.085  163.40  159.0685  159.54  51608580  AAPL
+
+Q: Plot the open minus close price
+NeuralPlot: fig = px.line(dataset, x="date", y="open - close", title='Stock Open - Close'); dataset["open - close"] = dataset["open"] - dataset["close"];
+
+In [6]: dataset.tail(3)
+Out[6]: 
+            date     open    high       low   close    volume  Name
+1256  2018-02-05  159.100  163.88  156.0000  156.49  72738522  AAPL
+1257  2018-02-06  154.830  163.72  154.0000  163.03  68243838  AAPL
+1258  2018-02-07  163.085  163.40  159.0685  159.54  51608580  AAPL
+
+Q: Plot the five day moving average in close price
+NeuralPlot: dataset['5d_avg'] = dataset['close'].rolling(window=5).mean(); dataset = dataset[np.logical_and(dataset.date >= "2015-01-01", dataset.date < "2016-01-01")];  fig = px.line(dataset, x="date", y="5d_avg", title='5 Day Moving Average in 2015');
+
+In [6]: dataset.tail(5)
+Out[6]: 
+      work_year experience_level employment_type                 job_title   salary salary_currency  salary_in_usd employee_residence  remote_ratio company_location company_size
+1190       2020               SE              FT            Data Scientist   412000             USD         412000                 US           100               US            L
+1191       2021               MI              FT  Principal Data Scientist   151000             USD         151000                 US           100               US            L
+1192       2020               EN              FT            Data Scientist   105000             USD         105000                 US           100               US            S
+1193       2020               EN              CT     Business Data Analyst   100000             USD         100000                 US           100               US            L
+1194       2021               SE              FT      Data Science Manager  7000000             INR          94665                 IN            50               IN            L
+Q: Histogram of salary, clipped to 500k max, stacked by experience level
+NeuralPlot:  dataset["salary_in_usd"] = dataset["salary_in_usd"].clip(-float("inf"), 500_000); fig = px.histogram(dataset, x="salary_in_usd", color="experience_level", title='Salary Histogram');
+
+In [6]: dataset.tail(5)
+Out[6]: 
+      work_year experience_level employment_type                 job_title   salary salary_currency  salary_in_usd employee_residence  remote_ratio company_location company_size
+1190       2020               SE              FT            Data Scientist   412000             USD         412000                 US           100               US            L
+1191       2021               MI              FT  Principal Data Scientist   151000             USD         151000                 US           100               US            L
+1192       2020               EN              FT            Data Scientist   105000             USD         105000                 US           100               US            S
+1193       2020               EN              CT     Business Data Analyst   100000             USD         100000                 US           100               US            L
+1194       2021               SE              FT      Data Science Manager  7000000             INR          94665                 IN            50               IN            L
+Q: Line graph of average salary in usd by year
+NeuralPlot: fig = px.histogram(dataset.groupby("work_year").mean().reset_index(), x="work_year", color="salary_in_usd", title='Salary Histogram');
+
+In [6]: dataset.tail(5)
+Out[6]: 
+      work_year experience_level employment_type                 job_title   salary salary_currency  salary_in_usd employee_residence  remote_ratio company_location company_size
+1190       2020               SE              FT            Data Scientist   412000             USD         412000                 US           100               US            L
+1191       2021               MI              FT  Principal Data Scientist   151000             USD         151000                 US           100               US            L
+1192       2020               EN              FT            Data Scientist   105000             USD         105000                 US           100               US            S
+1193       2020               EN              CT     Business Data Analyst   100000             USD         100000                 US           100               US            L
+1194       2021               SE              FT      Data Science Manager  7000000             INR          94665                 IN            50               IN            L
+Q: Plot correlation matrix between numeric variables
+NeuralPlot: fig = px.imshow(dataset.corr());
+
+In [6]: dataset.tail(5)
+Out[6]: 
+      work_year experience_level employment_type                 job_title   salary salary_currency  salary_in_usd employee_residence  remote_ratio company_location company_size
+1190       2020               SE              FT            Data Scientist   412000             USD         412000                 US           100               US            L
+1191       2021               MI              FT  Principal Data Scientist   151000             USD         151000                 US           100               US            L
+1192       2020               EN              FT            Data Scientist   105000             USD         105000                 US           100               US            S
+1193       2020               EN              CT     Business Data Analyst   100000             USD         100000                 US           100               US            L
+1194       2021               SE              FT      Data Science Manager  7000000             INR          94665                 IN            50               IN            L
+Q: Pie chart of salary in usd by experience level
+NeuralPlot: fig = px.pie(dataset.groupby("experience_level").mean().reset_index(), values="salary_in_usd", names="experience_level", title='Salary by Experience Level');
+
+In [6]: dataset.tail(5)
+Out[6]: 
+     index           Member       Party           State Chamber      Raised       Spent Cash on Hand     Debts
+532    532  William Timmons  Republican  South Carolina   House    $892,064    $823,955      $76,799  $391,742
+533    533        Young Kim  Republican      California   House  $7,900,497  $7,380,035     $928,803   $94,940
+534    534    Yvette Clarke  Democratic        New York   House    $684,268    $662,375      $93,513   $49,480
+535    535   Yvette Herrell  Republican      New Mexico   House  $3,777,731  $2,746,661   $1,085,613        $0
+536    536      Zoe Lofgren  Democratic      California   House  $1,679,466  $2,103,190     $736,813        $0
+Q: Box plot of cash on hand by party
+NeuralPlot: dataset["Cash on Hand"] = pd.to_numeric(dataset["Cash on Hand"].str.replace(",", "").str.replace("$",""), errors="coerce"); fig = px.box(dataset.dropna(), x="Cash on Hand", color="Party", title='Cash on Hand by Party');
+
+In [6]: dataset.tail(5)
+Out[6]: 
+     OBJECTID                          Postal      Lat        Lng     Type ISO3               REGION
+172       134             Surigao,Philippines  9.78900  125.49500     Bulk  PHL  East Asia & Pacific
+173       130               Davao,Philippines  7.07306  125.61278  General  PHL  East Asia & Pacific
+174       121  Port Moresby ,Papua New Guinea -9.47723  147.15089  General  PNG  East Asia & Pacific
+175       176                   Lamu Mainland      NaN        NaN  General  KEN   Sub-Saharan Africa
+176       177               Port Sudan, Sudan      NaN        NaN  General  SDN   Sub-Saharan Africa
+Q: Scatter plot of latitude vs. longitude for Brazilian ports
+NeuralPlot: dataset = dataset[dataset.ISO3 == "BRA"]; fig = px.scatter_geo(dataset, lat="Lat", lon="Lng", title='Brazilian Ports');
