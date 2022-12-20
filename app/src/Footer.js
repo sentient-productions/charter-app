@@ -47,7 +47,7 @@ export default function Footer() {
           <Typography
             variant="caption"
           >
-            {`Mobius is a demo powered by OpenAI Codex and is not yet a production ready tool. Please do not upload any sensitive data.`}
+            {`${NAME} is a demo powered by OpenAI Codex and is not yet a production ready tool. Please do not upload any large or sensitive data.`}
             {/* //  Mobius is not liable for content displayed or generated. Contact us on Twitter, Discord, or at support@mobius.ninja.`}     */}
           </Typography>
 

@@ -4,6 +4,7 @@ import App from './App';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Helmet } from "react-helmet";
+import { NAME } from './constants';
 
 const theme = createTheme({
   palette: {
@@ -39,20 +40,13 @@ const theme = createTheme({
         backgroundColor: '#0044ff' // Use the secondary theme color as the background
       }
     },
-    // MuiCard: {
-    //   root: {
-    //     // backgroundColor: '#080808',
-    //     borderRadius: 12, // Round the edges of the card
-    //     // boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' // Add a subtle shadow
-    //   }
-    // }
   }
 });
 
 ReactDOM.render(
   <React.StrictMode>
     <Helmet>
-      <title>Mobius | AI Powered Data Exploration. </title>
+      <title>{NAME} | AI Powered Data Wrangling. </title>
       <link rel="preconnect" href="https://fonts.googleapis.com"/>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
       <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>

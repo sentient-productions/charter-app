@@ -32,7 +32,7 @@ function App() {
         <Grid item sm={7} xs={12} sx={{ mt: 10 }}>
           <Grid item container alignItems="center" justifyContent="center">
             <Typography variant="h4" sx={{ mb: 2 }}>
-              Data Explorer
+              Data Wrangler
             </Typography>
           </Grid>
           {/* Query Panel */}

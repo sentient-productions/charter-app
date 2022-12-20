@@ -32,7 +32,7 @@ export const DATASET_QUERIES = {
 };
 
 export const URL = 'https://www.rango.run/';
-export const NAME = "Mobius";
+export const NAME = "Grappler";
 export const QUERY_MODES = {
   PLOT: 0,
   TABLE: 1

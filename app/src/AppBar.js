@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
+import DataObjectIcon from '@mui/icons-material/Dataset';
 import { NAME } from './constants';
 import SettingsIcon from '@mui/icons-material/Settings';
 
@@ -41,7 +41,7 @@ export default function LocalAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AllInclusiveIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <DataObjectIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -96,7 +96,7 @@ export default function LocalAppBar() {
               ))}
             </Menu>
           </Box>
-          <AllInclusiveIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <DataObjectIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
