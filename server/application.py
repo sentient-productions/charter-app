@@ -22,8 +22,7 @@ CORS(
         "http://localhost:3000",
         "http://localhost:3000/",
         "https://feature-amplify.doyldq2ymzq2e.amplifyapp.com",
-        "https://dev.d1iy4ft5lztl4s.amplifyapp.com/"
-        "https://rango.run",
+        "https://dev.d1iy4ft5lztl4s.amplifyapp.com/" "https://rango.run",
         "https://www.app.rango.run",
         "https://grappler.link",
         "https://www.grappler.link",
@@ -54,19 +53,17 @@ def upload():
         token = str(uuid.uuid4())
     # Each key in :attr:`files` is the name from the ``<input type="file" name="">``
     for file_storage in request.files.values():
-        name = file_storage.filename
-        # check if file is an excel file
+        datasets = pd_read_with_format(file_storage)
+        for name, df in datasets.items():
+            name = secure_filename(name)
+            # replace name file extension with csv
+            name = name.rsplit(".", 1)[0] + ".csv"
 
-        dataset = pd_read_with_format(file_storage)
-        name = secure_filename(name)
-        # replace name file extension with csv
-        name = name.rsplit(".", 1)[0] + ".csv"
-
-        dataset.to_csv(
-            f"s3://{BUCKET_NAME}/{USER_DATA_DIR}/{token}/{name}",
-            storage_options=STORAGE_OPTIONS,
-            index=False,
-        )
+            dataset.to_csv(
+                f"s3://{BUCKET_NAME}/{USER_DATA_DIR}/{token}/{name}",
+                storage_options=STORAGE_OPTIONS,
+                index=False,
+            )
     return token
 
 
@@ -109,6 +106,7 @@ def get_dataset_as_csv():
     token = request.form.get("token")
     dataset = load_from_s3(name, token)
     return dataset.to_csv(index=False)
+
 
 if __name__ == "__main__":
     application.debug = True
