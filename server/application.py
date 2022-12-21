@@ -40,7 +40,7 @@ CORS(
 )
 
 
-@application.route("/", methods=["POST"])
+@application.route("/plot", methods=["POST"])
 def plot():
     dataset, query = load_dataset_and_query(request)
     processor = PlotterProcessor(dataset, query)

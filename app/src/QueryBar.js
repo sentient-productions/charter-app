@@ -46,7 +46,7 @@ export default function QueryBar({ state, setState }) {
         query == '' ? DATASET_QUERIES[state.queryMode][state.dataset] : query
       );
       const endpoint =
-        state.queryMode == QUERY_MODES.PLOT ? URL : URL + '/table';
+        state.queryMode == QUERY_MODES.PLOT ? URL + '/plot' : URL + '/table';
 
       if (DATASET_QUERIES[0][state.dataset] === undefined) {
         console.log("appending token  = ", localStorage.getItem('storage-token'))
@@ -61,16 +61,29 @@ export default function QueryBar({ state, setState }) {
           return response.text();
         })
         .then((jsonText) => {
+          var payload = JSON.parse(jsonText);
+          console.log('payload=', jsonText)
+          console.log('payload[error] =.', payload["error"] )
+          if (payload["error"] != undefined) {
+            console.log('in error workflow...., err=', payload["error"])
+            setState({
+              ...state,
+              errorText:
+                'Execution encountered the following error: ' + payload["error"]
+            });
+            setIsLoading(false);
+          }
+          else{
+
           if (state.queryMode == QUERY_MODES.PLOT) {
             try {
-              var figure = JSON.parse(jsonText);
-              figure.layout.plot_bgcolor = '#000000';
-              figure.layout.paper_bgcolor = '#000000';
-              figure.layout.font = { color: '#ffffff' };
-              Plotly.newPlot('graph-div', figure.data, figure.layout);
+              payload.layout.plot_bgcolor = '#000000';
+              payload.layout.paper_bgcolor = '#000000';
+              payload.layout.font = { color: '#ffffff' };
+              Plotly.newPlot('graph-div', payload.data, payload.layout);
               setState({
                 ...state,
-                responseCode: figure.response_code.replaceAll('; ', '\n'),
+                responseCode: payload.response_code.replaceAll('; ', '\n'),
                 isExecuted: true
               });
               setIsLoading(false);
@@ -85,8 +98,7 @@ export default function QueryBar({ state, setState }) {
             }
           } else {
             try {
-              const table = JSON.parse(jsonText);
-              const outputColumns = table['data']['header'].map((header) => {
+              const outputColumns = payload['data']['header'].map((header) => {
                 let cleanHeader = header.replace('`', '').replace('`', '');
                 return {
                   field: cleanHeader,
@@ -97,10 +109,10 @@ export default function QueryBar({ state, setState }) {
                 };
               });
               let counter = 0;
-              const outputRows = table['data']['rows'].map((row) => {
+              const outputRows = payload['data']['rows'].map((row) => {
                 let result = {};
-                for (let i = 0; i < table['data']['header'].length; i++) {
-                  let cleanHeader = table['data']['header'][i]
+                for (let i = 0; i < payload['data']['header'].length; i++) {
+                  let cleanHeader = payload['data']['header'][i]
                     .replace('`', '')
                     .replace('`', '');
                   result[cleanHeader] = row[i];
@@ -113,7 +125,7 @@ export default function QueryBar({ state, setState }) {
                 ...state,
                 outputColumns,
                 outputRows,
-                responseCode: table.nsql,
+                responseCode: payload.nsql,
                 isExecuted: true
               });
               setIsLoading(false);
@@ -126,7 +138,8 @@ export default function QueryBar({ state, setState }) {
               setIsLoading(false);
             }
           }
-        });
+        }
+      });
     } catch (error) {
       console.log('caught error=', error);
       //   setResponseCode(error)

@@ -77,67 +77,77 @@ class PlotterProcessor(Processor):
         return ';'.join(response_text.strip(' ').split(';')[:-1])
 
     def produce_payload(self, temp_file = "temp.json"):
-        response = self.generate_response()
-        raw_response = response
-        response += """; f = open(temp_file, "w"); f.write(fig.to_json()); f.close();"""
+        try:
+            response = self.generate_response()
+            raw_response = response
+            response += """; f = open(temp_file, "w"); f.write(fig.to_json()); f.close();"""
 
-        # execute the response, which should result in a json file being written
-        dataset = self.dataset # need this for successful exec
-        exec(response)
-        with open(temp_file, "r") as f:
-            payload = json.load(f)
-        
-        payload['response_code'] = raw_response
-        return payload
+            # execute the response, which should result in a json file being written
+            dataset = self.dataset # need this for successful exec
+            exec(response)
+            with open(temp_file, "r") as f:
+                payload = json.load(f)
+            
+            payload['response_code'] = raw_response
+            return payload
+        except Exception as e:
+            print('an exception e happened =', e)
+            return {'error': str(e)}
 
 class TableProcessor(Processor):
     mode = 'table'
     params = DEFAULT_BINDER_PARAMS
 
     def produce_payload(self):
-        generator = Generator(self.params, keys=[self.key])
+        try:
+            generator = Generator(self.params, keys=[self.key])
 
-        title = "" # TODO
-        prompt_args = {
-            'table': self.dataset.head(),
-            'title': title,
-            'question': self.query
-        }
+            title = "" # TODO
+            prompt_args = {
+                'table': self.dataset.head(),
+                'title': title,
+                'question': self.query
+            }
 
-        few_shot_prompt = generator.build_few_shot_prompt_from_file(
-            file_path=self.params.prompt_file,
-            n_shots=self.params.n_shots,
-        )
-        generate_prompt = generator.build_generate_prompt(
-            data_item=prompt_args,
-            generate_type=(self.params.generate_type,)
-        )
-        prompt = few_shot_prompt + "\n\n" + generate_prompt
-        # Ensure the input length fit Codex max input tokens by shrinking the n_shots
-        response_dict = generator.generate_one_pass(
-            prompts=[(0, prompt)],
-            verbose=False
-        )
-        text_logit_pairs = response_dict[0]
-        nsql = max(text_logit_pairs, key=lambda x: x[1])[0]
-        db = NeuralDB([{'table': self.dataset, 'title': title}])
+            few_shot_prompt = generator.build_few_shot_prompt_from_file(
+                file_path=self.params.prompt_file,
+                n_shots=self.params.n_shots,
+            )
+            generate_prompt = generator.build_generate_prompt(
+                data_item=prompt_args,
+                generate_type=(self.params.generate_type,)
+            )
+            prompt = few_shot_prompt + "\n\n" + generate_prompt
+            # Ensure the input length fit Codex max input tokens by shrinking the n_shots
+            response_dict = generator.generate_one_pass(
+                prompts=[(0, prompt)],
+                verbose=False
+            )
+            text_logit_pairs = response_dict[0]
+            nsql = max(text_logit_pairs, key=lambda x: x[1])[0]
+            db = NeuralDB([{'table': self.dataset, 'title': title}])
 
-        # nsql = post_process_sql(
-        #     sql_str=nsql,
-        #     df=db.get_table_df(),
-        #     process_program_with_fuzzy_match_on_db=True,
-        #     table_title=title
-        # )
+            # nsql = post_process_sql(
+            #     sql_str=nsql,
+            #     df=db.get_table_df(),
+            #     process_program_with_fuzzy_match_on_db=True,
+            #     table_title=title
+            # )
 
-        executor = Executor(self.params, keys=[self.key])
-        exec_answer = executor.nsql_exec(nsql, db)
-        formatted = sqlfluff.fix(nsql.replace('`', ''))
-        payload = {
-            'nsql': formatted,
-            'data': exec_answer
-        }
+            executor = Executor(self.params, keys=[self.key])
+            exec_answer = executor.nsql_exec(nsql, db)
+            print('exec_answer=', exec_answer)
+            formatted = sqlfluff.fix(nsql.replace('`', ''))
+            payload = {
+                'nsql': formatted,
+                'data': exec_answer
+            }
 
-        return payload
+            return payload
+
+        except Exception as e:
+            print('an exception e happened =', e)
+            return {'error': str(e)}
 
 
 if __name__ == "__main__":

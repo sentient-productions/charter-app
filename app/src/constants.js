@@ -31,9 +31,10 @@ export const DATASET_QUERIES = {
   }
 };
 
-export const URL = 'https://www.rango.run/';
-// export const URL = "http://127.0.0.1:5000/"
+// export const URL = 'https://www.rango.run/';
+export const URL = "http://127.0.0.1:5000/"
 // export const URL = 'https://flask-env-5.eba-stwbput5.us-east-1.elasticbeanstalk.com/';
+
 export const NAME = 'Grappler';
 
 export const QUERY_MODES = {
