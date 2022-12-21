@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from config import *
 import pandas as pd
 
+
 def load_from_s3(name, token):
     name = secure_filename(name)
     s3 = boto3.resource("s3", aws_access_key_id=S3_KEY, aws_secret_access_key=S3_SECRET)
@@ -26,10 +27,14 @@ def load_from_s3(name, token):
             return clean_column_names(df)
     raise ValueError(f"File {name} not found")
 
-def clean_df(df):
+
+def clean_df(df, dropna=False):
     df = clean_column_names(df)
+    if dropna:
+        df = df.dropna()
     # todo: extend
     return df
+
 
 def clean_column_names(df):
     df.columns = [col.strip() for col in df.columns]
@@ -47,28 +52,41 @@ def load_dataset_and_query(request):
 
 
 def pd_read_with_format(file_storage):
-    df = None
+    dfs = {}
+
     if file_storage.filename.endswith(".xlsx") or file_storage.filename.endswith(
-            ".xls"
+        ".xls"
     ):
-        df = pd.read_excel(file_storage)
+        read_result = pd.read_excel(file_storage, sheet_name=None)
+        # delete extension from filename
+        filename_split = file_storage.filename.rsplit(".", 1)
+        filename = filename_split[0]
+        extension = filename_split[
+            1
+        ]  # todo this is kinda stupid but we're reattaching extension to remove it correctly later
+        if isinstance(read_result, dict):
+            for sheet_name, df in read_result.items():
+                dfs[filename + "_" + sheet_name + "." + extension] = clean_df(df, True) # we drop empty cells from excel sheets by default
+        if isinstance(read_result, pd.DataFrame):
+            dfs[file_storage.filename] = clean_df(read_result)
+
     if file_storage.filename.endswith(".csv"):
         # read the csv file
-        df = pd.read_csv(file_storage)
+        dfs[file_storage.filename] = clean_df(pd.read_csv(file_storage))
     if file_storage.filename.endswith(".json"):
         # read the json file
-        df = pd.read_json(file_storage)
+        dfs[file_storage.filename] = clean_df(pd.read_json(file_storage))
     if file_storage.filename.endswith(".parquet"):
         # read the parquet file
-        df = pd.read_parquet(file_storage)
+        dfs[file_storage.filename] = clean_df(pd.read_parquet(file_storage))
     if file_storage.filename.endswith(".pickle"):
         # read the pickle file
-        df = pd.read_pickle(file_storage)
+        dfs[file_storage.filename] = clean_df(pd.read_pickle(file_storage))
     if file_storage.filename.endswith(".tsv"):
         # read the tsv file
-        df = pd.read_csv(file_storage, sep="\t")
+        dfs[file_storage.filename] = clean_df(pd.read_csv(file_storage, sep="\t"))
 
-    if not df:
+    if not dfs:
         raise ValueError("File format not supported")
 
-    return clean_column_names(df)
+    return dfs
