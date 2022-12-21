@@ -28,9 +28,9 @@ function App() {
     <>
       <LocalAppBar />
       <Grid container alignItems="center" justifyContent="center">
-        <Grid item sm={7} xs={12} sx={{ mt: 10 }}>
+        <Grid item sm={7} xs={12} sx={{ mt: 7 }}>
           <Grid item container alignItems="center" justifyContent="center">
-            <Typography variant="h4" sx={{ mb: 2 }}>
+            <Typography variant="h4" sx={{ mb: 3 }}>
               {/* {state.queryMode == QUERY_MODES.PLOT ? "Data Wrangler - Plotter" : "Data Wrangler - Aggregator"} */}
               Data Wrangler
             </Typography>
@@ -40,9 +40,9 @@ function App() {
             <QueryBar state={state} setState={setState} />
           </Grid>
           {/* Code Snippet Panel */}
-          <Grid item sx={{ mb: state.isExecuted ? 2 : 0 }}>
+          {/* <Grid item sx={{ mb: state.isExecuted ? 2 : 0 }}>
             <CodeSnippet state={state} setState={setState} />
-          </Grid>
+          </Grid> */}
           {/* Output Panel */}
           <Grid item sx={{ mb: state.isExecuted ? 2 : 0 }}>
             {/* 

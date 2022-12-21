@@ -5,6 +5,7 @@ import {
   TableChart as TableChartIcon
 } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
+import CodeSnippet from './CodeSnippet';
 import { QUERY_MODES } from './constants';
 
 export default function Output({ state, setState }) {
@@ -14,6 +15,9 @@ export default function Output({ state, setState }) {
   return (
     state.isExecuted && (
       <Grid>
+        <Grid item>
+          <CodeSnippet state={state} setState={setState} /> 
+        </Grid>
         <Grid container direction="row" sx={{ pb: 1, display: 'flex' }}>
           <Grid item sx={{ mt: 0.75, mb: -0.75 }}>
             {state.queryMode == QUERY_MODES.PLOT ? (

@@ -13,7 +13,8 @@ export default function CodeSnippet({ state, setState }) {
   obsidian_modified.hljs.background = '#000000';
   return (
     state.isExecuted && (
-      <Card sx={{ pl: 2, pr: 2, pt: 1, pb: 1 }}>
+      // <Card sx={{ pl: 2, pr: 2, pt: 1, pb: 1 }}>
+      <Grid sx={{ pt: 1, pb: 1 }}>
         <Grid container direction="row" sx={{ display: 'flex' }}>
           <Grid item sx={{ mt: 0.75, mb: -0.75 }}>
             <CodeIcon />
@@ -41,7 +42,8 @@ export default function CodeSnippet({ state, setState }) {
             {state.responseCode}
           </SyntaxHighlighter>
         )}
-      </Card>
-    )
+      </Grid>
+      // </Card>
+      )
   );
 }

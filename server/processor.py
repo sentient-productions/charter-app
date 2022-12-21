@@ -77,6 +77,7 @@ class PlotterProcessor(Processor):
         return ';'.join(response_text.strip(' ').split(';')[:-1])
 
     def produce_payload(self, temp_file = "temp.json"):
+        raw_response = None
         try:
             response = self.generate_response()
             raw_response = response
@@ -92,13 +93,14 @@ class PlotterProcessor(Processor):
             return payload
         except Exception as e:
             print('an exception e happened =', e)
-            return {'error': str(e)}
+            return {'error': str(e), 'query': raw_response}
 
 class TableProcessor(Processor):
     mode = 'table'
     params = DEFAULT_BINDER_PARAMS
 
     def produce_payload(self):
+        nsql = None 
         try:
             generator = Generator(self.params, keys=[self.key])
 
@@ -147,7 +149,7 @@ class TableProcessor(Processor):
 
         except Exception as e:
             print('an exception e happened =', e)
-            return {'error': str(e)}
+            return {'error': str(e), 'query': nsql}
 
 
 if __name__ == "__main__":
