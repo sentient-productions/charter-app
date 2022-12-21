@@ -56,9 +56,13 @@ def pd_read_with_format(file_storage):
         ".xls"
     ):
         read_result = pd.read_excel(file_storage, sheet_name=None)
+        # delete extension from filename
+        filename_split = file_storage.filename.rsplit(".", 1)
+        filename = filename_split[0]
+        extension = filename_split[1] # todo this is kinda stupid but we're reattaching extension to remove it correctly later
         if isinstance(read_result, dict):
             for sheet_name, df in read_result.items():
-                dfs[file_storage.filename + "_" + sheet_name] = clean_df(df)
+                dfs[filename + "_" + sheet_name + "." + extension] = clean_df(df)
         if isinstance(read_result, pd.DataFrame):
             dfs[file_storage.filename] = clean_df(read_result)
 
