@@ -92,6 +92,7 @@ export default function Data({ state, setState }) {
           localStorage.setItem('storage-token', token);
         }
         updateUserList();
+        setState({...state, dataset: e.target.files[0].name})
         setIsLoading(false);
       });
   };
