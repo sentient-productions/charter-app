@@ -28,8 +28,10 @@ def load_from_s3(name, token):
     raise ValueError(f"File {name} not found")
 
 
-def clean_df(df):
+def clean_df(df, dropna=False):
     df = clean_column_names(df)
+    if dropna:
+        df = df.dropna()
     # todo: extend
     return df
 
@@ -64,7 +66,7 @@ def pd_read_with_format(file_storage):
         ]  # todo this is kinda stupid but we're reattaching extension to remove it correctly later
         if isinstance(read_result, dict):
             for sheet_name, df in read_result.items():
-                dfs[filename + "_" + sheet_name + "." + extension] = clean_df(df)
+                dfs[filename + "_" + sheet_name + "." + extension] = clean_df(df, True) # we drop empty cells from excel sheets by default
         if isinstance(read_result, pd.DataFrame):
             dfs[file_storage.filename] = clean_df(read_result)
 
