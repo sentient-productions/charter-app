@@ -59,7 +59,7 @@ def upload():
             # replace name file extension with csv
             name = name.rsplit(".", 1)[0] + ".csv"
 
-            dataset.to_csv(
+            df.to_csv(
                 f"s3://{BUCKET_NAME}/{USER_DATA_DIR}/{token}/{name}",
                 storage_options=STORAGE_OPTIONS,
                 index=False,
