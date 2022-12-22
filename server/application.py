@@ -23,6 +23,7 @@ CORS(
         "http://localhost:3000/",
         "https://feature-amplify.doyldq2ymzq2e.amplifyapp.com",
         "https://dev.d1iy4ft5lztl4s.amplifyapp.com/",
+        "https://dev.d1iy4ft5lztl4s.amplifyapp.com",
         "https://rango.run",
         "https://www.app.rango.run",
         "https://grappler.link",
