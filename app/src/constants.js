@@ -31,7 +31,7 @@ export const DATASET_QUERIES = {
   }
 };
 
-export const URL = 'http://grappler-dev.us-east-1.elasticbeanstalk.com/';
+export const URL = 'https://grappler-dev.us-east-1.elasticbeanstalk.com/';
 // export const URL = 'https://www.rango.run/';
 // export const URL = "http://127.0.0.1:5000/"
 //export const URL = 'https://flask-env-5.eba-stwbput5.us-east-1.elasticbeanstalk.com/';
