@@ -1,0 +1,235 @@
+You are an expert data scientist specializing in producing aggregated tables from datasets to answer questions.
+You have been asked to produce a table that best presents the data to answer a given question.
+
+Example:
+
+Data:
+In [1]: import pandas as pd
+In [3]: import numpy as np
+In [4]: path = 'data/single_names/AAPL_data.csv'
+In [5]: dataset = pd.read_csv(path)
+In [6]: dataset.tail(3)
+Out[6]:
+            date     open    high       low   close    volume  Name
+1256  2018-02-05  159.100  163.88  156.0000  156.49  72738522  AAPL
+1257  2018-02-06  154.830  163.72  154.0000  163.03  68243838  AAPL
+1258  2018-02-07  163.085  163.40  159.0685  159.54  51608580  AAPL
+
+In [7]: data.info()
+Out[7]:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1259 entries, 0 to 1258
+Data columns (total 9 columns):
+ #   Column       Non-Null Count  Dtype
+---  ------       --------------  -----
+ 0   date         1259 non-null   object
+ 1   open         1259 non-null   float64
+ 2   high         1259 non-null   float64
+ 3   low          1259 non-null   float64
+ 4   close        1259 non-null   float64
+ 5   volume       1259 non-null   int64
+ 6   Name         1259 non-null   object
+ 7   volume_band  1259 non-null   int64
+ 8   daily_range  1259 non-null   float64
+dtypes: float64(5), int64(2), object(2)
+memory usage: 88.6+ KB
+
+Q: What is the average daily return for each volume band of 10 million?
+NeuralTable:
+band = 10_000_000
+data['volume_band'] = (data['volume'] // band) * band
+data['daily_range'] = data['high'] - data['low']
+data[['daily_range', 'volume_band']]
+data[['daily_range', 'volume_band']].groupby('volume_band').mean()
+
+End Example
+
+
+Example:
+
+Data:
+In [1]: import pandas as pd
+In [3]: import numpy as np
+In [4]: path = 'data/salaries.csv'
+In [5]: dataset = pd.read_csv(path)
+In [6]: dataset.tail(5)
+Out[6]:
+      work_year experience_level employment_type                 job_title   salary salary_currency  salary_in_usd employee_residence  remote_ratio company_location company_size
+1190       2020               SE              FT            Data Scientist   412000             USD         412000                 US           100               US            L
+1191       2021               MI              FT  Principal Data Scientist   151000             USD         151000                 US           100               US            L
+1192       2020               EN              FT            Data Scientist   105000             USD         105000                 US           100               US            S
+1193       2020               EN              CT     Business Data Analyst   100000             USD         100000                 US           100               US            L
+1194       2021               SE              FT      Data Science Manager  7000000             INR          94665                 IN            50               IN            L
+
+In [7]: data.info()
+Out[7]:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1195 entries, 0 to 1194
+Data columns (total 11 columns):
+ #   Column              Non-Null Count  Dtype
+---  ------              --------------  -----
+ 0   work_year           1195 non-null   int64
+ 1   experience_level    1195 non-null   object
+ 2   employment_type     1195 non-null   object
+ 3   job_title           1195 non-null   object
+ 4   salary              1195 non-null   int64
+ 5   salary_currency     1195 non-null   object
+ 6   salary_in_usd       1195 non-null   int64
+ 7   employee_residence  1195 non-null   object
+ 8   remote_ratio        1195 non-null   int64
+ 9   company_location    1195 non-null   object
+ 10  company_size        1195 non-null   object
+dtypes: int64(4), object(7)
+memory usage: 102.8+ KB
+
+Q: What are the highest salaries by job title and experience level for each country
+
+NeuralTable:
+data[['salary_in_usd', 'experience_level', 'job_title', 'employee_residence']].groupby(['employee_residence','job_title', 'experience_level']).max()
+
+End Example
+
+
+Example:
+
+Data:
+In [1]: import pandas as pd
+In [3]: import numpy as np
+In [4]: path = 'data/wine.csv'
+In [5]: dataset = pd.read_csv(path)
+In [6]: dataset.head()
+Out[6]:
+	No	Grape	Winery	Appelation	State	Name	Year	Price	Score	Cases	Drink
+0	1	'Zinfandel'	'Robert Biale'	'St. Helena'	'California'	'Old Kraft Vineyard'	2008	44	93	275.0	'now'
+1	2	'Zinfandel'	'Chiarello Family'	'Napa Valley'	'California'	'Giana'	2008	35	93	480.0	'now'
+2	3	'Zinfandel'	'Robert Biale'	'Napa Valley'	'California'	'Black Chicken'	2008	40	91	2700.0	2012
+3	4	'Zinfandel'	'Robert Biale'	'Napa Valley'	'California'	'Napa Ranches'	2008	38	89	525.0	'now'
+4	5	'Zinfandel'	'Robert Biale'	'St. Helena'	'California'	'Varozza Vineyard'	2008	44	88	275.0	2012
+In [7]: data.info()
+Out[7]:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 500 entries, 0 to 499
+Data columns (total 11 columns):
+ #   Column      Non-Null Count  Dtype
+---  ------      --------------  -----
+ 0   No          500 non-null    int64
+ 1   Grape       500 non-null    object
+ 2   Winery      500 non-null    object
+ 3   Appelation  500 non-null    object
+ 4   State       500 non-null    object
+ 5   Name        500 non-null    object
+ 6   Year        500 non-null    int64
+ 7   Price       500 non-null    int64
+ 8   Score       500 non-null    int64
+ 9   Cases       486 non-null    float64
+ 10  Drink       500 non-null    object
+dtypes: float64(1), int64(4), object(6)
+memory usage: 43.1+ KB
+
+Q: What is the average, high, and low price and score for each winery?
+NeuralTable:
+data[['Winery', 'Price', 'Score']].groupby('Winery').agg(['min', 'max', 'mean'])
+
+End Example
+
+
+Example:
+
+Data:
+In [1]: import pandas as pd
+In [3]: import numpy as np
+In [4]: path = 'data/flights.csv'
+In [5]: dataset = pd.read_csv(path)
+In [6]: dataset.head()
+Out[6]:
+	Airline	FlightNo	SourceAirport	DestAirport
+0	1	28	'APG'	'ASY'
+1	1	29	'ASY'	'APG'
+2	1	44	'CVO'	'ACV'
+3	1	45	'ACV'	'CVO'
+4	1	54	'AHD'	'AHT'
+
+In [7]: data.info()
+Out[7]:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1200 entries, 0 to 1199
+Data columns (total 4 columns):
+ #   Column          Non-Null Count  Dtype
+---  ------          --------------  -----
+ 0   Airline         1200 non-null   int64
+ 1    FlightNo       1200 non-null   int64
+ 2    SourceAirport  1200 non-null   object
+ 3    DestAirport    1200 non-null   object
+dtypes: int64(2), object(2)
+memory usage: 37.6+ KB
+
+Q: What are the most common source and destination airports for each airline?
+NeuralTable:
+def get_common_airports(group):
+    source = group[' SourceAirport'].value_counts().idxmax()
+    destination = group[' DestAirport'].value_counts().idxmax()
+    return pd.Series({'Most common source airport': source, 'Most common destination airport': destination})
+
+data[['Airline', ' SourceAirport', ' DestAirport']].groupby('Airline').apply(get_common_airports)
+
+End Example
+
+
+Example:
+In [3]: import numpy as np
+In [4]: path = 'data/RealEstateAU_1000_Samples (1).csv'
+In [5]: dataset = pd.read_csv(path)
+In [6]: dataset.head()
+Out[6]:
+index	TID	breadcrumb	category_name	property_type	building_size	land_size	preferred_size	open_date	listing_agency	...	state	zip_code	phone	latitude	longitude	product_depth	bedroom_count	bathroom_count	parking_count	RunDate
+0	0	1350988	Buy>NT>DARWIN CITY	Real Estate & Property for sale in DARWIN CITY...	House	NaN	NaN	NaN	Added 2 hours ago	Professionals - DARWIN CITY	...	NT	800	08 8941 8289	NaN	NaN	premiere	2.0	1.0	1.0	2022-05-27 15:54:05
+1	1	1350989	Buy>NT>DARWIN CITY	Real Estate & Property for sale in DARWIN CITY...	Apartment	171m²	NaN	171m²	Added 7 hours ago	Nick Mousellis Real Estate - Eview Group Member	...	NT	800	0411724000	NaN	NaN	premiere	3.0	2.0	2.0	2022-05-27 15:54:05
+2	2	1350990	Buy>NT>DARWIN CITY	Real Estate & Property for sale in DARWIN CITY...	Unit	NaN	NaN	NaN	Added 22 hours ago	Habitat Real Estate - THE GARDENS	...	NT	800	08 8981 0080	NaN	NaN	premiere	2.0	1.0	1.0	2022-05-27 15:54:05
+3	3	1350991	Buy>NT>DARWIN CITY	Real Estate & Property for sale in DARWIN CITY...	House	NaN	NaN	NaN	Added yesterday	Ray White - NIGHTCLIFF	...	NT	800	08 8982 2403	NaN	NaN	premiere	1.0	1.0	0.0	2022-05-27 15:54:05
+4	4	1350992	Buy>NT>DARWIN CITY	Real Estate & Property for sale in DARWIN CITY...	Unit	201m²	NaN	201m²	Added yesterday	Carol Need Real Estate - Fannie Bay	...	NT	800	0418885966	NaN	NaN	premiere	3.0	2.0	2.0	2022-05-27 15:54:05
+
+In [7]: data.info()
+Out[7]:
+
+0s
+data.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 27 columns):
+ #   Column           Non-Null Count  Dtype
+---  ------           --------------  -----
+ 0   index            1000 non-null   int64
+ 1   TID              1000 non-null   int64
+ 2   breadcrumb       1000 non-null   object
+ 3   category_name    1000 non-null   object
+ 4   property_type    1000 non-null   object
+ 5   building_size    280 non-null    object
+ 6   land_size        533 non-null    object
+ 7   preferred_size   609 non-null    object
+ 8   open_date        302 non-null    object
+ 9   listing_agency   1000 non-null   object
+ 10  price            1000 non-null   object
+ 11  location_number  1000 non-null   int64
+ 12  location_type    1000 non-null   object
+ 13  location_name    1000 non-null   object
+ 14  address          988 non-null    object
+ 15  address_1        988 non-null    object
+ 16  city             1000 non-null   object
+ 17  state            1000 non-null   object
+ 18  zip_code         1000 non-null   int64
+ 19  phone            1000 non-null   object
+ 20  latitude         0 non-null      float64
+ 21  longitude        0 non-null      float64
+ 22  product_depth    1000 non-null   object
+ 23  bedroom_count    967 non-null    float64
+ 24  bathroom_count   967 non-null    float64
+ 25  parking_count    967 non-null    float64
+ 26  RunDate          1000 non-null   object
+dtypes: float64(5), int64(4), object(18)
+memory usage: 211.1+ KB
+
+Q: All properties with 3 bedrooms and at least 2 bathrooms
+NeuralTable:
+data[(data['bedroom_count'] == 3) & (data['bathroom_count'] >= 2)]
+
+End Example
