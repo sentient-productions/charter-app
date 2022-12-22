@@ -1,8 +1,8 @@
 branch-defaults:
   default:
-    environment: flask-env-5
+    environment: grappler-dev
 environment-defaults:
-  flask-env-5:
+  grappler-dev:
     branch: null
     repository: null
 global:
