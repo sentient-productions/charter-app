@@ -35,7 +35,7 @@ dtypes: float64(5), int64(2), object(2)
 memory usage: 88.6+ KB
 
 Q: What is the average daily return for each volume band of 10 million?
-NeuralTable:
+NeuralAggregator:
 band = 10_000_000
 data['volume_band'] = (data['volume'] // band) * band
 data['daily_range'] = data['high'] - data['low']
@@ -84,7 +84,7 @@ memory usage: 102.8+ KB
 
 Q: What are the highest salaries by job title and experience level for each country
 
-NeuralTable:
+NeuralAggregator:
 data[['salary_in_usd', 'experience_level', 'job_title', 'employee_residence']].groupby(['employee_residence','job_title', 'experience_level']).max()
 
 End Example
@@ -127,7 +127,7 @@ dtypes: float64(1), int64(4), object(6)
 memory usage: 43.1+ KB
 
 Q: What is the average, high, and low price and score for each winery?
-NeuralTable:
+NeuralAggregator:
 data[['Winery', 'Price', 'Score']].groupby('Winery').agg(['min', 'max', 'mean'])
 
 End Example
@@ -164,7 +164,7 @@ dtypes: int64(2), object(2)
 memory usage: 37.6+ KB
 
 Q: What are the most common source and destination airports for each airline?
-NeuralTable:
+NeuralAggregator:
 def get_common_airports(group):
     source = group[' SourceAirport'].value_counts().idxmax()
     destination = group[' DestAirport'].value_counts().idxmax()
@@ -229,7 +229,7 @@ dtypes: float64(5), int64(4), object(18)
 memory usage: 211.1+ KB
 
 Q: All properties with 3 bedrooms and at least 2 bathrooms
-NeuralTable:
+NeuralAggregator:
 data[(data['bedroom_count'] == 3) & (data['bathroom_count'] >= 2)]
 
 End Example
