@@ -26,34 +26,32 @@ class Processor:
         self.key = key
         openai.api_key = key
 
-class PlotterProcessor(Processor):
-    mode = 'plotter'
+class PandasProcessor(Processor):
+    mode = "default"
 
     def load_template_prompt(self):
         # Load the template prompt
-        with open("templates/%s_template_prompt.txt" % (self.mode), "r") as f:
+        with open("templates/%s_template_prompt.txt" % self.mode, "r") as f:
             plotter_template = f.read()
         return plotter_template
 
     def load_client_prompt_prefix(self):
         # Load the template prompt
-        with open("templates/%s_client_prompt_prefix.txt" % (self.mode), "r") as f:
+        with open("templates/%s_client_prompt_prefix.txt" % self.mode, "r") as f:
             plotter_template = f.read()
         return plotter_template
 
-    def load_client_prompt_suffix(self, query):
-        return "Q: %s\nNeuralPlot:" % (query) 
-
-    def construct_data_header(self, tail_size = 3):
+    def construct_data_header(self):
         prompt_prefix = self.load_client_prompt_prefix()
         tail_size = int(prompt_prefix.split('tail(')[1][:1])
         data_header = self.dataset.tail(tail_size).to_string() + "\n"
-        prompt_suffix = self.load_client_prompt_suffix(self.query)
+        data_info = self.dataset.info() + "\n"
+        prompt_suffix = self.load_client_prompt_suffix()
 
-        return prompt_prefix + data_header + prompt_suffix
+        return prompt_prefix + data_header + data_info + prompt_suffix
 
     def construct_prompt(self):
-        prompt = self.load_template_prompt() + self.construct_data_header(self.dataset)
+        prompt = self.load_template_prompt() + self.construct_data_header()
         print(
             "Prompt:\n%s" % (prompt)
         )
@@ -65,7 +63,7 @@ class PlotterProcessor(Processor):
             engine="code-davinci-002",
             prompt=self.construct_prompt(),
             max_tokens=128,
-            temperature=0.5,
+            temperature=0.2,
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0
@@ -75,6 +73,9 @@ class PlotterProcessor(Processor):
             "response_text:\n%s" % (response_text)
         )
         return ';'.join(response_text.strip(' ').split(';')[:-1])
+
+    def load_client_prompt_suffix(self):
+        return f"Q: {self.query}\n"
 
     def produce_payload(self, temp_file = "temp.json"):
         raw_response = None
@@ -88,15 +89,22 @@ class PlotterProcessor(Processor):
             exec(response)
             with open(temp_file, "r") as f:
                 payload = json.load(f)
-            
+
             payload['response_code'] = raw_response
             return payload
         except Exception as e:
             print('an exception e happened =', e)
             return {'error': str(e), 'query': raw_response}
 
-class TableProcessor(Processor):
-    mode = 'table'
+class PlotterProcessor(PandasProcessor):
+    mode = 'plotter'
+
+    def load_client_prompt_suffix(self):
+        return super().load_client_prompt_suffix() + "NeuralPlot:"
+
+
+class NsqlProcessor(Processor):
+    mode = 'nsql'
     params = DEFAULT_BINDER_PARAMS
 
     def produce_payload(self):
@@ -150,6 +158,13 @@ class TableProcessor(Processor):
         except Exception as e:
             print('an exception e happened =', e)
             return {'error': str(e), 'query': nsql}
+
+
+class AggregatorProcessor(PandasProcessor):
+    mode = 'aggregator'
+
+    def load_client_prompt_suffix(self):
+        return super().load_client_prompt_suffix() + "NeuralAggregator:"
 
 
 if __name__ == "__main__":

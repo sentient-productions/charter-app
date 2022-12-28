@@ -10,7 +10,7 @@ from flask_cors import CORS
 
 ROOT_DIR = os.path.join(os.path.dirname(__file__), "..")
 sys.path.insert(0, ROOT_DIR)
-from processor import TableProcessor, PlotterProcessor
+from processor import NsqlProcessor, PlotterProcessor, AggregatorProcessor
 from utils import *
 
 application = Flask(__name__)
@@ -42,7 +42,7 @@ def plot():
 @application.route("/table", methods=["POST"])
 def table():
     dataset, query = load_dataset_and_query(request)
-    processor = TableProcessor(dataset, query)
+    processor = AggregatorProcessor(dataset, query)
     return processor.produce_payload()
 
 
