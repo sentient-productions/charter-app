@@ -1,3 +1,4 @@
+import io
 import json
 import os
 import sys
@@ -45,7 +46,9 @@ class PandasProcessor(Processor):
         prompt_prefix = self.load_client_prompt_prefix()
         tail_size = int(prompt_prefix.split('tail(')[1][:1])
         data_header = self.dataset.tail(tail_size).to_string() + "\n"
-        data_info = self.dataset.info() + "\n"
+        buffer = io.StringIO()
+        self.dataset.info(buf=buffer)
+        data_info = buffer.getvalue() + "\n"
         prompt_suffix = self.load_client_prompt_suffix()
 
         return prompt_prefix + data_header + data_info + prompt_suffix
