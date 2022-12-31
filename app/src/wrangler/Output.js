@@ -6,7 +6,7 @@ import {
 } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import CodeSnippet from './CodeSnippet';
-import { QUERY_MODES } from './constants';
+import { QUERY_MODES } from '../constants';
 
 export default function Output({ state, setState }) {
   // Note, we cannot put full output in this object because

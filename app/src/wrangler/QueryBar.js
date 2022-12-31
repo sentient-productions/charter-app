@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-import { URL, QUERY_MODES, DATASET_QUERIES } from './constants';
+import { URL, QUERY_MODES, DATASET_QUERIES } from '../constants';
 
 export default function QueryBar({ state, setState }) {
   const [query, setQuery] = useState('');

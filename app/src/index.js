@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Helmet } from 'react-helmet';
+// Local
+import Wrangler from './wrangler/Wrangler';
 import { NAME } from './constants';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 
 const theme = createTheme({
   palette: {
     mode: 'dark',
     background: {
-      // default: '#232023' // Set the default background color to a light gray
-      // default: '#18151A', // Set the default background color to a light gray
       paper: '#000000'
     },
     primary: {
@@ -43,6 +48,15 @@ const theme = createTheme({
   }
 });
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Wrangler />}>
+      <Route path="answer" element={<Wrangler />} />
+      {/* ... etc. */}
+    </Route>
+  )
+);
+
 ReactDOM.render(
   <React.StrictMode>
     <Helmet>
@@ -56,7 +70,7 @@ ReactDOM.render(
     </Helmet>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+      <RouterProvider router={router} />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

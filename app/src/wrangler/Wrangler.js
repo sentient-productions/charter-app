@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Box, Card, Grid, Typography } from '@mui/material';
-import CodeSnippet from './CodeSnippet';
 import Data from './Data';
-import Footer from './Footer';
-import LocalAppBar from './AppBar';
+import Footer from '../Footer';
+import LocalAppBar from '../AppBar';
 import Output from './Output';
 import QueryBar from './QueryBar';
-import { QUERY_MODES } from './constants';
+import { QUERY_MODES } from '../constants';
 
-function App() {
-  // Global application state
+function Wrangler() {
+  // Global Wranglerlication state
   const [state, setState] = useState({
     dataset: 'cars.csv',
     columns: [],
@@ -39,10 +38,6 @@ function App() {
           <Grid item sx={{ mb: 2 }}>
             <QueryBar state={state} setState={setState} />
           </Grid>
-          {/* Code Snippet Panel */}
-          {/* <Grid item sx={{ mb: state.isExecuted ? 2 : 0 }}>
-            <CodeSnippet state={state} setState={setState} />
-          </Grid> */}
           {/* Output Panel */}
           <Grid item sx={{ mb: state.isExecuted ? 2 : 0 }}>
             {/* 
@@ -75,4 +70,4 @@ function App() {
   );
 }
 
-export default App;
+export default Wrangler;

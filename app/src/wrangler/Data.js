@@ -15,7 +15,7 @@ import {
 } from '@mui/icons-material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { DataGrid } from '@mui/x-data-grid';
-import { DATASET_QUERIES, URL } from './constants';
+import { DATASET_QUERIES, URL } from '../constants';
 
 export default function Data({ state, setState }) {
   const [list, setList] = useState([]);

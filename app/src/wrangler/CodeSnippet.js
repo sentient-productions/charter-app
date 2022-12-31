@@ -3,7 +3,7 @@ import { Button, Card, Grid, Typography } from '@mui/material';
 import { Code as CodeIcon } from '@mui/icons-material';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { obsidian } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { QUERY_MODES } from './constants';
+import { QUERY_MODES } from '../constants';
 
 // This component provides the code snippet for the user to copy/paste
 // And to see the executed code in a clean format
