@@ -3,15 +3,20 @@ import ReactDOM from 'react-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Helmet } from 'react-helmet';
+import * as ReactDOMClient from 'react-dom/client';
 // Local
 import Wrangler from './wrangler/Wrangler';
+import Solver from './solver/Solver';
+import Root from './Root';
+
 import { NAME } from './constants';
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
+// import {
+//   createBrowserRouter,
+//   createRoutesFromElements,
+//   Route,
+//   RouterProvider,
+// } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -48,16 +53,19 @@ const theme = createTheme({
   }
 });
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Wrangler />}>
-      <Route path="answer" element={<Wrangler />} />
+const router = <Router>
+      {/* <> */}
+      <Routes>
+        <Route exact path="/" element={<Wrangler />} />
+        <Route path="/wrangler" element={<Wrangler />} />
+        <Route path="/solver" element={<Solver />} />
       {/* ... etc. */}
-    </Route>
-  )
-);
+      </Routes>
+    </Router>
 
-ReactDOM.render(
+
+const root = ReactDOMClient.createRoot(document.getElementById("root"));
+root.render(
   <React.StrictMode>
     <Helmet>
       <title>{NAME} | AI Powered Data Wrangling </title>
@@ -70,8 +78,7 @@ ReactDOM.render(
     </Helmet>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <RouterProvider router={router} />
+      {router}
     </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  </React.StrictMode>
+  );

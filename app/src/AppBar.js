@@ -9,11 +9,13 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import DataObjectIcon from '@mui/icons-material/Dataset';
 import { NAME } from './constants';
+import { useNavigate } from "react-router-dom";
 
-const pages = [];
+const pages = ["Wrangler", "Solver"];
 
 export default function LocalAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -39,7 +41,6 @@ export default function LocalAppBar() {
           >
             {NAME}
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <Menu
               id="menu-appbar"
@@ -85,17 +86,19 @@ export default function LocalAppBar() {
           >
             {NAME}
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {/* <Box sx={{ flexGrow: 1}} /> */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => {navigate("/"+page.toLowerCase())}}  
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
           </Box>
+          {/* <Box sx={{ flexGrow: 1}} /> */}
         </Toolbar>
       </Container>
     </AppBar>
