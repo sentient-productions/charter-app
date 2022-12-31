@@ -53,7 +53,7 @@ function App() {
             <Card
               sx={
                 state.isExecuted
-                  ? { pl: 2, pr: 2, pt: 1, pb: 1 }
+                  ? { pl: 2, pr: 2, pt: 1, pb: 2 }
                   : { pl: 2, pr: 2 } // no height if no output, but pre-pad l+r for plot balance
               }
             >
