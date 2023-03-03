@@ -49,7 +49,7 @@ function App() {
         // URL="http://grappler-dev.us-east-1.elasticbeanstalk.com/chat"
         // URL="http://grappler-dev.us-east-1.elasticbeanstalk.com/chat";
         // URL="https://grappler-dev.us-east-1.elasticbeanstalk.com/chat";
-        URL="https://www.rango.run/chat";
+        URL="http://www.rango.run/chat";
         // URL="http://flask-env-5.eba-stwbput5.us-east-1.elasticbeanstalk.com/chat"
         // URL="http://grappler-dev.us-east-1.elasticbeanstalk.com/chat";
         // URL="http://charter-backend-env.eba-8vfambem.us-east-1.elasticbeanstalk.com/chat"
