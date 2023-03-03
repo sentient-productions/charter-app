@@ -1,0 +1,376 @@
+.App {
+  font-family: Roboto;
+  text-align: center;
+  /* background-color: #141414	; */
+  /* color: #fff; */
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+header {
+  display: none;
+}
+header h1 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #d9d9e3;
+  margin: auto;
+}
+.menu button {
+  background: none;
+  border: none;
+}
+nav {
+  display: none;
+  /* background-color: #4c4f5f; */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+.navItems {
+  padding: 8px;
+  /* background-color: #212122; */
+  width: 100%;
+  max-width: 340px;
+}
+.navPromptWrapper {
+  border-bottom: 1px solid #ffffff33;
+  padding: 10px;
+  height: 55vh;
+  overflow-y: auto;
+}
+.navPrompt {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  column-gap: 20px;
+  margin: 5px 0;
+  text-align: left;
+}
+.navPrompt p {
+  font-size: 14px;
+  line-height: 20px;
+  color: #ececf1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 150px;
+  margin: 0;
+}
+.blink {
+  animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+  50% {
+      opacity: 0;
+  }
+}
+.navPrompt span {
+  animation: fadeInChar 1s ease-in forwards;
+  opacity: 0;
+}
+#botMessage pre {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  white-space: pre-wrap;
+  position: relative;
+  /* top: -45px; */
+  /* bottom: -45px; */
+}
+pre {
+  /* font-weight: 500; */
+  font-family: Roboto;
+}
+@keyframes fadeInChar {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.navCloseIcon {
+  width: 20%;
+  margin: 10px;
+}
+nav svg {
+  float: left;
+}
+.sideMenu {
+  width: 244px;
+  padding: 8px;
+  /* background-color: #301E67; */
+}
+.sideMenuButton {
+  border: 1px solid hsl(0deg 0% 100% / 20%);
+  border-radius: 5px;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+  transition: all 0.25s ease;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+}
+.navPrompt:hover,
+.sideMenuButton:hover {
+  cursor: pointer;
+  /* background-color: hsla(240, 9%, 59%, 0.1); */
+}
+.sideMenuButton span {
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 6px;
+  padding-right: 10px;
+}
+.chatBox {
+  flex: 1;
+  background-color: #464349;
+  position: relative;
+  line-height: 24px;
+  color: #d1d5db;
+  font-size: 16px;
+  /* overflow: scroll; */
+  height: 90vh;
+  flex-grow: 1;
+  overflow-y: auto;
+  font-family: Roboto;
+}
+.chatPrompter{
+  /* flex: 1; */
+  background-color: #464349;
+  /* color: #d1d5db; */
+  font-size: 16px;
+  /* overflow: scroll; */
+  height: 10vh;
+  /* width:400px; */
+  /* flex-grow: 1;
+  overflow-y: auto; */
+  font-family: Roboto;
+  left: 0;
+  right: 0;
+  top: 11000.;
+  position: absolute;
+  /* padding-top: 40px; */
+}
+.sideBar {
+  background-color: #464943;
+  line-height: 24px;
+  color: #d1d5db;
+  width: 244px;
+  height: 100vh;
+}
+.chatPrompt {
+  height: 75px;
+  background-color: #464943;
+}
+
+#introsection::before,
+#introsection::after {
+  content: "<HomePage/>";
+  float: left;
+  color: rgb(0, 134, 244);
+}
+#introsection {
+  text-align: left;
+  padding: 20px;
+}
+#introsection h1 {
+  padding-top: 20px;
+  line-height: 33px;
+}
+#introsection h2 {
+  font-size: 16px;
+  font-weight: 400;
+}
+#introsection ul {
+  list-style-type: square;
+}
+#introsection pre {
+  margin: 0;
+  display: inline;
+}
+.chatLogWrapper {
+  height: 80vh;
+  overflow-y: auto;
+}
+
+/* adding custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #575969;
+}
+::-webkit-scrollbar-thumb {
+  background-clip: content-box;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px 2px;
+  background-color: rgb(243, 241, 241);
+}
+
+::-moz-scrollbar {
+  width: 8px;
+  background-color: #575969;
+}
+::-moz-scrollbar-thumb {
+  background-clip: content-box;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px 2px;
+  background-color: rgb(243, 241, 241);
+}
+
+.chatPromptWrapper {
+  max-width: 900px;
+  margin: auto;
+  padding: 24px;
+  text-align: left;
+  display: flex;
+  justify-content: left;
+  /* align-items: center; */
+  column-gap: 25px;
+}
+
+.userSVG {
+  transform: scale(0.6);
+}
+.botMessageMainContainer {
+  width: 100%;
+  background-color: #282828;
+}
+.botMessageWrapper {
+  max-width: 900px;
+  margin: auto;
+  padding: 24px;
+  text-align: left;
+  display: flex;
+  justify-content: left;
+  /* align-items: center; */
+  column-gap: 25px;
+}
+
+.errorMessage {
+  color: #ef4444;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.openaiSVG {
+  transform: scale(0.5);
+}
+#avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: contain;
+  object-position: center;
+}
+.inputPromptWrapper {
+  /* padding: 20px; */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  padding-top: 25px;
+  background-color: #464349;
+  height: 10vh;
+}
+.inputPrompttTextarea {
+  /* align-items: center; */
+  width: 70%;
+  /* max-height: 200px; */
+  /* height: px; */
+  padding: 10px;
+  /* resize: none; */
+  font-size: 16px;
+  background-color: #282828;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.25);
+  /* overflow-y: hidden; */
+}
+.selectBox {
+  position: block;
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-left: auto;
+  margin-right: auto;
+  width: 60vw;
+}
+
+@media screen and (min-width: 768px) {
+  .inputPromptWrapper {
+    left: 244px;
+  }
+  .chatPrompter {
+    left: 244px;
+  }
+
+}
+
+@media screen and (max-width: 1024px) {
+  .App {
+    display: block;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    background: #353441;
+    border-bottom: 1px solid hsl(0deg 0% 100% / 20%);
+    padding: 4px 0 0 12px;
+  }
+  nav {
+    display: flex;
+  }
+  .sideMenu {
+    display: none;
+  }
+  .chatBox {
+    position: static;
+  }
+  .chatPrompter {
+    position: absolute;
+  }
+
+  .chatPromptWrapper {
+    padding: 12px;
+  }
+  .botMessageWrapper {
+    padding: 12px;
+  }
+  .userSVG {
+    transform: scale(0.5);
+  }
+  .openaiSVG {
+    transform: scale(0.4);
+  }
+  #avatar {
+    width: 30px;
+    height: 30px;
+  }
+  #introsection {
+    padding: 20px 20px 40px 20px;
+    font-size: 14px;
+  }
+  #introsection h1,
+  pre {
+    font-size: 25px;
+    white-space: pre-wrap;
+  }
+  #introsection h2 {
+    font-size: 14px;
+  }
+}
