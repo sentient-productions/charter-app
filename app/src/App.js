@@ -14,6 +14,8 @@ import { Select, FormControl, FormLabel } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
 import { chatPayloads } from "./Prompts"
 
+const PROMPT_SUFFIX = "\n Do not forget to use your internal reasoning denoted by <internal> and </internal>";//, and please remember that your first internal prompt should read \"Reviewing my system prompt to ensure that I act in accordance with my system prompt's guiding principles.\""; //\n<internal>\n0. I should review my system prompt to ensure that I act in accordance my system prompts' guiding principles.\n1. ";
+const RESPONSE_PREFIX = ""; //<internal>\n0. I should review my system prompt to ensure that I act in accordance my system prompts' guiding principles.\n1. "
 function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [system, setSystem] = useState("");
@@ -41,9 +43,13 @@ function App() {
       console.log("newChatLog before call = ", newChatLog);
       try {
         let formData = new FormData();
-        const cleanChatLog = newChatLog.map(({preFilled, ...keepAttrs}) => keepAttrs)
-
+        let cleanChatLog = newChatLog.map(({preFilled, ...keepAttrs}) => keepAttrs)
+        console.log('cleanChatLog=', cleanChatLog)
+        console.log('cleanChatLo[-1]=', cleanChatLog[cleanChatLog.length-1])
+        
+        cleanChatLog[cleanChatLog.length-1].content = cleanChatLog[cleanChatLog.length-1].content+PROMPT_SUFFIX
         formData.append('chatLog', JSON.stringify(cleanChatLog));
+        console.log('cleanChatLog[cleanChatLog.length-1].content=', cleanChatLog[cleanChatLog.length-1].content)
 
         URL="https://www.rango.run/chat";
 
@@ -54,7 +60,9 @@ function App() {
         });
 
         console.log("response = ", response);
-        const responseJson = await response.json();
+        let responseJson = await response.json();
+        console.log("response content = ", responseJson.content);
+        responseJson.content = RESPONSE_PREFIX+responseJson.content;
         console.log("responseJson = ", responseJson);
         responseJson["preFilled"] = false
         return responseJson;
@@ -284,7 +292,7 @@ function App() {
                       </Avatar>
                       {chat.content ? (
                         <div id="botMessage">
-                          {chat.preFilled? <pre id="chatPrompt">{chat.content}</pre> : <BotResponse response={chat.content} scroller={scrollToBottom} />}
+                          {chat.preFilled? <pre id="chatPrompt">{chat.content.replace('<result>\n', '').replace('</result>', '')}</pre> : <BotResponse response={chat.content.replace('<result>\n', '').replace('</result>', '')} scroller={scrollToBottom} />}
                           {/* <div id="chatPrompt">{chat.content}</div> */}
                           {/* <div id="chatPrompt"><BotResponse response={chat.content} /></div> */}
                           </div>
