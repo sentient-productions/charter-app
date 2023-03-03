@@ -30,27 +30,12 @@ import {
     return (
       <Box p={4}>
         <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
-          <Heading fontSize={'3xl'}>CharterAI</Heading>
-          <Text color={'green.400'} fontSize={'xl'}>
-            Steer your conversation with the top rated system prompts from our community!
+          <Heading fontSize={'3xl'}>Charter</Heading>
+          <Text color={'green.400'} fontSize={'xl'} fontWeight={"bold"}>
+            AI governed by the people
           </Text>
+          <Text pt={8}  fontSize={'xl'}>We believe that AI ought be governed by a community of engaged and interested users, to minimize the potential for misuse. The Charter agent is the communities first attempt at enabling guide the direction of this new disruptive technology. By selecting the Charter system prompt you will engage with an agent that has been instructed to act in accordance with the values decided by the Charter community.</Text>
         </Stack>
-  
-        <Container maxW={'6xl'} mt={10}>
-          <SimpleGrid columns={{ base: 3, md: 3, lg: 4 }} spacing={10} >
-            {features.map((feature) => (
-              <HStack key={feature.id} align={'top'}>
-                <Box color={'green.400'} px={2}>
-                  <Icon as={CheckIcon} />
-                </Box>
-                <VStack align={'start'}>
-                  <Text fontWeight={600} >{feature.title}</Text>
-                  <Text color={'white.400'}>{feature.text}</Text>
-                </VStack>
-              </HStack>
-            ))}
-          </SimpleGrid>
-        </Container>
       </Box>
     );
   }
