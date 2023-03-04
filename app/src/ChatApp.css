@@ -1,5 +1,7 @@
 .App {
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   text-align: center;
   /* background-color: #141414	; */
   /* color: #fff; */
@@ -87,7 +89,9 @@ nav {
 }
 pre {
   /* font-weight: 500; */
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 @keyframes fadeInChar {
   0% {
@@ -133,7 +137,7 @@ nav svg {
 }
 .chatBox {
   flex: 1;
-  background-color: #464349;
+  background-color: #2D3748;
   position: relative;
   line-height: 24px;
   color: #d1d5db;
@@ -142,7 +146,9 @@ nav svg {
   height: 90vh;
   flex-grow: 1;
   overflow-y: auto;
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 .chatPrompter{
   /* flex: 1; */
@@ -154,7 +160,9 @@ nav svg {
   /* width:400px; */
   /* flex-grow: 1;
   overflow-y: auto; */
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   left: 0;
   right: 0;
   top: 11000.;
@@ -162,8 +170,12 @@ nav svg {
   /* padding-top: 40px; */
 }
 .sideBar {
-  background-color: #464943;
+  background-color: #212121;
+  /* background: linear-gradient(90deg, rgba(40,40,40,1) 0%, rgba(50,52,54,1) 100%, rgba(40,40,40,1) 100%); */
+  /* background: linear-gradient(90deg, rgba(50,52,54,1) 0%, rgba(40,40,40,1) 100%, rgba(40,40,40,1) 100%); */
   line-height: 24px;
+  border-width: 2px;
+  border-color: #222222;
   color: #d1d5db;
   width: 244px;
   height: 100vh;
@@ -244,7 +256,7 @@ nav svg {
 }
 .botMessageMainContainer {
   width: 100%;
-  background-color: #282828;
+  background-color: #222937;
 }
 .botMessageWrapper {
   max-width: 900px;
@@ -283,7 +295,7 @@ nav svg {
   bottom: 0;
   position: fixed;
   padding-top: 25px;
-  background-color: #464349;
+  background-color: #2D3748;
   height: 10vh;
 }
 .inputPrompttTextarea {
@@ -294,7 +306,7 @@ nav svg {
   padding: 10px;
   /* resize: none; */
   font-size: 16px;
-  background-color: #282828;
+  background-color: #212121;
   color: #fff;
   outline: none;
   border: none;

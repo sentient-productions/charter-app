@@ -11,16 +11,16 @@ export default function CodeSnippet(params){ //{ state, setState }) {
   let state = {showCode: true, isExecuted: true}
   return (
     state.isExecuted && (
-      <Card sx={{ pl: 2, pr: 2, pt: 1, pb: 1, }}>
+      <Card sx={{ pl: 2, pr: 2, pt: 1, pb: 1, }} >
         <Grid container direction="row" sx={{ display: 'flex' }}>
           <Grid item sx={{ mt: 0.75, mb: -0.75 }}>
             {/* <CodeIcon /> */}
           </Grid>
-          <Grid item sx={{ ml: 0.5, mt: 0.4, mb: -0.4 }}>
+          <Grid item sx={{ ml: 0.5, mt: 2, mb: 2 }}>
             <Text variant="overline"> Internal Dialogue </Text>
           </Grid>
           <Grid item sx={{ flexGrow: 1 }} />
-          <Grid item>
+          {/* <Grid item>
             <Button
               onClick={() => {
                 // setState({ ...state, showCode: !state.showCode });
@@ -29,7 +29,7 @@ export default function CodeSnippet(params){ //{ state, setState }) {
               {' '}
               {state.showCode == false ? 'Show' : 'Hide'}{' '}
             </Button>
-          </Grid>
+          </Grid> */}
         </Grid>
         {state.showCode && (
           <SyntaxHighlighter

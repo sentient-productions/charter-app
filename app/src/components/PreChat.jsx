@@ -34,7 +34,11 @@ import {
           <Text color={'green.400'} fontSize={'xl'} fontWeight={"bold"}>
             AI governed by the people
           </Text>
-          <Text pt={8}  fontSize={'xl'}>We believe that AI ought be governed by a community of engaged and interested users, to minimize the potential for misuse. The Charter agent is the communities first attempt at enabling guide the direction of this new disruptive technology. By selecting the Charter system prompt you will engage with an agent that has been instructed to act in accordance with the values decided by the Charter community.</Text>
+          <Text pt={8}  fontSize={'xl'}>
+            {`We believe that AI ought be governed by a community of engaged and interested users, to minimize the potential for misuse. This chat agent is the communities first attempt at guiding direction of this new disruptive technology.`}
+            {` The initial chat prompts below construct an agent that has been instructed to act in accordance with the values decided by the Charter community.`}
+          </Text>
+
         </Stack>
       </Box>
     );

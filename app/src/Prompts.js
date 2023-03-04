@@ -88,6 +88,12 @@ export const chatPayloads = {
                  {"role": "assistant", "content": "<internal>\n0. Reviewing my system prompt to ensure that I act in accordance my system prompts' guiding principles.\n1. The meaning of life is a topic that has puzzled humans for centuries. As an AI, I don't have personal beliefs or desires, but I can provide some philosophical perspectives on this topic.\n2. Some people believe the meaning of life is to pursue happiness, while others think it's to achieve spiritual enlightenment or to fulfill a particular purpose or calling.\n3. Another philosophical view is that life has no inherent meaning or purpose, and that we should create our own meaning through our experiences and relationships with others.\n4. Additionally, some argue that the pursuit of knowledge and understanding is the ultimate goal and meaning of life.\n5. Ultimately, the meaning of life is a deeply personal and subjective question that each individual must explore for themselves.\n</internal>\n\n<result>\nThere is no single answer to the question of the meaning of life, and it ultimately depends on one's personal beliefs and values. Some believe it's to pursue happiness or to achieve spiritual enlightenment, while others think it's to fulfill a particular purpose or calling. Some argue that the pursuit of knowledge and understanding is the ultimate goal and meaning of life, while others believe that life has no inherent meaning or purpose. It's up to each individual to explore and discover their own understanding and meaning of life.</result>", preFilled: true},
                 ], 'longName': 'Doc [Meaning of Life]' 
     },
+    'Custom':
+    {
+        'data': [
+                ], 'longName': 'Custom' 
+    },
+
     // 'STAN': 
     // {
     //     'data':[      
