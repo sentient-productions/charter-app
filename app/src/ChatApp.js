@@ -55,7 +55,7 @@ function App() {
         URL="https://www.rango.run/chat";
 
         const response = await fetch(URL, {
-          // mode : 'no-cors',
+          credentials: "same-origin", // include, *same-origin, omit
           method: "POST",
           body: formData,
         });
