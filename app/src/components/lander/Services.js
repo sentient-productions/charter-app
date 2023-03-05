@@ -72,7 +72,7 @@ const PackageTier = ({
       <Heading size={'md'}>{title}</Heading>
       <List spacing={3} textAlign="start">
         {options.map((desc, id) => (
-          <ListItem key={desc.id}>
+          <ListItem key={desc.id} width={"700px"}>
             <ListIcon as={FaCircle} color="green.500" />
             {desc.desc}
           </ListItem>
@@ -96,6 +96,8 @@ const ThreeTierPricingHorizontal = () => {
       <Stack spacing={4} width={'100%'} direction={'column'}>
         <Stack
           p={5}
+          mt={8}
+          mb={8}
           alignItems={'center'}
           justifyContent={{
             base: 'flex-start',

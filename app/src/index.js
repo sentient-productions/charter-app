@@ -11,6 +11,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import ReactGA from "react-ga4";
+
+
+const TRACKING_ID = "G-T4PNJFPSXB"; // OUR_TRACKING_ID
 
 // 2. Call `extendTheme` and pass your custom values
 // 2. Add your color mode config
@@ -52,6 +56,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
 );
+ReactGA.initialize(TRACKING_ID);
 
 reportWebVitals();
 

@@ -229,7 +229,7 @@ function App() {
             text="CharterAI Discord"
             link="https://discord.gg/D4pB3ydEeh"
           />
-          <NavLinks
+          {/* <NavLinks
             svg={
               <svg
                 viewBox="0 0 24 24"
@@ -249,7 +249,7 @@ function App() {
             }
             text="Updates & FAQ"
             link="https://help.openai.com/en/collections/3742473-chatgpt"
-          />
+          /> */}
           </Box>
         </Box>
 
