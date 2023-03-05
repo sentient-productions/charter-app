@@ -179,6 +179,7 @@ nav svg {
   color: #d1d5db;
   width: 244px;
   height: 100vh;
+  position: relative;
 }
 .chatPrompt {
   height: 75px;
