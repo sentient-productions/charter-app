@@ -12,13 +12,13 @@ const Footer = () => {
       textAlign="center"
       justifyContent="center"
     >
-      <Text mb="3">
+      {/* <Text mb="3">
         Provided by{' '}
         <Link href="https://appseed.us" isExternal color="blue.500">
           AppSeed
         </Link>
-      </Text>
-      <Text opacity="0.5">Open-Source Sample - Buit with Chakra UI</Text>
+      </Text> */}
+      <Text opacity="0.5">Buit with Chakra UI</Text>
     </Flex>
   );
 };

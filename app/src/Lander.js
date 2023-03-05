@@ -18,8 +18,8 @@ function App() {
       <Hero />
       <AboutUs />
       <Services />
-      <Testimonials />
-      <ContactUs />
+      {/* <Testimonials /> */}
+      {/* <ContactUs /> */}
       <Footer />
       <DrawerComponent isOpen={isOpen} onClose={onClose} btnRef={btnRef} />
     </Box>
