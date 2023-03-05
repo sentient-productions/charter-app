@@ -57,15 +57,24 @@ function App() {
         URL="https://www.rango.run/chat";
         // URL="http://127.0.0.1:5000/chat";
 
-        console.log('querying now....');
+        console.log('querying now... s');
         // const response = await fetch(URL, {
         //   method: "POST",
         //   // headers: { 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryeurjQjdVZd0r6Q1t'},
         //   headers: {"Content-Type": "application/x-www-form-urlencoded"},
         //   body: formData,
         // });
+        console.log('formData=', formData);
+        const config = {
+          headers: {
+              'content-type': 'multipart/form-data'
+          }
+      };
+  
+        // let headers = await formData.getHeaders();
 
-        const response = await axios.request({url:URL, method: 'POST', data: formData});
+        console.log('config  = ', config);
+        const response = await axios.request({url:URL, method: 'POST',  headers:config,  data: formData});
 
         console.log("response = ", response);
         let responseJson = response.data;//await response.json();
