@@ -1,10 +1,8 @@
-import AboutUs from './components/lander/Features';
-import ContactUs from './components/lander/ContactUs';
+import Features from './components/lander/Features';
 import Footer from './components/lander/Footer';
 import Hero from './components/lander/Hero';
 import Nav from './components/lander/Nav';
-import Services from './components/lander/Services';
-import Testimonials from './components/lander/Testimonials';
+import Roadmap from './components/lander/Roadmap';
 import React, { useRef } from 'react';
 import { useDisclosure, Box } from '@chakra-ui/react';
 import DrawerComponent from './components/lander/DrawerComponent';
@@ -16,10 +14,8 @@ function App() {
     <Box>
       <Nav ref={btnRef} onOpen={onOpen} />
       <Hero />
-      <AboutUs />
-      <Services />
-      {/* <Testimonials /> */}
-      {/* <ContactUs /> */}
+      <Features />
+      <Roadmap />
       <Footer />
       <DrawerComponent isOpen={isOpen} onClose={onClose} btnRef={btnRef} />
     </Box>

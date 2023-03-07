@@ -56,8 +56,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
 );
-ReactGA.initialize(TRACKING_ID);
 
+ReactGA.initialize(TRACKING_ID);
 reportWebVitals();
 
 

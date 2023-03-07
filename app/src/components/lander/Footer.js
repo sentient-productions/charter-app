@@ -1,4 +1,4 @@
-import { Flex, Text, Link } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 
 const Footer = () => {
@@ -12,12 +12,6 @@ const Footer = () => {
       textAlign="center"
       justifyContent="center"
     >
-      {/* <Text mb="3">
-        Provided by{' '}
-        <Link href="https://appseed.us" isExternal color="blue.500">
-          AppSeed
-        </Link>
-      </Text> */}
       <Text opacity="0.5">Buit with Chakra UI</Text>
     </Flex>
   );
