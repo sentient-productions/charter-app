@@ -33,6 +33,7 @@ const NavLinks = ({ svg, link, text, chatLog, setChatLog, system }) => {
       });
       result = result
       console.log('result = ', result)
+      navigator.clipboard.writeText(result)
     }
   };
   return (
