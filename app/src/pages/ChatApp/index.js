@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 // Local
 import "./normal.css";
 import "./ChatApp.css";
-import ChatBox from "./components/chat-app/ChatBox";
-import Menu from "./components/chat-app/Menu";
-import Sidebar from "./components/chat-app/Sidebar";
-import SubmitBox from "./components/chat-app/SubmitBox";
-import { chatPayloads } from "./Prompts";
+import ChatBox from "../../components/chat-app/ChatBox";
+import Menu from "../../components/chat-app/Menu";
+import Sidebar from "../../components/chat-app/Sidebar";
+import SubmitBox from "../../components/chat-app/SubmitBox";
+import { chatPayloads } from "../../misc/Prompts";
 
 const RESPONSE_PREFIX = "";
 const LOADING_MESSAGE = "...";

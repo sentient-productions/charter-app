@@ -4,7 +4,7 @@ import CodeSnippet from "./CodeSnippet";
 import Error from "./Error";
 import Loading from "./Loading";
 import Introduction from "./Introduction";
-import { chatPayloads } from "../../../Prompts";
+import { chatPayloads } from "../../../misc/Prompts";
 // Foreign
 import { Select, FormControl, FormLabel } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
@@ -17,7 +17,6 @@ const ChatBox = ({
   system,
   setSystem,
 }) => {
-  console.log("system=", system);
   return (
     <section className="chatBox">
       {system == "" ? (
