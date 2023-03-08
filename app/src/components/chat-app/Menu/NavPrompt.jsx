@@ -1,7 +1,7 @@
 import React from "react";
 
 const NavPrompt = ({ chatPrompt }) => {
-  console.log("chatPrompt = ", chatPrompt)
+  console.log("chatPrompt = ", chatPrompt);
   const chatPromptCharacters = chatPrompt.split("");
   return (
     <div className="navPrompt">
