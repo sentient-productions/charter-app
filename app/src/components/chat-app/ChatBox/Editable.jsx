@@ -88,7 +88,7 @@ function EditableBox({
 
   console.log("system=", system);
 
-  const [newDefaultVal, setNewDefaultVal] = useState(defaultVal + system);
+  const [newDefaultVal, setNewDefaultVal] = useState(defaultVal);
   useEffect(() => {
     console.log("triggering the use efefct, defaultVal=", defaultVal);
     console.log("chatLogVec=", chatLogVec);
