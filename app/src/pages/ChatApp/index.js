@@ -9,6 +9,7 @@ import Menu from "../../components/chat-app/Menu";
 import Sidebar from "../../components/chat-app/Sidebar";
 import SubmitBox from "../../components/chat-app/SubmitBox";
 import { chatPayloads } from "../../misc/Prompts";
+import { getNewConversationId } from "../../utils";
 
 const RESPONSE_PREFIX = "";
 const LOADING_MESSAGE = "...";
@@ -17,9 +18,14 @@ export default function ChatApp() {
   const [showMenu, setShowMenu] = useState(false);
   const [system, setSystem] = useState("");
   const [inputPrompt, setInputPrompt] = useState("");
-  const [random, setRandom] = useState(-1);
+  const initConvId = getNewConversationId();
+  let initChatLog = {};
+  initChatLog[initConvId.toString()] = chatPayloads[system]["data"];
 
-  const [chatLog, setChatLog] = useState([]);
+  const [chatLogVec, setChatLogVec] = useState(initChatLog);
+  console.log("chatLogVec=", chatLogVec);
+  const [selectedChatId, setSelectedChatId] = useState(initConvId);
+  console.log("selectedChatId=", selectedChatId);
   const [err, setErr] = useState(false);
 
   const messagesEndRef = useRef(null);
@@ -30,19 +36,41 @@ export default function ChatApp() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [chatLog]);
+  }, [setChatLogVec]);
 
   useEffect(() => {
-    setChatLog(chatPayloads[system]["data"]);
+    let chatLogVecCopy = Object.assign({}, chatLogVec);
+    chatLogVecCopy[selectedChatId] = chatPayloads[system]["data"];
+    setChatLogVec(chatLogVecCopy);
   }, [system]);
 
   useEffect(() => {
-    setRandom(Math.floor(Math.random() * 1_000_000_000_000_000));
-  }, []);
+    console.log("chatLogVec[selectedChatId] =", chatLogVec[selectedChatId]);
+    if (
+      chatLogVec[selectedChatId].length > 0 &&
+      chatLogVec[selectedChatId][chatLogVec[selectedChatId].length - 1].role ===
+        "user"
+    ) {
+      console.log("handlign submit..");
+      handleSubmit(null, chatLogVec[selectedChatId]).then((responseJson) => {
+        console.log("done");
+        if (responseJson) {
+          let newChatLogVec = { ...chatLogVec };
+          newChatLogVec[selectedChatId].push(responseJson);
+          console.log("newChatLogVec= ", newChatLogVec);
+          // newChatLogVec[selectedChatId] = newChatLog;
+          setChatLogVec(newChatLogVec);
+          const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+          delay(50).then(() => {
+            scrollToBottom();
+          });
+        }
+      });
+    }
+  }, [selectedChatId]);
 
   const handleSubmit = async (e, newChatLog) => {
-    e.preventDefault();
-
+    // e.preventDefault();
     async function callAPI() {
       try {
         let formData = new FormData();
@@ -59,7 +87,10 @@ export default function ChatApp() {
           messageId: cleanChatLog[cleanChatLog.length - 1].messageId,
         });
 
-        cleanChatLog = cleanChatLog.map((obj) => ({ ...obj, chatId: random }));
+        cleanChatLog = cleanChatLog.map((obj) => ({
+          ...obj,
+          chatId: selectedChatId,
+        }));
         console.log("cleanChatLog = ", cleanChatLog);
         formData.append("chatLog", JSON.stringify(cleanChatLog));
 
@@ -79,39 +110,46 @@ export default function ChatApp() {
         let responseJson = response.data;
         responseJson.content = RESPONSE_PREFIX + responseJson.content;
         responseJson["preFilled"] = false;
-        return responseJson;
         setErr(false);
+        return responseJson;
       } catch (err) {
         setErr(err);
       }
     }
-    return callAPI();
+    return await callAPI();
   };
 
   return (
     <div className="ChatApp">
       {showMenu && (
         <Menu
-          chatLog={chatLog}
-          setChatLog={setChatLog}
+          chatLog={chatLogVec[selectedChatId]}
+          setChatLog={setChatLogVec}
           setShowMenu={setShowMenu}
         />
       )}
-      <Sidebar chatLog={chatLog} system={system} />
+      <Sidebar chatLog={chatLogVec[selectedChatId]} system={system} />
       <ChatBox
-        chatLog={chatLog}
+        chatLog={chatLogVec[selectedChatId]}
+        chatLogVec={chatLogVec}
         err={err}
         messagesEndRef={messagesEndRef}
         scrollToBottom={scrollToBottom}
+        selectedChatId={selectedChatId}
+        setChatLogVec={setChatLogVec}
+        setSelectedChatId={setSelectedChatId}
         system={system}
         setSystem={setSystem}
       />
+
       <SubmitBox
-        chatLog={chatLog}
+        chatLog={chatLogVec[selectedChatId]}
+        chatLogVec={chatLogVec}
         handleSubmit={handleSubmit}
         inputPrompt={inputPrompt}
         scrollToBottom={scrollToBottom}
-        setChatLog={setChatLog}
+        selectedChatId={selectedChatId}
+        setChatLogVec={setChatLogVec}
         setInputPrompt={setInputPrompt}
         system={system}
       />

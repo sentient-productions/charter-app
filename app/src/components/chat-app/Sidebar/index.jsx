@@ -13,7 +13,7 @@ const Sidebar = ({ chatLog, system }) => {
               width="200"
               height="56"
               viewBox="0 0 369.89473684210526 89.89470633574877"
-              class="css-1j8o68f"
+              // class="css-1j8o68f"
             >
               <defs id="SvgjsDefs1186"></defs>
               <g
@@ -44,12 +44,13 @@ const Sidebar = ({ chatLog, system }) => {
               </g>
             </svg>
           </Link>
-          {chatLog.map(
-            (chat, idx) =>
-              chat.botMessage && (
-                <NavPrompt chatPrompt={chat.chatPrompt} key={idx} />
-              )
-          )}
+          {chatLog &&
+            chatLog.map(
+              (chat, idx) =>
+                chat.botMessage && (
+                  <NavPrompt chatPrompt={chat.chatPrompt} key={idx} />
+                )
+            )}
         </div>
       </Box>
       <Box ml={5}>

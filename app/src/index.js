@@ -4,7 +4,7 @@ import ChatApp from "./pages/ChatApp";
 import Lander from "./pages/Lander";
 import reportWebVitals from "./reportWebVitals";
 import "typeface-roboto";
-import { ChakraBaseProvider } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactGA from "react-ga4";
@@ -33,17 +33,17 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ChakraBaseProvider theme={theme}>
+      <ChakraProvider theme={theme}>
         <Lander />
-      </ChakraBaseProvider>
+      </ChakraProvider>
     ),
   },
   {
     path: "Chat",
     element: (
-      <ChakraBaseProvider theme={theme}>
+      <ChakraProvider theme={theme}>
         <ChatApp />
-      </ChakraBaseProvider>
+      </ChakraProvider>
     ),
   },
 ]);

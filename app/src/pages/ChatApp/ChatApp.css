@@ -150,25 +150,6 @@ nav svg {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
-.chatPrompter{
-  /* flex: 1; */
-  background-color: #464349;
-  /* color: #d1d5db; */
-  font-size: 16px;
-  /* overflow: scroll; */
-  height: 10vh;
-  /* width:400px; */
-  /* flex-grow: 1;
-  overflow-y: auto; */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  left: 0;
-  right: 0;
-  top: 11000.;
-  position: absolute;
-  /* padding-top: 40px; */
-}
 .sideBar {
   background-color: #212121;
   /* background: linear-gradient(90deg, rgba(40,40,40,1) 0%, rgba(50,52,54,1) 100%, rgba(40,40,40,1) 100%); */
@@ -295,9 +276,10 @@ nav svg {
   right: 0;
   bottom: 0;
   position: fixed;
-  padding-top: 25px;
+  /* padding-top: 3%; */
   background-color: #2D3748;
   height: 10vh;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
 }
 .inputPrompttTextarea {
   /* align-items: center; */
@@ -328,10 +310,6 @@ nav svg {
   .inputPromptWrapper {
     left: 244px;
   }
-  .chatPrompter {
-    left: 244px;
-  }
-
 }
 
 @media screen and (max-width: 1024px) {
@@ -354,10 +332,6 @@ nav svg {
   .chatBox {
     position: static;
   }
-  .chatPrompter {
-    position: absolute;
-  }
-
   .chatPromptWrapper {
     padding: 12px;
   }
