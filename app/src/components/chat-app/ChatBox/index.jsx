@@ -1,5 +1,5 @@
 import Introduction from "./Introduction";
-import { chatPayloads } from "../../../misc/Prompts";
+import { chatPayloads } from "../../../misc/PromptUtils";
 // Foreign
 import { Box, Select, FormControl, FormLabel } from "@chakra-ui/react";
 import ChatEntry from "./ChatEntry";
@@ -10,23 +10,13 @@ const ChatBox = ({
   chatLogVec,
   err,
   messagesEndRef,
-  scrollToBottom,
   system,
   selectedChatId,
   setChatLogVec,
   setSelectedChatId,
   setSystem,
+  scrollToBottom,
 }) => {
-  const messagesEndRef2 = useRef(null);
-
-  const scrollToBottom2 = () => {
-    messagesEndRef2.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom2();
-  }, [chatLog]);
-
   return (
     <>
       <section className="chatBox">
@@ -67,21 +57,28 @@ const ChatBox = ({
         {system != "" && chatLog.length > 0
           ? chatLog.map((chat, idx) => {
               let content = chat.content;
-              let snippet = "";
+              let diagnostic = "";
               if (idx != 0) {
                 if (
-                  content.includes("<internal>") &&
-                  content.includes("</internal>")
+                  chat.content.includes("<internal>") &&
+                  chat.content.includes("</internal>")
                 ) {
-                  content = content
-                    .split("</internal>\n")[1]
-                    .replace("<result>\n", "")
-                    .replace("</result>", "");
-                  snippet = chat.content
+                  diagnostic = chat.content
                     .split("<internal>\n")[1]
                     .split("</internal>")[0];
                 }
+
+                if (
+                  chat.content.includes("<result>") &&
+                  chat.content.includes("</result>")
+                ) {
+                  content = chat.content
+                    .split("<result>")[1]
+                    .replace("<result>\n", "")
+                    .replace("</result>", "");
+                }
               }
+
               return (
                 <div className="chatLog" key={idx}>
                   <ChatEntry
@@ -91,7 +88,7 @@ const ChatBox = ({
                     chatLogVec={chatLogVec}
                     error={err}
                     content={content}
-                    snippet={snippet}
+                    diagnostic={diagnostic}
                     idx={idx}
                     scrollToBottom={scrollToBottom}
                     selectedChatId={selectedChatId}
@@ -103,7 +100,6 @@ const ChatBox = ({
             })
           : null}
         <div ref={messagesEndRef}> {""} </div>
-        <div ref={messagesEndRef2}>{""} </div>
       </section>
     </>
   );

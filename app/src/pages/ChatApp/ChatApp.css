@@ -278,7 +278,7 @@ nav svg {
   position: fixed;
   /* padding-top: 3%; */
   background-color: #2D3748;
-  height: 10vh;
+  /* height: 10vh; */
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
 }
 .inputPrompttTextarea {

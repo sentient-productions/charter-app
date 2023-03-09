@@ -33,13 +33,7 @@ function EditableBox({
 }) {
   const [localChatIdx, setLocalChatIdx] = useState(0);
   const [chatIds, setChatIds] = useState([selectedChatId]);
-  console.log("localChatIdx=", localChatIdx);
-  console.log("chatIds=", chatIds);
-  // console.log("qqselectedChatId=", selectedChatId);
-  // console.log("qqchatLogVec=", chatLogVec);
-  // let defaultValCopy = `${defaultVal}`; //Object.assign("", defaultVal); //assign;
-  // console.log("defaultValCopy=", defaultValCopy);
-  /* Here's a custom control */
+
   function EditableControls() {
     const {
       isEditing,
@@ -86,17 +80,11 @@ function EditableBox({
     );
   }
 
-  console.log("system=", system);
-
   const [newDefaultVal, setNewDefaultVal] = useState(defaultVal);
   useEffect(() => {
-    console.log("triggering the use efefct, defaultVal=", defaultVal);
-    console.log("chatLogVec=", chatLogVec);
-    console.log("selectedChatId=", selectedChatId);
     setNewDefaultVal(chatLogVec[selectedChatId][idx].content);
   }, [chatLogVec, selectedChatId, system]);
 
-  console.log("newDefaultVal=", newDefaultVal);
   return (
     <div key={`${system}-${selectedChatId}-${newDefaultVal.slice(0, 20)}`}>
       <Editable
@@ -106,22 +94,15 @@ function EditableBox({
         fontSize="l"
         isPreviewFocusable={false}
         onSubmit={(value) => {
-          console.log("chatLogVecz = ", chatLogVec);
-          console.log("chatLogz = ", chatLog);
-          console.log(value);
           const conversationId = getNewConversationId();
           // let newChatLog = Object.assign({}, chatLog.slice(0, idx + 1));
-          // console.log("newChatLog = ", newChatLog);
           let newChatLog = JSON.parse(
             JSON.stringify(chatLog.slice(0, idx + 1))
           );
-          console.log("newChatLog = ", newChatLog);
           newChatLog[idx].content = value;
 
           let newChatLogVec = JSON.parse(JSON.stringify(chatLogVec));
-          console.log("before setting, = ", newChatLogVec);
           newChatLogVec[conversationId] = newChatLog;
-          console.log("newChatLogVecz = ", newChatLogVec);
 
           let newChatIds = [...chatIds];
           newChatIds.push(conversationId);

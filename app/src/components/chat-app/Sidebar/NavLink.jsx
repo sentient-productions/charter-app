@@ -32,7 +32,7 @@ const NavLinks = ({ svg, link, text, chatLog, setChatLog, system }) => {
             .split("</result>")[0];
           result +=
             `[${i}] ${role}:\n\n` +
-            ">*Internal Dialogue*\n" +
+            ">*Diagnostics*\n" +
             internal +
             "\n\n" +
             content +
@@ -42,7 +42,6 @@ const NavLinks = ({ svg, link, text, chatLog, setChatLog, system }) => {
         }
       });
       result = result;
-      console.log("result = ", result);
       navigator.clipboard.writeText(result);
     }
   };

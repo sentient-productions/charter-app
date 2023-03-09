@@ -5,10 +5,10 @@ import {
   Center,
   InputRightElement,
   InputGroup,
+  Button,
+  ButtonGroup,
 } from "@chakra-ui/react";
-import { ChatIcon } from "@chakra-ui/icons";
-import { getNewConversationId } from "../../../utils";
-import { FaEnvelopeOpenText } from "react-icons/fa";
+import { useMediaQuery } from "react-responsive";
 
 const LOADING_MESSAGE = "...";
 
@@ -22,9 +22,10 @@ const SubmitBox = ({
   setChatLogVec,
   setInputPrompt,
   system,
+  modeToggles,
+  setModeToggles,
 }) => {
   const submitMessage = async (e) => {
-    console.log("inputPrompt=", inputPrompt);
     if (inputPrompt != "") {
       const lastMessageId = chatLog[chatLog.length - 1].messageId;
 
@@ -64,6 +65,7 @@ const SubmitBox = ({
       return;
     }
   };
+  const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
   return (
     <div className="inputPromptWrapper">
@@ -73,13 +75,19 @@ const SubmitBox = ({
           submitMessage();
         }}
       >
-        <Flex height={"10vh"} alignContent={"center"} justifyContent={"center"}>
+        <Flex
+          height={isMobile ? "10vh" : "10vh"}
+          alignContent={"center"}
+          justifyContent={"center"}
+        >
           <Center>
             <InputGroup>
               <Input
+                // tell input is text
+                type="text"
                 placeholder="Message"
                 size="lg"
-                width="70vw"
+                width={!isMobile ? "50vw" : "90vw"}
                 maxWidth={"1000px"}
                 backgroundColor="#212121"
                 value={inputPrompt}
@@ -88,29 +96,81 @@ const SubmitBox = ({
                 autoFocus
               />
               <InputRightElement
+                mt={1}
+                width={"100px"}
                 children={
-                  <FaEnvelopeOpenText
-                    disabled={system == "" || inputPrompt == ""}
-                    onClick={submitMessage}
-                  />
+                  <Button
+                    size={"sm"}
+                    colorScheme={"green"}
+                    onClick={() => {
+                      submitMessage();
+                    }}
+                  >
+                    {" "}
+                    Send{" "}
+                  </Button>
                 }
               />
             </InputGroup>
-
-            {/* <input
-              width={"500px"}
-              id=""
-              className="inputPrompttTextarea"
-              type="text"
-              rows="1"
-              value={inputPrompt}
-              onChange={(e) => setInputPrompt(e.target.value)}
-              autoFocus
-              disabled={system == ""}
-            ></input> */}
+            {!isMobile && (
+              <ButtonGroup p={3}>
+                <Button
+                  colorScheme={modeToggles.diagnostic ? "blue" : null}
+                  onClick={() => {
+                    setModeToggles({
+                      ...modeToggles,
+                      diagnostic: !modeToggles.diagnostic,
+                    });
+                  }}
+                >
+                  {" "}
+                  Diagnostic{" "}
+                </Button>
+                <Button
+                  colorScheme={modeToggles.dual ? "red" : null}
+                  onClick={() => {
+                    setModeToggles({
+                      ...modeToggles,
+                      dual: !modeToggles.dual,
+                    });
+                  }}
+                >
+                  {" "}
+                  Dual{" "}
+                </Button>
+              </ButtonGroup>
+            )}
           </Center>
         </Flex>
       </form>
+      {isMobile && (
+        <ButtonGroup p={3}>
+          <Button
+            colorScheme={modeToggles.diagnostic ? "blue" : null}
+            onClick={() => {
+              setModeToggles({
+                ...modeToggles,
+                diagnostic: !modeToggles.diagnostic,
+              });
+            }}
+          >
+            {" "}
+            Diagnostic{" "}
+          </Button>
+          <Button
+            colorScheme={modeToggles.dual ? "red" : null}
+            onClick={() => {
+              setModeToggles({
+                ...modeToggles,
+                dual: !modeToggles.dual,
+              });
+            }}
+          >
+            {" "}
+            Inverse{" "}
+          </Button>
+        </ButtonGroup>
+      )}
     </div>
   );
 };

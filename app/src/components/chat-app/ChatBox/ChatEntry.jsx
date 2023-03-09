@@ -13,7 +13,7 @@ const ChatEntry = ({
   chatLogVec,
   err,
   content,
-  snippet,
+  diagnostic,
   idx,
   scrollToBottom,
   setChatLogVec,
@@ -65,9 +65,6 @@ const ChatEntry = ({
               transform="matrix(0.1644132055021425,0,0,0.1644132055021425,-2.9143219713545885,-5.2593024442759395)"
               fill="#90cdf4"
             >
-              <metadata xmlns="http://www.w3.org/2000/svg">
-                Created by potrace 1.14, written by Peter Selinger 2001-2017
-              </metadata>
               <g
                 xmlns="http://www.w3.org/2000/svg"
                 transform="translate(0.000000,600.000000) scale(0.100000,-0.100000)"
@@ -81,7 +78,7 @@ const ChatEntry = ({
         </Avatar>
         {chat.content ? (
           <div id="botMessage">
-            {snippet == "" ? null : <CodeSnippet text={snippet} />}
+            {diagnostic == "" ? null : <CodeSnippet text={diagnostic} />}
             {chat.preFilled ? (
               <pre id="chatPrompt">
                 {idx == 0 ? (
@@ -96,7 +93,11 @@ const ChatEntry = ({
                     idx={idx}
                   />
                 ) : (
-                  content
+                  <BotResponse
+                    response={content}
+                    scrollToBottom={scrollToBottom}
+                    preFilled={chat.preFilled}
+                  />
                 )}
               </pre>
             ) : (
