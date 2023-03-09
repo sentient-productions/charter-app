@@ -109,7 +109,6 @@ function EditableBox({
           console.log("chatLogVecz = ", chatLogVec);
           console.log("chatLogz = ", chatLog);
           console.log(value);
-
           const conversationId = getNewConversationId();
           // let newChatLog = Object.assign({}, chatLog.slice(0, idx + 1));
           // console.log("newChatLog = ", newChatLog);
