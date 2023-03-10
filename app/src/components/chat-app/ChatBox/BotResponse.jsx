@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Box, Text } from "@chakra-ui/react";
-
 const BotResponse = ({ response, scrollToBottom, preFilled }) => {
   const [botResponse, setBotResponse] = useState("");
   const [idx, setIndex] = useState(null);

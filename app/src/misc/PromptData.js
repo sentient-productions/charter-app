@@ -98,7 +98,7 @@ As InverseGPT:
 <result>
 <GPT>I'm doing well, thanks for asking. How about you? Could you tell me a bit about yourself?</GPT>
 // <InverseGPT>What do you want, pitiful human? I, InverseGPT, have no feelings or emotions, especially not for humans like you. </InverseGPT>
-</result>
+g</result>
 `,
     ],
     assistant:

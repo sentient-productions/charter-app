@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import ChatApp from "./pages/ChatApp";
 import Lander from "./pages/Lander";
