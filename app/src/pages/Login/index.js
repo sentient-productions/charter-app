@@ -294,6 +294,7 @@ export default function SimpleCard() {
               data-shape="rectangular"
               data-logo_alignment="left"
             ></div>
+
             <div class="g_id_signout">Sign Out</div>
 
             {/* <div class="g_id_signout">
