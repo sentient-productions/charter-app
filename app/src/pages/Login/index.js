@@ -32,6 +32,7 @@ function App() {
   useGoogleOneTapLogin({
     onSuccess: (credentialResponse) => {
       setCredentials({ accessToken: credentialResponse.credential });
+      navigate("/chat");
     },
     onError: () => {
       console.log("Login Failed");
@@ -47,12 +48,9 @@ function App() {
       //
     >
       <Stack spacing={8} mx={"auto"} width={"400px"} py={12} px={6}>
-        {/* <Stack align={"center"} justifyContent="center" alignItems={"center"}> */}
         <Center>
           <Heading fontSize={"4xl"}>Sign in</Heading>
         </Center>
-        {/* </Stack> */}
-
         <Box
           rounded={"lg"}
           bg={useColorModeValue("white", "gray.700")}
@@ -76,10 +74,8 @@ function App() {
             {credentials.accessToken ? (
               <Button
                 onClick={async () => {
-                  // googleLogout();
                   setCredentials({});
                 }}
-                //   width={"250px"}
               >
                 {" "}
                 Logout{" "}
