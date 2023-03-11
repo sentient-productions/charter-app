@@ -273,24 +273,26 @@ export default function SimpleCard() {
               {" "}
               sign in{" "}
             </Button> */}
+            <div class="g_id_signout">
+              <Button
+                onClick={async () => {
+                  console.log("logging out...");
+                  // googleLogout();
+                  await googleLogout();
+                  // await logout();
+                  console.log("refreshing..");
+                  window.location.href = "https://www.charterai.org";
 
-            <Button
-              onClick={async () => {
-                console.log("logging out...");
-                // googleLogout();
-                await googleLogout();
-                // await logout();
-                console.log("refreshing..");
+                  // window.location.reload();
+                  // console.log("refreshed..");
 
-                // window.location.reload();
-                // console.log("refreshed..");
-
-                // window.location.reload(false);
-              }}
-            >
-              {" "}
-              Logout{" "}
-            </Button>
+                  // window.location.reload(false);
+                }}
+              >
+                {" "}
+                Logout{" "}
+              </Button>
+            </div>
             {/* <GoogleLogout
               clientId="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
               buttonText="Logout"
