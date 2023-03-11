@@ -70,10 +70,11 @@ import {
 } from "@chakra-ui/react";
 import { GoogleLogin } from "@react-oauth/google";
 import { googleLogout } from "@react-oauth/google";
+import GoogleLogout from "react-google-login";
+import { useGoogleLogout, useGoogleLogin } from "react-google-login";
 import "./login.css";
-import { useGoogleApi } from "react-gapi";
 import { gapi, loadAuth2 } from "gapi-script";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 export default function SimpleCard() {
   //   const gapi = useGoogleApi({
   //     scopes: ["profile"],
@@ -84,24 +85,60 @@ export default function SimpleCard() {
   //   const auth = gapi?.auth2.getAuthInstance();
   //   console.log("auth = ", auth);
 
+  const { signOut } = useGoogleLogout({
+    clientId:
+      "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
+    onLogoutSuccess: () => {
+      console.log("log out success");
+    },
+    onFailure: () => {
+      console.log("log out faiure");
+    },
+  });
+  const { signIn, loaded } = useGoogleLogin({
+    onSuccess: () => {
+      console.log("success");
+    },
+    onFailure: () => {
+      console.log("log out faiure");
+    },
+    isSignedIn: false,
+    clientId:
+      "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
+    cookiePolicy: "single_host_origin",
+  });
+
   const logout = async () => {
     let auth2 = await loadAuth2(
       gapi,
       "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
       ""
     );
+
+    // signOut();
+
     console.log("auth2=", auth2);
+    // gapi.auth2.init();
+    // auth2.init();
+    // console.log("gapi.auth2.init()=", gapi.auth2.init());
     auth2.signOut().then(() => {
+      //   signOut();
       console.log("User signed out.");
       auth2.disconnect();
+      auth2.isSignedIn.set(false);
+      //   document.location.href =
+      //     "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://charterai.org/CharterAI/logoutUser";
+      //   signOut();
+
+      console.log("auth2.currentUser.get()=", auth2.currentUser.get());
       console.log("disconnecting..");
     });
   };
 
-  useEffect(() => {
-    logout();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   useEffect(() => {
+  //     logout();
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, []);
 
   return (
     <Flex
@@ -172,14 +209,30 @@ export default function SimpleCard() {
             /> */}
             <Button
               onClick={() => {
+                console.log("sign in...");
+                signIn();
+              }}
+            >
+              {" "}
+              sign in{" "}
+            </Button>
+
+            <Button
+              onClick={async () => {
                 console.log("logging out...");
-                googleLogout();
-                logout();
+                // googleLogout();
+                await logout();
+                // window.location.reload(false);
               }}
             >
               {" "}
               Logout{" "}
             </Button>
+            <GoogleLogout
+              clientId="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
+              buttonText="Logout"
+              //   onLogoutSuccess={logout}
+            ></GoogleLogout>
           </Stack>
         </Box>
       </Stack>
