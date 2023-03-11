@@ -1,4 +1,3 @@
-import { GoogleLogin } from "@react-oauth/google";
 import {
   Flex,
   Box,
@@ -13,14 +12,41 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { GoogleLogin } from "@react-oauth/google";
+// import { googleLogout } from "@react-oauth/google";
+import { useGoogleOneTapLogin } from "@react-oauth/google";
+import { useContext } from "react";
+import { AccountContext } from "../../contexts/account";
+
 const Login = () => {
-  const onSuccess = () => {
-    console.log("success login");
-    window.location.reload();
+  const { credentials, setCredentials } = useContext(AccountContext);
+
+  console.log("credentials=", credentials);
+  useGoogleOneTapLogin({
+    onSuccess: (credentialResponse) => {
+      console.log(credentialResponse);
+      const responsePayload = JSON.parse(
+        atob(credentialResponse.credential)[1]
+      );
+      console.log("responsePayload = ", responsePayload);
+      setCredentials(credentialResponse);
+    },
+    onError: () => {
+      console.log("Login Failed");
+    },
+  });
+
+  const onSuccess = (credentialResponse) => {
+    console.log("success....");
+    // const responsePayload = JSON.parse(atob(credentialResponse.credential)[1]);
+    // console.log("responsePayload = ", responsePayload);
+    console.log("success login, response=", credentialResponse);
+    setCredentials(credentialResponse);
+    // window.location.reload();
   };
 
-  const onFailure = (res) => {
-    console.log("fail login");
+  const onFailure = (response) => {
+    console.log("fail login, response =", response);
   };
 
   const clientId =
@@ -44,14 +70,14 @@ const Login = () => {
           p={8}
         >
           <Stack spacing={4}>
-            <div
+            {/* <div
               id="g_id_onload"
               data-client_id="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
               data-context="signin"
               data-ux_mode="popup"
-              //   data-login_uri="https://www.charterai.org/login"
+              //   data-login_uri="https://www.charterai.org/chat"
               data-itp_support="true"
-            ></div>
+            ></div> */}
             <GoogleLogin
               clientId={clientId}
               buttonText="Login"
@@ -75,8 +101,82 @@ const Login = () => {
 
             <Button
               onClick={async () => {
-                document.location.href =
-                  "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://charterai.org/";
+                // alert("googleLogout start");
+                //gapi.auth2.getAuthInstance().signOut();
+                //OR (both are same)
+                // var auth2 = gapi.auth2.getAuthInstance();
+                // auth2.signOut().then(function () {
+                //   console.log("User signed out.");
+                // });
+                console.log("window.gapi=", window.gapi);
+                console.log("window.gapi.auth2=", window.gapi.auth2);
+
+                // window.gapi.auth2.init({ client_id: clientId });
+                var auth2 = window.gapi.auth2.getAuthInstance();
+
+                auth2.signOut().then(function () {
+                  console.log("User signed out.");
+                });
+
+                // document.location.href =
+                //   "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://charterai.org/";
+                //   }
+                // window.location.href =
+                //   "https://accounts.google.com/o/oauth2/revoke?token=" +
+                //   credentials.credential;
+                // var clientId = credentials.clientId; //'<YOUR_CLIENT_ID>';
+                // var refreshToken = credentials.credential; //'<YOUR_REFRESH_TOKEN>';
+                // function revokeAccess(accessToken) {
+                //   // Google's OAuth 2.0 endpoint for revoking access tokens.
+                //   var revokeTokenEndpoint =
+                //     "https://oauth2.googleapis.com/revoke";
+
+                //   // Create <form> element to use to POST data to the OAuth 2.0 endpoint.
+                //   var form = document.createElement("form");
+                //   form.setAttribute("method", "post");
+                //   form.setAttribute("action", revokeTokenEndpoint);
+
+                //   // Add access token to the form so it is set as value of 'token' parameter.
+                //   // This corresponds to the sample curl request, where the URL is:
+                //   //      https://oauth2.googleapis.com/revoke?token={token}
+                //   var tokenField = document.createElement("input");
+                //   tokenField.setAttribute("type", "hidden");
+                //   tokenField.setAttribute("name", "token");
+                //   tokenField.setAttribute("value", accessToken);
+                //   form.appendChild(tokenField);
+
+                //   // Add form to page and submit it to actually revoke the token.
+                //   document.body.appendChild(form);
+                //   form.submit();
+                // }
+                // revokeAccess(credentials.credential);
+                // // Construct the URL for the revoke endpoint
+                // var revokeUrl =
+                //   "https://accounts.google.com/o/oauth2/revoke?token=" +
+                //   refreshToken;
+
+                // // Create a POST request to revoke the user's permission
+                // fetch(revokeUrl, {
+                //   method: "POST",
+                //   headers: {
+                //     "Content-Type": "application/x-www-form-urlencoded",
+                //   },
+                // })
+                //   .then(function (response) {
+                //     // Handle the response
+                //     if (response.ok) {
+                //       // The user's permission was successfully revoked
+                //       console.log("User signed out");
+                //     } else {
+                //       // The response indicates an error
+                //       console.error("Error revoking permission");
+                //       console.log("err=", response);
+                //     }
+                //   })
+                //   .catch(function (error) {
+                //     // Handle errors here
+                //     console.error(error);
+                //   });
               }}
             >
               {" "}
