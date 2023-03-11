@@ -16,6 +16,7 @@ import {
 const Login = () => {
   const onSuccess = () => {
     console.log("success login");
+    window.location.reload();
   };
 
   const onFailure = (res) => {
@@ -59,7 +60,7 @@ const Login = () => {
               cookiePolicy={"single_host_origin"}
               //   style={{ marginTop: "100px" }}
               isSignedIn={true}
-              //   width={"400px"}
+              width={"350px"}
             />
 
             {/* <div
