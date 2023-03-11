@@ -130,13 +130,20 @@ export default function SimpleCard() {
       });
     }
     console.log("gapi.auth2=", gapi.auth2);
+    console.log(
+      "is signed in = ",
+      gapi.auth2.getAuthInstance().isSignedIn.get()
+    );
 
     // await gapi.auth2.signOut();
     gapi.auth2
       .getAuthInstance()
       .signOut()
       .then(function () {
-        console.log(gapi.auth2.getAuthInstance().isSignedIn.get());
+        console.log(
+          "is signed in after = ",
+          gapi.auth2.getAuthInstance().isSignedIn.get()
+        );
         // prints 'true'
       });
 
@@ -174,6 +181,21 @@ export default function SimpleCard() {
   //     // eslint-disable-next-line react-hooks/exhaustive-deps
   //   }, []);
 
+  if (!gapi.auth2) {
+    gapi.load("auth2", function () {
+      gapi.auth2.init({
+        client_id:
+          "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
+      });
+    });
+  }
+  console.log("gapi.auth2 inline=", gapi.auth2);
+  if (gapi.auth2) {
+    console.log(
+      "is signed in inline = ",
+      gapi.auth2.getAuthInstance().isSignedIn.get()
+    );
+  }
   return (
     <Flex
       minH={"100vh"}
