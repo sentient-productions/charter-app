@@ -76,7 +76,7 @@ const Login = () => {
             <Button
               onClick={async () => {
                 document.location.href =
-                  "https://www.google.com/url?sa=D&q=https://www.charterai.org";
+                  "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://charterai.org/";
               }}
             >
               {" "}
