@@ -1,48 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import {
+  Flex,
+  Box,
+  Stack,
+  Button,
+  Heading,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
-// import jwt_decode from "jwt-decode";
+import { useContext } from "react";
+import { AccountContext } from "../../contexts/account";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loggedUser, setLoggedUser] = useState(null);
+  const { credentials, setCredentials } = useContext(AccountContext);
+  const clientId =
+    "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com";
 
-  useEffect(() => {
-    console.log(loggedUser);
-  }, [loggedUser]);
-
-  const loginSuccess = (user) => {
-    console.log("Login Success", user);
-    setLoggedUser(user.credential); //jwt_decode(user.credential));
-    setIsLoggedIn(true);
+  const onSuccess = (credentialResponse) => {
+    console.log("success....");
+    console.log("success login, response=", credentialResponse);
+    setCredentials(credentialResponse);
   };
 
-  const loginFailure = (res) => {
-    console.log("Login Failure", res);
-  };
-
-  const logoutSuccess = () => {
-    googleLogout();
-    console.log("Logout Success");
-    setIsLoggedIn(false);
+  const onFailure = (response) => {
+    console.log("fail login, response =", response);
   };
 
   return (
-    <div className="login_box">
-      {isLoggedIn ? (
-        <div>
-          <p>Welcome {loggedUser.name}</p>
-          <button type="button" onClick={logoutSuccess}>
-            Log Out
-          </button>
-        </div>
-      ) : (
-        <GoogleLogin
-          onSuccess={loginSuccess}
-          onError={loginFailure}
-          text="signup_with"
-        />
-      )}
-    </div>
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"}>Sign in to your account</Heading>
+        </Stack>
+
+        <Box
+          rounded={"lg"}
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={8}
+        >
+          <Stack spacing={4}>
+            <GoogleLogin
+              clientId={clientId}
+              buttonText="Login"
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              cookiePolicy={"single_host_origin"}
+              //   style={{ marginTop: "100px" }}
+              //   isSignedIn={true}
+              width={"350px"}
+            />
+            <Button
+              onClick={async () => {
+                googleLogout();
+              }}
+            >
+              {" "}
+              Logout{" "}
+            </Button>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
   );
 }
 
