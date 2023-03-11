@@ -196,6 +196,8 @@ export default function SimpleCard() {
   //       gapi.auth2.getAuthInstance().isSignedIn.get()
   //     );
   //   }
+  //   console.log("gapi.auth2=", window.gapi.auth2);
+
   return (
     <Flex
       minH={"100vh"}
@@ -244,7 +246,7 @@ export default function SimpleCard() {
               //   }}
             /> */}
 
-            {/* <GoogleLogin
+            <GoogleLogin
               //   className="GoogleButton" // Add a className prop
               size={"large"}
               onSuccess={(credentialResponse) => {
@@ -262,7 +264,7 @@ export default function SimpleCard() {
                   Sign in with Googles
                 </button>
               )}
-            /> */}
+            />
 
             {/* <Button
               onClick={() => {
@@ -285,7 +287,7 @@ export default function SimpleCard() {
               data-login_uri="https://www.charterai.org/login"
               data-auto_prompt="false"
             ></div>
-            <div
+            {/* <div
               class="g_id_signin"
               data-type="standard"
               data-size="large"
@@ -293,7 +295,7 @@ export default function SimpleCard() {
               data-text="sign_in_with"
               data-shape="rectangular"
               data-logo_alignment="left"
-            ></div>
+            ></div> */}
 
             <div class="g_id_signout">Sign Out</div>
 
