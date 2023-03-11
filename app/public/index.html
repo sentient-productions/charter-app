@@ -12,28 +12,7 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Charter</title>
-    <meta name="google-signin-client_id" content="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com">
   </head>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-  <script>
-    function signOut() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.log('User signed out.');
-      });
-    }
-
-    function onLoad() {
-      gapi.load('auth2', function() {
-        gapi.auth2.init();
-      });
-    }
-  </script>
-  <a href="#" onclick="signOut();">Sign out</a>
-
-    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
