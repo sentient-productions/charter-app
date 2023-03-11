@@ -218,7 +218,7 @@ export default function SimpleCard() {
           p={8}
         >
           <Stack spacing={4}>
-            <GoogleLogin
+            {/* <GoogleLogin
               //   className="rounded-circle"
               clientId="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
               onSuccess={(credentialResponse) => {
@@ -242,7 +242,7 @@ export default function SimpleCard() {
               //   render={(renderProps) => {
               //     return <Button> x </Button>;
               //   }}
-            />
+            /> */}
 
             {/* <GoogleLogin
               //   className="GoogleButton" // Add a className prop
@@ -273,7 +273,30 @@ export default function SimpleCard() {
               {" "}
               sign in{" "}
             </Button> */}
-            <div class="g_id_signout">
+            <script
+              src="https://accounts.google.com/gsi/client"
+              async
+              defer
+            ></script>
+
+            <div
+              id="g_id_onload"
+              data-client_id="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
+              data-login_uri="https://www.charterai.org/login"
+              data-auto_prompt="false"
+            ></div>
+            <div
+              class="g_id_signin"
+              data-type="standard"
+              data-size="large"
+              data-theme="outline"
+              data-text="sign_in_with"
+              data-shape="rectangular"
+              data-logo_alignment="left"
+            ></div>
+            <div class="g_id_signout">Sign Out</div>
+
+            {/* <div class="g_id_signout">
               <Button
                 onClick={async () => {
                   console.log("logging out...");
@@ -291,8 +314,7 @@ export default function SimpleCard() {
               >
                 {" "}
                 Logout{" "}
-              </Button>
-            </div>
+              </Button> */}
             {/* <GoogleLogout
               clientId="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
               buttonText="Logout"
