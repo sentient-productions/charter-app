@@ -71,7 +71,7 @@ import {
 import { GoogleLogin } from "@react-oauth/google";
 import { googleLogout } from "@react-oauth/google";
 import GoogleLogout from "react-google-login";
-import { useGoogleLogout, useGoogleLogin } from "react-google-login";
+// import { useGoogleLogout, useGoogleLogin } from "react-google-login";
 import "./login.css";
 import { gapi, loadAuth2 } from "gapi-script";
 import { useEffect, useCallback } from "react";
@@ -109,72 +109,72 @@ export default function SimpleCard() {
   //     isSignedIn: false,
   //   });
 
-  const logout = async () => {
-    // await signOut();
+  //   const logout = async () => {
+  //     // await signOut();
 
-    console.log("gapi=", gapi);
-    // await gapi.auth2.init();
+  //     console.log("gapi=", gapi);
+  //     // await gapi.auth2.init();
 
-    // let auth2 = await loadAuth2(
-    //   gapi,
-    //   "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
-    //   ""
-    // );
+  //     // let auth2 = await loadAuth2(
+  //     //   gapi,
+  //     //   "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
+  //     //   ""
+  //     // );
 
-    if (!gapi.auth2) {
-      gapi.load("auth2", function () {
-        gapi.auth2.init({
-          client_id:
-            "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
-        });
-      });
-    }
-    console.log("gapi.auth2=", gapi.auth2);
-    console.log(
-      "is signed in = ",
-      gapi.auth2.getAuthInstance().isSignedIn.get()
-    );
+  //     if (!gapi.auth2) {
+  //       gapi.load("auth2", function () {
+  //         gapi.auth2.init({
+  //           client_id:
+  //             "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
+  //         });
+  //       });
+  //     }
+  //     console.log("gapi.auth2=", gapi.auth2);
+  //     console.log(
+  //       "is signed in = ",
+  //       gapi.auth2.getAuthInstance().isSignedIn.get()
+  //     );
 
-    // await gapi.auth2.signOut();
-    gapi.auth2
-      .getAuthInstance()
-      .signOut()
-      .then(function () {
-        console.log(
-          "is signed in after = ",
-          gapi.auth2.getAuthInstance().isSignedIn.get()
-        );
-        // prints 'true'
-      });
+  //     // await gapi.auth2.signOut();
+  //     gapi.auth2
+  //       .getAuthInstance()
+  //       .signOut()
+  //       .then(function () {
+  //         console.log(
+  //           "is signed in after = ",
+  //           gapi.auth2.getAuthInstance().isSignedIn.get()
+  //         );
+  //         // prints 'true'
+  //       });
 
-    // console.log("gapi.auth2=", gapi.auth2);
-    // const auth2 = gapi.auth2;
-    // console.log("sign out");
-    // await auth2.signOut();
-    // console.log("disconnect");
-    // await auth2.disconnect();
-    // console.log("sign out");
-    // await auth2.signOut();
-    // console.log("disconnect");
-    // await auth2.disconnect();
+  //     // console.log("gapi.auth2=", gapi.auth2);
+  //     // const auth2 = gapi.auth2;
+  //     // console.log("sign out");
+  //     // await auth2.signOut();
+  //     // console.log("disconnect");
+  //     // await auth2.disconnect();
+  //     // console.log("sign out");
+  //     // await auth2.signOut();
+  //     // console.log("disconnect");
+  //     // await auth2.disconnect();
 
-    // auth2.init();
+  //     // auth2.init();
 
-    // // // auth2.init();
-    // // // console.log("gapi.auth2.init()=", gapi.auth2.init());
-    // auth2.signOut().then(() => {
-    //   //   signOut();
-    //   console.log("User signed out.");
-    //   auth2.disconnect();
-    //   auth2.isSignedIn.set(false);
-    //   //   document.location.href =
-    //   //     "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://charterai.org/CharterAI/logoutUser";
-    //   //   signOut();
+  //     // // // auth2.init();
+  //     // // // console.log("gapi.auth2.init()=", gapi.auth2.init());
+  //     // auth2.signOut().then(() => {
+  //     //   //   signOut();
+  //     //   console.log("User signed out.");
+  //     //   auth2.disconnect();
+  //     //   auth2.isSignedIn.set(false);
+  //     //   //   document.location.href =
+  //     //   //     "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://charterai.org/CharterAI/logoutUser";
+  //     //   //   signOut();
 
-    //   console.log("auth2.currentUser.get()=", auth2.currentUser.get());
-    //   console.log("disconnecting..");
-    // });
-  };
+  //     //   console.log("auth2.currentUser.get()=", auth2.currentUser.get());
+  //     //   console.log("disconnecting..");
+  //     // });
+  //   };
 
   //   useEffect(() => {
   //     logout();
@@ -279,7 +279,7 @@ export default function SimpleCard() {
                 console.log("logging out...");
                 // googleLogout();
                 // await googleLogout();
-                await logout();
+                // await logout();
                 console.log("refreshing..");
 
                 // window.location.reload();
@@ -291,11 +291,11 @@ export default function SimpleCard() {
               {" "}
               Logout{" "}
             </Button>
-            {/* <GoogleLogout
+            <GoogleLogout
               clientId="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
               buttonText="Logout"
               //   onLogoutSuccess={logout}
-            ></GoogleLogout> */}
+            ></GoogleLogout>
           </Stack>
         </Box>
       </Stack>
