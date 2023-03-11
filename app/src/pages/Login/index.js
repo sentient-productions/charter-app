@@ -6,7 +6,7 @@ const Login = () => {
         data-client_id="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
         data-context="signin"
         data-ux_mode="popup"
-        data-login_uri="https://www.charterai.org/login"
+        // data-login_uri="https://www.charterai.org/login"
         data-itp_support="true"
       ></div>
 
