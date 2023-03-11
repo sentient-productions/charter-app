@@ -70,10 +70,10 @@ import {
 } from "@chakra-ui/react";
 import { GoogleLogin } from "@react-oauth/google";
 import { googleLogout } from "@react-oauth/google";
-import GoogleLogout from "react-google-login";
+// import GoogleLogout from "react-google-login";
 // import { useGoogleLogout, useGoogleLogin } from "react-google-login";
 import "./login.css";
-import { gapi, loadAuth2 } from "gapi-script";
+// import { gapi, loadAuth2 } from "gapi-script";
 import { useEffect, useCallback } from "react";
 export default function SimpleCard() {
   //   const gapi = useGoogleApi({
@@ -181,21 +181,21 @@ export default function SimpleCard() {
   //     // eslint-disable-next-line react-hooks/exhaustive-deps
   //   }, []);
 
-  if (!gapi.auth2) {
-    gapi.load("auth2", function () {
-      gapi.auth2.init({
-        client_id:
-          "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
-      });
-    });
-  }
-  console.log("gapi.auth2 inline=", gapi.auth2);
-  if (gapi.auth2) {
-    console.log(
-      "is signed in inline = ",
-      gapi.auth2.getAuthInstance().isSignedIn.get()
-    );
-  }
+  //   if (!gapi.auth2) {
+  //     gapi.load("auth2", function () {
+  //       gapi.auth2.init({
+  //         client_id:
+  //           "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
+  //       });
+  //     });
+  //   }
+  //   console.log("gapi.auth2 inline=", gapi.auth2);
+  //   if (gapi.auth2) {
+  //     console.log(
+  //       "is signed in inline = ",
+  //       gapi.auth2.getAuthInstance().isSignedIn.get()
+  //     );
+  //   }
   return (
     <Flex
       minH={"100vh"}
@@ -278,7 +278,7 @@ export default function SimpleCard() {
               onClick={async () => {
                 console.log("logging out...");
                 // googleLogout();
-                // await googleLogout();
+                await googleLogout();
                 // await logout();
                 console.log("refreshing..");
 
@@ -291,11 +291,11 @@ export default function SimpleCard() {
               {" "}
               Logout{" "}
             </Button>
-            <GoogleLogout
+            {/* <GoogleLogout
               clientId="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
               buttonText="Logout"
               //   onLogoutSuccess={logout}
-            ></GoogleLogout>
+            ></GoogleLogout> */}
           </Stack>
         </Box>
       </Stack>
