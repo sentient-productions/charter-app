@@ -1,26 +1,105 @@
+import { GoogleLogin } from "@react-oauth/google";
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Checkbox,
+  Stack,
+  Link,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 const Login = () => {
-  return (
-    <>
-      <div
-        id="g_id_onload"
-        data-client_id="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
-        data-context="signin"
-        data-ux_mode="popup"
-        // data-login_uri="https://www.charterai.org/login"
-        data-itp_support="true"
-      ></div>
+  const onSuccess = (res) => {
+    console.log("Login Success: currentUser:", res.profileObj);
+    alert(
+      `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
+    );
+  };
 
-      <div
-        class="g_id_signin"
-        data-type="standard"
-        data-shape="rectangular"
-        data-theme="outline"
-        data-text="signin_with"
-        data-size="large"
-        data-logo_alignment="left"
-      ></div>
-      <div class="g_id_signout">Sign Out</div>
-    </>
+  const onFailure = (res) => {
+    console.log("Login failed: res:", res);
+    alert(
+      `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
+    );
+  };
+
+  const clientId =
+    "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com";
+  return (
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"}>Sign in to your account</Heading>
+        </Stack>
+
+        <Box
+          rounded={"lg"}
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={8}
+        >
+          <Stack spacing={4}>
+            <div
+              id="g_id_onload"
+              data-client_id="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
+              data-context="signin"
+              data-ux_mode="popup"
+              // data-login_uri="https://www.charterai.org/login"
+              data-itp_support="true"
+            ></div>
+            <GoogleLogin
+              clientId={clientId}
+              buttonText="Login"
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              cookiePolicy={"single_host_origin"}
+              style={{ marginTop: "100px" }}
+              isSignedIn={true}
+            />
+            <Button
+              onClick={async () => {
+                document.location.href =
+                  "https://www.google.com/url?sa=D&q=https://www.charterai.org";
+              }}
+            >
+              {" "}
+              Logout{" "}
+            </Button>
+            {/* 
+            <div
+              id="g_id_onload"
+              data-client_id="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
+              data-context="signin"
+              data-ux_mode="popup"
+              // data-login_uri="https://www.charterai.org/login"
+              data-itp_support="true"
+            ></div>
+
+            <div
+              class="g_id_signin"
+              data-type="standard"
+              data-shape="rectangular"
+              data-theme="outline"
+              data-text="signin_with"
+              data-size="large"
+              data-logo_alignment="left"
+            ></div>
+            <div class="g_id_signout">Sign Out</div> */}{" "}
+            */}
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
   );
 };
 export default Login;

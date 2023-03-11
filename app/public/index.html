@@ -22,6 +22,9 @@
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
           console.log('User signed out.');
+          document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://www.charterai.org/login/";
+
+
         });
       }
   
@@ -31,7 +34,6 @@
         });
       }
     </script>
-    <a href="#" onclick="signOut();">Sign out</a>
 
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
