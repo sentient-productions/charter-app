@@ -85,54 +85,88 @@ export default function SimpleCard() {
   //   const auth = gapi?.auth2.getAuthInstance();
   //   console.log("auth = ", auth);
 
-  const { signOut } = useGoogleLogout({
-    clientId:
-      "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
-    onLogoutSuccess: () => {
-      console.log("log out success");
-    },
-    onFailure: () => {
-      console.log("log out faiure");
-    },
-  });
-  const { signIn, loaded } = useGoogleLogin({
-    onSuccess: () => {
-      console.log("success");
-    },
-    onFailure: () => {
-      console.log("log out faiure");
-    },
-    isSignedIn: false,
-    clientId:
-      "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
-    cookiePolicy: "single_host_origin",
-  });
+  //   const { signOut } = useGoogleLogout({
+  //     clientId:
+  //       "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
+  //     onLogoutSuccess: () => {
+  //       console.log("login success");
+  //     },
+  //     onFailure: () => {
+  //       console.log("log out faiure");
+  //     },
+  //   });
+
+  //   const { signIn, loaded } = useGoogleLogin({
+  //     clientId:
+  //       "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
+  //     cookiePolicy: "single_host_origin",
+  //     onSuccess: () => {
+  //       console.log("login success");
+  //     },
+  //     onFailure: () => {
+  //       console.log("log out faiure");
+  //     },
+  //     isSignedIn: false,
+  //   });
 
   const logout = async () => {
-    let auth2 = await loadAuth2(
-      gapi,
-      "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
-      ""
-    );
+    // await signOut();
 
-    // signOut();
+    console.log("gapi=", gapi);
+    // await gapi.auth2.init();
 
-    console.log("auth2=", auth2);
-    // gapi.auth2.init();
+    // let auth2 = await loadAuth2(
+    //   gapi,
+    //   "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
+    //   ""
+    // );
+
+    if (!gapi.auth2) {
+      gapi.load("auth2", function () {
+        gapi.auth2.init({
+          client_id:
+            "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com",
+        });
+      });
+    }
+    console.log("gapi.auth2=", gapi.auth2);
+
+    // await gapi.auth2.signOut();
+    gapi.auth2
+      .getAuthInstance()
+      .signOut()
+      .then(function () {
+        console.log(gapi.auth2.getAuthInstance().isSignedIn.get());
+        // prints 'true'
+      });
+
+    // console.log("gapi.auth2=", gapi.auth2);
+    // const auth2 = gapi.auth2;
+    // console.log("sign out");
+    // await auth2.signOut();
+    // console.log("disconnect");
+    // await auth2.disconnect();
+    // console.log("sign out");
+    // await auth2.signOut();
+    // console.log("disconnect");
+    // await auth2.disconnect();
+
     // auth2.init();
-    // console.log("gapi.auth2.init()=", gapi.auth2.init());
-    auth2.signOut().then(() => {
-      //   signOut();
-      console.log("User signed out.");
-      auth2.disconnect();
-      auth2.isSignedIn.set(false);
-      //   document.location.href =
-      //     "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://charterai.org/CharterAI/logoutUser";
-      //   signOut();
 
-      console.log("auth2.currentUser.get()=", auth2.currentUser.get());
-      console.log("disconnecting..");
-    });
+    // // // auth2.init();
+    // // // console.log("gapi.auth2.init()=", gapi.auth2.init());
+    // auth2.signOut().then(() => {
+    //   //   signOut();
+    //   console.log("User signed out.");
+    //   auth2.disconnect();
+    //   auth2.isSignedIn.set(false);
+    //   //   document.location.href =
+    //   //     "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://charterai.org/CharterAI/logoutUser";
+    //   //   signOut();
+
+    //   console.log("auth2.currentUser.get()=", auth2.currentUser.get());
+    //   console.log("disconnecting..");
+    // });
   };
 
   //   useEffect(() => {
@@ -207,7 +241,8 @@ export default function SimpleCard() {
                 </button>
               )}
             /> */}
-            <Button
+
+            {/* <Button
               onClick={() => {
                 console.log("sign in...");
                 signIn();
@@ -215,24 +250,30 @@ export default function SimpleCard() {
             >
               {" "}
               sign in{" "}
-            </Button>
+            </Button> */}
 
             <Button
               onClick={async () => {
                 console.log("logging out...");
                 // googleLogout();
+                // await googleLogout();
                 await logout();
+                console.log("refreshing..");
+
+                // window.location.reload();
+                // console.log("refreshed..");
+
                 // window.location.reload(false);
               }}
             >
               {" "}
               Logout{" "}
             </Button>
-            <GoogleLogout
+            {/* <GoogleLogout
               clientId="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
               buttonText="Logout"
               //   onLogoutSuccess={logout}
-            ></GoogleLogout>
+            ></GoogleLogout> */}
           </Stack>
         </Box>
       </Stack>
