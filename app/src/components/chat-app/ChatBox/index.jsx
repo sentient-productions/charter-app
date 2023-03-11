@@ -27,7 +27,7 @@ const ChatBox = ({
           </Box>
         ) : null}
         <Box className="selectBox" mt={1} mb={5}>
-          {/* <FormControl>
+          <FormControl>
             <FormLabel as="legend" fontSize="2xl" fontWeight={"bold"}>
               Selected Conversation Starter
             </FormLabel>
@@ -47,7 +47,7 @@ const ChatBox = ({
                 }
               })}
             </Select>
-          </FormControl> */}
+          </FormControl>
         </Box>
         {system == "" ? (
           <Box mt={20} mb={20}>

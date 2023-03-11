@@ -9,6 +9,7 @@ import { extendTheme } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactGA from "react-ga4";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleApiProvider } from "react-gapi";
 
 const TRACKING_ID = "G-T4PNJFPSXB"; // OUR_TRACKING_ID
 
@@ -58,9 +59,15 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <GoogleOAuthProvider clientId="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com">
-    <RouterProvider router={router} />
-  </GoogleOAuthProvider>
+  <GoogleApiProvider
+    clientId={
+      "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
+    }
+  >
+    <GoogleOAuthProvider clientId="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com">
+      <RouterProvider router={router} />
+    </GoogleOAuthProvider>
+  </GoogleApiProvider>
 );
 
 ReactGA.initialize(TRACKING_ID);
