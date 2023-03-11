@@ -14,7 +14,7 @@ import { AccountContext } from "../../contexts/account";
 function App() {
   const { credentials, setCredentials } = useContext(AccountContext);
   const clientId =
-    "393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com";
+    "393331770643-ij113a8c5q541g80jorfk6578lac65b2.apps.googleusercontent.com";
 
   const onSuccess = (credentialResponse) => {
     console.log("success....");
