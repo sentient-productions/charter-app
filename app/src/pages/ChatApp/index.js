@@ -19,6 +19,9 @@ import {
   diagnosticAndDualExample,
   diagnosticAndDualPrompt,
 } from "../../misc/PromptData";
+import { Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AccountContext } from "../../contexts/account";
 
 const RESPONSE_PREFIX = "";
 const LOADING_MESSAGE = "...";
@@ -147,8 +150,11 @@ export default function ChatApp() {
     }
     return await callAPI();
   };
-
-  return (
+  const { credentials, setCredentials } = useContext(AccountContext);
+  console.log("credentials = ", credentials);
+  return !credentials.accessToken ? (
+    <Navigate to={{ pathname: "/login", state: { from: "/chat" } }} />
+  ) : (
     <div className="ChatApp">
       {showMenu && (
         <Menu

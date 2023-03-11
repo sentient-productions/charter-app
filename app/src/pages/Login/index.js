@@ -6,37 +6,56 @@ import {
   Button,
   Heading,
   useColorModeValue,
+  Container,
+  Center,
 } from "@chakra-ui/react";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import { useContext } from "react";
 import { AccountContext } from "../../contexts/account";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useGoogleOneTapLogin } from "@react-oauth/google";
+import { FaGoogle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const { credentials, setCredentials } = useContext(AccountContext);
-  const clientId =
-    "393331770643-ij113a8c5q541g80jorfk6578lac65b2.apps.googleusercontent.com";
+  const navigate = useNavigate();
 
-  const onSuccess = (credentialResponse) => {
-    console.log("success....");
-    console.log("success login, response=", credentialResponse);
-    setCredentials(credentialResponse);
-  };
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      console.log(tokenResponse);
+      setCredentials({ accessToken: tokenResponse.access_token });
+      navigate("/chat");
+    },
+  });
 
-  const onFailure = (response) => {
-    console.log("fail login, response =", response);
-  };
-
+  useGoogleOneTapLogin({
+    onSuccess: (credentialResponse) => {
+      console.log(credentialResponse);
+      const responsePayload = JSON.parse(
+        atob(credentialResponse.credential)[1]
+      );
+      console.log("responsePayload = ", responsePayload);
+      setCredentials(credentialResponse);
+    },
+    onError: () => {
+      console.log("Login Failed");
+    },
+  });
   return (
     <Flex
       minH={"100vh"}
       align={"center"}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
+      //
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"}>Sign in to your account</Heading>
-        </Stack>
+      <Stack spacing={8} mx={"auto"} width={"400px"} py={12} px={6}>
+        {/* <Stack align={"center"} justifyContent="center" alignItems={"center"}> */}
+        <Center>
+          <Heading fontSize={"4xl"}>Sign in</Heading>
+        </Center>
+        {/* </Stack> */}
 
         <Box
           rounded={"lg"}
@@ -45,7 +64,7 @@ function App() {
           p={8}
         >
           <Stack spacing={4}>
-            <GoogleLogin
+            {/* <GoogleLogin
               clientId={clientId}
               buttonText="Login"
               onSuccess={onSuccess}
@@ -54,15 +73,46 @@ function App() {
               //   style={{ marginTop: "100px" }}
               //   isSignedIn={true}
               width={"350px"}
-            />
-            <Button
+            /> */}
+            {/* <Button
               onClick={async () => {
-                googleLogout();
+                login();
               }}
             >
               {" "}
+              Login{" "}
+            </Button> */}
+            {/* <Container alignItems={"center"} justifyContent={"center"} ml={3}>
+              <GoogleButton
+                onClick={() => {
+                  login();
+                }}
+              />
+            </Container> */}
+
+            {
+              <Button
+                leftIcon={<FaGoogle />}
+                onClick={async () => {
+                  login();
+                }}
+                colorScheme={"blue"}
+              >
+                {" "}
+                Continue With Google{" "}
+              </Button>
+            }
+
+            {/* <Button
+              onClick={async () => {
+                googleLogout();
+                setCredentials({});
+              }}
+              width={"250px"}
+            >
+              {" "}
               Logout{" "}
-            </Button>
+            </Button> */}
           </Stack>
         </Box>
       </Stack>

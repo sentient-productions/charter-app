@@ -9,7 +9,7 @@ import { extendTheme } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactGA from "react-ga4";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import AccountProvider, { AccountContext } from "./contexts/account";
+import AccountProvider from "./contexts/account";
 
 const TRACKING_ID = "G-T4PNJFPSXB"; // OUR_TRACKING_ID
 
