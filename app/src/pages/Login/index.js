@@ -14,18 +14,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 const Login = () => {
-  const onSuccess = (res) => {
-    console.log("Login Success: currentUser:", res.profileObj);
-    alert(
-      `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
-    );
+  const onSuccess = () => {
+    console.log("success login");
   };
 
   const onFailure = (res) => {
-    console.log("Login failed: res:", res);
-    alert(
-      `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
-    );
+    console.log("fail login");
   };
 
   const clientId =
@@ -54,7 +48,7 @@ const Login = () => {
               data-client_id="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
               data-context="signin"
               data-ux_mode="popup"
-              // data-login_uri="https://www.charterai.org/login"
+              //   data-login_uri="https://www.charterai.org/login"
               data-itp_support="true"
             ></div>
             <GoogleLogin
@@ -63,9 +57,21 @@ const Login = () => {
               onSuccess={onSuccess}
               onFailure={onFailure}
               cookiePolicy={"single_host_origin"}
-              style={{ marginTop: "100px" }}
+              //   style={{ marginTop: "100px" }}
               isSignedIn={true}
+              //   width={"400px"}
             />
+
+            {/* <div
+              class="g_id_signin"
+              data-type="standard"
+              data-shape="rectangular"
+              data-theme="outline"
+              data-text="signin_with"
+              data-size="large"
+              data-logo_alignment="left"
+            ></div> */}
+
             <Button
               onClick={async () => {
                 document.location.href =
@@ -75,27 +81,6 @@ const Login = () => {
               {" "}
               Logout{" "}
             </Button>
-            {/* 
-            <div
-              id="g_id_onload"
-              data-client_id="393331770643-ah9rnhe7hfl3vuecneggpmnkk8p2o904.apps.googleusercontent.com"
-              data-context="signin"
-              data-ux_mode="popup"
-              // data-login_uri="https://www.charterai.org/login"
-              data-itp_support="true"
-            ></div>
-
-            <div
-              class="g_id_signin"
-              data-type="standard"
-              data-shape="rectangular"
-              data-theme="outline"
-              data-text="signin_with"
-              data-size="large"
-              data-logo_alignment="left"
-            ></div>
-            <div class="g_id_signout">Sign Out</div> */}{" "}
-            */}
           </Stack>
         </Box>
       </Stack>
