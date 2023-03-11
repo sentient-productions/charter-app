@@ -150,7 +150,7 @@ export default function ChatApp() {
     }
     return await callAPI();
   };
-  const { credentials, setCredentials } = useContext(AccountContext);
+  const { credentials } = useContext(AccountContext);
   console.log("credentials = ", credentials);
   return !credentials.accessToken ? (
     <Navigate to={{ pathname: "/login", state: { from: "/chat" } }} />

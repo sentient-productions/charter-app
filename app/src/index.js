@@ -11,9 +11,8 @@ import ReactGA from "react-ga4";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import AccountProvider from "./contexts/account";
 
-const TRACKING_ID = "G-T4PNJFPSXB"; // OUR_TRACKING_ID
+const TRACKING_ID = "G-T4PNJFPSXB";
 
-// 2. Call `extendTheme` and pass your custom values
 // 2. Add your color mode config
 const config = {
   initialColorMode: "dark",
