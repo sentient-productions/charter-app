@@ -1,9 +1,23 @@
-import { Box, Link } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import NavLinks from "./NavLink";
 import NavPrompt from "../Menu/NavPrompt";
 import { FaCopy, FaDiscourse } from "react-icons/fa";
+import { useContext } from "react";
+import { AccountContext } from "../../../contexts/account";
 
 const Sidebar = ({ chatLog, system }) => {
+  const { credentials, setCredentials } = useContext(AccountContext);
+  let email = credentials?.email.length > 10 ? credentials?.email : ""; //"ocolegrove@gmail.com";
+  console.log("credentials = ", credentials);
   return (
     <Box className="sideBar">
       <Box ml={2}>
@@ -44,6 +58,37 @@ const Sidebar = ({ chatLog, system }) => {
               </g>
             </svg>
           </Link>
+          <Menu>
+            <MenuButton
+              as={Button}
+              colorScheme="blue"
+              width={"100%"}
+              mt={3}
+              variant="outline"
+              leftIcon={
+                <Avatar
+                  name={credentials.name}
+                  src={credentials.picture}
+                  size={"sm"}
+                  // src="https://bit.ly/dan-abramov"
+                  // height={"30px"}
+                  // alignContent="left"
+                  // ml={"-65px"}
+                />
+              }
+            >
+              {email.length > 12 ? email.slice(0, 12) + "..." : email}
+            </MenuButton>
+            <MenuList>
+              <MenuItem
+                onClick={async () => {
+                  setCredentials({});
+                }}
+              >
+                Logout
+              </MenuItem>
+            </MenuList>
+          </Menu>
           {chatLog &&
             chatLog.map(
               (chat, idx) =>

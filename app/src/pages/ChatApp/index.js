@@ -91,9 +91,8 @@ export default function ChatApp() {
     // e.preventDefault();
     async function callAPI() {
       try {
-        let formData = new FormData();
         let cleanChatLog = newChatLog
-          .map(({ preFilled, messageId, ...keepAttrs }) => keepAttrs)
+          .map(({ preFilled, ...keepAttrs }) => keepAttrs)
           .filter((ele) => ele.content != LOADING_MESSAGE);
 
         cleanChatLog[cleanChatLog.length - 1].content =
@@ -115,22 +114,26 @@ export default function ChatApp() {
         cleanChatLog.push({
           role: "assistant",
           content: assistantMessage,
-          // chatId: cleanChatLog[cleanChatLog.length - 1].chatId,
-          // messageId: cleanChatLog[cleanChatLog.length - 1].messageId,
+          chatId: cleanChatLog[cleanChatLog.length - 1].chatId,
+          messageId: cleanChatLog[cleanChatLog.length - 1].messageId,
         });
 
         cleanChatLog = cleanChatLog.map((obj) => ({
           ...obj,
-          // chatId: selectedChatId,
+          chatId: selectedChatId,
         }));
         console.log("cleanChatLog = ", cleanChatLog);
-        formData.append("chatLog", JSON.stringify(cleanChatLog));
 
         const config = {
           headers: {
             "content-type": "multipart/form-data",
           },
         };
+
+        let formData = new FormData();
+        formData.append("token", credentials.accessToken);
+        formData.append("provider", "https://accounts.google.com");
+        formData.append("chatLog", JSON.stringify(cleanChatLog));
 
         const response = await axios.request({
           url: charterBackendURI + "/chat",
@@ -151,7 +154,6 @@ export default function ChatApp() {
     return await callAPI();
   };
   const { credentials } = useContext(AccountContext);
-  console.log("credentials = ", credentials);
   return !credentials.accessToken ? (
     <Navigate to={{ pathname: "/login", state: { from: "/chat" } }} />
   ) : (

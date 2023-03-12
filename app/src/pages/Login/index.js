@@ -24,23 +24,17 @@ function App() {
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       let formData = new FormData();
-      formData.append("tokenVal", JSON.stringify(tokenResponse.code));
-      formData.append("tokenType", JSON.stringify("oauth-id"));
-      formData.append("provider", JSON.stringify("google"));
-      console.log("login response w google = ", tokenResponse);
-      const response = await axios.request({
+      formData.append("inputVal", tokenResponse.code);
+      formData.append("inputType", "auth-code");
+      formData.append("provider", "https://accounts.google.com");
+      const userRequest = await axios.request({
         url: charterBackendURI + "/login",
         method: "POST",
         data: formData,
       });
-      console.log("response = ", response);
-      let responseJson = response.data;
-      console.log("responseJson=", responseJson);
-      setCredentials({
-        accessToken: tokenResponse.access_token,
-        type: "oauth-id",
-      });
-      console.log("we should be navving");
+      let userJSON = userRequest.data;
+      console.log("userJSON=", userJSON);
+      setCredentials(userJSON);
       navigate("/chat");
     },
     onError: () => {
@@ -53,7 +47,6 @@ function App() {
     onSuccess: (credentialResponse) => {
       setCredentials({
         accessToken: credentialResponse.credential,
-        type: "jwt",
       });
       navigate("/chat");
     },
