@@ -92,7 +92,7 @@ export default function ChatApp() {
       try {
         let formData = new FormData();
         let cleanChatLog = newChatLog
-          .map(({ preFilled, ...keepAttrs }) => keepAttrs)
+          .map(({ preFilled, messageId, ...keepAttrs }) => keepAttrs)
           .filter((ele) => ele.content != LOADING_MESSAGE);
 
         cleanChatLog[cleanChatLog.length - 1].content =
@@ -114,13 +114,13 @@ export default function ChatApp() {
         cleanChatLog.push({
           role: "assistant",
           content: assistantMessage,
-          chatId: cleanChatLog[cleanChatLog.length - 1].chatId,
-          messageId: cleanChatLog[cleanChatLog.length - 1].messageId,
+          // chatId: cleanChatLog[cleanChatLog.length - 1].chatId,
+          // messageId: cleanChatLog[cleanChatLog.length - 1].messageId,
         });
 
         cleanChatLog = cleanChatLog.map((obj) => ({
           ...obj,
-          chatId: selectedChatId,
+          // chatId: selectedChatId,
         }));
         console.log("cleanChatLog = ", cleanChatLog);
         formData.append("chatLog", JSON.stringify(cleanChatLog));
