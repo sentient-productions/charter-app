@@ -22,6 +22,7 @@ import {
 import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AccountContext } from "../../contexts/account";
+import { charterBackendURI } from "../../utils";
 
 const RESPONSE_PREFIX = "";
 const LOADING_MESSAGE = "...";
@@ -125,7 +126,6 @@ export default function ChatApp() {
         console.log("cleanChatLog = ", cleanChatLog);
         formData.append("chatLog", JSON.stringify(cleanChatLog));
 
-        URL = "https://www.rango.run/chat";
         const config = {
           headers: {
             "content-type": "multipart/form-data",
@@ -133,7 +133,7 @@ export default function ChatApp() {
         };
 
         const response = await axios.request({
-          url: URL,
+          url: charterBackendURI + "/chat",
           method: "POST",
           headers: config,
           data: formData,

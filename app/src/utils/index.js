@@ -1,6 +1,9 @@
+export const charterBackendURI = "http://127.0.0.1:5000"; //"https://www.rango.run/";
+
 export function getNewConversationId() {
   return Math.floor(Math.random() * 1_000_000_000_000_000);
 }
+
 export const refreshTokenSetup = (res) => {
   // Timing to renew access token
   let refreshTiming = (res.tokenObj.expires_in || 3600 - 5 * 60) * 1000;

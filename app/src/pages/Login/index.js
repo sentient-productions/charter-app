@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import {
   Flex,
@@ -14,30 +15,45 @@ import { useGoogleLogin, GoogleLogin } from "@react-oauth/google";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { charterBackendURI } from "../../utils";
 
 function App() {
   const { credentials, setCredentials } = useContext(AccountContext);
   const navigate = useNavigate();
 
   const googleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      console.log("tokenResponse= ", tokenResponse);
-      setCredentials({ accessToken: tokenResponse.access_token, type: "jwt" });
+    onSuccess: async (tokenResponse) => {
+      let formData = new FormData();
+      formData.append("tokenVal", JSON.stringify(tokenResponse.code));
+      formData.append("tokenType", JSON.stringify("oauth-id"));
+      formData.append("provider", JSON.stringify("google"));
+      console.log("login response w google = ", tokenResponse);
+      const response = await axios.request({
+        url: charterBackendURI + "/login",
+        method: "POST",
+        data: formData,
+      });
+      console.log("response = ", response);
+      let responseJson = response.data;
+      console.log("responseJson=", responseJson);
+      setCredentials({
+        accessToken: tokenResponse.access_token,
+        type: "oauth-id",
+      });
       console.log("we should be navving");
       navigate("/chat");
     },
     onError: () => {
       console.log("Login Failed");
     },
-    // flow: "auth-code",
-    response_type: "id_token",
+    flow: "auth-code",
   });
 
   useGoogleOneTapLogin({
     onSuccess: (credentialResponse) => {
       setCredentials({
         accessToken: credentialResponse.credential,
-        type: "google-auth",
+        type: "jwt",
       });
       navigate("/chat");
     },
@@ -65,19 +81,6 @@ function App() {
           p={8}
         >
           <Stack spacing={4}>
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                if (credentialResponse.credential != null) {
-                  console.log("credentialResponse = ", credentialResponse);
-                  // const USER_CREDENTIAL: dataCredential = jwtDecode(credentialResponse.credential);
-                  // console.log(USER_CREDENTIAL);
-                  // const { given_name, family_name } = USER_CREDENTIAL;
-                  // console.log(given_name, family_name)
-                }
-              }}
-            >
-              {" "}
-            </GoogleLogin>
             {!credentials.accessToken ? (
               <Button
                 leftIcon={<FaGoogle />}
