@@ -9,7 +9,6 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import NavLinks from "./NavLink";
-import NavPrompt from "../Menu/NavPrompt";
 import { FaCopy, FaDiscourse } from "react-icons/fa";
 import { useContext } from "react";
 import { AccountContext } from "../../../contexts/account";
@@ -86,31 +85,14 @@ const Sidebar = ({ chatLog, system }) => {
               </MenuItem>
             </MenuList>
           </Menu>
-          {chatLog &&
-            chatLog.map(
-              (chat, idx) =>
-                chat.botMessage && (
-                  <NavPrompt chatPrompt={chat.chatPrompt} key={idx} />
-                )
-            )}
-          {/* <Box ml={4}>
-            <Button
-              colorScheme="blue"
-              width={"100%"}
-              mt={3}
-              variant={"outline"} //"text"}
-              leftIcon={<FaPlusCircle />}
-            >
-              New Chat
-            </Button>
-          </Box> */}
-          <Button mt={4} ml={-2} width={"100%"}>
+
+          {/* <Button mt={4} ml={-2} width={"100%"}>
             <NavLinks
               svg={<FaPlusCircle />}
               text="New Chat"
               link="https://discord.gg/D4pB3ydEeh"
             />
-          </Button>
+          </Button> */}
         </div>
       </Box>
       <Box ml={4}>

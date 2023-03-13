@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import "./normal.css";
 import "./ChatApp.css";
 import ChatBox from "../../components/chat-app/ChatBox";
-import Menu from "../../components/chat-app/Menu";
 import Sidebar from "../../components/chat-app/Sidebar";
 import SubmitBox from "../../components/chat-app/SubmitBox";
 import Navbar from "../../components/chat-app/ChatBox/Navbar";
@@ -31,7 +30,6 @@ const LOADING_MESSAGE = "...";
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 export default function ChatApp() {
-  const [showMenu, setShowMenu] = useState(false);
   const [system, setSystem] = useState("");
   const [inputPrompt, setInputPrompt] = useState("");
   const initConvId = getNewConversationId();
@@ -163,13 +161,6 @@ export default function ChatApp() {
     <Navigate to={{ pathname: "/login", state: { from: "/chat" } }} />
   ) : (
     <div className="ChatApp">
-      {showMenu && (
-        <Menu
-          chatLog={chatLogVec[selectedChatId]}
-          setChatLog={setChatLogVec}
-          setShowMenu={setShowMenu}
-        />
-      )}
       {isMobile && <Navbar />}
       {!isMobile && (
         <Sidebar chatLog={chatLogVec[selectedChatId]} system={system} />
