@@ -22,3 +22,7 @@ export const refreshTokenSetup = (res) => {
   // Setup first refresh timer
   setTimeout(refreshToken, refreshTiming);
 };
+
+export function timeout(delay) {
+  return new Promise((res) => setTimeout(res, delay));
+}

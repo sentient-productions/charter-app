@@ -15,7 +15,7 @@ import { useGoogleLogin, GoogleLogin } from "@react-oauth/google";
 import { useGoogleOneTapLogin } from "@react-oauth/google";
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { charterBackendURI } from "../../utils";
+import { charterBackendURI, timeout } from "../../utils";
 
 function parseJwt(token) {
   var base64Url = token.split(".")[1];
@@ -55,6 +55,7 @@ function App() {
 
       console.log("userJSON=", userJSON);
       setCredentials(userJSON);
+      await timeout(50);
       navigate("/chat");
     },
     onError: () => {
@@ -64,11 +65,12 @@ function App() {
   });
 
   useGoogleOneTapLogin({
-    onSuccess: (credentialResponse) => {
+    onSuccess: async (credentialResponse) => {
       console.log("credentialResponse=", credentialResponse);
       let credentials = parseJwt(credentialResponse.credential);
       credentials["accessToken"] = credentialResponse.credential;
       setCredentials(credentials);
+      await timeout(50);
       navigate("/chat");
     },
     onError: () => {
