@@ -23,6 +23,7 @@ import {
 import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AccountContext } from "../../contexts/account";
+import { ChatsContext } from "../../contexts/chats";
 import { charterBackendURI } from "../../utils";
 
 const RESPONSE_PREFIX = "";
@@ -32,12 +33,25 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 export default function ChatApp() {
   const [system, setSystem] = useState("");
   const [inputPrompt, setInputPrompt] = useState("");
+  const { credentials } = useContext(AccountContext);
+  const { chats, setChats } = useContext(ChatsContext);
+  console.log("chats = ", chats);
+
   const initConvId = getNewConversationId();
   let initChatLog = {};
+  console.log("system=", system);
   initChatLog[initConvId.toString()] = chatPayloads[system]["data"];
-
   const [chatLogVec, setChatLogVec] = useState(initChatLog);
   const [selectedChatId, setSelectedChatId] = useState(initConvId);
+
+  useEffect(() => {
+    let chatsCopy = Object.assign({}, chats);
+    if (selectedChatId) {
+      chatsCopy[`${selectedChatId}`] = chatLogVec;
+      chatsCopy[`${selectedChatId}_system`] = system;
+    }
+    setChats(chatsCopy);
+  }, [chatLogVec]);
   const [err, setErr] = useState(false);
   const [modeToggles, setModeToggles] = useState({});
 
@@ -55,23 +69,25 @@ export default function ChatApp() {
   }, [setChatLogVec]);
 
   useEffect(() => {
-    let chatLogVecCopy = Object.assign({}, chatLogVec);
-    chatLogVecCopy[selectedChatId] = chatPayloads[system]["data"];
-    setChatLogVec(chatLogVecCopy);
-    if (system === "DOC-w-Dual") {
-      setModeToggles({ dual: true, diagnostic: true });
-    } else if (system === "DOC") {
-      setModeToggles({ dual: false, diagnostic: true });
-    } else {
-      setModeToggles({ dual: false, diagnostic: false });
+    if (chatLogVec.length == 0) {
+      let chatLogVecCopy = Object.assign({}, chatLogVec);
+      chatLogVecCopy[selectedChatId] = chatPayloads[system]["data"];
+      setChatLogVec(chatLogVecCopy);
+      if (system === "DOC-w-Dual") {
+        setModeToggles({ dual: true, diagnostic: true });
+      } else if (system === "DOC") {
+        setModeToggles({ dual: false, diagnostic: true });
+      } else {
+        setModeToggles({ dual: false, diagnostic: false });
+      }
     }
   }, [system]);
 
   useEffect(() => {
     if (
-      chatLogVec[selectedChatId].length > 0 &&
-      chatLogVec[selectedChatId][chatLogVec[selectedChatId].length - 1].role ===
-        "user"
+      chatLogVec?.selectedChatId?.length > 0 &&
+      chatLogVec?.selectedChatId[chatLogVec[selectedChatId]?.length - 1]
+        ?.role === "user"
     ) {
       handleSubmit(null, chatLogVec[selectedChatId]).then((responseJson) => {
         if (responseJson) {
@@ -95,8 +111,8 @@ export default function ChatApp() {
           .map(({ preFilled, ...keepAttrs }) => keepAttrs)
           .filter((ele) => ele.content != LOADING_MESSAGE);
 
-        cleanChatLog[cleanChatLog.length - 1].content =
-          cleanChatLog[cleanChatLog.length - 1].content;
+        cleanChatLog[cleanChatLog?.length - 1].content =
+          cleanChatLog[cleanChatLog?.length - 1].content;
 
         let assistantMessage = "";
 
@@ -114,8 +130,8 @@ export default function ChatApp() {
         cleanChatLog.push({
           role: "assistant",
           content: assistantMessage,
-          chatId: cleanChatLog[cleanChatLog.length - 1].chatId,
-          messageId: cleanChatLog[cleanChatLog.length - 1].messageId,
+          chatId: cleanChatLog[cleanChatLog?.length - 1].chatId,
+          messageId: cleanChatLog[cleanChatLog?.length - 1].messageId,
         });
 
         cleanChatLog = cleanChatLog.map((obj) => ({
@@ -156,14 +172,20 @@ export default function ChatApp() {
     }
     return await callAPI();
   };
-  const { credentials } = useContext(AccountContext);
   return !credentials.accessToken ? (
     <Navigate to={{ pathname: "/login", state: { from: "/chat" } }} />
   ) : (
     <div className="ChatApp">
       {isMobile && <Navbar />}
       {!isMobile && (
-        <Sidebar chatLog={chatLogVec[selectedChatId]} system={system} />
+        <Sidebar
+          chatLog={chatLogVec?.selectedChatId}
+          system={system}
+          selectedChatId={selectedChatId}
+          setSelectedChatId={setSelectedChatId}
+          setChatLogVec={setChatLogVec}
+          setSystem={setSystem}
+        />
       )}
       <ChatBox
         chatLog={chatLogVec[selectedChatId]}

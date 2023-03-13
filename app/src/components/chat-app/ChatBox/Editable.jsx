@@ -51,7 +51,7 @@ function EditableBox({
       </ButtonGroup>
     ) : (
       <ButtonGroup size="md">
-        {chatIds.length > 1 && (
+        {chatIds?.length > 1 && (
           <>
             <IconButton
               isDisabled={localChatIdx == 0}
@@ -63,7 +63,7 @@ function EditableBox({
               }}
             />
             <IconButton
-              isDisabled={localChatIdx == chatIds.length - 1}
+              isDisabled={localChatIdx == chatIds?.length - 1}
               size="md"
               icon={<ArrowRightIcon />}
               onClick={() => {
@@ -107,7 +107,7 @@ function EditableBox({
           setChatLogVec(newChatLogVec);
           setSelectedChatId(conversationId);
           setChatIds(newChatIds);
-          setLocalChatIdx(chatIds.length);
+          setLocalChatIdx(chatIds?.length);
         }}
       >
         <Flex>

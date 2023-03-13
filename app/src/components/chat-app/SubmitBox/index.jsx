@@ -27,7 +27,7 @@ const SubmitBox = ({
 }) => {
   const submitMessage = async (e) => {
     if (inputPrompt != "") {
-      const lastMessageId = chatLog[chatLog.length - 1].messageId;
+      const lastMessageId = chatLog[chatLog?.length - 1].messageId;
 
       let newChatLog = [
         ...chatLog,
@@ -55,7 +55,7 @@ const SubmitBox = ({
       let responseJson = await handleSubmit(e, newChatLog);
       if (responseJson) {
         let newChatLogVec = { ...chatLogVec };
-        newChatLog[newChatLog.length - 1] = responseJson;
+        newChatLog[newChatLog?.length - 1] = responseJson;
         newChatLogVec[selectedChatId] = newChatLog;
         setChatLogVec(newChatLogVec);
         await delay(50);

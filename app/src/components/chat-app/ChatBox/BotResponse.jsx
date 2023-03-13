@@ -9,7 +9,7 @@ const BotResponse = ({ response, scrollToBottom, preFilled }) => {
     let index = 1;
     let msg = setInterval(() => {
       setBotResponse(response.slice(0, index));
-      if (index >= response.length) {
+      if (index >= response?.length) {
         clearInterval(msg);
       }
       index++;

@@ -17,10 +17,11 @@ const ChatBox = ({
   setSystem,
   scrollToBottom,
 }) => {
+  console.log("in chatbox, chatLogVec=", chatLogVec);
   return (
     <>
       <section className="chatBox">
-        {system == "" ? (
+        {chatLog?.length == 0 ? (
           <Box mt={20} mb={20}>
             {" "}
             <Introduction />{" "}
@@ -54,7 +55,7 @@ const ChatBox = ({
             {" "}
           </Box>
         ) : null}
-        {system != "" && chatLog.length > 0
+        {system != "" && chatLog?.length > 0
           ? chatLog.map((chat, idx) => {
               let content = chat.content;
               let diagnostic = "";

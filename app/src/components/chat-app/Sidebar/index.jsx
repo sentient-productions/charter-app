@@ -12,10 +12,22 @@ import NavLinks from "./NavLink";
 import { FaCopy, FaDiscourse } from "react-icons/fa";
 import { useContext } from "react";
 import { AccountContext } from "../../../contexts/account";
-import { FaPlusCircle } from "react-icons/fa";
-const Sidebar = ({ chatLog, system }) => {
+import { ChatsContext } from "../../../contexts/chats";
+import { FaPlusCircle, FaArrowRight, FaTrashAlt } from "react-icons/fa";
+import { getNewConversationId } from "../../../utils";
+
+const Sidebar = ({
+  chatLog,
+  system,
+  selectedChatId,
+  setSelectedChatId,
+  setChatLogVec,
+  setSystem,
+}) => {
   const { credentials, setCredentials } = useContext(AccountContext);
-  let email = credentials?.email?.length > 10 ? credentials?.email : ""; //"ocolegrove@gmail.com";
+  const { chats, setChats } = useContext(ChatsContext);
+
+  let email = credentials?.email?.length > 10 ? credentials?.email : "";
   console.log("credentials = ", credentials);
   return (
     <Box className="sideBar">
@@ -86,15 +98,78 @@ const Sidebar = ({ chatLog, system }) => {
             </MenuList>
           </Menu>
 
-          {/* <Button mt={4} ml={-2} width={"100%"}>
+          <Button
+            mt={4}
+            ml={-2}
+            width={"100%"}
+            onClick={() => {
+              let convID = getNewConversationId();
+
+              console.log("chatId=", convID);
+              console.log("chats[convID]=", chats[convID]);
+
+              setSelectedChatId(convID);
+              let newChatLog = {};
+              newChatLog[convID] = [];
+              setChatLogVec(newChatLog);
+              setSystem("");
+            }}
+          >
             <NavLinks
               svg={<FaPlusCircle />}
               text="New Chat"
-              link="https://discord.gg/D4pB3ydEeh"
+              // link="https://discord.gg/D4pB3ydEeh"
             />
-          </Button> */}
+          </Button>
+          {Object.keys(chats)
+            .sort()
+            .filter((ele) => {
+              return !ele.includes("system");
+            })
+            .map((chatId, it) => {
+              return (
+                <Button
+                  variant={selectedChatId == chatId ? null : "text"}
+                  width={"90%"}
+                  onClick={() => {
+                    console.log("chats[chatId]=", chats[chatId]);
+                    setSelectedChatId(chatId);
+                    setChatLogVec(chats[chatId]);
+                    setSystem(chats[`${chatId}_system`]);
+                  }}
+                >
+                  <NavLinks
+                    svg={<FaArrowRight />}
+                    text={"Conversation " + it}
+                  />
+                </Button>
+              );
+            })}
+          <Button
+            mt={4}
+            ml={-2}
+            width={"100%"}
+            onClick={() => {
+              let convID = getNewConversationId();
+
+              console.log("chatId=", convID);
+              console.log("chats[convID]=", chats[convID]);
+
+              setChatLogVec({});
+              setSelectedChatId();
+              setChats({});
+            }}
+            variant="text"
+          >
+            <NavLinks
+              svg={<FaTrashAlt />}
+              text="Clear Chat"
+              // link="https://discord.gg/D4pB3ydEeh"
+            />
+          </Button>
         </div>
       </Box>
+
       <Box ml={4}>
         <NavLinks
           svg={

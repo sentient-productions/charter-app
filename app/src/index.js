@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactGA from "react-ga4";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import AccountProvider from "./contexts/account";
+import ChatProvider from "./contexts/chats";
 
 const TRACKING_ID = "G-T4PNJFPSXB";
 
@@ -58,11 +59,13 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <AccountProvider>
-    <GoogleOAuthProvider clientId="393331770643-ij113a8c5q541g80jorfk6578lac65b2.apps.googleusercontent.com">
-      <RouterProvider router={router} />
-    </GoogleOAuthProvider>
-  </AccountProvider>
+  <ChatProvider>
+    <AccountProvider>
+      <GoogleOAuthProvider clientId="393331770643-ij113a8c5q541g80jorfk6578lac65b2.apps.googleusercontent.com">
+        <RouterProvider router={router} />
+      </GoogleOAuthProvider>
+    </AccountProvider>
+  </ChatProvider>
 );
 
 ReactGA.initialize(TRACKING_ID);
