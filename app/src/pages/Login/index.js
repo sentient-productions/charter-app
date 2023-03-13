@@ -43,11 +43,16 @@ function App() {
       formData.append("inputVal", tokenResponse.code);
       formData.append("inputType", "auth-code");
       formData.append("provider", "https://accounts.google.com");
+      console.log("fetching user data...");
       const userRequest = await axios.request({
         url: charterBackendURI + "/login",
         method: "POST",
         data: formData,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
       });
+      console.log("success!");
 
       let userJSON = userRequest.data;
       console.log("userJSON.accessToken=", userJSON.accessToken);

@@ -142,6 +142,9 @@ export default function ChatApp() {
           method: "POST",
           headers: config,
           data: formData,
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
         });
         let responseJson = response.data;
         console.log("raw response = ", responseJson.content);
