@@ -17,6 +17,22 @@ import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { charterBackendURI } from "../../utils";
 
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+}
+
 function App() {
   const { credentials, setCredentials } = useContext(AccountContext);
   const navigate = useNavigate();
@@ -32,7 +48,11 @@ function App() {
         method: "POST",
         data: formData,
       });
+
       let userJSON = userRequest.data;
+      console.log("userJSON.accessToken=", userJSON.accessToken);
+      console.log("user data=", parseJwt(userJSON.accessToken));
+
       console.log("userJSON=", userJSON);
       setCredentials(userJSON);
       navigate("/chat");
@@ -45,9 +65,10 @@ function App() {
 
   useGoogleOneTapLogin({
     onSuccess: (credentialResponse) => {
-      setCredentials({
-        accessToken: credentialResponse.credential,
-      });
+      console.log("credentialResponse=", credentialResponse);
+      let credentials = parseJwt(credentialResponse.credential);
+      credentials["accessToken"] = credentialResponse.credential;
+      setCredentials(credentials);
       navigate("/chat");
     },
     onError: () => {

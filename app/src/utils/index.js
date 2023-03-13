@@ -1,4 +1,4 @@
-export const charterBackendURI = "https://www.rango.run/";
+export const charterBackendURI = "https://www.rango.run";
 
 export function getNewConversationId() {
   return Math.floor(Math.random() * 1_000_000_000_000_000);
