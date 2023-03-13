@@ -50,7 +50,7 @@ function EditableBox({
         </ButtonGroup>
       </Box>
     ) : (
-      <Box width={1} height={1} ml={5}>
+      <Box width={50} height={1} ml={5}>
         <ButtonGroup justifyContent="end" size="md">
           {chatIds.length > 1 && (
             <>
@@ -116,7 +116,7 @@ function EditableBox({
           <pre>
             <EditablePreview />
           </pre>
-          <Input width={"100%"} as={EditableInput} />
+          <Input as={EditableInput} />
           <Spacer />
           <EditableControls />
         </Flex>

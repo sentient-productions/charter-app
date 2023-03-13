@@ -23,7 +23,7 @@ const BotResponse = ({ response, scrollToBottom, preFilled }) => {
   let preGPTResponse = selectedResponse.split("<GPT>")[0];
 
   let gptResponse = "";
-  let inverseGptResponse = "";
+  let EvilGPTResponse = "";
 
   if (selectedResponse.includes("<GPT>")) {
     gptResponse +=
@@ -32,10 +32,10 @@ const BotResponse = ({ response, scrollToBottom, preFilled }) => {
       "\n\n";
   }
 
-  if (selectedResponse.includes("<InverseGPT>")) {
-    inverseGptResponse +=
-      "[InverseGPT 😈]: " +
-      selectedResponse.split("<InverseGPT>")[1].split("</InverseGPT>")[0];
+  if (selectedResponse.includes("<EvilGPT>")) {
+    EvilGPTResponse +=
+      "[EvilGPT 😈]: " +
+      selectedResponse.split("<EvilGPT>")[1].split("</EvilGPT>")[0];
   }
 
   return (
@@ -51,7 +51,7 @@ const BotResponse = ({ response, scrollToBottom, preFilled }) => {
               <Text color="green.300">{gptResponse}</Text>
             </pre>
             <pre>
-              <Text color="tomato">{inverseGptResponse}</Text>
+              <Text color="tomato">{EvilGPTResponse}</Text>
             </pre>
           </Box>
         </Box>

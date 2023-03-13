@@ -44,7 +44,7 @@ export default function ChatApp() {
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView(); //{ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView();
   };
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 

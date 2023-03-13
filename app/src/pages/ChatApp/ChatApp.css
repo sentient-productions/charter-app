@@ -270,15 +270,15 @@ nav svg {
   object-fit: contain;
   object-position: center;
 }
-.inputPromptWrapper {
-  /* padding: 20px; */
+.inputBar {
   left: 0;
   right: 0;
   bottom: 0;
   position: fixed;
+  /* padding: 20px; */
   /* padding-top: 3%; */
-  background-color: #2D3748;
   /* height: 10vh; */
+  background-color: #2D3748;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
 }
 .inputPrompttTextarea {
@@ -305,12 +305,20 @@ nav svg {
   margin-right: auto;
   width: 60vw;
 }
-
+/* wide-screen settings */
 @media screen and (min-width: 768px) {
-  .inputPromptWrapper {
+  .inputBar {
     left: 244px;
   }
 }
+/* mobile settings */
+@media (max-width: 768px) {
+  .chatBox {
+    height: 80vh;
+    position: static;
+  }
+}
+
 
 @media screen and (max-width: 1024px) {
   .App {
@@ -328,9 +336,6 @@ nav svg {
   }
   .sideMenu {
     display: none;
-  }
-  .chatBox {
-    position: static;
   }
   .chatPromptWrapper {
     padding: 12px;

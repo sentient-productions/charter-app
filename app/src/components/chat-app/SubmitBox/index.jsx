@@ -68,7 +68,7 @@ const SubmitBox = ({
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
   return (
-    <div className="inputPromptWrapper">
+    <div className="inputBar">
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -93,6 +93,7 @@ const SubmitBox = ({
                 value={inputPrompt}
                 onChange={(e) => setInputPrompt(e.target.value)}
                 disabled={system == ""}
+                pr={"100px"}
                 autoFocus
               />
               <InputRightElement
