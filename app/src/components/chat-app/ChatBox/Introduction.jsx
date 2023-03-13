@@ -18,11 +18,11 @@ export default function Introduction() {
             AI governed by the people
           </Text>
         </Heading>
-        <Text fontSize={{ base: "lg", sm: "lg", md: "lg" }} fontWeight="bold">
+        {/* <Text fontSize={{ base: "lg", sm: "lg", md: "lg" }} fontWeight="bold">
           {" "}
           Please stand-by while we work to increase our OpenAI usage quota.{" "}
-        </Text>
-        {/* <Text
+        </Text> */}
+        <Text
           pt={8}
           fontSize={{ base: "xl", sm: "xl", md: "2xl" }}
           textAlign={"center"}
@@ -35,7 +35,7 @@ export default function Introduction() {
           textAlign={"center"}
         >
           {`This chat agent is the community's first attempt at guiding the direction of this new disruptive technology. Select a system prompt to guide your chat with the AI and share your experiences on our Discord, Reddit, or Discourse.`}
-        </Text> */}
+        </Text>
       </Stack>
     </Box>
   );

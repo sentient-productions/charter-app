@@ -1,6 +1,15 @@
 import React from "react";
+import { Box } from "@chakra-ui/react";
 
-const NavLinks = ({ svg, link, text, chatLog, setChatLog, system }) => {
+const NavLinks = ({
+  svg,
+  link,
+  text,
+  chatLog,
+  setChatLog,
+  system,
+  textRight,
+}) => {
   const handleClick = (text) => {
     if (text === "Clear Conversations") setChatLog([]);
     if (text === "Copy Conversation") {
@@ -55,7 +64,9 @@ const NavLinks = ({ svg, link, text, chatLog, setChatLog, system }) => {
     >
       <div className="navPrompt">
         {svg}
-        <p>{text}</p>
+        <p>
+          <Box ml={textRight}>{text}</Box>
+        </p>
       </div>
     </a>
   );

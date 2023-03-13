@@ -65,6 +65,7 @@ const Sidebar = ({ chatLog, system }) => {
               width={"100%"}
               mt={3}
               variant="outline"
+              fontSize={"sm"}
               leftIcon={
                 <Avatar
                   name={credentials.name}
@@ -77,7 +78,7 @@ const Sidebar = ({ chatLog, system }) => {
                 />
               }
             >
-              {email.length > 12 ? email.slice(0, 12) + "..." : email}
+              {email.length > 15 ? email.slice(0, 15) + "..." : email}
             </MenuButton>
             <MenuList>
               <MenuItem
@@ -98,7 +99,7 @@ const Sidebar = ({ chatLog, system }) => {
             )}
         </div>
       </Box>
-      <Box ml={5}>
+      <Box ml={4}>
         <NavLinks
           svg={
             <svg
@@ -129,6 +130,7 @@ const Sidebar = ({ chatLog, system }) => {
           svg={<FaDiscourse />}
           text="Charter Discorse"
           link="https://gov.charterai.org"
+          textRight={1}
         />
       </Box>
       <Box ml={5}>
@@ -137,6 +139,7 @@ const Sidebar = ({ chatLog, system }) => {
           text="Copy Conversation"
           chatLog={chatLog}
           system={system}
+          textRight={1}
         />
       </Box>
     </Box>
