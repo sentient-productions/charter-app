@@ -16,7 +16,7 @@ import { AccountContext } from "../../../contexts/account";
 
 const Sidebar = ({ chatLog, system }) => {
   const { credentials, setCredentials } = useContext(AccountContext);
-  let email = credentials?.email.length > 10 ? credentials?.email : ""; //"ocolegrove@gmail.com";
+  let email = credentials?.email?.length > 10 ? credentials?.email : ""; //"ocolegrove@gmail.com";
   console.log("credentials = ", credentials);
   return (
     <Box className="sideBar">
