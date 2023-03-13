@@ -316,7 +316,22 @@ nav svg {
   .chatBox {
     height: 80vh;
     position: static;
+    padding-top: 5vh;
   }
+  .navBar {
+    /* left: 0; */
+    /* right: 0; */
+    bottom: 1;
+    position: fixed;
+    align-items: flex-start;
+    justify-content: left !important;
+    /* padding: 20px; */
+    /* padding-top: 3%; */
+    /* height: 10vh; */
+    background-color: #2D3748;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+  }
+
 }
 
 

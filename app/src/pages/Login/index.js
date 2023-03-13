@@ -78,6 +78,11 @@ function App() {
     },
   });
 
+  React.useEffect(() => {
+    if (credentials.accessToken) {
+      navigate("/chat");
+    }
+  });
   return (
     <Flex
       minH={"100vh"}

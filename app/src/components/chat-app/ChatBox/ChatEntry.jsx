@@ -97,13 +97,13 @@ const ChatEntry = ({
     <div ref={componentRef}>
       {" "}
       {chat.role == "user" ? (
-        <Container maxWidth={"900px"} pl={2.5} pt={4} pb={6}>
+        <Container maxWidth={"900px"} pl={2.5} pt={4} pb={2}>
           <HStack width={"100%"} alignItems="flex-start">
             <Box>
               <Avatar
                 name={credentials.name}
                 src={credentials.picture}
-                size={"md"}
+                size={"sm"}
               />
             </Box>
             <Box pl={2} flexGrow={1} textAlign={"left"}>
@@ -127,13 +127,13 @@ const ChatEntry = ({
       ) : (
         <div className="botMessageMainContainer" key={idx}>
           {/* <div className="botMessageWrapper"> */}
-          <Container maxWidth={"900px"} pl={2.5} pt={4} pb={6}>
+          <Container maxWidth={"900px"} pl={2.5} pt={4} pb={2}>
             <HStack width={"100%"} alignItems="flex-start">
               <Box>
                 <Avatar
                   name={credentials.name}
                   src={"/favicon.png"}
-                  size={"md"}
+                  size={"sm"}
                 />
               </Box>
               <Box pl={2} flexGrow={1} textAlign={"left"}>

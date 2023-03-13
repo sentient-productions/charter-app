@@ -9,6 +9,8 @@ import ChatBox from "../../components/chat-app/ChatBox";
 import Menu from "../../components/chat-app/Menu";
 import Sidebar from "../../components/chat-app/Sidebar";
 import SubmitBox from "../../components/chat-app/SubmitBox";
+import Navbar from "../../components/chat-app/ChatBox/Navbar";
+
 import { chatPayloads } from "../../misc/PromptUtils";
 import { getNewConversationId } from "../../utils";
 import {
@@ -165,6 +167,7 @@ export default function ChatApp() {
           setShowMenu={setShowMenu}
         />
       )}
+      {isMobile && <Navbar />}
       {!isMobile && (
         <Sidebar chatLog={chatLogVec[selectedChatId]} system={system} />
       )}

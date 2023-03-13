@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Container,
   ButtonGroup,
   IconButton,
   Editable,
@@ -10,6 +11,7 @@ import {
   Box,
   Flex,
   Spacer,
+  HStack,
 } from "@chakra-ui/react";
 import {
   FaCheck as CheckIcon,
@@ -43,40 +45,36 @@ function EditableBox({
     } = useEditableControls();
 
     return isEditing ? (
-      <Box width={1} height={1} ml={5}>
-        <ButtonGroup justifyContent="end" size="md">
-          <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
-          <IconButton icon={<CloseIcon />} {...getCancelButtonProps()} />
-        </ButtonGroup>
-      </Box>
+      <ButtonGroup size="md">
+        <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
+        <IconButton icon={<CloseIcon />} {...getCancelButtonProps()} />
+      </ButtonGroup>
     ) : (
-      <Box width={50} height={1} ml={5}>
-        <ButtonGroup justifyContent="end" size="md">
-          {chatIds.length > 1 && (
-            <>
-              <IconButton
-                isDisabled={localChatIdx == 0}
-                size="md"
-                icon={<ArrowLeftIcon />}
-                onClick={() => {
-                  setLocalChatIdx(localChatIdx - 1);
-                  setSelectedChatId(chatIds[localChatIdx - 1]);
-                }}
-              />
-              <IconButton
-                isDisabled={localChatIdx == chatIds.length - 1}
-                size="md"
-                icon={<ArrowRightIcon />}
-                onClick={() => {
-                  setLocalChatIdx(localChatIdx + 1);
-                  setSelectedChatId(chatIds[localChatIdx + 1]);
-                }}
-              />
-            </>
-          )}
-          <IconButton size="md" icon={<EditIcon />} {...getEditButtonProps()} />
-        </ButtonGroup>
-      </Box>
+      <ButtonGroup size="md">
+        {chatIds.length > 1 && (
+          <>
+            <IconButton
+              isDisabled={localChatIdx == 0}
+              size="md"
+              icon={<ArrowLeftIcon />}
+              onClick={() => {
+                setLocalChatIdx(localChatIdx - 1);
+                setSelectedChatId(chatIds[localChatIdx - 1]);
+              }}
+            />
+            <IconButton
+              isDisabled={localChatIdx == chatIds.length - 1}
+              size="md"
+              icon={<ArrowRightIcon />}
+              onClick={() => {
+                setLocalChatIdx(localChatIdx + 1);
+                setSelectedChatId(chatIds[localChatIdx + 1]);
+              }}
+            />
+          </>
+        )}
+        <IconButton size="md" icon={<EditIcon />} {...getEditButtonProps()} />
+      </ButtonGroup>
     );
   }
 
@@ -116,9 +114,10 @@ function EditableBox({
           <pre>
             <EditablePreview />
           </pre>
-          <Input as={EditableInput} />
+          {/* <Input as={EditableInput} /> */}
+          <EditableInput />
           <Spacer />
-          <EditableControls />
+          <EditableControls sx={{ "align-items": "start" }} />
         </Flex>
       </Editable>
     </div>
