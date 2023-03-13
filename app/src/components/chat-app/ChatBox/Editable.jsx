@@ -1,4 +1,5 @@
 import {
+  Avatar,
   ButtonGroup,
   IconButton,
   Editable,
@@ -10,7 +11,6 @@ import {
   Flex,
   Spacer,
 } from "@chakra-ui/react";
-import Avatar from "./Avatar";
 import {
   FaCheck as CheckIcon,
   FaEdit as EditIcon,

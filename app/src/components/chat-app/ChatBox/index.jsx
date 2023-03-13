@@ -1,7 +1,7 @@
 import Introduction from "./Introduction";
 import { chatPayloads } from "../../../misc/PromptUtils";
 // Foreign
-import { Box, Select, FormControl, FormLabel } from "@chakra-ui/react";
+import { Avatar, Box, Select, FormControl, FormLabel } from "@chakra-ui/react";
 import ChatEntry from "./ChatEntry";
 import { useEffect, useRef, useState } from "react";
 

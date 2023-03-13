@@ -71,10 +71,6 @@ const Sidebar = ({ chatLog, system }) => {
                   name={credentials.name}
                   src={credentials.picture}
                   size={"sm"}
-                  // src="https://bit.ly/dan-abramov"
-                  // height={"30px"}
-                  // alignContent="left"
-                  // ml={"-65px"}
                 />
               }
             >

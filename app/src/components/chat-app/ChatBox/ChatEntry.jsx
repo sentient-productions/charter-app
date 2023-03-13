@@ -1,11 +1,18 @@
-import Avatar from "./Avatar";
 import BotResponse from "./BotResponse";
 import CodeSnippet from "./CodeSnippet";
 import Editable from "./Editable";
 import Error from "./Error";
 import Loading from "./Loading";
-import { Box, ButtonGroup, Container, IconButton } from "@chakra-ui/react";
-import { useRef } from "react";
+import { AccountContext } from "../../../contexts/account";
+import {
+  Avatar,
+  Box,
+  ButtonGroup,
+  Container,
+  HStack,
+  IconButton,
+} from "@chakra-ui/react";
+import { useContext, useRef } from "react";
 import html2canvas from "html2canvas";
 import { FaShareAltSquare } from "react-icons/fa";
 // import { RWebShare } from "react-web-share";
@@ -70,6 +77,7 @@ const ChatEntry = ({
   setSelectedChatId,
 }) => {
   const componentRef = useRef(null);
+  const { credentials, setCredentials } = useContext(AccountContext);
 
   const captureComponent = () => {
     console.log("converting image now...");
@@ -89,43 +97,47 @@ const ChatEntry = ({
     <div ref={componentRef}>
       {" "}
       {chat.role == "user" ? (
-        <Container maxWidth={"900px"} pl={5} pt={4} pb={6}>
-          <Box height={0} width={0}>
-            <svg
-              stroke="currentColor"
-              fill="none"
-              strokeWidth={1.9}
-              viewBox="0 0 24 24"
-              className="h-6 w-6"
-              height={40}
-              width={40}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx={12} cy={7} r={4} />
-            </svg>
-          </Box>
-          <Box pl={16}>
-            <div id="botMessage">
-              <div id="chatPrompt">
-                <Editable
-                  system={system}
-                  chatLog={chatLog}
-                  chatLogVec={chatLogVec}
-                  selectedChatId={selectedChatId}
-                  setChatLogVec={setChatLogVec}
-                  setSelectedChatId={setSelectedChatId}
-                  defaultVal={chat.content}
-                  idx={idx}
-                />
+        <Container maxWidth={"900px"} pl={2.5} pt={4} pb={6}>
+          <HStack width={"100%"} alignItems="flex-start">
+            <Box>
+              <Avatar
+                name={credentials.name}
+                src={credentials.picture}
+                size={"md"}
+              />
+            </Box>
+            <Box pl={2} flexGrow={1} textAlign={"left"}>
+              <div id="botMessage">
+                <div id="chatPrompt">
+                  <Editable
+                    system={system}
+                    chatLog={chatLog}
+                    chatLogVec={chatLogVec}
+                    selectedChatId={selectedChatId}
+                    setChatLogVec={setChatLogVec}
+                    setSelectedChatId={setSelectedChatId}
+                    defaultVal={chat.content}
+                    idx={idx}
+                  />
+                </div>
               </div>
-            </div>
-          </Box>
+            </Box>
+          </HStack>
         </Container>
       ) : (
         <div className="botMessageMainContainer" key={idx}>
-          <div className="botMessageWrapper">
-            <Avatar bg="none" className="openaiSVG">
+          {/* <div className="botMessageWrapper"> */}
+          <Container maxWidth={"900px"} pl={2.5} pt={4} pb={6}>
+            <HStack width={"100%"} alignItems="flex-start">
+              <Box>
+                <Avatar
+                  name={credentials.name}
+                  src={"/favicon.png"}
+                  size={"md"}
+                />
+              </Box>
+              <Box pl={2} flexGrow={1} textAlign={"left"}>
+                {/* <Avatar bg="none" className="openaiSVG">
               <svg
                 width={100}
                 height={100}
@@ -148,44 +160,47 @@ const ChatEntry = ({
                   </g>
                 </g>
               </svg>
-            </Avatar>
-            {chat.content ? (
-              <div id="botMessage">
-                {diagnostic == "" ? null : <CodeSnippet text={diagnostic} />}
-                {chat.preFilled ? (
-                  <pre id="chatPrompt">
-                    {idx == 0 ? (
-                      <Editable
-                        system={system}
-                        chatLog={chatLog}
-                        chatLogVec={chatLogVec}
-                        selectedChatId={selectedChatId}
-                        setChatLogVec={setChatLogVec}
-                        setSelectedChatId={setSelectedChatId}
-                        defaultVal={chat.content}
-                        idx={idx}
-                      />
+            </Avatar> */}
+
+                {chat.content ? (
+                  <div id="botMessage">
+                    {diagnostic == "" ? null : (
+                      <CodeSnippet text={diagnostic} />
+                    )}
+                    {chat.preFilled ? (
+                      <pre id="chatPrompt">
+                        {idx == 0 ? (
+                          <Editable
+                            system={system}
+                            chatLog={chatLog}
+                            chatLogVec={chatLogVec}
+                            selectedChatId={selectedChatId}
+                            setChatLogVec={setChatLogVec}
+                            setSelectedChatId={setSelectedChatId}
+                            defaultVal={chat.content}
+                            idx={idx}
+                          />
+                        ) : (
+                          <BotResponse
+                            response={content}
+                            scrollToBottom={scrollToBottom}
+                            preFilled={chat.preFilled}
+                          />
+                        )}
+                      </pre>
                     ) : (
                       <BotResponse
                         response={content}
                         scrollToBottom={scrollToBottom}
-                        preFilled={chat.preFilled}
                       />
                     )}
-                  </pre>
+                  </div>
+                ) : err ? (
+                  <Error err={err} />
                 ) : (
-                  <BotResponse
-                    response={content}
-                    scrollToBottom={scrollToBottom}
-                  />
+                  <Loading />
                 )}
-              </div>
-            ) : err ? (
-              <Error err={err} />
-            ) : (
-              <Loading />
-            )}
-            {/* <Box
+                {/* <Box
               width={0}
               height={50}
               alignContent="right"
@@ -231,8 +246,11 @@ const ChatEntry = ({
                 }
               />
             </Box> */}
-            {/* <button onClick={captureComponent}>Share</button> */}
-          </div>
+                {/* <button onClick={captureComponent}>Share</button> */}
+                {/* </div> */}
+              </Box>
+            </HStack>
+          </Container>
         </div>
       )}
     </div>
