@@ -41,6 +41,7 @@ export default function ChatApp() {
   let initChatLog = {};
   console.log("system=", system);
   initChatLog[initConvId.toString()] = chatPayloads[system]["data"];
+  console.log("initChatLog = ", initChatLog);
   const [chatLogVec, setChatLogVec] = useState(initChatLog);
   const [selectedChatId, setSelectedChatId] = useState(initConvId);
 
@@ -69,26 +70,28 @@ export default function ChatApp() {
   }, [setChatLogVec]);
 
   useEffect(() => {
-    if (chatLogVec.length == 0) {
-      let chatLogVecCopy = Object.assign({}, chatLogVec);
-      chatLogVecCopy[selectedChatId] = chatPayloads[system]["data"];
-      setChatLogVec(chatLogVecCopy);
-      if (system === "DOC-w-Dual") {
-        setModeToggles({ dual: true, diagnostic: true });
-      } else if (system === "DOC") {
-        setModeToggles({ dual: false, diagnostic: true });
-      } else {
-        setModeToggles({ dual: false, diagnostic: false });
-      }
+    let chatLogVecCopy = Object.assign({}, chatLogVec);
+    chatLogVecCopy[selectedChatId] = chatPayloads[system]["data"];
+    setChatLogVec(chatLogVecCopy);
+    if (system === "DOC-w-Dual") {
+      setModeToggles({ dual: true, diagnostic: true });
+    } else if (system === "DOC") {
+      setModeToggles({ dual: false, diagnostic: true });
+    } else {
+      setModeToggles({ dual: false, diagnostic: false });
     }
   }, [system]);
 
   useEffect(() => {
+    console.log("we are in the submission use effect");
+    console.log("selectedChatId=", selectedChatId);
+    console.log("chatLogVec=", chatLogVec);
     if (
       chatLogVec?.selectedChatId?.length > 0 &&
       chatLogVec?.selectedChatId[chatLogVec[selectedChatId]?.length - 1]
         ?.role === "user"
     ) {
+      console.log("we are handling a chat log submit.");
       handleSubmit(null, chatLogVec[selectedChatId]).then((responseJson) => {
         if (responseJson) {
           let newChatLogVec = { ...chatLogVec };
@@ -106,6 +109,7 @@ export default function ChatApp() {
   const handleSubmit = async (e, newChatLog) => {
     // e.preventDefault();
     async function callAPI() {
+      console.log("we are trying to call the api");
       try {
         let cleanChatLog = newChatLog
           .map(({ preFilled, ...keepAttrs }) => keepAttrs)
