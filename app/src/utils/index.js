@@ -1,4 +1,4 @@
-export const charterBackendURI = "http://127.0.0.1:5000"; //"https://www.rango.run/";
+export const charterBackendURI = "https://www.rango.run/";
 
 export function getNewConversationId() {
   return Math.floor(Math.random() * 1_000_000_000_000_000);
