@@ -41,7 +41,7 @@ export default function ChatApp() {
     if (chatState.initialized == false && chatState.system != BLANK_SYSTEM) {
       let chatStateCopy = Object.assign({}, chatState);
       chatStateCopy.chatLogVec[chatId] = initChatData[system].initChatLog;
-      setChatState({ ...chatStateCopy, initialized: true });
+      setChatState({ ...chatStateCopy });
       if (system === "DOC-w-Dual") {
         setModeToggles({ dual: true, diagnostic: true });
       } else if (system === "DOC") {
@@ -56,7 +56,6 @@ export default function ChatApp() {
     let chatsCopy = Object.assign({}, chatHistory);
     let chatStateCopy = Object.assign({}, chatState);
     if (!chatHistory[`${primaryChatId}`]) {
-      let chatsContainer = {};
       chatsCopy[`${primaryChatId}`] = chatStateCopy;
       chatsCopy[`${primaryChatId}`]["chatNumber"] =
         Object.keys(chatHistory).length;

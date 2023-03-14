@@ -96,6 +96,7 @@ const SubmitBox = ({
             {!isMobile && (
               <ButtonGroup p={3}>
                 <Button
+                  isDisabled={isLoading}
                   colorScheme={modeToggles.diagnostic ? "blue" : null}
                   onClick={() => {
                     setModeToggles({

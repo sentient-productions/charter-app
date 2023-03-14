@@ -95,6 +95,7 @@ export const handleSubmit = async (
         ...chatState,
         chatLogVec: newChatLogVec,
         isLoading: true,
+        initialized: true,
       });
 
       let cleanChatLog = newChatLog
