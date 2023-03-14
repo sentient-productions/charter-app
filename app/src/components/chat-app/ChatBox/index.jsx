@@ -11,9 +11,9 @@ const ChatBox = ({
   setChatState,
   scrollToBottom,
 }) => {
-  const { system, chatLogVec, chatId } = chatState;
+  const { system, chatLogVec, chatId, primaryChatId } = chatState;
   const chatLog = chatLogVec[chatId] || [];
-
+  console.log("chatState = ", chatState);
   return (
     <>
       <section className="chatBox">
@@ -24,7 +24,7 @@ const ChatBox = ({
           </Box>
         ) : null}
         <Box className="selectBox" mt={1} mb={5}>
-          <FormControl>
+          <FormControl key={primaryChatId}>
             <FormLabel as="legend" fontSize="2xl" fontWeight={"bold"}>
               Selected Conversation Starter
             </FormLabel>

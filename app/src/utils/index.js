@@ -52,6 +52,7 @@ export function getDefaultChatState() {
     err: "",
     initialized: false,
     chatBranchPoints: {},
+    isLoading: false,
   };
 }
 
@@ -90,7 +91,11 @@ export const handleSubmit = async (
 
       let newChatLogVec = Object.assign({}, chatLogVec);
       newChatLogVec[chatId] = newChatLog;
-      setChatState({ ...chatState, chatLogVec: newChatLogVec });
+      setChatState({
+        ...chatState,
+        chatLogVec: newChatLogVec,
+        isLoading: true,
+      });
 
       let cleanChatLog = newChatLog
         .map(({ preFilled, ...keepAttrs }) => keepAttrs)
@@ -146,11 +151,16 @@ export const handleSubmit = async (
       responseJson["preFilled"] = false;
       newChatLog[newChatLog.length - 1] = responseJson;
       newChatLogVec[chatId] = newChatLog;
-      setChatState({ ...chatState, chatLogVec: newChatLogVec, err: "" });
+      setChatState({
+        ...chatState,
+        chatLogVec: newChatLogVec,
+        err: "",
+        isLoading: false,
+      });
       // console.log("at end of callAPI, newChatLog = ", newChatLog);
       // setChatState({ ...chatState, err: false });
     } catch (err) {
-      setChatState({ ...chatState, err: err });
+      setChatState({ ...chatState, err: err, isLoading: false });
     }
   }
   return await callAPI();

@@ -22,7 +22,8 @@ import { FaPlusCircle, FaArrowRight, FaTrashAlt } from "react-icons/fa";
 const Sidebar = ({ chatState, setChatState }) => {
   const { credentials, setCredentials } = useContext(AccountContext);
   const { chatHistory, setChatHistory } = useContext(ChatsContext);
-  const { chatId, primaryChatId } = chatState;
+  const { chatId, primaryChatId, isLoading } = chatState;
+  console.log("in sidebart, isLoading = ", isLoading);
   let email = credentials?.email?.length > 10 ? credentials?.email : "";
 
   return (
@@ -69,6 +70,7 @@ const Sidebar = ({ chatState, setChatState }) => {
             onClick={() => {
               setChatState(getDefaultChatState());
             }}
+            isDisabled={isLoading}
           >
             <NavLinks svg={<FaPlusCircle />} text="New Chat" />
           </Button>
@@ -87,10 +89,12 @@ const Sidebar = ({ chatState, setChatState }) => {
                   onClick={() => {
                     setChatState(chatHistory[convId]);
                   }}
+                  isDisabled={isLoading}
                 >
                   <NavLinks
                     svg={<FaArrowRight />}
                     text={"Conversation " + it}
+                    disabled={isLoading}
                   />
                 </Button>
               );
@@ -104,6 +108,7 @@ const Sidebar = ({ chatState, setChatState }) => {
               setChatState(getDefaultChatState());
             }}
             variant="text"
+            isDisabled={isLoading}
           >
             <NavLinks svg={<FaTrashAlt />} text="Clear Chat" />
           </Button>
