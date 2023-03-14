@@ -1,6 +1,7 @@
 import {
   Avatar,
   Container,
+  Box,
   ButtonGroup,
   IconButton,
   Editable,
@@ -8,7 +9,6 @@ import {
   Input,
   EditableInput,
   useEditableControls,
-  Box,
   Flex,
   Spacer,
   HStack,
@@ -46,7 +46,7 @@ function EditableBox({ defaultVal, chatState, setChatState, idx }) {
     } = useEditableControls();
 
     return isEditing ? (
-      <ButtonGroup size="md">
+      <ButtonGroup size="md" ml={2}>
         <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
         <IconButton icon={<CloseIcon />} {...getCancelButtonProps()} />
       </ButtonGroup>
@@ -55,7 +55,7 @@ function EditableBox({ defaultVal, chatState, setChatState, idx }) {
         {chatIds?.length > 1 && (
           <>
             <IconButton
-              isDisabled={localChatIdx == 0}
+              isDisabled={localChatIdx == 0 || isLoading}
               size="md"
               icon={<ArrowLeftIcon />}
               onClick={() => {
@@ -67,7 +67,7 @@ function EditableBox({ defaultVal, chatState, setChatState, idx }) {
               }}
             />
             <IconButton
-              isDisabled={localChatIdx == chatIds?.length - 1}
+              isDisabled={localChatIdx == chatIds?.length - 1 || isLoading}
               size="md"
               icon={<ArrowRightIcon />}
               onClick={() => {

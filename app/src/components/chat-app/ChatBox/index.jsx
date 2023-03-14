@@ -11,7 +11,7 @@ const ChatBox = ({
   setChatState,
   scrollToBottom,
 }) => {
-  const { system, chatLogVec, chatId, primaryChatId } = chatState;
+  const { system, chatLogVec, chatId, primaryChatId, initialized } = chatState;
   const chatLog = chatLogVec[chatId] || [];
   console.log("chatState = ", chatState);
   return (
@@ -34,6 +34,7 @@ const ChatBox = ({
               onChange={(x) => {
                 setChatState({ ...chatState, system: x.target.value });
               }}
+              isDisabled={initialized}
             >
               <option value="">Select a prompt to continue</option>
               {Object.keys(initChatData).map((key) => {
@@ -65,10 +66,7 @@ const ChatBox = ({
                     .split("</internal>")[0];
                 }
 
-                if (
-                  chat.content.includes("<result>") &&
-                  chat.content.includes("</result>")
-                ) {
+                if (chat.content.includes("<result>")) {
                   content = chat.content
                     .split("<result>")[1]
                     .replace("<result>\n", "")

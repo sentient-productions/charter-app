@@ -18,6 +18,8 @@ import { charterBackendURI, BLANK_SYSTEM, timeout } from "../../utils";
 export default function ChatApp() {
   const { credentials } = useContext(AccountContext);
   const { chatHistory, setChatHistory } = useContext(ChatsContext);
+  const chatHistoryUser = chatHistory[credentials.email] || {};
+
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
   const messagesEndRef = useRef(null);
 
@@ -27,11 +29,6 @@ export default function ChatApp() {
   const [chatState, setChatState] = useState(getDefaultChatState());
   const { system, chatLogVec, chatId, primaryChatId, err } = chatState;
   const chatLog = chatLogVec[chatId] || [];
-  console.log("chatHistory = ", chatHistory);
-  console.log("chatState = ", chatState);
-
-  // console.log("chatLogVec = ", chatLogVec);
-  // console.log("chatLog = ", chatLog);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView();
@@ -41,7 +38,7 @@ export default function ChatApp() {
     if (chatState.initialized == false && chatState.system != BLANK_SYSTEM) {
       let chatStateCopy = Object.assign({}, chatState);
       chatStateCopy.chatLogVec[chatId] = initChatData[system].initChatLog;
-      setChatState({ ...chatStateCopy, initialized: true });
+      setChatState({ ...chatStateCopy });
       if (system === "DOC-w-Dual") {
         setModeToggles({ dual: true, diagnostic: true });
       } else if (system === "DOC") {
@@ -53,36 +50,40 @@ export default function ChatApp() {
   }, [system]);
 
   useEffect(() => {
-    let chatsCopy = Object.assign({}, chatHistory);
+    let userChatsCopy = Object.assign({}, chatHistoryUser);
+    console.log("userChatsCopy = ", userChatsCopy);
     let chatStateCopy = Object.assign({}, chatState);
     if (!chatHistory[`${primaryChatId}`]) {
-      let chatsContainer = {};
-      chatsCopy[`${primaryChatId}`] = chatStateCopy;
-      chatsCopy[`${primaryChatId}`]["chatNumber"] =
+      userChatsCopy[`${primaryChatId}`] = chatStateCopy;
+      userChatsCopy[`${primaryChatId}`]["chatNumber"] =
         Object.keys(chatHistory).length;
     } else {
       if (chatId == primaryChatId) {
-        chatsCopy[`${primaryChatId}`].system = chatStateCopy.system;
-        chatsCopy[`${primaryChatId}`].initialized = chatStateCopy.initialized;
+        userChatsCopy[`${primaryChatId}`].system = chatStateCopy.system;
+        userChatsCopy[`${primaryChatId}`].initialized =
+          chatStateCopy.initialized;
       }
-      chatsCopy[`${primaryChatId}`].chatLogVec = chatStateCopy.chatLogVec;
-      chatsCopy[`${primaryChatId}`].chatBranchPoints =
+      userChatsCopy[`${primaryChatId}`].chatLogVec = chatStateCopy.chatLogVec;
+      userChatsCopy[`${primaryChatId}`].chatBranchPoints =
         chatStateCopy.chatBranchPoints;
     }
     console.log(
-      "chatsCopy[`${primaryChatId}`].chatLogVec = ",
-      chatsCopy[`${primaryChatId}`].chatLogVec
+      "userChatsCopy[`${primaryChatId}`].chatLogVec = ",
+      userChatsCopy[`${primaryChatId}`].chatLogVec
     );
     // turn off pre-fill so we don't get an annoying load out
-    if (chatsCopy[`${primaryChatId}`].chatLogVec[chatId]) {
-      chatsCopy[`${primaryChatId}`].chatLogVec[chatId] = chatsCopy[
+    if (userChatsCopy[`${primaryChatId}`].chatLogVec[chatId]) {
+      userChatsCopy[`${primaryChatId}`].chatLogVec[chatId] = userChatsCopy[
         `${primaryChatId}`
       ].chatLogVec[chatId].map((message) => {
         return { ...message, preFilled: true };
       });
     }
 
-    setChatHistory(chatsCopy);
+    console.log("setting chat history = ", userChatsCopy);
+    let chatHistoryCopy = Object.assign({}, chatHistory);
+    chatHistoryCopy[credentials.email] = userChatsCopy;
+    setChatHistory({ ...chatHistoryCopy });
     if (chatLog.length > 0 && chatLog[chatLog.length - 1].role === "user") {
       handleSubmit(credentials, chatState, setChatState, modeToggles, "").then(
         () => {

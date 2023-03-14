@@ -22,6 +22,8 @@ import { FaPlusCircle, FaArrowRight, FaTrashAlt } from "react-icons/fa";
 const Sidebar = ({ chatState, setChatState }) => {
   const { credentials, setCredentials } = useContext(AccountContext);
   const { chatHistory, setChatHistory } = useContext(ChatsContext);
+  const chatHistoryUser = chatHistory[credentials.email] || {};
+
   const { chatId, primaryChatId, isLoading } = chatState;
   console.log("in sidebart, isLoading = ", isLoading);
   let email = credentials?.email?.length > 10 ? credentials?.email : "";
@@ -74,9 +76,11 @@ const Sidebar = ({ chatState, setChatState }) => {
           >
             <NavLinks svg={<FaPlusCircle />} text="New Chat" />
           </Button>
-          {Object.keys(chatHistory)
+          {Object.keys(chatHistoryUser)
             .sort(function (a, b) {
-              return chatHistory[a].chatNumber - chatHistory[b].chatNumber;
+              return (
+                chatHistoryUser[a].chatNumber - chatHistoryUser[b].chatNumber
+              );
             })
             .filter((ele) => {
               return !ele.includes("system");
@@ -87,7 +91,7 @@ const Sidebar = ({ chatState, setChatState }) => {
                   variant={primaryChatId == convId ? null : "text"}
                   width={"90%"}
                   onClick={() => {
-                    setChatState(chatHistory[convId]);
+                    setChatState(chatHistoryUser[convId]);
                   }}
                   isDisabled={isLoading}
                 >
@@ -104,7 +108,7 @@ const Sidebar = ({ chatState, setChatState }) => {
             ml={-2}
             width={"100%"}
             onClick={() => {
-              setChatHistory({});
+              setChatHistory({ ...chatHistory, [credentials.email]: {} });
               setChatState(getDefaultChatState());
             }}
             variant="text"
