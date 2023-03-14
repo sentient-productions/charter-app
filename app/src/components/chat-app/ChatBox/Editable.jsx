@@ -25,7 +25,7 @@ import { useEffect, useState } from "react";
 
 function EditableBox({ defaultVal, chatState, setChatState, idx }) {
   const [localChatIdx, setLocalChatIdx] = useState(0);
-  const { system, chatLogVec, chatId, chatBranchPoints } = chatState;
+  const { system, chatLogVec, chatId, chatBranchPoints, isLoading } = chatState;
   let chatIdsTemp = [chatId];
 
   Object.keys(chatBranchPoints).forEach((key) => {
@@ -51,7 +51,7 @@ function EditableBox({ defaultVal, chatState, setChatState, idx }) {
         <IconButton icon={<CloseIcon />} {...getCancelButtonProps()} />
       </ButtonGroup>
     ) : (
-      <ButtonGroup size="md">
+      <ButtonGroup size="md" isDisabled={isLoading}>
         {chatIds?.length > 1 && (
           <>
             <IconButton

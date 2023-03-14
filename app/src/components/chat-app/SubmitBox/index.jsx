@@ -24,7 +24,7 @@ const SubmitBox = ({
   setModeToggles,
 }) => {
   const { credentials } = useContext(AccountContext);
-  const { system, chatLogVec, chatId } = chatState;
+  const { system, isLoading } = chatState;
   // const chatLog = chatLogVec[chatId] || [];
 
   const submitMessage = async () => {
@@ -72,7 +72,7 @@ const SubmitBox = ({
                 backgroundColor="#212121"
                 value={inputPrompt}
                 onChange={(e) => setInputPrompt(e.target.value)}
-                disabled={system == ""}
+                disabled={isLoading}
                 pr={"100px"}
                 autoFocus
               />
