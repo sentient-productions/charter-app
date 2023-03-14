@@ -20,21 +20,14 @@ import {
   // FaArrowRight as ArrowRightIcon,
 } from "react-icons/fa";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import { getNewConversationId } from "../../../utils";
+import { getNewChatId } from "../../../utils";
 import { useEffect, useState } from "react";
 
-function EditableBox({
-  defaultVal,
-  chatLog,
-  chatLogVec,
-  setChatLogVec,
-  selectedChatId,
-  setSelectedChatId,
-  system,
-  idx,
-}) {
+function EditableBox({ defaultVal, chatState, setChatState, idx }) {
   const [localChatIdx, setLocalChatIdx] = useState(0);
-  const [chatIds, setChatIds] = useState([selectedChatId]);
+  const { system, chatLogVec, chatId } = chatState;
+  const [chatIds, setChatIds] = useState([chatId]);
+  const chatLog = chatLogVec[chatId] || [];
 
   function EditableControls() {
     const {
@@ -59,7 +52,10 @@ function EditableBox({
               icon={<ArrowLeftIcon />}
               onClick={() => {
                 setLocalChatIdx(localChatIdx - 1);
-                setSelectedChatId(chatIds[localChatIdx - 1]);
+                setChatState({
+                  ...chatState,
+                  chatId: chatIds[localChatIdx - 1],
+                });
               }}
             />
             <IconButton
@@ -68,7 +64,10 @@ function EditableBox({
               icon={<ArrowRightIcon />}
               onClick={() => {
                 setLocalChatIdx(localChatIdx + 1);
-                setSelectedChatId(chatIds[localChatIdx + 1]);
+                setChatState({
+                  ...chatState,
+                  chatId: chatIds[localChatIdx + 1],
+                });
               }}
             />
           </>
@@ -79,34 +78,37 @@ function EditableBox({
   }
 
   const [newDefaultVal, setNewDefaultVal] = useState(defaultVal);
+
   useEffect(() => {
-    setNewDefaultVal(chatLogVec[selectedChatId][idx].content);
-  }, [chatLogVec, selectedChatId, system]);
+    setNewDefaultVal(chatLog[idx].content);
+  }, [chatState]);
 
   return (
-    <div key={`${system}-${selectedChatId}-${newDefaultVal.slice(0, 20)}`}>
+    <div key={`${system}-${chatId}-${newDefaultVal.slice(0, 20)}`}>
       <Editable
-        // key={`${system}-${selectedChatId}-2`}
         textAlign="left"
         defaultValue={newDefaultVal}
         fontSize="l"
         isPreviewFocusable={false}
         onSubmit={(value) => {
-          const conversationId = getNewConversationId();
-          // let newChatLog = Object.assign({}, chatLog.slice(0, idx + 1));
+          /// wtf, fix this shit
+          console.log("in edit, before anything = ", chatLogVec);
+          const newChatId = getNewChatId();
           let newChatLog = JSON.parse(
             JSON.stringify(chatLog.slice(0, idx + 1))
           );
-          newChatLog[idx].content = value;
-
-          let newChatLogVec = JSON.parse(JSON.stringify(chatLogVec));
-          newChatLogVec[conversationId] = newChatLog;
-
-          let newChatIds = [...chatIds];
-          newChatIds.push(conversationId);
-          setChatLogVec(newChatLogVec);
-          setSelectedChatId(conversationId);
-          setChatIds(newChatIds);
+          newChatLog[newChatLog.length - 1].content = value;
+          console.log("in edit, before assign newChatLog = ", newChatLog);
+          let newChatLogVec = Object.assign({}, chatLogVec);
+          console.log("in edit, after assign chatLogVec = ", chatLogVec);
+          newChatLogVec[newChatId] = newChatLog;
+          console.log("in edit, after assign newChatLogVec = ", newChatLogVec);
+          setChatState({
+            ...chatState,
+            chatLogVec: newChatLogVec,
+            chatId: newChatId,
+          });
+          setChatIds([...chatIds, newChatId]);
           setLocalChatIdx(chatIds?.length);
         }}
       >

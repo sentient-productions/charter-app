@@ -8,59 +8,39 @@ import {
   Button,
   ButtonGroup,
 } from "@chakra-ui/react";
+import { useContext } from "react";
 import { useMediaQuery } from "react-responsive";
-
-const LOADING_MESSAGE = "...";
+import { AccountContext } from "../../../contexts/account";
+import { LOADING_MESSAGE, timeout } from "../../../utils";
 
 const SubmitBox = ({
-  chatLog,
-  chatLogVec,
-  selectedChatId,
+  chatState,
+  setChatState,
   handleSubmit,
   inputPrompt,
   scrollToBottom,
-  setChatLogVec,
   setInputPrompt,
-  system,
   modeToggles,
   setModeToggles,
 }) => {
-  const submitMessage = async (e) => {
+  const { credentials } = useContext(AccountContext);
+  const { system, chatLogVec, chatId } = chatState;
+  // const chatLog = chatLogVec[chatId] || [];
+
+  const submitMessage = async () => {
     if (inputPrompt != "") {
-      const lastMessageId = chatLog[chatLog?.length - 1].messageId;
-
-      let newChatLog = [
-        ...chatLog,
-        {
-          role: "user",
-          content: inputPrompt,
-          preFilled: false,
-          messageId: lastMessageId + 1,
-        },
-        {
-          role: "assistant",
-          content: LOADING_MESSAGE,
-          preFilled: false,
-          messageId: lastMessageId + 1,
-        },
-      ];
-
-      let newChatLogVec = { ...chatLogVec };
-      newChatLogVec[selectedChatId] = newChatLog;
-      setChatLogVec(newChatLogVec);
-      const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-      await delay(5);
+      await timeout(5);
       scrollToBottom();
       setInputPrompt("");
-      let responseJson = await handleSubmit(e, newChatLog);
-      if (responseJson) {
-        let newChatLogVec = { ...chatLogVec };
-        newChatLog[newChatLog?.length - 1] = responseJson;
-        newChatLogVec[selectedChatId] = newChatLog;
-        setChatLogVec(newChatLogVec);
-        await delay(50);
-        scrollToBottom();
-      }
+      await handleSubmit(
+        credentials,
+        chatState,
+        setChatState,
+        modeToggles,
+        inputPrompt
+      );
+      await timeout(50);
+      scrollToBottom();
     } else {
       return;
     }

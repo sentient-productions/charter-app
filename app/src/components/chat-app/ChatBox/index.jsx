@@ -1,27 +1,23 @@
 import Introduction from "./Introduction";
-import { chatPayloads } from "../../../misc/PromptUtils";
+import { initChatData } from "../../../misc/PromptUtils";
 // Foreign
-import { Avatar, Box, Select, FormControl, FormLabel } from "@chakra-ui/react";
+import { Box, Select, FormControl, FormLabel } from "@chakra-ui/react";
 import ChatEntry from "./ChatEntry";
-import { useEffect, useRef, useState } from "react";
 
 const ChatBox = ({
-  chatLog,
-  chatLogVec,
+  chatState,
   err,
   messagesEndRef,
-  system,
-  selectedChatId,
-  setChatLogVec,
-  setSelectedChatId,
-  setSystem,
+  setChatState,
   scrollToBottom,
 }) => {
-  console.log("in chatbox, chatLogVec=", chatLogVec);
+  const { system, chatLogVec, chatId } = chatState;
+  const chatLog = chatLogVec[chatId] || [];
+
   return (
     <>
       <section className="chatBox">
-        {chatLog?.length == 0 ? (
+        {chatLog.length == 0 ? (
           <Box mt={20} mb={20}>
             {" "}
             <Introduction />{" "}
@@ -36,14 +32,14 @@ const ChatBox = ({
               height={"50px"}
               fontSize="xl"
               onChange={(x) => {
-                setSystem(x.target.value);
+                setChatState({ ...chatState, system: x.target.value });
               }}
             >
               <option value="">Select a prompt to continue</option>
-              {Object.keys(chatPayloads).map((key) => {
+              {Object.keys(initChatData).map((key) => {
                 if (key != "") {
                   return (
-                    <option value={key}>{chatPayloads[key]["longName"]}</option>
+                    <option value={key}>{initChatData[key]["longName"]}</option>
                   );
                 }
               })}
@@ -55,7 +51,7 @@ const ChatBox = ({
             {" "}
           </Box>
         ) : null}
-        {system != "" && chatLog?.length > 0
+        {system != "" && chatLog.length > 0
           ? chatLog.map((chat, idx) => {
               let content = chat.content;
               let diagnostic = "";
@@ -84,17 +80,13 @@ const ChatBox = ({
                 <div className="chatLog" key={idx}>
                   <ChatEntry
                     chat={chat}
-                    system={system}
-                    chatLog={chatLog}
-                    chatLogVec={chatLogVec}
+                    chatState={chatState}
+                    setChatState={setChatState}
                     error={err}
                     content={content}
                     diagnostic={diagnostic}
                     idx={idx}
                     scrollToBottom={scrollToBottom}
-                    selectedChatId={selectedChatId}
-                    setChatLogVec={setChatLogVec}
-                    setSelectedChatId={setSelectedChatId}
                   />
                 </div>
               );

@@ -43,7 +43,6 @@ function App() {
       formData.append("inputVal", tokenResponse.code);
       formData.append("inputType", "auth-code");
       formData.append("provider", "https://accounts.google.com");
-      console.log("fetching user data...");
       const userRequest = await axios.request({
         url: charterBackendURI + "/login",
         method: "POST",
@@ -52,13 +51,8 @@ function App() {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       });
-      console.log("success!");
 
       let userJSON = userRequest.data;
-      console.log("userJSON.accessToken=", userJSON.accessToken);
-      console.log("user data=", parseJwt(userJSON.accessToken));
-
-      console.log("userJSON=", userJSON);
       setCredentials(userJSON);
       await timeout(50);
       navigate("/chat");
@@ -71,7 +65,6 @@ function App() {
 
   useGoogleOneTapLogin({
     onSuccess: async (credentialResponse) => {
-      console.log("credentialResponse=", credentialResponse);
       let credentials = parseJwt(credentialResponse.credential);
       credentials["accessToken"] = credentialResponse.credential;
       setCredentials(credentials);

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 export const ChatsContext = React.createContext({});
 const ChatsProvider = ({ children }) => {
-  const [chats, setChats] = useState(() => {
+  const [chatHistory, setChatHistory] = useState(() => {
     // Try to get the value from local storage
     const storedValue = window.localStorage.getItem("charterChats");
     // Return the stored value, or a default value if it doesn't exist
@@ -13,11 +13,11 @@ const ChatsProvider = ({ children }) => {
 
   // Update the value in local storage whenever it changes
   useEffect(() => {
-    window.localStorage.setItem("charterChats", JSON.stringify(chats));
-  }, [chats]);
+    window.localStorage.setItem("charterChats", JSON.stringify(chatHistory));
+  }, [chatHistory]);
 
   return (
-    <ChatsContext.Provider value={{ chats, setChats }}>
+    <ChatsContext.Provider value={{ chatHistory, setChatHistory }}>
       {children}
     </ChatsContext.Provider>
   );

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Box, Text } from "@chakra-ui/react";
+import { LOADING_MESSAGE } from "../../../utils";
+
 const BotResponse = ({ response, scrollToBottom, preFilled }) => {
   const [botResponse, setBotResponse] = useState("");
   const [idx, setIndex] = useState(null);
@@ -40,8 +42,8 @@ const BotResponse = ({ response, scrollToBottom, preFilled }) => {
 
   return (
     <>
-      {response == "..." ? (
-        <pre className="blink">{"|"}</pre>
+      {response == LOADING_MESSAGE ? (
+        <pre className="blink">{LOADING_MESSAGE}</pre>
       ) : (
         <Box>
           <pre>{preGPTResponse}</pre>
