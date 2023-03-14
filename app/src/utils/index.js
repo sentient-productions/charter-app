@@ -51,6 +51,7 @@ export function getDefaultChatState() {
     system: BLANK_SYSTEM,
     err: "",
     initialized: false,
+    chatBranchPoints: {},
   };
 }
 

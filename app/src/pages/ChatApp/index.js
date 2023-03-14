@@ -18,7 +18,6 @@ import { charterBackendURI, BLANK_SYSTEM, timeout } from "../../utils";
 export default function ChatApp() {
   const { credentials } = useContext(AccountContext);
   const { chatHistory, setChatHistory } = useContext(ChatsContext);
-  console.log("chatHistory = ", chatHistory);
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
   const messagesEndRef = useRef(null);
 
@@ -26,9 +25,13 @@ export default function ChatApp() {
   const [modeToggles, setModeToggles] = useState({});
 
   const [chatState, setChatState] = useState(getDefaultChatState());
-
   const { system, chatLogVec, chatId, primaryChatId, err } = chatState;
   const chatLog = chatLogVec[chatId] || [];
+  console.log("chatHistory = ", chatHistory);
+  console.log("chatState = ", chatState);
+
+  // console.log("chatLogVec = ", chatLogVec);
+  // console.log("chatLog = ", chatLog);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView();
@@ -54,19 +57,31 @@ export default function ChatApp() {
     let chatStateCopy = Object.assign({}, chatState);
     if (!chatHistory[`${primaryChatId}`]) {
       let chatsContainer = {};
-      chatsContainer[`${primaryChatId}`] = chatStateCopy;
-      chatsCopy[`${primaryChatId}`] = chatsContainer;
+      chatsCopy[`${primaryChatId}`] = chatStateCopy;
       chatsCopy[`${primaryChatId}`]["chatNumber"] =
         Object.keys(chatHistory).length;
     } else {
-      chatsCopy[`${primaryChatId}`][chatId] = chatStateCopy;
+      if (chatId == primaryChatId) {
+        chatsCopy[`${primaryChatId}`].system = chatStateCopy.system;
+        chatsCopy[`${primaryChatId}`].initialized = chatStateCopy.initialized;
+      }
+      chatsCopy[`${primaryChatId}`].chatLogVec = chatStateCopy.chatLogVec;
+      chatsCopy[`${primaryChatId}`].chatBranchPoints =
+        chatStateCopy.chatBranchPoints;
     }
+    console.log(
+      "chatsCopy[`${primaryChatId}`].chatLogVec = ",
+      chatsCopy[`${primaryChatId}`].chatLogVec
+    );
     // turn off pre-fill so we don't get an annoying load out
-    chatsCopy[`${primaryChatId}`][chatId].chatLogVec[chatId] = chatsCopy[
-      `${primaryChatId}`
-    ][chatId].chatLogVec[chatId].map((message) => {
-      return { ...message, preFilled: true };
-    });
+    if (chatsCopy[`${primaryChatId}`].chatLogVec[chatId]) {
+      chatsCopy[`${primaryChatId}`].chatLogVec[chatId] = chatsCopy[
+        `${primaryChatId}`
+      ].chatLogVec[chatId].map((message) => {
+        return { ...message, preFilled: true };
+      });
+    }
+
     setChatHistory(chatsCopy);
     if (chatLog.length > 0 && chatLog[chatLog.length - 1].role === "user") {
       handleSubmit(credentials, chatState, setChatState, modeToggles, "").then(
