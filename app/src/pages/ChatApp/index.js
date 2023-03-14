@@ -98,7 +98,7 @@ export default function ChatApp() {
     <Navigate to={{ pathname: "/login", state: { from: "/chat" } }} />
   ) : (
     <div className="ChatApp">
-      {isMobile && <Navbar />}
+      {isMobile && <Navbar chatState={chatState} setChatState={setChatState} />}
       {!isMobile && (
         <Sidebar chatState={chatState} setChatState={setChatState} />
       )}
