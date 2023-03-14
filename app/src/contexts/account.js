@@ -6,9 +6,9 @@ export const AccountContext = React.createContext({});
 const AccountProvider = ({ children }) => {
   const [credentials, setCredentials] = useState(() => {
     // Try to get the value from local storage
-    const storedValue = window.localStorage.getItem("charterCreds");
+    const credsStore = window.localStorage.getItem("charterCreds");
     // Return the stored value, or a default value if it doesn't exist
-    return storedValue ? JSON.parse(storedValue) : {};
+    return credsStore ? JSON.parse(credsStore) : {};
   });
 
   // Update the value in local storage whenever it changes

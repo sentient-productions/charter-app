@@ -59,13 +59,13 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ChatProvider>
-    <AccountProvider>
+  <AccountProvider>
+    <ChatProvider>
       <GoogleOAuthProvider clientId="393331770643-ij113a8c5q541g80jorfk6578lac65b2.apps.googleusercontent.com">
         <RouterProvider router={router} />
       </GoogleOAuthProvider>
-    </AccountProvider>
-  </ChatProvider>
+    </ChatProvider>
+  </AccountProvider>
 );
 
 ReactGA.initialize(TRACKING_ID);
