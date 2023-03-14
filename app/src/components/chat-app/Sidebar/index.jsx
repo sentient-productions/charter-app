@@ -85,7 +85,7 @@ const Sidebar = ({ chatState, setChatState }) => {
                   variant={primaryChatId == convId ? null : "text"}
                   width={"90%"}
                   onClick={() => {
-                    setChatState(chatHistory[convId][convId]);
+                    setChatState(chatHistory[convId]);
                   }}
                 >
                   <NavLinks

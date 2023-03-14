@@ -25,8 +25,16 @@ import { useEffect, useState } from "react";
 
 function EditableBox({ defaultVal, chatState, setChatState, idx }) {
   const [localChatIdx, setLocalChatIdx] = useState(0);
-  const { system, chatLogVec, chatId } = chatState;
-  const [chatIds, setChatIds] = useState([chatId]);
+  const { system, chatLogVec, chatId, chatBranchPoints } = chatState;
+  let chatIdsTemp = [chatId];
+
+  Object.keys(chatBranchPoints).forEach((key) => {
+    if (chatBranchPoints[key] == idx) {
+      chatIdsTemp.push(parseInt(key));
+    }
+  });
+
+  const [chatIds, setChatIds] = useState(chatIdsTemp);
   const chatLog = chatLogVec[chatId] || [];
 
   function EditableControls() {
@@ -103,10 +111,21 @@ function EditableBox({ defaultVal, chatState, setChatState, idx }) {
           console.log("in edit, after assign chatLogVec = ", chatLogVec);
           newChatLogVec[newChatId] = newChatLog;
           console.log("in edit, after assign newChatLogVec = ", newChatLogVec);
+
+          let newChatBranchPoints = Object.assign(
+            {},
+            chatState.chatBranchPoints
+          );
+          if (chatState.chatBranchPoints[idx]) {
+            newChatBranchPoints[newChatId].push(idx);
+          } else {
+            newChatBranchPoints[newChatId] = [idx];
+          }
           setChatState({
             ...chatState,
             chatLogVec: newChatLogVec,
             chatId: newChatId,
+            chatBranchPoints: newChatBranchPoints,
           });
           setChatIds([...chatIds, newChatId]);
           setLocalChatIdx(chatIds?.length);

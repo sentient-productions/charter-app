@@ -15,8 +15,9 @@ import {
   Flex,
   IconButton,
 } from "@chakra-ui/react";
+import Sidebar from "../Sidebar";
 import { FaBars } from "react-icons/fa";
-const Navbar = () => {
+const Navbar = ({ chatState, setChatState }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 
@@ -45,9 +46,11 @@ const Navbar = () => {
           finalFocusRef={btnRef}
         >
           <DrawerOverlay />
-          <DrawerContent>
+          <DrawerContent mt={"5vh"}>
             <DrawerCloseButton />
-            <DrawerHeader>Create your account</DrawerHeader>
+            <Sidebar chatState={chatState} setChatState={setChatState} />
+
+            {/* <DrawerHeader>Create your account</DrawerHeader>
 
             <DrawerBody>
               <Input placeholder="Type here..." />
@@ -58,7 +61,7 @@ const Navbar = () => {
                 Cancel
               </Button>
               <Button colorScheme="blue">Save</Button>
-            </DrawerFooter>
+            </DrawerFooter> */}
           </DrawerContent>
         </Drawer>
       </Flex>
