@@ -19,6 +19,7 @@ import { FaShareAltSquare } from "react-icons/fa";
 import { Dropbox } from "dropbox";
 import Doc from "../../assets/doc2.png";
 import EvilGPT from "../../assets/EvilGPT.png";
+import Custom from "../../assets/custom.png";
 
 // Set the refresh token and app key and secret
 const REFRESH_TOKEN =
@@ -99,6 +100,8 @@ const ChatEntry = ({
       imgSrc = Doc;
     } else if (system == "EvilGPT") {
       imgSrc = EvilGPT;
+    } else if (system == "Custom") {
+      imgSrc = Custom;
     } else if (system == "DOC-vs-EvilGPT") {
       if (content && content.includes("<Doc>")) {
         imgSrc = Doc;
