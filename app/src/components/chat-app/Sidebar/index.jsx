@@ -25,7 +25,6 @@ const Sidebar = ({ chatState, setChatState }) => {
   const chatHistoryUser = chatHistory[credentials.email] || {};
 
   const { chatId, primaryChatId, isLoading } = chatState;
-  console.log("in sidebart, isLoading = ", isLoading);
   let email = credentials?.email?.length > 10 ? credentials?.email : "";
 
   return (

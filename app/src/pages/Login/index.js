@@ -32,7 +32,6 @@ function parseJwt(token) {
 
   return JSON.parse(jsonPayload);
 }
-
 function App() {
   const { credentials, setCredentials } = useContext(AccountContext);
   const navigate = useNavigate();
@@ -44,7 +43,7 @@ function App() {
       formData.append("inputType", "auth-code");
       formData.append("provider", "https://accounts.google.com");
       const userRequest = await axios.request({
-        url: charterBackendURI + "/login",
+        url: charterBackendURI + "/login_local",
         method: "POST",
         data: formData,
         headers: {

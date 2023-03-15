@@ -17,6 +17,8 @@ import html2canvas from "html2canvas";
 import { FaShareAltSquare } from "react-icons/fa";
 // import { RWebShare } from "react-web-share";
 import { Dropbox } from "dropbox";
+import Doc from "../../assets/doc2.png";
+import EvilGPT from "../../assets/EvilGPT.png";
 
 // Set the refresh token and app key and secret
 const REFRESH_TOKEN =
@@ -74,6 +76,7 @@ const ChatEntry = ({
 }) => {
   const componentRef = useRef(null);
   const { credentials } = useContext(AccountContext);
+  const { system } = chatState;
 
   const captureComponent = () => {
     console.log("converting image now...");
@@ -89,6 +92,22 @@ const ChatEntry = ({
     });
   };
 
+  const imageSrc = () => {
+    let imgSrc = "./favicon.png";
+
+    if (system == "DOC") {
+      imgSrc = Doc;
+    } else if (system == "EvilGPT") {
+      imgSrc = EvilGPT;
+    } else if (system == "DOC-vs-EvilGPT") {
+      if (content && content.includes("<Doc>")) {
+        imgSrc = Doc;
+      } else {
+        imgSrc = EvilGPT;
+      }
+    }
+    return imgSrc;
+  };
   return (
     <div ref={componentRef}>
       {" "}
@@ -122,11 +141,7 @@ const ChatEntry = ({
           <Container maxWidth={"900px"} pl={2.5} pt={4} pb={2}>
             <HStack width={"100%"} alignItems="flex-start">
               <Box>
-                <Avatar
-                  name={credentials.name}
-                  src={"/favicon.png"}
-                  size={"sm"}
-                />
+                <Avatar src={imageSrc()} size={"sm"} />
               </Box>
               <Box pl={2} flexGrow={1} textAlign={"left"}>
                 {chat.content ? (
@@ -145,6 +160,7 @@ const ChatEntry = ({
                           />
                         ) : (
                           <BotResponse
+                            chatState={chatState}
                             response={content}
                             scrollToBottom={scrollToBottom}
                             preFilled={chat.preFilled}
@@ -153,6 +169,7 @@ const ChatEntry = ({
                       </pre>
                     ) : (
                       <BotResponse
+                        chatState={chatState}
                         response={content}
                         scrollToBottom={scrollToBottom}
                       />

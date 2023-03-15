@@ -3,9 +3,11 @@ import { useState } from "react";
 import { Box, Text } from "@chakra-ui/react";
 import { LOADING_MESSAGE } from "../../../utils";
 
-const BotResponse = ({ response, scrollToBottom, preFilled }) => {
+const BotResponse = ({ response, chatState, scrollToBottom, preFilled }) => {
   const [botResponse, setBotResponse] = useState("");
   const [idx, setIndex] = useState(null);
+
+  const { system } = chatState;
 
   useEffect(() => {
     let index = 1;
@@ -22,23 +24,23 @@ const BotResponse = ({ response, scrollToBottom, preFilled }) => {
 
   const selectedResponse = preFilled ? response : botResponse; //preFilled ? response : botResponse;
 
-  let preGPTResponse = selectedResponse.split("<GPT>")[0];
+  let preGPTResponse = selectedResponse.split("<Doc>")[0];
 
   let gptResponse = "";
   let EvilGPTResponse = "";
 
-  if (selectedResponse.includes("<GPT>")) {
+  if (selectedResponse.includes("<Doc>")) {
     gptResponse +=
-      "[GPT 😇]: " +
-      selectedResponse.split("<GPT>")[1].split("</GPT>")[0] +
-      "\n\n";
+      selectedResponse.split("<Doc>")[1].split("</Doc>")[0].trim() + "\n\n";
   }
 
   if (selectedResponse.includes("<EvilGPT>")) {
     EvilGPTResponse +=
-      "[EvilGPT 😈]: " +
-      selectedResponse.split("<EvilGPT>")[1].split("</EvilGPT>")[0];
+      "" + selectedResponse.split("<EvilGPT>")[1].split("</EvilGPT>")[0].trim();
   }
+
+  console.log("response = ", response);
+  console.log("response.trim() = ", response.trim());
 
   return (
     <>
@@ -46,7 +48,11 @@ const BotResponse = ({ response, scrollToBottom, preFilled }) => {
         <pre className="blink">{LOADING_MESSAGE}</pre>
       ) : (
         <Box>
-          <pre>{preGPTResponse}</pre>
+          <pre>
+            {system != "EvilGPT" && system != "DOC-vs-EvilGPT"
+              ? preGPTResponse
+              : null}
+          </pre>
           <Box mt={-5}>
             <pre>
               {" "}

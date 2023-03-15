@@ -1,10 +1,8 @@
 import axios from "axios";
 import {
   dualExample,
-  dualModePrompt,
   diagnosticExample,
   diagnosticPrompt,
-  diagnosticAndDualExample,
   diagnosticAndDualPrompt,
 } from "../misc/PromptData";
 import { initChatData } from "../misc/PromptUtils";
@@ -104,15 +102,9 @@ export const handleSubmit = async (
 
       let assistantMessage = "";
 
-      if (modeToggles.diagnostic && modeToggles.dual) {
-        assistantMessage += diagnosticAndDualPrompt;
-        assistantMessage += diagnosticAndDualExample;
-      } else if (modeToggles.diagnostic) {
+      if (modeToggles.diagnostic) {
         assistantMessage += diagnosticPrompt;
         assistantMessage += diagnosticExample;
-      } else if (modeToggles.dual) {
-        assistantMessage += dualModePrompt;
-        assistantMessage += dualExample;
       }
 
       cleanChatLog.push({
@@ -137,7 +129,7 @@ export const handleSubmit = async (
       formData.append("token", credentials.accessToken);
       formData.append("provider", "https://accounts.google.com");
       formData.append("chatLog", JSON.stringify(cleanChatLog));
-      console.log("calling handleSubmit with cleanChatLog=", cleanChatLog);
+
       const response = await axios.request({
         url: charterBackendURI + "/chat",
         method: "POST",

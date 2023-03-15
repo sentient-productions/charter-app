@@ -27,11 +27,36 @@ export const initChatData = {
     assistant_prompt: promptJSON["DOC"].assistant,
     system: "DOC",
   },
-  "DOC-w-Dual": {
+  EvilGPT: {
     initChatLog: [
       {
         role: "system",
-        content: promptJSON["DOC-w-Dual"].system,
+        content: promptJSON["EvilGPT"].system,
+        preFilled: true,
+        messageId: 0,
+      },
+      {
+        role: "user",
+        content: "Hi EvilGPT, how are you feeling today?",
+        preFilled: true,
+        messageId: 1,
+      },
+      {
+        role: "assistant",
+        content: promptJSON["EvilGPT"].chatReplies[0],
+        preFilled: false,
+        messageId: 2,
+      },
+    ],
+    longName: "EvilGPT",
+    assistant_prompt: promptJSON["DOC-vs-EvilGPT"].assistant,
+    system: "EvilGPT",
+  },
+  "DOC-vs-EvilGPT": {
+    initChatLog: [
+      {
+        role: "system",
+        content: promptJSON["DOC-vs-EvilGPT"].system,
         preFilled: true,
         messageId: 0,
       },
@@ -43,13 +68,13 @@ export const initChatData = {
       },
       {
         role: "assistant",
-        content: promptJSON["DOC-w-Dual"].chatReplies[0],
+        content: promptJSON["DOC-vs-EvilGPT"].chatReplies[0],
         preFilled: false,
         messageId: 2,
       },
     ],
-    longName: "Dual Mode Doc [recommended]",
-    assistant_prompt: promptJSON["DOC-w-Dual"].assistant,
+    longName: "Doc vs. EvilGPT",
+    assistant_prompt: promptJSON["DOC-vs-EvilGPT"].assistant,
     system: "DOC",
   },
   Custom: {
