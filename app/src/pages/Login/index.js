@@ -43,7 +43,7 @@ function App() {
       formData.append("inputType", "auth-code");
       formData.append("provider", "https://accounts.google.com");
       const userRequest = await axios.request({
-        url: charterBackendURI + "/login_local",
+        url: charterBackendURI + "/login",
         method: "POST",
         data: formData,
         headers: {
