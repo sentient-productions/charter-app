@@ -39,19 +39,18 @@ export default function ChatApp() {
       let chatStateCopy = Object.assign({}, chatState);
       chatStateCopy.chatLogVec[chatId] = initChatData[system].initChatLog;
       setChatState({ ...chatStateCopy });
-      if (system === "DOC-w-Dual") {
-        setModeToggles({ dual: true, diagnostic: true });
-      } else if (system === "DOC") {
-        setModeToggles({ dual: false, diagnostic: true });
+      if (system === "DOC") {
+        setModeToggles({ diagnostic: true });
+      } else if (system === "EvilGPT") {
+        setModeToggles({ diagnostic: true });
       } else {
-        setModeToggles({ dual: false, diagnostic: false });
+        setModeToggles({ diagnostic: false });
       }
     }
   }, [system]);
 
   useEffect(() => {
     let userChatsCopy = Object.assign({}, chatHistoryUser);
-    console.log("userChatsCopy = ", userChatsCopy);
     let chatStateCopy = Object.assign({}, chatState);
     if (!chatHistory[`${primaryChatId}`]) {
       userChatsCopy[`${primaryChatId}`] = chatStateCopy;
@@ -67,10 +66,7 @@ export default function ChatApp() {
       userChatsCopy[`${primaryChatId}`].chatBranchPoints =
         chatStateCopy.chatBranchPoints;
     }
-    console.log(
-      "userChatsCopy[`${primaryChatId}`].chatLogVec = ",
-      userChatsCopy[`${primaryChatId}`].chatLogVec
-    );
+
     // turn off pre-fill so we don't get an annoying load out
     if (userChatsCopy[`${primaryChatId}`].chatLogVec[chatId]) {
       userChatsCopy[`${primaryChatId}`].chatLogVec[chatId] = userChatsCopy[
@@ -80,7 +76,6 @@ export default function ChatApp() {
       });
     }
 
-    console.log("setting chat history = ", userChatsCopy);
     let chatHistoryCopy = Object.assign({}, chatHistory);
     chatHistoryCopy[credentials.email] = userChatsCopy;
     setChatHistory({ ...chatHistoryCopy });

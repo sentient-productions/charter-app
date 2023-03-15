@@ -100,17 +100,13 @@ function EditableBox({ defaultVal, chatState, setChatState, idx }) {
         isPreviewFocusable={false}
         onSubmit={(value) => {
           /// wtf, fix this shit
-          console.log("in edit, before anything = ", chatLogVec);
           const newChatId = getNewChatId();
           let newChatLog = JSON.parse(
             JSON.stringify(chatLog.slice(0, idx + 1))
           );
           newChatLog[newChatLog.length - 1].content = value;
-          console.log("in edit, before assign newChatLog = ", newChatLog);
           let newChatLogVec = Object.assign({}, chatLogVec);
-          console.log("in edit, after assign chatLogVec = ", chatLogVec);
           newChatLogVec[newChatId] = newChatLog;
-          console.log("in edit, after assign newChatLogVec = ", newChatLogVec);
 
           let newChatBranchPoints = Object.assign(
             {},

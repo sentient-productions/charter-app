@@ -1,8 +1,8 @@
 import Introduction from "./Introduction";
-import { initChatData } from "../../../misc/PromptUtils";
 // Foreign
-import { Box, Select, FormControl, FormLabel } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import ChatEntry from "./ChatEntry";
+import SelectBox from "./SelectBox";
 
 const ChatBox = ({
   chatState,
@@ -13,40 +13,31 @@ const ChatBox = ({
 }) => {
   const { system, chatLogVec, chatId, primaryChatId, initialized } = chatState;
   const chatLog = chatLogVec[chatId] || [];
-  console.log("chatState = ", chatState);
   return (
     <>
       <section className="chatBox">
         {chatLog.length == 0 ? (
-          <Box mt={20} mb={20}>
+          <Box mb={-10} pl={2} pr={2}>
             {" "}
-            <Introduction />{" "}
+            <Introduction
+              primaryChatId={primaryChatId}
+              initialized={initialized}
+              chatState={chatState}
+              setChatState={setChatState}
+            />{" "}
           </Box>
         ) : null}
-        <Box className="selectBox" mt={1} mb={5}>
-          <FormControl key={primaryChatId}>
-            <FormLabel as="legend" fontSize="2xl" fontWeight={"bold"}>
-              Selected Conversation Starter
-            </FormLabel>
-            <Select
-              height={"50px"}
-              fontSize="xl"
-              onChange={(x) => {
-                setChatState({ ...chatState, system: x.target.value });
-              }}
-              isDisabled={initialized}
-            >
-              <option value="">Select a prompt to continue</option>
-              {Object.keys(initChatData).map((key) => {
-                if (key != "") {
-                  return (
-                    <option value={key}>{initChatData[key]["longName"]}</option>
-                  );
-                }
-              })}
-            </Select>
-          </FormControl>
-        </Box>
+        {/* {chatLog.length > 0 ? ( */}
+        {/* {chatLog.length > 0 && (
+          <SelectBox
+            title={"Selected Personality"}
+            primaryChatId={primaryChatId}
+            initialized={initialized}
+            chatState={chatState}
+            setChatState={setChatState}
+          />
+        )} */}
+        {/* ) : null} */}
         {system == "" ? (
           <Box mt={20} mb={20}>
             {" "}
@@ -71,10 +62,15 @@ const ChatBox = ({
                     .split("<result>")[1]
                     .replace("<result>\n", "")
                     .replace("</result>", "");
+
+                  if (content.includes("</internal>")) {
+                    content = content.split("</internal>")[1];
+                  }
                 }
               }
-
-              return (
+              return system != "DOC-vs-EvilGPT" ||
+                chat.role != "assistant" ||
+                !content.includes("</Doc>") ? (
                 <div className="chatLog" key={idx}>
                   <ChatEntry
                     chat={chat}
@@ -82,6 +78,29 @@ const ChatBox = ({
                     setChatState={setChatState}
                     error={err}
                     content={content}
+                    diagnostic={diagnostic}
+                    idx={idx}
+                    scrollToBottom={scrollToBottom}
+                  />
+                </div>
+              ) : (
+                <div className="chatLog" key={idx}>
+                  <ChatEntry
+                    chat={chat}
+                    chatState={chatState}
+                    setChatState={setChatState}
+                    error={err}
+                    content={content.split("</Doc>")[0].trim()}
+                    diagnostic={diagnostic}
+                    idx={idx}
+                    scrollToBottom={scrollToBottom}
+                  />
+                  <ChatEntry
+                    chat={chat}
+                    chatState={chatState}
+                    setChatState={setChatState}
+                    error={err}
+                    content={content.split("</Doc>")[1].trim()}
                     diagnostic={diagnostic}
                     idx={idx}
                     scrollToBottom={scrollToBottom}

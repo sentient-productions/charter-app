@@ -24,8 +24,8 @@ const SubmitBox = ({
   setModeToggles,
 }) => {
   const { credentials } = useContext(AccountContext);
-  const { system, isLoading } = chatState;
-  // const chatLog = chatLogVec[chatId] || [];
+  const { system, chatId, chatLogVec, isLoading } = chatState;
+  const chatLog = chatLogVec[chatId] || [];
 
   const submitMessage = async () => {
     if (inputPrompt != "") {
@@ -46,6 +46,14 @@ const SubmitBox = ({
     }
   };
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
+
+  const regenerate = () => {
+    if (chatLog.length > 0 && chatLog[chatLog.length - 1].role == "assistant") {
+      let chatStateCopy = Object.assign({}, chatState);
+      chatStateCopy.chatLogVec[chatId] = chatLog.slice(0, chatLog.length - 1);
+      setChatState({ ...chatStateCopy });
+    }
+  };
 
   return (
     <div className="inputBar">
@@ -109,16 +117,13 @@ const SubmitBox = ({
                   Diagnostic{" "}
                 </Button>
                 <Button
-                  colorScheme={modeToggles.dual ? "red" : null}
-                  onClick={() => {
-                    setModeToggles({
-                      ...modeToggles,
-                      dual: !modeToggles.dual,
-                    });
-                  }}
+                  isDisabled={isLoading}
+                  colorScheme={"orange"}
+                  onClick={regenerate}
+                  variant="outline"
                 >
                   {" "}
-                  Dual{" "}
+                  Regenerate{" "}
                 </Button>
               </ButtonGroup>
             )}
@@ -136,20 +141,16 @@ const SubmitBox = ({
               });
             }}
           >
-            {" "}
-            Diagnostic{" "}
+            Diagnostic
           </Button>
           <Button
-            colorScheme={modeToggles.dual ? "red" : null}
-            onClick={() => {
-              setModeToggles({
-                ...modeToggles,
-                dual: !modeToggles.dual,
-              });
-            }}
+            isDisabled={isLoading}
+            colorScheme={"orange"}
+            onClick={regenerate}
+            variant="outline"
           >
             {" "}
-            Inverse{" "}
+            Regenerate{" "}
           </Button>
         </ButtonGroup>
       )}

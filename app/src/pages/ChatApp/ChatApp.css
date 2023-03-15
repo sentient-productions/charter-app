@@ -142,7 +142,6 @@ nav svg {
   line-height: 24px;
   color: #d1d5db;
   font-size: 16px;
-  /* overflow: scroll; */
   height: 90vh;
   flex-grow: 1;
   overflow-y: auto;
@@ -275,19 +274,12 @@ nav svg {
   right: 0;
   bottom: 0;
   position: fixed;
-  /* padding: 20px; */
-  /* padding-top: 3%; */
-  /* height: 10vh; */
   background-color: #2D3748;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
 }
 .inputPrompttTextarea {
-  /* align-items: center; */
   width: 70%;
-  /* max-height: 200px; */
-  /* height: px; */
   padding: 10px;
-  /* resize: none; */
   font-size: 16px;
   background-color: #212121;
   color: #fff;
@@ -295,12 +287,9 @@ nav svg {
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.25);
-  /* overflow-y: hidden; */
 }
 .selectBox {
   position: block;
-  /* justify-content: center; */
-  /* align-items: center; */
   margin-left: auto;
   margin-right: auto;
   width: 60vw;
@@ -314,20 +303,16 @@ nav svg {
 /* mobile settings */
 @media (max-width: 768px) {
   .chatBox {
-    height: 80vh;
+    height: 90vh;
     position: static;
-    padding-top: 5vh;
+    padding-top: 10vh;
+    padding-bottom: 5vh;
   }
   .navBar {
-    /* left: 0; */
-    /* right: 0; */
     bottom: 1;
     position: fixed;
     align-items: flex-start;
     justify-content: left !important;
-    /* padding: 20px; */
-    /* padding-top: 3%; */
-    /* height: 10vh; */
     background-color: #2D3748;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
   }
