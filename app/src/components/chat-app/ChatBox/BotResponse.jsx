@@ -39,9 +39,6 @@ const BotResponse = ({ response, chatState, scrollToBottom, preFilled }) => {
       "" + selectedResponse.split("<EvilGPT>")[1].split("</EvilGPT>")[0].trim();
   }
 
-  console.log("response = ", response);
-  console.log("response.trim() = ", response.trim());
-
   return (
     <>
       {response == LOADING_MESSAGE ? (

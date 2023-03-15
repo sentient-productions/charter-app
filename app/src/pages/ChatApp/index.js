@@ -78,6 +78,7 @@ export default function ChatApp() {
 
     let chatHistoryCopy = Object.assign({}, chatHistory);
     chatHistoryCopy[credentials.email] = userChatsCopy;
+    console.log("userChatsCopy = ", userChatsCopy);
     setChatHistory({ ...chatHistoryCopy });
     if (chatLog.length > 0 && chatLog[chatLog.length - 1].role === "user") {
       handleSubmit(credentials, chatState, setChatState, modeToggles, "").then(
