@@ -78,9 +78,6 @@ function TestimonialCard(props) {
   return (
     <Flex
       cursor={"pointer"}
-      onClick={() => {
-        console.log("clicked");
-      }}
       boxShadow={"lg"}
       maxW={"640px"}
       direction={{ base: "column-reverse", md: "row" }}
@@ -133,9 +130,6 @@ function TestimonialCard(props) {
           variant={"outline"}
           width={"200px"}
           onClick={() => {
-            console.log("we should be setting the chatState");
-            console.log("system=", system);
-            console.log("initChatData[system]=", initChatData[system]);
             setChatState({
               ...chatState,
               chatLogVec: initChatData[system].initChatLog,
@@ -147,14 +141,6 @@ function TestimonialCard(props) {
           {
             <chakra.p fontFamily={"Roboto"} fontWeight={"bold"} fontSize={14}>
               {name}
-              {/* <chakra.span
-            fontFamily={"Inter"}
-            fontWeight={"medium"}
-            color={"gray.500"}
-          >
-            {" "}
-            - {role}
-          </chakra.span> */}
             </chakra.p>
           }{" "}
         </Button>

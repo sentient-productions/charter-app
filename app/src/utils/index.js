@@ -149,6 +149,7 @@ export const handleSubmit = async (
         chatLogVec: newChatLogVec,
         err: "",
         isLoading: false,
+        initialized: true,
       });
       // console.log("at end of callAPI, newChatLog = ", newChatLog);
       // setChatState({ ...chatState, err: false });

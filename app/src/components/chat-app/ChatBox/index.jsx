@@ -2,7 +2,6 @@ import Introduction from "./Introduction";
 // Foreign
 import { Box } from "@chakra-ui/react";
 import ChatEntry from "./ChatEntry";
-import SelectBox from "./SelectBox";
 
 const ChatBox = ({
   chatState,
@@ -27,17 +26,6 @@ const ChatBox = ({
             />{" "}
           </Box>
         ) : null}
-        {/* {chatLog.length > 0 ? ( */}
-        {/* {chatLog.length > 0 && (
-          <SelectBox
-            title={"Selected Personality"}
-            primaryChatId={primaryChatId}
-            initialized={initialized}
-            chatState={chatState}
-            setChatState={setChatState}
-          />
-        )} */}
-        {/* ) : null} */}
         {system == "" ? (
           <Box mt={20} mb={20}>
             {" "}
