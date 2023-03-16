@@ -2,6 +2,7 @@ import ReactDOM from "react-dom/client";
 import ChatApp from "./pages/ChatApp";
 import Lander from "./pages/Lander";
 import Login from "./pages/Login";
+import Research from "./pages/Research";
 import reportWebVitals from "./reportWebVitals";
 import "typeface-roboto";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -53,6 +54,14 @@ const router = createBrowserRouter([
     element: (
       <ChakraProvider theme={theme}>
         <ChatApp />
+      </ChakraProvider>
+    ),
+  },
+  {
+    path: "/samples",
+    element: (
+      <ChakraProvider theme={theme}>
+        <Research />
       </ChakraProvider>
     ),
   },
