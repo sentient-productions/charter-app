@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 // Local
 import "./normal.css";
 import "./research.css";
+import Nav from "../../components/lander/Nav";
 import ChatBox from "../../components/research/ChatBox";
 import Navbar from "../../components/research/ChatBox/Navbar";
 import { getDefaultChatState, handleSubmit } from "../../utils";
@@ -12,6 +13,7 @@ import { AccountContext } from "../../contexts/account";
 import { ChatsContext } from "../../contexts/chats";
 import { initChatData } from "../../misc/PromptUtils";
 import { charterBackendURI, BLANK_SYSTEM, timeout } from "../../utils";
+import { Stack, Box } from "@chakra-ui/react";
 
 export default function Research() {
   const { credentials } = useContext(AccountContext);
@@ -90,15 +92,22 @@ export default function Research() {
   }, [chatState]);
 
   return (
-    <div className="ChatApp">
-      {isMobile && <Navbar chatState={chatState} setChatState={setChatState} />}
-      <ChatBox
-        chatState={chatState}
-        setChatState={setChatState}
-        err={err}
-        messagesEndRef={messagesEndRef}
-        scrollToBottom={scrollToBottom}
-      />
-    </div>
+    <>
+      <div className="ChatApp">
+        {/* {isMobile && <Navbar chatState={chatState} setChatState={setChatState} />} */}
+        <Stack width={"100%"}>
+          <Nav />
+          <Box>
+            <ChatBox
+              chatState={chatState}
+              setChatState={setChatState}
+              err={err}
+              messagesEndRef={messagesEndRef}
+              scrollToBottom={scrollToBottom}
+            />
+          </Box>
+        </Stack>
+      </div>
+    </>
   );
 }
