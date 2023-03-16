@@ -17,7 +17,7 @@ import { FaAlignJustify } from "react-icons/fa";
 import { Icon } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-const Links = { Govern: "https://gov.charterai.org/" };
+const Links = { Govern: "https://gov.charterai.org/", Samples: "/samples" };
 const NavLink = ({ name }) => (
   <Link
     px={2}
