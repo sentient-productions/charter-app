@@ -126,7 +126,7 @@ function TestimonialCard(props) {
         backgroundSize: "cover",
         top: 0,
         left: 0,
-        backgroundImage: backgrounds[index % 4],
+        // backgroundImage: backgrounds[(index + 3) % 4],
       }}
     >
       <Flex

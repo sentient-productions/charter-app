@@ -59,7 +59,7 @@ const Nav = ({ onOpen, ref }) => {
       // position="sticky"
       // position="fixed"
       // top="0"
-      zIndex={100000}
+      // zIndex={100000}
       w="full"
       bg={navBg}
       // bgImage="linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url('Background.jpg')"

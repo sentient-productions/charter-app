@@ -15,7 +15,7 @@ const ChatBox = ({
   return (
     <>
       <section className="chatBox">
-        <Box mb={-10} pl={2} pr={2}>
+        <Box mb={-10} pl={2} pr={2} zIndex={10000}>
           {" "}
           <Introduction
             primaryChatId={primaryChatId}
