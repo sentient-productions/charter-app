@@ -292,13 +292,13 @@ export default function Introduction({
                       // ml={isMobile ? 5 : 0}
                       cursor={"pointer"}
                       onClick={() => {
-                        // if (selected == 0) {
-                        //   setSelected(testimonialsVec.length - 1);
-                        // } else setSelected(selected - 1);
-                        const random = Math.floor(
-                          Math.random() * testimonialsVec.length
-                        );
-                        setSelected(random);
+                        if (selected == 0) {
+                          setSelected(testimonialsVec.length - 1);
+                        } else setSelected(selected - 1);
+                        // const random = Math.floor(
+                        //   Math.random() * testimonialsVec.length
+                        // );
+                        // setSelected(random);
                       }}
                     />
                     {!isMobile && (
@@ -311,13 +311,10 @@ export default function Introduction({
                       h={10}
                       cursor={"pointer"}
                       onClick={() => {
-                        // if (selected == testimonialsVec.length - 1) {
-                        //   setSelected(0);
-                        // } else setSelected(selected + 1);
-                        const random = Math.floor(
-                          Math.random() * testimonialsVec.length
-                        );
-                        setSelected(random);
+                        if (selected == testimonialsVec.length - 1) {
+                          setSelected(0);
+                        } else setSelected(selected + 1);
+                        // setSelected(random);
                       }}
                     />{" "}
                   </Flex>
